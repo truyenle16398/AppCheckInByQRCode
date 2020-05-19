@@ -1,3 +1,14 @@
 <resources>
     <string name="app_name">AppCheckInByQRCode</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="my_string_value"><u>Forgot your Password?</u></string>
+    <string name="my_string_value2"><u>Back to Login</u></string>
+    <string name="forgot_password">Forgot Password</string>
+    <string name="login">Login</string>
+    <string name="enter_your_email">Enter Your Email</string>
+    <string name="enter_your_password">Enter Your Password</string>
+    <string name="enter_your_code">Enter Your Code</string>
+    <string name="change_password">Change Password</string>
 </resources>
