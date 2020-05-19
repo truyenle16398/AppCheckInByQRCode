@@ -1,10 +1,13 @@
-package com.example.appcheckinbyqrcode.client;
+package com.example.appcheckinbyqrcode.client.adapter;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
+import com.example.appcheckinbyqrcode.client.fragment.ClientUserFragment;
+import com.example.appcheckinbyqrcode.client.fragment.EventFragment;
+import com.example.appcheckinbyqrcode.client.fragment.FavoriteEventFragment;
 
 
 public class ClientPagerAdapter extends FragmentPagerAdapter {

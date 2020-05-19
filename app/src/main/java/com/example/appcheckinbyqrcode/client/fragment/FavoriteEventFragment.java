@@ -1,4 +1,4 @@
-package com.example.appcheckinbyqrcode.client;
+package com.example.appcheckinbyqrcode.client.fragment;
 
 import android.os.Bundle;
 
