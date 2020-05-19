@@ -5,10 +5,10 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
-public class PagerAdapter extends FragmentPagerAdapter {
+public class AdminPagerAdapter extends FragmentPagerAdapter {
     private int tabsNumber;
 
-    public PagerAdapter(@NonNull FragmentManager fm, int behavior, int tabs) {
+    public AdminPagerAdapter(@NonNull FragmentManager fm, int behavior, int tabs) {
         super(fm, behavior);
         this.tabsNumber = tabs;
     }
@@ -22,7 +22,7 @@ public class PagerAdapter extends FragmentPagerAdapter {
             case 1:
                 return new HistoryCheckInFragment();
             case 2:
-                return new UserFragment();
+                return new AdminUserFragment();
 
             default: return null;
         }

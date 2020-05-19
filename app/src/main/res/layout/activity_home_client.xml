@@ -6,9 +6,9 @@
     android:id="@+id/drawer"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".admin.HomeAdminActivity">
+    tools:context=".client.HomeClientActivity">
     <include
-        layout="@layout/admin_content_main"
+        layout="@layout/client_content_main"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 </androidx.drawerlayout.widget.DrawerLayout>

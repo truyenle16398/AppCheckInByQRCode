@@ -1,4 +1,4 @@
-package com.example.appcheckinbyqrcode.admin;
+package com.example.appcheckinbyqrcode.client;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
@@ -8,10 +8,11 @@ import androidx.viewpager.widget.ViewPager;
 import android.os.Bundle;
 
 import com.example.appcheckinbyqrcode.R;
+import com.example.appcheckinbyqrcode.admin.AdminPagerAdapter;
 import com.google.android.material.tabs.TabItem;
 import com.google.android.material.tabs.TabLayout;
 
-public class HomeAdminActivity extends AppCompatActivity {
+public class HomeClientActivity extends AppCompatActivity {
     DrawerLayout drawerLayout;
     ViewPager pager;
     TabLayout mTabLayout;
@@ -20,7 +21,7 @@ public class HomeAdminActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home_admin);
+        setContentView(R.layout.activity_home_client);
         pager = findViewById(R.id.viewpager);
         mTabLayout = findViewById(R.id.tablayout);
 

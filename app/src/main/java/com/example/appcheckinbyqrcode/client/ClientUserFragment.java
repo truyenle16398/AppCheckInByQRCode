@@ -1,4 +1,4 @@
-package com.example.appcheckinbyqrcode.admin;
+package com.example.appcheckinbyqrcode.client;
 
 import android.os.Bundle;
 
@@ -13,9 +13,9 @@ import com.example.appcheckinbyqrcode.R;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class UserFragment extends Fragment {
+public class ClientUserFragment extends Fragment {
 
-    public UserFragment() {
+    public ClientUserFragment() {
         // Required empty public constructor
     }
 
@@ -24,6 +24,6 @@ public class UserFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_user, container, false);
+        return inflater.inflate(R.layout.fragment_client_user, container, false);
     }
 }
