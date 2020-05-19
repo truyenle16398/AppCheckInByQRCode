@@ -3,6 +3,7 @@
     package="com.example.appcheckinbyqrcode">
 
     <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.INTERNET"/>
 
     <uses-feature android:name="android.hardware.Camera.autofocus" />
 
@@ -14,21 +15,16 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".client.EventDetailActivity"></activity>
-
-        <activity android:name=".client.HomeClientActivity">
+        <activity android:name=".client.HomeClientActivity" />
+        <activity android:name=".login.ForgotPassActivity" />
+        <activity android:name=".login.LoginActivity" />
+        <activity android:name=".admin.ScanCodeActivity" />
+        <activity android:name=".admin.HomeAdminActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-
-
-        <activity android:name=".login.ForgotPassActivity" />
-        <activity android:name=".login.LoginActivity" />
-        <activity android:name=".admin.ScanCodeActivity" />
-        <activity android:name=".admin.HomeAdminActivity">
-
         </activity>
     </application>
 

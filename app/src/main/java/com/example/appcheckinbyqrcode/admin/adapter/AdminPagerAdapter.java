@@ -1,9 +1,12 @@
-package com.example.appcheckinbyqrcode.admin;
+package com.example.appcheckinbyqrcode.admin.adapter;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
+
+import com.example.appcheckinbyqrcode.admin.fragment.AdminUserFragment;
+import com.example.appcheckinbyqrcode.admin.fragment.ScannerFragment;
 
 public class AdminPagerAdapter extends FragmentPagerAdapter {
     private int tabsNumber;
@@ -20,7 +23,7 @@ public class AdminPagerAdapter extends FragmentPagerAdapter {
             case 0:
                 return new ScannerFragment();
             case 1:
-                return new HistoryCheckInFragment();
+                return new AdminUserFragment.HistoryCheckInFragment();
             case 2:
                 return new AdminUserFragment();
 

@@ -7,7 +7,7 @@
     android:layout_gravity="center"
     android:gravity="center"
     android:background="#86E38A"
-    tools:context=".admin.ScannerFragment">
+    tools:context=".admin.fragment.ScannerFragment">
 
     <!-- TODO: Update blank fragment layout -->
     <TextView
