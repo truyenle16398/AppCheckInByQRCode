@@ -1,11 +1,14 @@
 package com.example.appcheckinbyqrcode.client.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -14,17 +17,19 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.appcheckinbyqrcode.R;
+import com.example.appcheckinbyqrcode.client.EventDetailActivity;
 import com.example.appcheckinbyqrcode.client.model.event;
 
 import java.util.List;
 
 import butterknife.BindView;
 
-public class eventadapter extends RecyclerView.Adapter<eventadapter.ViewHolder> {
+public class eventadapter extends RecyclerView.Adapter<eventadapter.ViewHolder>{
 
     private static final String TAG = "nnn";
     private List<event> data;
     private Context context;
+
 
     public eventadapter(List<event> data,Context context) {
         this.data = data;
@@ -56,7 +61,7 @@ public class eventadapter extends RecyclerView.Adapter<eventadapter.ViewHolder> 
         return data.size();
     }
 
-    static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    class ViewHolder extends RecyclerView.ViewHolder{// implements View.OnClickListener
 
 //        @BindView(R.id.eventname)
         public TextView name;
@@ -70,6 +75,7 @@ public class eventadapter extends RecyclerView.Adapter<eventadapter.ViewHolder> 
         public TextView address;
 //        @BindView(R.id.eventimage)
         public ImageView photo;
+        public LinearLayout linearLayout;
 
         public ViewHolder(View view) {
             super(view);
@@ -79,12 +85,16 @@ public class eventadapter extends RecyclerView.Adapter<eventadapter.ViewHolder> 
             time = view.findViewById(R.id.eventtime);
             address = view.findViewById(R.id.eventaddress);
             photo = view.findViewById(R.id.eventimage);
+            linearLayout = view.findViewById(R.id.linner);
+            linearLayout.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Log.d(TAG, "onClick: "+ getAdapterPosition());
+                    Intent intent = new Intent(context, EventDetailActivity.class);
+                    context.startActivity(intent);
+                }
+            });
 
-        }
-
-        @Override
-        public void onClick(View v) {
-            Toast.makeText(v.getContext(), "Clicked Item Position = " + getPosition(), Toast.LENGTH_SHORT).show();
         }
     }
 }

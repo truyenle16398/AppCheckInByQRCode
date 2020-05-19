@@ -1,7 +1,9 @@
 package com.example.appcheckinbyqrcode.client.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -12,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.appcheckinbyqrcode.R;
+import com.example.appcheckinbyqrcode.client.EventDetailActivity;
 import com.example.appcheckinbyqrcode.client.adapter.eventadapter;
 import com.example.appcheckinbyqrcode.client.model.event;
 

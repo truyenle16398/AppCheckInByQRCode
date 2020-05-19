@@ -9,8 +9,10 @@
     android:paddingTop="10dp"
     android:paddingLeft="7dp"
     android:paddingRight="7dp"
+    android:id="@+id/linner"
     android:layout_height="wrap_content">
     <androidx.cardview.widget.CardView
+        android:id="@+id/carr"
         app:cardCornerRadius="9dp"
         app:cardElevation="8dp"
         android:layout_width="match_parent"

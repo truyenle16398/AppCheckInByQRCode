@@ -1,9 +1,120 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".client.EventDetailActivity">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:scaleType="fitXY"
+            android:src="@drawable/ic_launcher_background"
+            android:id="@+id/imagedetail"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"/>
+        <androidx.appcompat.widget.Toolbar
+            app:titleTextColor="#fff"
+            app:title="Ra mắt sự kiện Bphone"
+            android:background="#40000000"
+            android:id="@+id/toolbardetail"
+            android:layout_width="match_parent"
+            android:layout_height="?actionBarSize"/>
+    </RelativeLayout>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <LinearLayout
+        android:paddingRight="10dp"
+        android:paddingLeft="10dp"
+        android:layout_marginTop="10dp"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <RatingBar
+            android:layout_gravity="center"
+            android:rating="3.5"
+            android:id="@+id/ratingBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:textStyle="bold"
+            android:layout_marginTop="5dp"
+            android:drawableLeft="@drawable/ic_call_to_action_black_24dp"
+            android:textColor="#000"
+            android:textSize="25dp"
+            android:text=" EVENT DATE"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:id="@+id/timedetail"
+            android:layout_marginTop="5dp"
+            android:textColor="#000"
+            android:textSize="12sp"
+            android:text="20h00 - 21h00"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+        <TextView
+            android:id="@+id/daydetail"
+            android:layout_marginTop="5dp"
+            android:textColor="#000"
+            android:textSize="12sp"
+            android:text="Ngày 19 tháng 05 năm 2020"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+        //
+        <TextView
+            android:layout_marginTop="5dp"
+            android:drawableLeft="@drawable/ic_call_to_action_black_24dp"
+            android:textColor="#000"
+            android:textSize="25dp"
+            android:textStyle="bold"
+            android:text=" EVENT DETAIL"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:id="@+id/infodetail"
+            android:layout_marginRight="30dp"
+            android:layout_marginTop="5dp"
+            android:textColor="#000"
+            android:textSize="16sp"
+            android:text="Bphone B86 sở hữu thiết kế tối giản với viền đều và không có cằm, Bkav thiết kế Bphone B86 như một khối kính, biến Bphone B86 trở thành điện thoại hiếm hoi trên thị trường có màn hình đều và không có cằm, phần trán vốn là đặc trưng của Bphone 3 nay đã được thu gọn hợp lý hơn trên Bphone B86."
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>//
+        <TextView
+            android:layout_marginTop="5dp"
+            android:drawableLeft="@drawable/ic_call_to_action_black_24dp"
+            android:textColor="#000"
+            android:textSize="25dp"
+            android:textStyle="bold"
+            android:text=" EVENT ADDRESS"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:id="@+id/addressinfodetail"
+            android:layout_marginRight="30dp"
+            android:layout_marginTop="5dp"
+            android:textColor="#000"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:text="TÒA NHÀ B, TẦNG 5"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+        <TextView
+            android:id="@+id/addressdetail"
+            android:layout_marginRight="30dp"
+            android:layout_marginTop="5dp"
+            android:textColor="#000"
+            android:textSize="16sp"
+            android:text="41 Lê Duẫn, Hải Châu, Đà Nẵng"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+    </LinearLayout>
+    <Button
+        android:textSize="22sp"
+        android:text="đăng ký tham gia"
+        android:id="@+id/btnregisterdetail"
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+</LinearLayout>
