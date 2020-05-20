@@ -7,7 +7,7 @@
     android:layout_gravity="center"
     android:gravity="center"
     android:background="#C5A2DC"
-    tools:context=".admin.fragment.ScannerFragment">
+    tools:context=".ui.admin.fragment.ScannerFragment">
 
     <ImageView
         android:background="@drawable/qr"
