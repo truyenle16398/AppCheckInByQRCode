@@ -8,7 +8,7 @@ import android.Manifest;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 
-import com.example.appcheckinbyqrcode.R;
+import com.example.appcheckinbyqrcode.admin.fragment.ScannerFragment;
 import com.google.zxing.Result;
 
 import me.dm7.barcodescanner.zxing.ZXingScannerView;

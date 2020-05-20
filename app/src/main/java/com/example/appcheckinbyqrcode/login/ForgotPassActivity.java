@@ -26,7 +26,7 @@ public class ForgotPassActivity extends AppCompatActivity {
         onClick();
     }
 
-    void onClick(){
+    void onClick() {
         BtnGetCode.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -52,7 +52,7 @@ public class ForgotPassActivity extends AppCompatActivity {
         });
     }
 
-    private void startCountdownTimer(){
+    private void startCountdownTimer() {
         countDownTimer = new CountDownTimer(120000, 1000) {
 
             public void onTick(long millisUntilFinished) {
@@ -65,7 +65,8 @@ public class ForgotPassActivity extends AppCompatActivity {
             }
         }.start();
     }
-    void Anhxa(){
+
+    void Anhxa() {
         BtnGetCode = findViewById(R.id.btnGetCode);
         TVBack = findViewById(R.id.tvBack);
         TVcode = findViewById(R.id.inputCode);

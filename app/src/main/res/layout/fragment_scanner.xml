@@ -6,16 +6,21 @@
     android:layout_height="match_parent"
     android:layout_gravity="center"
     android:gravity="center"
-    android:background="#86E38A"
-    tools:context=".admin.ScannerFragment">
+    android:background="#C5A2DC"
+    tools:context=".admin.fragment.ScannerFragment">
 
-    <!-- TODO: Update blank fragment layout -->
+    <ImageView
+        android:background="@drawable/qr"
+        android:layout_width="150dp"
+        android:layout_height="150dp">
+
+    </ImageView>
     <TextView
 
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        android:text="Scanner Now!!!"
+        android:text="Vui lòng hãy Scanner để qua được cổng!!!"
         android:id="@+id/barcodetextview"/>
 
     <Button
