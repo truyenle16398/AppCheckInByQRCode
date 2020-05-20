@@ -28,7 +28,6 @@ public class ClientPagerAdapter extends FragmentPagerAdapter {
                 return new FavoriteEventFragment();
             case 2:
                 return new ClientUserFragment();
-
             default:
                 return null;
         }

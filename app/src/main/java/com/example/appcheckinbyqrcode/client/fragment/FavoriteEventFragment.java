@@ -28,6 +28,7 @@ public class FavoriteEventFragment extends Fragment {
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_favorite_event, container, false);
         TextView textView = view.findViewById(R.id.test);
+        textView.setText("aaaaaaaaaaaasdadasdasdasdasdasdas");
         textView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
