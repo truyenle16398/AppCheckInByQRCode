@@ -44,22 +44,15 @@ public class HistoryCheckInFragment extends Fragment {
             // Inflate the layout for this fragment
             View view = inflater.inflate(R.layout.fragment_history_check_in, container, false);
             items = new ArrayList<>();
-            //        items.add("First CardView Item");
-            //        items.add("Second CardView Item");
-            //        items.add("Third CardView Item");
-            //        items.add("Fourth CardView Item");
-            //        items.add("Fifth CardView Item");
-            //        items.add("Sixth CardView Item");
-            items.add(new HistoryCheckIn(" Truyen Le Huy ","https://genk.mediacdn.vn/thumb_w/640/2019/10/16/pixel-image-1-15711948680921149315497-crop-15711968629591144940646.jpg","12:00"));
-            items.add(new HistoryCheckIn(" Long Duc Nguyen ","https://interactive-examples.mdn.mozilla.net/media/examples/grapefruit-slice-332-332.jpg","1:00"));
-            items.add(new HistoryCheckIn(" Truyen Le Huy ","https://assets.jpegmini.com/user/images/slider_puffin_jpegmini_mobile.jpg","13:00"));
-            items.add(new HistoryCheckIn(" Long Duc Nguyen ","https://interactive-examples.mdn.mozilla.net/media/examples/grapefruit-slice-332-332.jpg","2:00"));
-            items.add(new HistoryCheckIn(" Truyen Le Huy ","https://genk.mediacdn.vn/thumb_w/640/2019/10/16/pixel-image-1-15711948680921149315497-crop-15711968629591144940646.jpg","14:00"));
-            items.add(new HistoryCheckIn(" Long Duc Nguyen ","https://assets.jpegmini.com/user/images/slider_puffin_jpegmini_mobile.jpg","3:00"));
-            items.add(new HistoryCheckIn(" Truyen Le Huy ","https://genk.mediacdn.vn/thumb_w/640/2019/10/16/pixel-image-1-15711948680921149315497-crop-15711968629591144940646.jpg","15:00"));
-            items.add(new HistoryCheckIn(" Long Duc Nguyen ","https://interactive-examples.mdn.mozilla.net/media/examples/grapefruit-slice-332-332.jpg","4:00"));
-            items.add(new HistoryCheckIn(" Truyen Le Huy ","https://assets.jpegmini.com/user/images/slider_puffin_jpegmini_mobile.jpg","16:00"));
-            items.add(new HistoryCheckIn(" Long Duc Nguyen ","https://interactive-examples.mdn.mozilla.net/media/examples/grapefruit-slice-332-332.jpg","5:00"));
+            items.add(new HistoryCheckIn(" Truyen Le Huy ","https://assets.jpegmini.com/user/images/slider_puffin_jpegmini_mobile.jpg","Truyen Sexy Dancer","7:00"));
+            items.add(new HistoryCheckIn(" Long Duc Nguyen ","https://interactive-examples.mdn.mozilla.net/media/examples/grapefruit-slice-332-332.jpg","THĂM NGÀN KẸP NGẦN THEO PHONG CÁCH Truyen Le","13:00"));
+            items.add(new HistoryCheckIn(" Truyen Le Huy ","https://assets.jpegmini.com/user/images/slider_puffin_jpegmini_mobile.jpg","Truyen Class Learning MakeUp","8:00"));
+            items.add(new HistoryCheckIn(" Long Duc Nguyen ","https://interactive-examples.mdn.mozilla.net/media/examples/grapefruit-slice-332-332.jpg","TalkShow to truyen Le Business ","8:00"));
+            items.add(new HistoryCheckIn(" Truyen Le Huy ","https://assets.jpegmini.com/user/images/slider_puffin_jpegmini_mobile.jpg","Truyen Sexy Dancer","6:00"));
+            items.add(new HistoryCheckIn(" Long Duc Nguyen ","https://interactive-examples.mdn.mozilla.net/media/examples/grapefruit-slice-332-332.jpg","Sing Truyen Le Song","15:00"));
+            items.add(new HistoryCheckIn(" Truyen Le Huy ","https://assets.jpegmini.com/user/images/slider_puffin_jpegmini_mobile.jpg","THĂM NGÀN KẸP NGẦN THEO PHONG CÁCH Truyen Le","8:00"));
+            items.add(new HistoryCheckIn(" Long Duc Nguyen ","https://interactive-examples.mdn.mozilla.net/media/examples/grapefruit-slice-332-332.jpg","TalkShow to truyen Le Love and Girl ","9:00"));
+
 
 
 

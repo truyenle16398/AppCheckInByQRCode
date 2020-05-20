@@ -15,7 +15,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <activity android:name=".client.EventDetailActivity"></activity>
+        <activity android:name=".client.EventDetailActivity"/>
         <activity android:name=".client.HomeClientActivity" />
         <activity android:name=".login.ForgotPassActivity" />
         <activity android:name=".login.LoginActivity">
