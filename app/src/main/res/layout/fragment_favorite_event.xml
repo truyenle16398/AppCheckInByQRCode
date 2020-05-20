@@ -4,7 +4,12 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".client.FavoriteEventFragment">
+    tools:context=".client.fragment.FavoriteEventFragment">
 
-
+    <!-- TODO: Update blank fragment layout -->
+    <TextView
+        android:id="@+id/test"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="@string/hello_blank_fragment" />
 </LinearLayout>
