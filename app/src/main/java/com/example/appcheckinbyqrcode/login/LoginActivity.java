@@ -10,6 +10,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.appcheckinbyqrcode.R;
+import com.example.appcheckinbyqrcode.admin.HomeAdminActivity;
 
 public class LoginActivity extends AppCompatActivity {
     Button BtnLogin;
@@ -39,6 +40,8 @@ public class LoginActivity extends AppCompatActivity {
                 }
                 else {
                     //code in here
+                    Intent intent = new Intent(LoginActivity.this, HomeAdminActivity.class);
+                    startActivity(intent);
                 }
             }
         });

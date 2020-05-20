@@ -1,4 +1,4 @@
-package com.example.appcheckinbyqrcode.admin;
+package com.example.appcheckinbyqrcode.admin.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.appcheckinbyqrcode.R;
+import com.example.appcheckinbyqrcode.admin.ScanCodeActivity;
 
 /**
  * A simple {@link Fragment} subclass.
