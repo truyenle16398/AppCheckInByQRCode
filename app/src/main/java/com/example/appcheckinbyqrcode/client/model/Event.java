@@ -8,7 +8,7 @@ import lombok.EqualsAndHashCode;
 
 @lombok.Data
 @EqualsAndHashCode(callSuper = false)
-public class event implements Serializable {
+public class Event implements Serializable {
     private String eventname;
     private String eventnote;
     private String eventday;
@@ -16,7 +16,7 @@ public class event implements Serializable {
     private String eventaddress;
     private String eventimage;
 
-    public event(String eventname, String eventnote, String eventday, String eventtime, String eventaddress, String eventimage) {
+    public Event(String eventname, String eventnote, String eventday, String eventtime, String eventaddress, String eventimage) {
         this.eventname = eventname;
         this.eventnote = eventnote;
         this.eventday = eventday;
