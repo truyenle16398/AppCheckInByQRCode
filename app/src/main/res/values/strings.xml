@@ -11,4 +11,9 @@
     <string name="enter_your_password">Enter Your Password</string>
     <string name="enter_your_code">Enter Your Code</string>
     <string name="change_password">Change Password</string>
+    <string name="event_date"><u>EVENT DATE</u></string>
+    <string name="event_address"><u>EVENT ADDRESS</u></string>
+    <string name="text_button_register">đăng ký tham gia</string>
+    <string name="event_detail"><u>EVENT DETAIL</u></string>
+
 </resources>

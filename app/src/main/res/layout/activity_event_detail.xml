@@ -21,8 +21,9 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent">
                         <ImageView
-                            android:scaleType="fitXY"
-                            android:src="@drawable/ic_launcher_background"
+                            android:background="#fff"
+                            android:scaleType="center"
+                            android:src="@drawable/loading"
                             android:id="@+id/imagedetail"
                             android:layout_width="match_parent"
                             android:layout_height="250dp"/>
@@ -41,19 +42,20 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content" />
                             <TextView
+                                android:drawableLeft="@drawable/calendarbig"
+                                android:layout_marginTop="6dp"
+                                android:layout_weight="5"
                                 android:textStyle="bold"
-                                android:layout_marginTop="5dp"
-                                android:drawableLeft="@drawable/ic_call_to_action_black_24dp"
                                 android:textColor="#000"
                                 android:textSize="25dp"
-                                android:text=" EVENT DATE"
+                                android:text="@string/event_date"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"/>
                             <TextView
                                 android:id="@+id/timedetail"
                                 android:layout_marginTop="5dp"
                                 android:textColor="#000"
-                                android:textSize="12sp"
+                                android:textSize="15sp"
                                 android:text="20h00 - 21h00"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"/>
@@ -61,18 +63,18 @@
                                 android:id="@+id/daydetail"
                                 android:layout_marginTop="5dp"
                                 android:textColor="#000"
-                                android:textSize="12sp"
+                                android:textSize="15sp"
                                 android:text="Ngày 19 tháng 05 năm 2020"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"/>
                             //
                             <TextView
                                 android:layout_marginTop="5dp"
-                                android:drawableLeft="@drawable/ic_call_to_action_black_24dp"
+                                android:drawableLeft="@drawable/searchbig"
                                 android:textColor="#000"
                                 android:textSize="25dp"
                                 android:textStyle="bold"
-                                android:text=" EVENT DETAIL"
+                                android:text="@string/event_detail"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"/>
                             <TextView
@@ -86,11 +88,11 @@
                                 android:layout_height="match_parent"/>//
                             <TextView
                                 android:layout_marginTop="5dp"
-                                android:drawableLeft="@drawable/ic_call_to_action_black_24dp"
+                                android:drawableLeft="@drawable/locationbig"
                                 android:textColor="#000"
                                 android:textSize="25dp"
                                 android:textStyle="bold"
-                                android:text=" EVENT ADDRESS"
+                                android:text="@string/event_address"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"/>
                             <TextView
@@ -118,11 +120,11 @@
                             android:layout_marginBottom="5dp"
                             android:layout_marginRight="30dp"
                             android:layout_marginLeft="30dp"
-                            android:background="@drawable/button_detail_event"
+                            android:background="@drawable/buttonlogin"
                             android:id="@+id/btnregisterdetail"
                             android:layout_width="match_parent"
                             android:layout_height="?actionBarSize"
-                            android:text="đăng ký tham gia"
+                            android:text="@string/text_button_register"
                             android:textSize="22sp" />
                     </LinearLayout>
                 </ScrollView>
