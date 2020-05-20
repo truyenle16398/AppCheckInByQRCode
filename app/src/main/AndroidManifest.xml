@@ -14,7 +14,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
         <activity android:name=".ui.client.EventDetailActivity"/>
         <activity android:name=".ui.client.HomeClientActivity" />
         <activity android:name=".ui.login.ForgotPassActivity" />

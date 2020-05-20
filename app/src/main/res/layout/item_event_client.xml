@@ -6,9 +6,10 @@
     android:background="#C4C2C2"
     app:cardCornerRadius="9dp"
     android:layout_marginBottom="10dp"
-    android:paddingTop="10dp"
+    android:paddingTop="5dp"
     android:paddingLeft="7dp"
     android:paddingRight="7dp"
+    android:paddingBottom="5dp"
     android:id="@+id/linner"
     android:layout_height="wrap_content">
     <androidx.cardview.widget.CardView
@@ -25,7 +26,7 @@
             android:layout_height="150dp">
             <ImageView
                 android:scaleType="fitXY"
-                android:src="@drawable/ic_launcher_background"
+                android:src="@drawable/loading"
                 android:layout_weight="1"
                 android:id="@+id/eventimage"
                 android:layout_width="0dp"
@@ -37,6 +38,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content">
                 <TextView
+                    android:textStyle="bold"
                     android:id="@+id/eventname"
                     android:gravity="center|left"
                     android:textSize="20sp"
@@ -45,6 +47,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
                 <TextView
+                    android:layout_marginBottom="2dp"
                     android:id="@+id/eventnote"
                     android:gravity="center|left"
                     android:textSize="12sp"
@@ -53,18 +56,20 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
                 <TextView
+                    android:layout_marginBottom="2dp"
                     android:id="@+id/eventday"
                     android:gravity="center|left"
-                    android:drawableLeft="@drawable/ic_call_to_action_black_24dp"
+                    android:drawableLeft="@drawable/calendar"
                     android:textSize="12sp"
                     android:textColor="#000"
                     android:text="19-05-2020"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
                 <TextView
+                    android:layout_marginBottom="2dp"
                     android:id="@+id/eventtime"
                     android:gravity="center|left"
-                    android:drawableLeft="@drawable/ic_alarm_on_black_24dp"
+                    android:drawableLeft="@drawable/time"
                     android:textSize="12sp"
                     android:textColor="#000"
                     android:text="08:00 đến 17:00"
@@ -73,7 +78,7 @@
                 <TextView
                     android:id="@+id/eventaddress"
                     android:gravity="center|left"
-                    android:drawableLeft="@drawable/ic_location_on_black_24dp"
+                    android:drawableLeft="@drawable/locationicon"
                     android:textSize="12sp"
                     android:textColor="#000"
                     android:text="41 Le Duan, Hai Chau, DN"
