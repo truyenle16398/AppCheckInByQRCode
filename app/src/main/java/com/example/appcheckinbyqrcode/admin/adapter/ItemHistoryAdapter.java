@@ -39,6 +39,7 @@ public class ItemHistoryAdapter extends RecyclerView.Adapter<ItemHistoryAdapter.
         Glide.with(context).load(listHistory.get(position).getmImage()).into(holder.imageView);
         holder.txtName.setText(listHistory.get(position).getmName());
         holder.txtTimeCheckInOut.setText(listHistory.get(position).getmTimeCheck());
+        holder.txtEventName.setText(listHistory.get(position).getmEventName());
 
 
     }
@@ -50,13 +51,15 @@ public class ItemHistoryAdapter extends RecyclerView.Adapter<ItemHistoryAdapter.
 
     public class CardViewHolder extends RecyclerView.ViewHolder {
         ImageView imageView;
-        TextView txtName, txtTimeCheckInOut;
+        TextView txtName, txtTimeCheckInOut, txtEventName;
 
         public CardViewHolder(@NonNull View itemView) {
             super(itemView);
             imageView = itemView.findViewById(R.id.imageView);
             txtName = itemView.findViewById(R.id.txtName);
             txtTimeCheckInOut = itemView.findViewById(R.id.txtTimeCheckInOut);
+            txtEventName = itemView.findViewById(R.id.txtEventName);
+
         }
     }
 }

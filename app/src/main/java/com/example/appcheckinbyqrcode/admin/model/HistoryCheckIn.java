@@ -1,15 +1,16 @@
 package com.example.appcheckinbyqrcode.admin.model;
 
 public class HistoryCheckIn {
-    private String mName, mImage, mTimeCheck;
-
-    public HistoryCheckIn(String mName, String mImage, String mTimeCheck) {
-        this.mName = mName;
-        this.mImage = mImage;
-        this.mTimeCheck = mTimeCheck;
-    }
+    private String mName, mImage, mEventName, mTimeCheck;
 
     public HistoryCheckIn() {
+    }
+
+    public HistoryCheckIn(String mName, String mImage, String mEventName, String mTimeCheck) {
+        this.mName = mName;
+        this.mImage = mImage;
+        this.mEventName = mEventName;
+        this.mTimeCheck = mTimeCheck;
     }
 
     public String getmName() {
@@ -26,6 +27,14 @@ public class HistoryCheckIn {
 
     public void setmImage(String mImage) {
         this.mImage = mImage;
+    }
+
+    public String getmEventName() {
+        return mEventName;
+    }
+
+    public void setmEventName(String mEventName) {
+        this.mEventName = mEventName;
     }
 
     public String getmTimeCheck() {

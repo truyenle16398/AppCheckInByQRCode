@@ -57,10 +57,4 @@ public class HomeClientActivity extends AppCompatActivity {
 
     }
 
-    private void setIcon() {
-        mTabLayout.getTabAt(0).setIcon(R.drawable.qr);
-        mTabLayout.getTabAt(1).setIcon(R.drawable.list);
-        mTabLayout.getTabAt(2).setIcon(R.drawable.person);
-
-    }
 }
