@@ -6,6 +6,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
 import com.example.appcheckinbyqrcode.admin.fragment.AdminUserFragment;
+import com.example.appcheckinbyqrcode.admin.fragment.HistoryCheckInFragment;
 import com.example.appcheckinbyqrcode.admin.fragment.ScannerFragment;
 
 public class AdminPagerAdapter extends FragmentPagerAdapter {
@@ -23,7 +24,7 @@ public class AdminPagerAdapter extends FragmentPagerAdapter {
             case 0:
                 return new ScannerFragment();
             case 1:
-                return new AdminUserFragment.HistoryCheckInFragment();
+                return new HistoryCheckInFragment();
             case 2:
                 return new AdminUserFragment();
 
