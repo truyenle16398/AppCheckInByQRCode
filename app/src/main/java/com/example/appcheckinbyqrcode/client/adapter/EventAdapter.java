@@ -6,11 +6,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -18,20 +16,18 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.appcheckinbyqrcode.R;
 import com.example.appcheckinbyqrcode.client.EventDetailActivity;
-import com.example.appcheckinbyqrcode.client.model.event;
+import com.example.appcheckinbyqrcode.client.model.Event;
 
 import java.util.List;
 
-import butterknife.BindView;
-
-public class eventadapter extends RecyclerView.Adapter<eventadapter.ViewHolder>{
+public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder>{
 
     private static final String TAG = "nnn";
-    private List<event> data;
+    private List<Event> data;
     private Context context;
 
 
-    public eventadapter(List<event> data,Context context) {
+    public EventAdapter(List<Event> data, Context context) {
         this.data = data;
         this.context = context;
     }
