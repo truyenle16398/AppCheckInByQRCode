@@ -6,7 +6,7 @@
     android:id="@+id/drawer"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".client.HomeClientActivity">
+    tools:context=".ui.client.HomeClientActivity">
     <include
         layout="@layout/client_content_main"
         android:layout_width="match_parent"

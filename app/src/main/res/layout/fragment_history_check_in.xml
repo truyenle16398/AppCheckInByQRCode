@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".admin.fragment.HistoryCheckInFragment">
+    tools:context=".ui.admin.fragment.HistoryCheckInFragment">
 
     <TextView
         android:layout_width="match_parent"
@@ -16,7 +16,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:text="Total :" />
+        android:text="Total : 10" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycle_view"
