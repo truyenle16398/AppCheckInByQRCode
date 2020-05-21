@@ -6,13 +6,32 @@
     android:layout_height="match_parent"
     android:layout_gravity="center"
     android:gravity="center"
-    android:background="#C5A2DC"
+    android:background="@drawable/background"
     tools:context=".ui.admin.fragment.ScannerFragment">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="72dp"
+        android:background="@drawable/logo" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
+        android:layout_marginBottom="60dp"
+        android:background="@drawable/box_bg"
+        android:orientation="vertical"
+        android:gravity="center|top"
+        android:layout_gravity="center"
+        android:layout_marginTop="32dp"
+        >
 
     <ImageView
         android:background="@drawable/qr"
         android:layout_width="150dp"
-        android:layout_height="150dp">
+        android:layout_height="150dp"
+        android:layout_marginTop="50dp">
 
     </ImageView>
     <TextView
@@ -27,7 +46,12 @@
         android:id="@+id/buttonscan"
         android:layout_marginTop="10dp"
         android:layout_width="match_parent"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"
         android:layout_height="wrap_content"
-        android:text="Scan QR Code" />
-
+        android:background="@drawable/buttonlogin"
+        android:textColor="#fff"
+        android:text="Scan QR Code"
+        android:layout_marginBottom="50dp"/>
+    </LinearLayout>
 </LinearLayout>
