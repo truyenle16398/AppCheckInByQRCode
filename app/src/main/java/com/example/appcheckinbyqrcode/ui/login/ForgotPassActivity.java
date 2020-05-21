@@ -2,6 +2,7 @@ package com.example.appcheckinbyqrcode.ui.login;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.View;
@@ -10,11 +11,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.appcheckinbyqrcode.R;
+import com.example.appcheckinbyqrcode.ui.client.HomeClientActivity;
+import com.example.appcheckinbyqrcode.ui.client.fragment.EventFragment;
 
 public class ForgotPassActivity extends AppCompatActivity {
     Button BtnGetCode;
     TextView TVBack, TVemail, TVcode, TVpass, TVtimer;
-    String email, pass;
+    String email, pass,code;
     CountDownTimer countDownTimer;
 
 
@@ -40,6 +43,20 @@ public class ForgotPassActivity extends AppCompatActivity {
                     TVtimer.setVisibility(View.VISIBLE);
                     BtnGetCode.setText("Change Password");
                     startCountdownTimer();
+                    BtnGetCode.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            code = TVcode.getText().toString();
+                            pass = TVpass.getText().toString();
+
+                            if (code.isEmpty() || pass.isEmpty()){
+                                Toast.makeText(ForgotPassActivity.this, "Vui lòng nhập Code và Pass đầy đủ", Toast.LENGTH_SHORT).show();
+                            }else {
+                                Intent intent = new Intent(ForgotPassActivity.this, HomeClientActivity.class);
+                                startActivity(intent);
+                            }
+                        }
+                    });
                 }
             }
         });

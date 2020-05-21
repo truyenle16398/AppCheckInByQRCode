@@ -153,7 +153,7 @@
                     android:clickable="true"
                     android:text="Already account? Back to Login"
                     android:textStyle="bold"
-                    android:textSize="20dp"
+                    android:textSize="10dp"
                     />
 
 
