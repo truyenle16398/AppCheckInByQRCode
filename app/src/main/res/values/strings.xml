@@ -15,5 +15,7 @@
     <string name="event_address"><u>EVENT ADDRESS</u></string>
     <string name="text_button_register">đăng ký tham gia</string>
     <string name="event_detail"><u>EVENT DETAIL</u></string>
+    <string name="register_new_account"><u>Register New Account</u></string>
+    <string name="already_account_back_to_login"><u>Already account? Back to Login</u></string>
 
 </resources>
