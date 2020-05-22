@@ -151,7 +151,7 @@
                     android:layout_marginBottom="32dp"
                     android:layout_marginTop="32dp"
                     android:clickable="true"
-                    android:text="Already account? Back to Login"
+                    android:text="@string/already_account_back_to_login"
                     android:textStyle="bold"
                     android:textSize="10dp"
                     />
