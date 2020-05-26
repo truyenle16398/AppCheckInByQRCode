@@ -1,4 +1,4 @@
-package com.example.appcheckinbyqrcode.ui.model;
+package com.example.appcheckinbyqrcode;
 
 import android.content.Context;
 import android.content.SharedPreferences;
