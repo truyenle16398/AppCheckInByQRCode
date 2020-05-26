@@ -1,6 +1,5 @@
 package com.example.appcheckinbyqrcode.ui.login;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -16,14 +15,12 @@ import android.widget.Toast;
 import com.example.appcheckinbyqrcode.R;
 import com.example.appcheckinbyqrcode.network.ApiClient;
 import com.example.appcheckinbyqrcode.ui.admin.HomeAdminActivity;
+import com.example.appcheckinbyqrcode.ui.client.HomeClientActivity;
 import com.example.appcheckinbyqrcode.ui.model.ApiConfig;
-import com.example.appcheckinbyqrcode.ui.model.SessionManager;
+import com.example.appcheckinbyqrcode.SessionManager;
 import com.example.appcheckinbyqrcode.ui.model.User;
 import com.example.appcheckinbyqrcode.ui.model.info;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.iid.FirebaseInstanceId;
-import com.google.firebase.iid.InstanceIdResult;
+
 
 import io.reactivex.Observer;
 import io.reactivex.SingleObserver;
@@ -42,14 +39,9 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        ApiConfig config = ApiConfig.builder().context(this).baseUrl("http://10.0.1.120:8888/sdc_event/public/api/")
-                //SessionManager.getInstance().getKeySaveToken()
-                .auth("")
-                .build();
-        ApiClient.getInstance().init(config);
         Anhxa();
         onClick();
-//        CheckLogin();
+        CheckLogin();
     }
 
     void onClick() {
@@ -87,10 +79,20 @@ public class LoginActivity extends AppCompatActivity {
                                         SessionManager.getInstance().setKeyRole(info.getRoleId());
                                         Log.d("nnn", "onError: " + us.getAccessToken());
                                         ////////
-                                        saveTokenFirebase();
-                                        Toast.makeText(LoginActivity.this, "Đăng nhập thành công 1111111!", Toast.LENGTH_SHORT).show();
-                                        Intent intent = new Intent(LoginActivity.this, HomeAdminActivity.class);
-                                        startActivity(intent);
+                                        /////event role id
+                                        if (info.getRoleId().equals("3")){
+                                            Toast.makeText(LoginActivity.this, "Đăng nhập thành công!", Toast.LENGTH_SHORT).show();
+                                            Intent intent = new Intent(LoginActivity.this, HomeClientActivity.class);
+                                            startActivity(intent);
+                                        }else if (info.getRoleId().equals("2")){
+                                            Toast.makeText(LoginActivity.this, "Đăng nhập thành công!", Toast.LENGTH_SHORT).show();
+                                            Intent intent = new Intent(LoginActivity.this, HomeAdminActivity.class);
+                                            startActivity(intent);
+                                        }else {
+                                            Toast.makeText(LoginActivity.this, "Tuoi Nao Ma Doi Vo App Tao!", Toast.LENGTH_SHORT).show();
+                                        }
+
+//                                        saveTokenFirebase();
 
                                         ApiConfig config = ApiConfig.builder().context(LoginActivity.this).baseUrl(SessionManager.getInstance().getKeySaveCityName())
                                                 .auth(SessionManager.getInstance().getKeySaveToken())
@@ -100,8 +102,6 @@ public class LoginActivity extends AppCompatActivity {
                                     } else {
                                         Toast.makeText(LoginActivity.this, "Tài khoản hoặc mật khẩu không chính xác!!", Toast.LENGTH_SHORT).show();
                                     }
-
-
                                 }
 
                                 @Override
@@ -139,48 +139,22 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
-    private void saveTokenFirebase() {
-        FirebaseInstanceId.getInstance().getInstanceId()
-                .addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<InstanceIdResult> task) {
-                        String tokenfirebase = task.getResult().getToken();
-                        ApiClient.getService().savetokenfirebase(tokenfirebase)
-                                .subscribeOn(Schedulers.io())
-                                .observeOn(AndroidSchedulers.mainThread())
-                                .subscribe(new SingleObserver<String>() {
-                                    @Override
-                                    public void onSubscribe(Disposable d) {
 
-                                    }
-
-                                    @Override
-                                    public void onSuccess(String s) {
-                                        if (s.equals("success")) {
-
-                                        } else {
-                                            Toast.makeText(LoginActivity.this, "" + s, Toast.LENGTH_SHORT).show();
-                                        }
-                                    }
-
-                                    @Override
-                                    public void onError(Throwable e) {
-                                        Log.d("nnn", "onError: tokenfirebase " + e.getMessage());
-                                    }
-                                });
-                    }
-                });
-
+    private void CheckLogin(){
+        if(!SessionManager.getInstance().CheckKeyLogin()){//session.Check()
+            Toast.makeText(this, "Vui lòng đăng nhập!!!!!!", Toast.LENGTH_SHORT).show();
+        }else {
+            if (SessionManager.getInstance().getKeyRole().equals("3")){
+                Intent intent = new Intent(getApplication(),HomeClientActivity.class);
+                startActivity(intent);
+                finish();
+            }else if (SessionManager.getInstance().getKeyRole().equals("2")){
+                Intent intent = new Intent(getApplication(),HomeAdminActivity.class);
+                startActivity(intent);
+                finish();
+                }
+        }
     }
-//    private void CheckLogin(){
-//        if(!SessionManager.getInstance().CheckKeyLogin()){//session.Check()
-//            Toast.makeText(this, "Vui lòng đăng nhập!!!!!!", Toast.LENGTH_SHORT).show();
-//        }else {
-//            Intent intent = new Intent(getApplication(),HomeAdminActivity.class);
-//            startActivity(intent);
-//            finish();
-//        }
-//    }
 
     void Anhxa() {
         btnLogin = findViewById(R.id.btnLogin);

@@ -5,10 +5,6 @@ import com.example.appcheckinbyqrcode.ui.model.User;
 
 import io.reactivex.Observable;
 import io.reactivex.Single;
-import retrofit2.Call;
-import retrofit2.http.Field;
-import retrofit2.http.FormUrlEncoded;
-import retrofit2.http.Headers;
 import retrofit2.http.POST;
 import retrofit2.http.Query;
 
@@ -21,6 +17,6 @@ public interface ApiService {
 
     // luu token firebase vao csdl
     @POST("save-notification")
-    Single<String> savetokenfirebase(@Query("token") String token);
+    Observable<String> savetokenfirebase(@Query("token") String token);
 
 }
