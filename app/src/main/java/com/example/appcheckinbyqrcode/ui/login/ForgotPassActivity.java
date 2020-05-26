@@ -2,11 +2,13 @@ package com.example.appcheckinbyqrcode.ui.login;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.util.Log;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -29,6 +31,7 @@ public class ForgotPassActivity extends AppCompatActivity {
     EditText edtCode, edtPass, edtEmail;
     String email, pass, code, message;
     CountDownTimer countDownTimer;
+    private String TAG="nnn";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +45,10 @@ public class ForgotPassActivity extends AppCompatActivity {
         btnGetCode.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                ProgressDialog pd = new ProgressDialog(ForgotPassActivity.this);
+                pd.setMessage("loading");
+                pd.show();
+                hideKeybaord(view);
                 email = edtEmail.getText().toString();
                 if (email.isEmpty()) {
                     Toast.makeText(ForgotPassActivity.this, "Vui lòng nhập Email của bạn", Toast.LENGTH_SHORT).show();
@@ -55,14 +62,14 @@ public class ForgotPassActivity extends AppCompatActivity {
                                 public void onSubscribe(Disposable d) {
 
                                 }
-
                                 @Override
                                 public void onNext(forgetPassResponse forgetPassResponse) {
                                     //forgetPassResponse.getMessage().equals("We cant find a user with that e-mail address.");
                                     Log.d("nnn", "OnMess" + forgetPassResponse.getMessage());
                                     if (forgetPassResponse.getMessage().equals("We cant find a user with that e-mail address.")) {
-                                        Toast.makeText(ForgotPassActivity.this, "Email của bạn khong dung", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(ForgotPassActivity.this, "Email của bạn không tồn tại!", Toast.LENGTH_SHORT).show();
                                     } else {
+                                        pd.dismiss();
                                         edtEmail.setVisibility(View.GONE);
                                         edtCode.setVisibility(View.VISIBLE);
                                         edtPass.setVisibility(View.VISIBLE);
@@ -72,13 +79,16 @@ public class ForgotPassActivity extends AppCompatActivity {
                                         btnGetCode.setOnClickListener(new View.OnClickListener() {
                                             @Override
                                             public void onClick(View view) {
+                                                ProgressDialog bb = new ProgressDialog(ForgotPassActivity.this);
+                                                bb.setMessage("loading");
+                                                bb.show();
+                                                hideKeybaord(view);
                                                 code = edtCode.getText().toString();
                                                 pass = edtPass.getText().toString();
-
                                                 if (code.isEmpty() || pass.isEmpty()) {
                                                     Toast.makeText(ForgotPassActivity.this, "Vui lòng nhập Code và Pass đầy đủ", Toast.LENGTH_SHORT).show();
                                                 } else {
-                                                    ApiClient.getService().resetPass(email, pass, pass, code, message)
+                                                    ApiClient.getService().resetPass(email, pass, pass, code)
                                                             .subscribeOn(Schedulers.io())
                                                             .observeOn(AndroidSchedulers.mainThread())
                                                             .subscribe(new Observer<resetPassResponse>() {
@@ -89,22 +99,21 @@ public class ForgotPassActivity extends AppCompatActivity {
 
                                                                 @Override
                                                                 public void onNext(resetPassResponse resetPassResponse) {
-                                                                    Toast.makeText(ForgotPassActivity.this, "Email của bạn khong dung", Toast.LENGTH_SHORT).show();
+                                                                    Toast.makeText(ForgotPassActivity.this, resetPassResponse.getMessage(), Toast.LENGTH_SHORT).show();
+                                                                    Intent intent = new Intent(ForgotPassActivity.this, LoginActivity.class);
+                                                                    startActivity(intent);
                                                                 }
 
                                                                 @Override
                                                                 public void onError(Throwable e) {
-
+                                                                    Log.d(TAG, "onError in click BtnGetCode: "+e.getMessage());
                                                                 }
 
                                                                 @Override
                                                                 public void onComplete() {
-
+                                                                    bb.dismiss();
                                                                 }
                                                             });
-
-                                                    Intent intent = new Intent(ForgotPassActivity.this, LoginActivity.class);
-                                                    startActivity(intent);
                                                 }
                                             }
                                         });
@@ -121,7 +130,6 @@ public class ForgotPassActivity extends AppCompatActivity {
 
                                 @Override
                                 public void onComplete() {
-
                                 }
                             });
                 }
@@ -134,6 +142,10 @@ public class ForgotPassActivity extends AppCompatActivity {
                 finish();
             }
         });
+    }
+    private void hideKeybaord(View v) {
+        InputMethodManager inputMethodManager = (InputMethodManager)getSystemService(INPUT_METHOD_SERVICE);
+        inputMethodManager.hideSoftInputFromWindow(v.getApplicationWindowToken(),0);
     }
 
     private void startCountdownTimer() {

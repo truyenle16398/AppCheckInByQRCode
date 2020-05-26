@@ -6,6 +6,8 @@ import com.example.appcheckinbyqrcode.network.response.resetPassResponse;
 import com.example.appcheckinbyqrcode.ui.model.User;
 
 import io.reactivex.Observable;
+import retrofit2.http.Field;
+import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.POST;
 import retrofit2.http.Query;
 
@@ -17,16 +19,16 @@ public interface ApiService {
                               @Query("password") String password);
 
     //xac nhan email de lay lai mat khau
-    @POST("forgot-password")
-    Observable<forgetPassResponse> forgetPass(@Query("email") String email);
+    @POST("create")//forgot-password
+    @FormUrlEncoded
+    Observable<forgetPassResponse> forgetPass(@Field("email") String email);
 
     //reset pass
     @POST("reset")
     Observable<resetPassResponse> resetPass(@Query("email") String email,
                                             @Query("password") String password,
                                             @Query("password_confirmation") String password_confirmation,
-                                            @Query("token") String token,
-                                            @Query("message") String message);
+                                            @Query("token") String token);
 
     //dang ky
     @POST("register")

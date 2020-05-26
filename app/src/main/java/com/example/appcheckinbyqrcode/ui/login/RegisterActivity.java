@@ -2,11 +2,13 @@ package com.example.appcheckinbyqrcode.ui.login;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -47,6 +49,10 @@ public class RegisterActivity extends AppCompatActivity {
         btnregister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                ProgressDialog pd = new ProgressDialog(RegisterActivity.this);
+                pd.setMessage("loading");
+                pd.show();
+                hideKeybaord(view);
                 email = edtemail.getText().toString();
                 name = edtname.getText().toString();
                 address = edtaddress.getText().toString();
@@ -55,6 +61,7 @@ public class RegisterActivity extends AppCompatActivity {
                 confirmpassword = edtconfirmpass.getText().toString();
                 if (email.isEmpty() || name.isEmpty() || address.isEmpty() || phone.isEmpty() || password.isEmpty() || confirmpassword.isEmpty()) {
                     Toast.makeText(RegisterActivity.this, "Vui lòng nhập đầy đủ thông tin để đăng ký!!", Toast.LENGTH_SHORT).show();
+                    pd.dismiss();
                 } else {
                     ApiClient.getService().register(email, name, address, phone, password, confirmpassword)
                             .subscribeOn(Schedulers.io())
@@ -82,7 +89,7 @@ public class RegisterActivity extends AppCompatActivity {
 
                                 @Override
                                 public void onComplete() {
-
+                                    pd.dismiss();
                                 }
                             });
                 }
@@ -99,6 +106,11 @@ public class RegisterActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    private void hideKeybaord(View v) {
+        InputMethodManager inputMethodManager = (InputMethodManager)getSystemService(INPUT_METHOD_SERVICE);
+        inputMethodManager.hideSoftInputFromWindow(v.getApplicationWindowToken(),0);
     }
 
     private void initWidget() {

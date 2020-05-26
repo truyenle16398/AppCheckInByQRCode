@@ -2,11 +2,13 @@ package com.example.appcheckinbyqrcode.ui.login;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -48,14 +50,20 @@ public class LoginActivity extends AppCompatActivity {
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                ProgressDialog pd = new ProgressDialog(LoginActivity.this);
+                pd.setMessage("loading");
+                pd.show();
                 email = edtEmail.getText().toString();
                 pass = edtPass.getText().toString();
                 if (email.isEmpty() && pass.isEmpty()) {
                     Toast.makeText(LoginActivity.this, "Vui lòng nhập đầy đủ!!", Toast.LENGTH_SHORT).show();
+                    pd.dismiss();
                 } else if (email.isEmpty()) {
                     Toast.makeText(LoginActivity.this, "Vui lòng nhập tài khoản Email!!", Toast.LENGTH_SHORT).show();
+                    pd.dismiss();
                 } else if (pass.isEmpty()) {
                     Toast.makeText(LoginActivity.this, "Vui lòng nhập mật khẩu!!", Toast.LENGTH_SHORT).show();
+                    pd.dismiss();
                 } else {
                     //code in here
                     ApiClient.getService().loginnew(email, pass)
@@ -113,7 +121,7 @@ public class LoginActivity extends AppCompatActivity {
 
                                 @Override
                                 public void onComplete() {
-
+                                    pd.dismiss();
                                 }
                             });
                 }
@@ -153,7 +161,6 @@ public class LoginActivity extends AppCompatActivity {
             }
         }
     }
-
     private void InitWidget() {
         btnLogin = findViewById(R.id.btnLogin);
         tvForgotPass = findViewById(R.id.tvPass);

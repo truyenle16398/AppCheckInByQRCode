@@ -28,6 +28,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="250dp"/>
                         <LinearLayout
+                            android:layout_marginLeft="15dp"
                             android:paddingRight="10dp"
                             android:paddingLeft="10dp"
                             android:layout_marginTop="10dp"
@@ -42,6 +43,8 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content" />
                             <TextView
+                                android:layout_marginBottom="5dp"
+                                android:drawablePadding="8dp"
                                 android:drawableLeft="@drawable/calendarbig"
                                 android:layout_marginTop="6dp"
                                 android:layout_weight="5"
@@ -52,6 +55,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"/>
                             <TextView
+                                android:layout_marginBottom="5dp"
                                 android:id="@+id/timedetail"
                                 android:layout_marginTop="5dp"
                                 android:textColor="#000"
@@ -60,6 +64,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"/>
                             <TextView
+                                android:layout_marginBottom="5dp"
                                 android:id="@+id/daydetail"
                                 android:layout_marginTop="5dp"
                                 android:textColor="#000"
@@ -69,6 +74,8 @@
                                 android:layout_height="match_parent"/>
                             //
                             <TextView
+                                android:layout_marginBottom="5dp"
+                                android:drawablePadding="8dp"
                                 android:layout_marginTop="5dp"
                                 android:drawableLeft="@drawable/searchbig"
                                 android:textColor="#000"
@@ -78,6 +85,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"/>
                             <TextView
+                                android:lineSpacingExtra="4dp"
                                 android:id="@+id/infodetail"
                                 android:layout_marginRight="30dp"
                                 android:layout_marginTop="5dp"
@@ -87,6 +95,8 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"/>//
                             <TextView
+                                android:layout_marginBottom="5dp"
+                                android:drawablePadding="8dp"
                                 android:layout_marginTop="5dp"
                                 android:drawableLeft="@drawable/locationbig"
                                 android:textColor="#000"
@@ -96,6 +106,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"/>
                             <TextView
+                                android:layout_marginBottom="5dp"
                                 android:id="@+id/addressinfodetail"
                                 android:layout_marginRight="30dp"
                                 android:layout_marginTop="5dp"
@@ -106,6 +117,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"/>
                             <TextView
+                                android:layout_marginBottom="5dp"
                                 android:id="@+id/addressdetail"
                                 android:layout_marginRight="30dp"
                                 android:layout_marginTop="5dp"
