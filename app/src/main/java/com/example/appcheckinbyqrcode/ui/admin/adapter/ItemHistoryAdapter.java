@@ -40,8 +40,6 @@ public class ItemHistoryAdapter extends RecyclerView.Adapter<ItemHistoryAdapter.
         holder.txtName.setText(listHistory.get(position).getmName());
         holder.txtTimeCheckInOut.setText(listHistory.get(position).getmTimeCheck());
         holder.txtEventName.setText(listHistory.get(position).getmEventName());
-
-
     }
 
     @Override

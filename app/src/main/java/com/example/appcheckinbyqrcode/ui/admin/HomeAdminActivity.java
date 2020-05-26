@@ -54,7 +54,6 @@ public class HomeAdminActivity extends AppCompatActivity {
 
         pager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(mTabLayout));
 
-
     }
 
 }

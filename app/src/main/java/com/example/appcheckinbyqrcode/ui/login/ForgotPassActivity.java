@@ -19,12 +19,6 @@ import com.example.appcheckinbyqrcode.SessionManager;
 import com.example.appcheckinbyqrcode.network.ApiClient;
 import com.example.appcheckinbyqrcode.network.response.forgetPassResponse;
 import com.example.appcheckinbyqrcode.network.response.resetPassResponse;
-import com.example.appcheckinbyqrcode.ui.admin.HomeAdminActivity;
-import com.example.appcheckinbyqrcode.ui.client.HomeClientActivity;
-import com.example.appcheckinbyqrcode.ui.client.fragment.EventFragment;
-import com.example.appcheckinbyqrcode.ui.model.ApiConfig;
-import com.example.appcheckinbyqrcode.ui.model.User;
-import com.example.appcheckinbyqrcode.ui.model.info;
 
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -32,31 +26,30 @@ import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 
 public class ForgotPassActivity extends AppCompatActivity {
-    Button BtnGetCode;
-    TextView TVBack, TVtimer;
-    EditText EDTcode, EDTpass, EDTemail;
+    Button btnGetCode;
+    TextView tvBack, tvTimer;
+    EditText edtCode, edtPass, edtEmail;
     String email, pass, code, message;
     CountDownTimer countDownTimer;
     private String TAG="nnn";
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_forgot_pass);
-        Anhxa();
+        InitWidget();
         onClick();
     }
 
     void onClick() {
-        BtnGetCode.setOnClickListener(new View.OnClickListener() {
+        btnGetCode.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 ProgressDialog pd = new ProgressDialog(ForgotPassActivity.this);
                 pd.setMessage("loading");
                 pd.show();
                 hideKeybaord(view);
-                email = EDTemail.getText().toString();
+                email = edtEmail.getText().toString();
                 if (email.isEmpty()) {
                     Toast.makeText(ForgotPassActivity.this, "Vui lòng nhập Email của bạn", Toast.LENGTH_SHORT).show();
                 } else {
@@ -77,22 +70,21 @@ public class ForgotPassActivity extends AppCompatActivity {
                                         Toast.makeText(ForgotPassActivity.this, "Email của bạn không tồn tại!", Toast.LENGTH_SHORT).show();
                                     } else {
                                         pd.dismiss();
-                                        EDTemail.setVisibility(View.GONE);
-                                        EDTcode.setVisibility(View.VISIBLE);
-                                        EDTpass.setVisibility(View.VISIBLE);
-                                        TVtimer.setVisibility(View.VISIBLE);
-                                        BtnGetCode.setText("Change Password");
+                                        edtEmail.setVisibility(View.GONE);
+                                        edtCode.setVisibility(View.VISIBLE);
+                                        edtPass.setVisibility(View.VISIBLE);
+                                        tvTimer.setVisibility(View.VISIBLE);
+                                        btnGetCode.setText("Change Password");
                                         startCountdownTimer();
-                                        BtnGetCode.setOnClickListener(new View.OnClickListener() {
+                                        btnGetCode.setOnClickListener(new View.OnClickListener() {
                                             @Override
                                             public void onClick(View view) {
                                                 ProgressDialog bb = new ProgressDialog(ForgotPassActivity.this);
                                                 bb.setMessage("loading");
                                                 bb.show();
                                                 hideKeybaord(view);
-                                                code = EDTcode.getText().toString();
-                                                pass = EDTpass.getText().toString();
-
+                                                code = edtCode.getText().toString();
+                                                pass = edtPass.getText().toString();
                                                 if (code.isEmpty() || pass.isEmpty()) {
                                                     Toast.makeText(ForgotPassActivity.this, "Vui lòng nhập Code và Pass đầy đủ", Toast.LENGTH_SHORT).show();
                                                 } else {
@@ -133,20 +125,18 @@ public class ForgotPassActivity extends AppCompatActivity {
                                 @Override
                                 public void onError(Throwable e) {
                                     Toast.makeText(ForgotPassActivity.this, "ban Sai Vl", Toast.LENGTH_SHORT).show();
-                                    Log.d("nnn","Error" +e.getMessage());
+                                    Log.d("nnn", "Error" + e.getMessage());
                                 }
 
                                 @Override
                                 public void onComplete() {
                                 }
                             });
-
-
                 }
             }
         });
 
-        TVBack.setOnClickListener(new View.OnClickListener() {
+        tvBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 finish();
@@ -162,7 +152,7 @@ public class ForgotPassActivity extends AppCompatActivity {
         countDownTimer = new CountDownTimer(120000, 1000) {
 
             public void onTick(long millisUntilFinished) {
-                TVtimer.setText("Time remaining : " + millisUntilFinished / 1000);
+                tvTimer.setText("Time remaining : " + millisUntilFinished / 1000);
             }
 
             public void onFinish() {
@@ -172,15 +162,15 @@ public class ForgotPassActivity extends AppCompatActivity {
         }.start();
     }
 
-    void Anhxa() {
-        BtnGetCode = findViewById(R.id.btnGetCode);
-        TVBack = findViewById(R.id.tvBack);
-        EDTcode = findViewById(R.id.inputCode);
-        EDTpass = findViewById(R.id.inputPass);
-        EDTemail = findViewById(R.id.inputEmail);
-        EDTcode.setVisibility(View.GONE);
-        EDTpass.setVisibility(View.GONE);
-        TVtimer = findViewById(R.id.timer);
-        TVtimer.setVisibility(View.GONE);
+    private void InitWidget() {
+        btnGetCode = findViewById(R.id.btnGetCode);
+        tvBack = findViewById(R.id.tvBack);
+        edtCode = findViewById(R.id.inputCode);
+        edtPass = findViewById(R.id.inputPass);
+        edtEmail = findViewById(R.id.inputEmail);
+        edtCode.setVisibility(View.GONE);
+        edtPass.setVisibility(View.GONE);
+        tvTimer = findViewById(R.id.timer);
+        tvTimer.setVisibility(View.GONE);
     }
 }
