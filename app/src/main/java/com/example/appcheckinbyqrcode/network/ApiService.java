@@ -3,6 +3,7 @@ package com.example.appcheckinbyqrcode.network;
 
 import com.example.appcheckinbyqrcode.ui.model.User;
 
+import io.reactivex.Observable;
 import io.reactivex.Single;
 import retrofit2.Call;
 import retrofit2.http.Field;
@@ -14,21 +15,12 @@ import retrofit2.http.Query;
 public interface ApiService {
 
     //dang nhap
-    @FormUrlEncoded
     @POST("login")
-    Single<User> loginnew(@Field("email") String email,
-                          @Field("password") String password);
+    Observable<User> loginnew(@Query("email") String email,
+                              @Query("password") String password);
 
     // luu token firebase vao csdl
     @POST("save-notification")
     Single<String> savetokenfirebase(@Query("token") String token);
 
-    @Headers({"Accept: application/json"
-            //  , "Content-Type : application/json"
-    })
-
-    @POST("login")
-    @FormUrlEncoded
-    Call<User> login(@Field("email") String email,
-                     @Field("password") String password);
 }
