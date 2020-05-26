@@ -114,7 +114,7 @@ public class ApiClient {
         });
 
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://192.168.43.2:8888/cham-cong/api/")//192.168.2.24
+                .baseUrl("http://10.0.1.120:8888/sdc_event/public/api/")//192.168.2.24
                 //192.168.43.2
                 //http://192.168.43.187:8888/cham-cong/api/
                 .client(okHttpBuilder.build())
