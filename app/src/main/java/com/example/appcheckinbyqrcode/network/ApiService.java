@@ -19,4 +19,12 @@ public interface ApiService {
     @POST("save-notification")
     Observable<String> savetokenfirebase(@Query("token") String token);
 
+    //dang ky
+    @POST("register")
+    Observable<User> register(@Query("email") String email,
+                              @Query("name") String name,
+                              @Query("address") String address,
+                              @Query("phone") String phone,
+                              @Query("password") String password,
+                              @Query("password_confirmation") String confirmpassword);
 }
