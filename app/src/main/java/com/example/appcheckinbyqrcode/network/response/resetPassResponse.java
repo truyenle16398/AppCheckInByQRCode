@@ -25,7 +25,6 @@ public class resetPassResponse {
     @Expose
     private String token;
 
-
     @SerializedName("message")
     @Expose
     private String message;

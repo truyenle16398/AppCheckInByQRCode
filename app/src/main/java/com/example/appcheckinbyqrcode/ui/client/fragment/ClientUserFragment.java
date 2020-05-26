@@ -20,7 +20,7 @@ import com.example.appcheckinbyqrcode.ui.login.LoginActivity;
  * A simple {@link Fragment} subclass.
  */
 public class ClientUserFragment extends Fragment {
-    Button BtnChangePass,BtnLogOut;
+    Button btnChangePass,btnLogOut;
     private View view;
     public ClientUserFragment() {
         // Required empty public constructor
@@ -32,9 +32,9 @@ public class ClientUserFragment extends Fragment {
         // Inflate the layout for this fragment
 
         view = inflater.inflate(R.layout.fragment_client_user, container, false);
-        BtnLogOut = view.findViewById(R.id.btnLogout);
+        btnLogOut = view.findViewById(R.id.btnLogout);
 
-        BtnLogOut.setOnClickListener(new View.OnClickListener() {
+        btnLogOut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Toast.makeText(getActivity(), "Logout thành công!", Toast.LENGTH_SHORT).show();
@@ -44,11 +44,9 @@ public class ClientUserFragment extends Fragment {
                 SessionManager.getInstance().setKeySaveToken("");
                 SessionManager.getInstance().setKeySaveCheck(true);
                 SessionManager.getInstance().setKeyLogin(false);
-//                finish();
                 getActivity().finish();
             }
         });
-
 
         return view;
 

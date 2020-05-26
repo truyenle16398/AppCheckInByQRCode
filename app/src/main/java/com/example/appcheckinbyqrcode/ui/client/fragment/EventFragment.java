@@ -22,9 +22,7 @@ import java.util.List;
  */
 public class EventFragment extends Fragment {
 
-//    @BindView(R.id.recyclerviewEvent)
     RecyclerView mRCycMs;
-
     private static final int NUM_COLUMNS = 2;
     private EventAdapter adapter;
     private List<Event> data;
@@ -39,7 +37,6 @@ public class EventFragment extends Fragment {
                              Bundle savedInstanceState) {
         view= inflater.inflate(R.layout.fragment_event, container, false);
         mRCycMs = view.findViewById(R.id.recyclerviewEvent);
-
         data = new ArrayList<>();
         data.add(new Event("Kiet's BirthDay Party at home","Pool Party and Live Music","19-05-2020","08:00 đến 17:00","41 Le Duan, Hai Chau, DN","https://xinhevent.com/wp-content/uploads/2018/08/b%C3%A0n-trang-tr%C3%AD-sinh-nh%E1%BA%ADt-tr%E1%BB%8Dn-g%C3%B3i-01-1200x800.jpg"));
         data.add(new Event("Kiet's BirthDay Party at home","Pool Party and Live Music","19-05-2020","08:00 đến 17:00","41 Le Duan, Hai Chau, DN","https://xinhevent.com/wp-content/uploads/2018/08/b%C3%A0n-trang-tr%C3%AD-sinh-nh%E1%BA%ADt-tr%E1%BB%8Dn-g%C3%B3i-01-1200x800.jpg"));

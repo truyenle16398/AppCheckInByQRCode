@@ -37,9 +37,8 @@ public class RegisterActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
-        initWiget();
+        initWidget();
         onClick();
-
     }
 
 
@@ -70,7 +69,6 @@ public class RegisterActivity extends AppCompatActivity {
                                 public void onNext(User us) {
                                     Log.d("nnn", "onSuccess: " + us.getMessage());
                                     Toast.makeText(RegisterActivity.this, "Đăng ký tài khoản thành công!!", Toast.LENGTH_SHORT).show();
-
                                     Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
                                     startActivity(intent);
 
@@ -103,7 +101,7 @@ public class RegisterActivity extends AppCompatActivity {
         });
     }
 
-    private void initWiget() {
+    private void initWidget() {
         edtemail = findViewById(R.id.inputEmail);
         edtname = findViewById(R.id.inputName);
         edtaddress = findViewById(R.id.inputAddress);

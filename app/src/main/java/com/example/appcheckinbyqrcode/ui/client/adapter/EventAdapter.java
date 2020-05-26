@@ -59,20 +59,9 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder>{
 
     class ViewHolder extends RecyclerView.ViewHolder{// implements View.OnClickListener
 
-//        @BindView(R.id.eventname)
-        public TextView name;
-//        @BindView(R.id.eventnote)
-        public TextView note;
-//        @BindView(R.id.eventday)
-        public TextView day;
-//        @BindView(R.id.time)
-        public TextView time;
-//        @BindView(R.id.eventaddress)
-        public TextView address;
-//        @BindView(R.id.eventimage)
+        public TextView name, note, day, time, address;
         public ImageView photo;
         public LinearLayout linearLayout;
-
         public ViewHolder(View view) {
             super(view);
             name = view.findViewById(R.id.eventname);
