@@ -71,37 +71,42 @@ public class LoginActivity extends AppCompatActivity {
                                 @Override
                                 public void onNext(User us) {
                                     Log.d("nnn", "onSuccess: " + us.getMessage());
-                                    info info = us.getUser();
-                                    if (us != null && info.getId() != null) {
-                                        SessionManager.getInstance().setKeySaveToken(us.getAccessToken());
-                                        SessionManager.getInstance().setKeySaveName(info.getName());
-                                        SessionManager.getInstance().setKeyLogin(true);
-                                        SessionManager.getInstance().setKeyRole(info.getRoleId());
-                                        Log.d("nnn", "onError: " + us.getAccessToken());
-                                        ////////
-                                        /////event role id
-                                        if (info.getRoleId().equals("3")){
-                                            Toast.makeText(LoginActivity.this, "Đăng nhập thành công!", Toast.LENGTH_SHORT).show();
-                                            Intent intent = new Intent(LoginActivity.this, HomeClientActivity.class);
-                                            startActivity(intent);
-                                        }else if (info.getRoleId().equals("2")){
-                                            Toast.makeText(LoginActivity.this, "Đăng nhập thành công!", Toast.LENGTH_SHORT).show();
-                                            Intent intent = new Intent(LoginActivity.this, HomeAdminActivity.class);
-                                            startActivity(intent);
-                                        }else {
-                                            Toast.makeText(LoginActivity.this, "Tuoi Nao Ma Doi Vo App Tao!", Toast.LENGTH_SHORT).show();
-                                        }
+                                    if (us.getMessage().equals("Tài khoản của bạn chưa xác thực!")) {
+                                        Toast.makeText(LoginActivity.this, "Vui lòng xác thực tài khoản của bạn", Toast.LENGTH_SHORT).show();
+                                    } else {
+                                        info info = us.getUser();
+                                        if (us != null && info.getId() != null) {
+                                            SessionManager.getInstance().setKeySaveToken(us.getAccessToken());
+                                            SessionManager.getInstance().setKeySaveName(info.getName());
+                                            SessionManager.getInstance().setKeyLogin(true);
+                                            SessionManager.getInstance().setKeyRole(info.getRoleId());
+                                            Log.d("nnn", "onError: " + us.getAccessToken());
+                                            ////////
+                                            /////event role id
+                                            if (info.getRoleId().equals("3")) {
+                                                Toast.makeText(LoginActivity.this, "Đăng nhập thành công!", Toast.LENGTH_SHORT).show();
+                                                Intent intent = new Intent(LoginActivity.this, HomeClientActivity.class);
+                                                startActivity(intent);
+                                            } else if (info.getRoleId().equals("2")) {
+                                                Toast.makeText(LoginActivity.this, "Đăng nhập thành công!", Toast.LENGTH_SHORT).show();
+                                                Intent intent = new Intent(LoginActivity.this, HomeAdminActivity.class);
+                                                startActivity(intent);
+                                            } else {
+                                                Toast.makeText(LoginActivity.this, "Tuoi Nao Ma Doi Vo App Tao!", Toast.LENGTH_SHORT).show();
+                                            }
 
 //                                        saveTokenFirebase();
 
-                                        ApiConfig config = ApiConfig.builder().context(LoginActivity.this).baseUrl(SessionManager.getInstance().getKeySaveCityName())
-                                                .auth(SessionManager.getInstance().getKeySaveToken())
-                                                .build();
-                                        ApiClient.getInstance().init(config);
-                                        finish();
-                                    } else {
-                                        Toast.makeText(LoginActivity.this, "Tài khoản hoặc mật khẩu không chính xác!!", Toast.LENGTH_SHORT).show();
+                                            ApiConfig config = ApiConfig.builder().context(LoginActivity.this).baseUrl(SessionManager.getInstance().getKeySaveCityName())
+                                                    .auth(SessionManager.getInstance().getKeySaveToken())
+                                                    .build();
+                                            ApiClient.getInstance().init(config);
+                                            finish();
+                                        } else {
+                                            Toast.makeText(LoginActivity.this, "Tài khoản hoặc mật khẩu không chính xác!!", Toast.LENGTH_SHORT).show();
+                                        }
                                     }
+
                                 }
 
                                 @Override
@@ -140,19 +145,17 @@ public class LoginActivity extends AppCompatActivity {
     }
 
 
-    private void CheckLogin(){
-        if(!SessionManager.getInstance().CheckKeyLogin()){//session.Check()
-            Toast.makeText(this, "Vui lòng đăng nhập!!!!!!", Toast.LENGTH_SHORT).show();
-        }else {
-            if (SessionManager.getInstance().getKeyRole().equals("3")){
-                Intent intent = new Intent(getApplication(),HomeClientActivity.class);
+    private void CheckLogin() {
+        if (SessionManager.getInstance().CheckKeyLogin()) {//session.Check()
+            if (SessionManager.getInstance().getKeyRole().equals("3")) {
+                Intent intent = new Intent(getApplication(), HomeClientActivity.class);
                 startActivity(intent);
                 finish();
-            }else if (SessionManager.getInstance().getKeyRole().equals("2")){
-                Intent intent = new Intent(getApplication(),HomeAdminActivity.class);
+            } else if (SessionManager.getInstance().getKeyRole().equals("2")) {
+                Intent intent = new Intent(getApplication(), HomeAdminActivity.class);
                 startActivity(intent);
                 finish();
-                }
+            }
         }
     }
 
