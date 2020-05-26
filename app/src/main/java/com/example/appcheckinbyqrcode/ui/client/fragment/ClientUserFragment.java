@@ -34,7 +34,6 @@ public class ClientUserFragment extends Fragment {
         view = inflater.inflate(R.layout.fragment_client_user, container, false);
         BtnLogOut = view.findViewById(R.id.btnLogout);
 
-
         BtnLogOut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
