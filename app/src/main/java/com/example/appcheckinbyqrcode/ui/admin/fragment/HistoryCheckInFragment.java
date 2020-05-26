@@ -29,8 +29,6 @@ public class HistoryCheckInFragment extends Fragment {
             // Required empty public constructor
         }
 
-
-
         @Override
         public void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
@@ -51,9 +49,6 @@ public class HistoryCheckInFragment extends Fragment {
             items.add(new HistoryCheckIn(" Long Nguyen Duc ","https://interactive-examples.mdn.mozilla.net/media/examples/grapefruit-slice-332-332.jpg","Sing Truyen Le Song","15:00"));
             items.add(new HistoryCheckIn(" Truyen Le Huy ","https://assets.jpegmini.com/user/images/slider_puffin_jpegmini_mobile.jpg","THĂM NGÀN KẸP NGẦN THEO PHONG CÁCH Truyen Le","8:00"));
             items.add(new HistoryCheckIn(" Long Nguyen Duc ","https://interactive-examples.mdn.mozilla.net/media/examples/grapefruit-slice-332-332.jpg","TalkShow to truyen Le Love and Girl ","9:00"));
-
-
-
 
             recyclerView = view.findViewById(R.id.recycle_view);
             recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));

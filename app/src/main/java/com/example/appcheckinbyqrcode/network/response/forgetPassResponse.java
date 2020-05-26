@@ -12,6 +12,4 @@ public class forgetPassResponse {
     @SerializedName("message")
     @Expose
     private String message;
-
-
 }

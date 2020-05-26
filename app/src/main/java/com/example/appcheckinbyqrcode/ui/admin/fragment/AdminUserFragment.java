@@ -1,30 +1,30 @@
 package com.example.appcheckinbyqrcode.ui.admin.fragment;
 
-        import android.app.AlertDialog;
-        import android.content.DialogInterface;
-        import android.content.Intent;
-        import android.os.Bundle;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.os.Bundle;
 
-        import androidx.fragment.app.Fragment;
+import androidx.fragment.app.Fragment;
 
-        import android.view.LayoutInflater;
-        import android.view.View;
-        import android.view.ViewGroup;
-        import android.widget.Button;
-        import android.widget.EditText;
-        import android.widget.TextView;
-        import android.widget.Toast;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
 
-        import com.example.appcheckinbyqrcode.R;
-        import com.example.appcheckinbyqrcode.SessionManager;
-        import  com.example.appcheckinbyqrcode.ui.admin.fragment.AdminUserFragment;
-        import com.example.appcheckinbyqrcode.ui.login.LoginActivity;
+import com.example.appcheckinbyqrcode.R;
+import com.example.appcheckinbyqrcode.SessionManager;
+import com.example.appcheckinbyqrcode.ui.admin.fragment.AdminUserFragment;
+import com.example.appcheckinbyqrcode.ui.login.LoginActivity;
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class AdminUserFragment extends Fragment {
-    private Button BtnChangePass, BtnChangePassDialog,BtnLogOut;
+    private Button BtnChangePass, BtnChangePassDialog, BtnLogOut;
     private EditText oldPass, newPass;
     private AlertDialog dialog;
     private TextView tv_mess;
@@ -33,7 +33,6 @@ public class AdminUserFragment extends Fragment {
     public AdminUserFragment() {
         // Required empty public constructor
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -64,17 +63,14 @@ public class AdminUserFragment extends Fragment {
                 getActivity().finish();
             }
         });
-
-
         return view;
-
     }
 
     private void showDialog() {
         //hien dialog
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         LayoutInflater inflater = getActivity().getLayoutInflater();
-        View view =inflater.inflate(R.layout.dialog_changepass,null);
+        View view = inflater.inflate(R.layout.dialog_changepass, null);
         oldPass = view.findViewById(R.id.inputOldPass);
         newPass = view.findViewById(R.id.inputNewPass);
         BtnChangePassDialog = view.findViewById(R.id.btnChangePassDl);
@@ -87,7 +83,7 @@ public class AdminUserFragment extends Fragment {
                 dialog.dismiss();
             }
         });
-        dialog =builder.create();
+        dialog = builder.create();
         dialog.show();
         BtnChangePassDialog.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -97,20 +93,19 @@ public class AdminUserFragment extends Fragment {
                 BtnChangePassDialog.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        if (oldPassStr.isEmpty() || newPassStr.isEmpty()){
+                        if (oldPassStr.isEmpty() || newPassStr.isEmpty()) {
                             tv_mess.setVisibility(View.VISIBLE);
                             tv_mess.setText("Vui lòng điền đầy đủ");
-                        }else {
-                            if (oldPassStr == newPassStr){
+                        } else {
+                            if (oldPassStr == newPassStr) {
                                 tv_mess.setText("Trùng mật khẩu");
-                            }else {
+                            } else {
                                 tv_mess.setText("Đổi mật khẩu Okie");
                             }
                         }
 
                     }
                 });
-
             }
         });
     }
@@ -120,7 +115,6 @@ public class AdminUserFragment extends Fragment {
         public HistoryCheckInFragment() {
             // Required empty public constructor
         }
-
 
         @Override
         public void onCreate(Bundle savedInstanceState) {

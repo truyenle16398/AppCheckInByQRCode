@@ -31,15 +31,14 @@ import io.reactivex.schedulers.Schedulers;
 public class LoginActivity extends AppCompatActivity {
     Button btnLogin;
     TextView tvForgotPass, tvRegister;
-    EditText edEmail, edtPass;
+    EditText edtEmail, edtPass;
     String email, pass;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        Anhxa();
+        InitWidget();
         onClick();
         CheckLogin();
     }
@@ -49,7 +48,7 @@ public class LoginActivity extends AppCompatActivity {
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                email = edEmail.getText().toString();
+                email = edtEmail.getText().toString();
                 pass = edtPass.getText().toString();
                 if (email.isEmpty() && pass.isEmpty()) {
                     Toast.makeText(LoginActivity.this, "Vui lòng nhập đầy đủ!!", Toast.LENGTH_SHORT).show();
@@ -95,8 +94,6 @@ public class LoginActivity extends AppCompatActivity {
                                                 Toast.makeText(LoginActivity.this, "Tuoi Nao Ma Doi Vo App Tao!", Toast.LENGTH_SHORT).show();
                                             }
 
-//                                        saveTokenFirebase();
-
                                             ApiConfig config = ApiConfig.builder().context(LoginActivity.this).baseUrl(SessionManager.getInstance().getKeySaveCityName())
                                                     .auth(SessionManager.getInstance().getKeySaveToken())
                                                     .build();
@@ -106,7 +103,6 @@ public class LoginActivity extends AppCompatActivity {
                                             Toast.makeText(LoginActivity.this, "Tài khoản hoặc mật khẩu không chính xác!!", Toast.LENGTH_SHORT).show();
                                         }
                                     }
-
                                 }
 
                                 @Override
@@ -121,7 +117,7 @@ public class LoginActivity extends AppCompatActivity {
                                 }
                             });
                 }
-                edEmail.onEditorAction(EditorInfo.IME_ACTION_DONE);
+                edtEmail.onEditorAction(EditorInfo.IME_ACTION_DONE);
                 edtPass.onEditorAction(EditorInfo.IME_ACTION_DONE);
             }
         });
@@ -144,7 +140,6 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
-
     private void CheckLogin() {
         if (SessionManager.getInstance().CheckKeyLogin()) {//session.Check()
             if (SessionManager.getInstance().getKeyRole().equals("3")) {
@@ -159,10 +154,10 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
-    void Anhxa() {
+    private void InitWidget() {
         btnLogin = findViewById(R.id.btnLogin);
         tvForgotPass = findViewById(R.id.tvPass);
-        edEmail = findViewById(R.id.inputEmail);
+        edtEmail = findViewById(R.id.inputEmail);
         edtPass = findViewById(R.id.inputPass);
         tvRegister = findViewById(R.id.tvRegister);
     }
