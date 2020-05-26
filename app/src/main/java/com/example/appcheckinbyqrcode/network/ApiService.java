@@ -30,15 +30,6 @@ public interface ApiService {
                                             @Query("password_confirmation") String password_confirmation,
                                             @Query("token") String token);
 
-
-
-
-
-
-    // luu token firebase vao csdl
-    @POST("save-notification")
-    Observable<String> savetokenfirebase(@Query("token") String token);
-
     //dang ky
     @POST("register")
     Observable<User> register(@Query("email") String email,
