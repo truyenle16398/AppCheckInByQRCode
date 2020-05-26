@@ -37,7 +37,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="32dp"
-                    android:text="@string/login"
+                    android:text="Register"
                     android:textSize="30dp"
                     android:textStyle="bold"
                     android:textColor="#2d3057"/>
@@ -50,14 +50,65 @@
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
                     android:layout_marginTop="16dp"
+                    android:drawableLeft="@drawable/ic_email_black_24dp"
                     android:ems="10"
                     android:inputType="textEmailAddress"
-                    android:hint="@string/enter_your_email"
+                    android:hint="Email"
+                    android:drawablePadding="10dp"
                     android:textSize="15dp"
                     android:textColorHint="#a8a8a8"
                     />
 
                 <EditText
+                    android:id="@+id/inputName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginTop="16dp"
+                    android:drawableLeft="@drawable/ic_person_black_24dp"
+                    android:ems="10"
+                    android:inputType="text"
+                    android:hint="FullName"
+                    android:drawablePadding="10dp"
+                    android:textSize="15dp"
+                    android:textColorHint="#a8a8a8"
+                    />
+
+                <EditText
+                    android:id="@+id/inputAddress"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginRight="20dp"
+                    android:drawableLeft="@drawable/ic_location_on_black_24dp"
+                    android:ems="10"
+                    android:hint="Address"
+                    android:drawablePadding="10dp"
+                    android:inputType="text"
+                    android:padding="10dp"
+                    android:textColorHint="#a8a8a8"
+                    android:textSize="15dp" />
+
+                <EditText
+                    android:id="@+id/inputPhone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginTop="16dp"
+                    android:ems="10"
+                    android:drawableLeft="@drawable/ic_local_phone_black_24dp"
+                    android:inputType="text"
+                    android:hint="Phone"
+                    android:drawablePadding="10dp"
+                    android:textSize="15dp"
+                    android:textColorHint="#a8a8a8"
+                    />
+                    <EditText
                     android:id="@+id/inputPass"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -67,12 +118,30 @@
                     android:layout_marginTop="16dp"
                     android:ems="10"
                     android:inputType="textPassword"
-                    android:hint="@string/enter_your_password"
+                    android:hint="Password"
                     android:textSize="15dp"
+                        android:drawablePadding="10dp"
+                    android:drawableLeft="@drawable/ic_lock_outline_black_24dp"
                     android:textColorHint="#a8a8a8"
                     />
+                <EditText
+                    android:id="@+id/inputPassConfirm"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginTop="16dp"
+                    android:ems="10"
+                    android:inputType="textPassword"
+                    android:hint="Confirm Password"
+                    android:drawablePadding="10dp"
+                    android:textSize="15dp" android:drawableLeft="@drawable/ic_lock_black_24dp"
+                    android:textColorHint="#a8a8a8"
+                    />
+
                 <TextView
-                    android:id="@+id/tvPass"
+                    android:id="@+id/tvBack"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
@@ -82,24 +151,11 @@
                     android:layout_marginBottom="32dp"
                     android:layout_marginTop="32dp"
                     android:clickable="true"
-                    android:text="@string/my_string_value"
+                    android:text="@string/already_account_back_to_login"
                     android:textStyle="bold"
                     android:textSize="10dp"
                     />
 
-                <TextView
-                    android:id="@+id/tvRegister"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginLeft="16dp"
-                    android:layout_marginEnd="16dp"
-                    android:layout_marginRight="16dp"
-                    android:clickable="true"
-                    android:text="@string/register_new_account"
-                    android:textStyle="bold"
-                    android:textSize="10dp"
-                    />
 
                 <Button
                     android:id="@+id/btnLogin"
@@ -109,7 +165,7 @@
                     android:layout_marginTop="32dp"
                     android:layout_marginBottom="32dp"
                     android:background="@drawable/buttonlogin"
-                    android:text="@string/login"
+                    android:text="Register"
                     android:textColor="#FFFFFF"
                     android:textSize="18sp" />
             </LinearLayout>
