@@ -111,6 +111,7 @@ public class RegisterActivity extends AppCompatActivity {
         InputMethodManager inputMethodManager = (InputMethodManager)getSystemService(INPUT_METHOD_SERVICE);
         inputMethodManager.hideSoftInputFromWindow(v.getApplicationWindowToken(),0);
     }
+
     private void initWidget() {
         edtemail = findViewById(R.id.inputEmail);
         edtname = findViewById(R.id.inputName);
