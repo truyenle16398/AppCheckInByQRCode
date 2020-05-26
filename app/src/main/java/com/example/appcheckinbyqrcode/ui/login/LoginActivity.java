@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -14,7 +15,8 @@ import com.example.appcheckinbyqrcode.ui.admin.HomeAdminActivity;
 
 public class LoginActivity extends AppCompatActivity {
     Button BtnLogin;
-    TextView TVForgotPass, TVemail, TVpass, TVregister;
+    TextView TVForgotPass, TVregister;
+    EditText EDTemail, EDTpass;
     String email, pass;
 
     @Override
@@ -30,8 +32,8 @@ public class LoginActivity extends AppCompatActivity {
         BtnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                email = TVemail.getText().toString();
-                pass = TVpass.getText().toString();
+                email = EDTemail.getText().toString();
+                pass = EDTpass.getText().toString();
                 if (email.isEmpty() && pass.isEmpty()) {
                     Toast.makeText(LoginActivity.this, "Vui lòng nhập đầy đủ!!", Toast.LENGTH_SHORT).show();
                 } else if (email.isEmpty()) {
@@ -67,8 +69,8 @@ public class LoginActivity extends AppCompatActivity {
     void Anhxa() {
         BtnLogin = findViewById(R.id.btnLogin);
         TVForgotPass = findViewById(R.id.tvPass);
-        TVemail = findViewById(R.id.inputEmail);
-        TVpass = findViewById(R.id.inputPass);
+        EDTemail = findViewById(R.id.inputEmail);
+        EDTpass = findViewById(R.id.inputPass);
         TVregister = findViewById(R.id.tvRegister);
     }
 }
