@@ -3,6 +3,11 @@ package com.example.appcheckinbyqrcode.ui.model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+
+@Data
+@EqualsAndHashCode(callSuper = false)
 public class info {
     @SerializedName("id")
     @Expose
