@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -16,7 +17,8 @@ import com.example.appcheckinbyqrcode.ui.client.fragment.EventFragment;
 
 public class ForgotPassActivity extends AppCompatActivity {
     Button BtnGetCode;
-    TextView TVBack, TVemail, TVcode, TVpass, TVtimer;
+    TextView TVBack, TVtimer;
+    EditText EDTcode,EDTpass,EDTemail;
     String email, pass,code;
     CountDownTimer countDownTimer;
 
@@ -33,21 +35,21 @@ public class ForgotPassActivity extends AppCompatActivity {
         BtnGetCode.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                email = TVemail.getText().toString();
+                email = EDTemail.getText().toString();
                 if (email.isEmpty()) {
                     Toast.makeText(ForgotPassActivity.this, "Vui lòng nhập Email của bạn", Toast.LENGTH_SHORT).show();
                 } else {
-                    TVemail.setVisibility(View.GONE);
-                    TVcode.setVisibility(View.VISIBLE);
-                    TVpass.setVisibility(View.VISIBLE);
+                    EDTemail.setVisibility(View.GONE);
+                    EDTcode.setVisibility(View.VISIBLE);
+                    EDTpass.setVisibility(View.VISIBLE);
                     TVtimer.setVisibility(View.VISIBLE);
                     BtnGetCode.setText("Change Password");
                     startCountdownTimer();
                     BtnGetCode.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-                            code = TVcode.getText().toString();
-                            pass = TVpass.getText().toString();
+                            code = EDTcode.getText().toString();
+                            pass = EDTpass.getText().toString();
 
                             if (code.isEmpty() || pass.isEmpty()){
                                 Toast.makeText(ForgotPassActivity.this, "Vui lòng nhập Code và Pass đầy đủ", Toast.LENGTH_SHORT).show();
@@ -86,11 +88,11 @@ public class ForgotPassActivity extends AppCompatActivity {
     void Anhxa() {
         BtnGetCode = findViewById(R.id.btnGetCode);
         TVBack = findViewById(R.id.tvBack);
-        TVcode = findViewById(R.id.inputCode);
-        TVpass = findViewById(R.id.inputPass);
-        TVemail = findViewById(R.id.inputEmail);
-        TVcode.setVisibility(View.GONE);
-        TVpass.setVisibility(View.GONE);
+        EDTcode = findViewById(R.id.inputCode);
+        EDTpass = findViewById(R.id.inputPass);
+        EDTemail = findViewById(R.id.inputEmail);
+        EDTcode.setVisibility(View.GONE);
+        EDTpass.setVisibility(View.GONE);
         TVtimer = findViewById(R.id.timer);
         TVtimer.setVisibility(View.GONE);
     }
