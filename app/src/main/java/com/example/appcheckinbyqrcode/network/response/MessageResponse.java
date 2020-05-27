@@ -8,7 +8,7 @@ import lombok.EqualsAndHashCode;
 
 @EqualsAndHashCode(callSuper = false)
 @Data
-public class forgetPassResponse {
+public class MessageResponse {
     @SerializedName("message")
     @Expose
     private String message;
