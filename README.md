@@ -21,7 +21,6 @@
   * <b>Navigation</b> - Handle everything needed for in-app navigation.
   * <b>ViewModel</b> - Store UI-related data that isn't destroyed on app rotations.
   * <b>WorkManager</b> - Manage your Android background jobs.
-* <b>Third party</b>
   * <b>Retrofit</b> - A type-safe HTTP client for Android and Java
   * <b>Moshi</b> - A modern JSON library for Android and Java. It makes it easy to parse JSON into Java objects
   * <b>Glide</b> for image loading
