@@ -1,4 +1,4 @@
-# AppCheckInByQRCode
+# AppCheckInByQRCode 🚧👷🔧️
 
 ##### Hello everyone! This is Android application "Register events Online and Scan QR Code to Check in"
 
@@ -6,6 +6,9 @@
 * TruyenLe: https://github.com/truyenle16398/
 * KietNguyen: https://github.com/kietnguyen711998/
 * KhoaNe: https://github.com/quachhongkhoait
+
+## Link to Download  :
+<a href="#"><img alt="Get it on Google Play" src="https://play.google.com/intl/en_us/badges/images/generic/en-play-badge.png" height=60px /></a>
 
 ## Mockup User Inteface Demo
 (This is UI of application drawed by Photoshop SC6)
@@ -27,6 +30,21 @@
   * <b>RxJava,RxAndroid</b> is a Java VM implementation of ReactiveX a library for composing asynchronous and event-based programs by using observable sequences.
   
   ## Screenshoot
-  ~Waiting for update
+  ~Waiting for update...
   
-  <blockquote>Copyright Android Team 2020 SDC Intership </blockquote>
+  ## [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
+```
+   Copyright 2020 Paul Mburu
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+   ```
