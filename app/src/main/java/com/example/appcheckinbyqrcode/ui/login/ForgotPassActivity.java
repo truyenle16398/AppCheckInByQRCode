@@ -68,6 +68,7 @@ public class ForgotPassActivity extends AppCompatActivity {
                                     Log.d("nnn", "OnMess" + forgetPassResponse.getMessage());
                                     if (forgetPassResponse.getMessage().equals("We cant find a user with that e-mail address.")) {
                                         Toast.makeText(ForgotPassActivity.this, "Email của bạn không tồn tại!", Toast.LENGTH_SHORT).show();
+                                        pd.dismiss();
                                     } else {
                                         pd.dismiss();
                                         edtEmail.setVisibility(View.GONE);
@@ -87,6 +88,7 @@ public class ForgotPassActivity extends AppCompatActivity {
                                                 pass = edtPass.getText().toString();
                                                 if (code.isEmpty() || pass.isEmpty()) {
                                                     Toast.makeText(ForgotPassActivity.this, "Vui lòng nhập Code và Pass đầy đủ", Toast.LENGTH_SHORT).show();
+                                                    bb.dismiss();
                                                 } else {
                                                     ApiClient.getService().resetPass(email, pass, pass, code)
                                                             .subscribeOn(Schedulers.io())
@@ -124,10 +126,12 @@ public class ForgotPassActivity extends AppCompatActivity {
                                 public void onError(Throwable e) {
                                     Toast.makeText(ForgotPassActivity.this, "ban Sai Vl", Toast.LENGTH_SHORT).show();
                                     Log.d("nnn", "Error" + e.getMessage());
+                                    pd.dismiss();
                                 }
 
                                 @Override
                                 public void onComplete() {
+                                    pd.dismiss();
                                 }
                             });
                 }

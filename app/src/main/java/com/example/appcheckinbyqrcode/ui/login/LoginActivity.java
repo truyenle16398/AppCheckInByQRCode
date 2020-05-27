@@ -109,6 +109,7 @@ public class LoginActivity extends AppCompatActivity {
                                             finish();
                                         } else {
                                             Toast.makeText(LoginActivity.this, "Tài khoản hoặc mật khẩu không chính xác!!", Toast.LENGTH_SHORT).show();
+                                            pd.dismiss();
                                         }
                                     }
                                 }
@@ -117,6 +118,7 @@ public class LoginActivity extends AppCompatActivity {
                                 public void onError(Throwable e) {
                                     Log.d("nnn", "onError: " + e.getMessage());
                                     Toast.makeText(LoginActivity.this, "Đăng nhập thất bại!!", Toast.LENGTH_SHORT).show();
+                                    pd.dismiss();
                                 }
 
                                 @Override

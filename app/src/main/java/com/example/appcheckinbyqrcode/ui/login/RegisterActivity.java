@@ -85,6 +85,7 @@ public class RegisterActivity extends AppCompatActivity {
                                 public void onError(Throwable e) {
                                     Log.d("nnn", "onError: " + e.getMessage());
                                     Toast.makeText(RegisterActivity.this, "Không thể đăng ký!!", Toast.LENGTH_SHORT).show();
+                                    pd.dismiss();
                                 }
 
                                 @Override
