@@ -15,10 +15,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.appcheckinbyqrcode.R;
-import com.example.appcheckinbyqrcode.SessionManager;
 import com.example.appcheckinbyqrcode.network.ApiClient;
-import com.example.appcheckinbyqrcode.network.response.forgetPassResponse;
-import com.example.appcheckinbyqrcode.network.response.resetPassResponse;
+import com.example.appcheckinbyqrcode.network.response.MessageResponse;
 
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -57,16 +55,16 @@ public class ForgotPassActivity extends AppCompatActivity {
                     ApiClient.getService().forgetPass(email)
                             .subscribeOn(Schedulers.io())
                             .observeOn(AndroidSchedulers.mainThread())
-                            .subscribe(new Observer<forgetPassResponse>() {
+                            .subscribe(new Observer<MessageResponse>() {
                                 @Override
                                 public void onSubscribe(Disposable d) {
 
                                 }
                                 @Override
-                                public void onNext(forgetPassResponse forgetPassResponse) {
+                                public void onNext(MessageResponse messageResponse) {
                                     //forgetPassResponse.getMessage().equals("We cant find a user with that e-mail address.");
-                                    Log.d("nnn", "OnMess" + forgetPassResponse.getMessage());
-                                    if (forgetPassResponse.getMessage().equals("We cant find a user with that e-mail address.")) {
+                                    Log.d("nnn", "OnMess" + messageResponse.getMessage());
+                                    if (messageResponse.getMessage().equals("We cant find a user with that e-mail address.")) {
                                         Toast.makeText(ForgotPassActivity.this, "Email của bạn không tồn tại!", Toast.LENGTH_SHORT).show();
                                         pd.dismiss();
                                     } else {
@@ -93,15 +91,15 @@ public class ForgotPassActivity extends AppCompatActivity {
                                                     ApiClient.getService().resetPass(email, pass, pass, code)
                                                             .subscribeOn(Schedulers.io())
                                                             .observeOn(AndroidSchedulers.mainThread())
-                                                            .subscribe(new Observer<resetPassResponse>() {
+                                                            .subscribe(new Observer<MessageResponse>() {
                                                                 @Override
                                                                 public void onSubscribe(Disposable d) {
 
                                                                 }
 
                                                                 @Override
-                                                                public void onNext(resetPassResponse resetPassResponse) {
-                                                                    Toast.makeText(ForgotPassActivity.this, resetPassResponse.getMessage(), Toast.LENGTH_SHORT).show();
+                                                                public void onNext(MessageResponse messageResponse) {
+                                                                    Toast.makeText(ForgotPassActivity.this, messageResponse.getMessage(), Toast.LENGTH_SHORT).show();
                                                                     Intent intent = new Intent(ForgotPassActivity.this, LoginActivity.class);
                                                                     startActivity(intent);
                                                                 }

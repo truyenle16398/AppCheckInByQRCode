@@ -151,7 +151,8 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void CheckLogin() {
-        if (SessionManager.getInstance().CheckKeyLogin()) {//session.Check()
+        if (SessionManager.getInstance().CheckKeyLogin()) {
+            //session.Check()
             if (SessionManager.getInstance().getKeyRole().equals("3")) {
                 Intent intent = new Intent(getApplication(), HomeClientActivity.class);
                 startActivity(intent);

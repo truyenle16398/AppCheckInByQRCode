@@ -1,9 +1,6 @@
 package com.example.appcheckinbyqrcode.network;
 
-
-import com.example.appcheckinbyqrcode.network.response.forgetPassResponse;
-import com.example.appcheckinbyqrcode.network.response.resetPassResponse;
-import com.example.appcheckinbyqrcode.network.response.userResponse;
+import com.example.appcheckinbyqrcode.network.response.MessageResponse;
 import com.example.appcheckinbyqrcode.ui.model.User;
 
 import io.reactivex.Observable;
@@ -20,15 +17,18 @@ public interface ApiService {
     @POST("login")
     Observable<User> loginnew(@Query("email") String email,
                               @Query("password") String password);
+    //logout
+    @GET("logout")
+    Observable<MessageResponse> logout();
 
     //xac nhan email de lay lai mat khau
     @POST("create")//forgot-password
     @FormUrlEncoded
-    Observable<forgetPassResponse> forgetPass(@Field("email") String email);
+    Observable<MessageResponse> forgetPass(@Field("email") String email);
 
     //reset pass
     @POST("reset")
-    Observable<resetPassResponse> resetPass(@Query("email") String email,
+    Observable<MessageResponse> resetPass(@Query("email") String email,
                                             @Query("password") String password,
                                             @Query("password_confirmation") String password_confirmation,
                                             @Query("token") String token);
