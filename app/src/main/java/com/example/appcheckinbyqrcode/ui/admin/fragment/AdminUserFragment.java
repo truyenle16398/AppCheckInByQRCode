@@ -35,7 +35,7 @@ import io.reactivex.schedulers.Schedulers;
  * A simple {@link Fragment} subclass.
  */
 public class AdminUserFragment extends Fragment {
-    private Button BtnChangePass, BtnChangePassDialog, BtnLogOut;
+    private Button BtnLogOut;
     private EditText oldPass, newPass;
     private AlertDialog dialog;
     private TextView tv_mess;
@@ -50,13 +50,6 @@ public class AdminUserFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_user_admin, container, false);
-        BtnChangePass = view.findViewById(R.id.btnLogin);
-        BtnChangePass.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                showDialog();
-            }
-        });
         BtnLogOut = view.findViewById(R.id.btnLogout);
         BtnLogOut.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -109,50 +102,6 @@ public class AdminUserFragment extends Fragment {
 
                     }
                 });
-    }
-
-    private void showDialog() {
-        //hien dialog
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        LayoutInflater inflater = getActivity().getLayoutInflater();
-        View view = inflater.inflate(R.layout.dialog_changepass, null);
-        oldPass = view.findViewById(R.id.inputOldPass);
-        newPass = view.findViewById(R.id.inputNewPass);
-        BtnChangePassDialog = view.findViewById(R.id.btnChangePassDl);
-        tv_mess = view.findViewById(R.id.tvMess);
-        tv_mess.setVisibility(View.GONE);
-        builder.setView(view);
-        builder.setNegativeButton("Hủy", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.dismiss();
-            }
-        });
-        dialog = builder.create();
-        dialog.show();
-        BtnChangePassDialog.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                final String oldPassStr = oldPass.getText().toString();
-                final String newPassStr = newPass.getText().toString();
-                BtnChangePassDialog.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        if (oldPassStr.isEmpty() || newPassStr.isEmpty()) {
-                            tv_mess.setVisibility(View.VISIBLE);
-                            tv_mess.setText("Vui lòng điền đầy đủ");
-                        } else {
-                            if (oldPassStr == newPassStr) {
-                                tv_mess.setText("Trùng mật khẩu");
-                            } else {
-                                tv_mess.setText("Đổi mật khẩu Okie");
-                            }
-                        }
-
-                    }
-                });
-            }
-        });
     }
 
     public static class HistoryCheckInFragment extends Fragment {

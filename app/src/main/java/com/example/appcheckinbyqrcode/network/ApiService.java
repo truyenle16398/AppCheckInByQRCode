@@ -1,6 +1,7 @@
 package com.example.appcheckinbyqrcode.network;
 
 import com.example.appcheckinbyqrcode.network.response.MessageResponse;
+import com.example.appcheckinbyqrcode.network.response.userResponse;
 import com.example.appcheckinbyqrcode.ui.model.User;
 
 import io.reactivex.Observable;
