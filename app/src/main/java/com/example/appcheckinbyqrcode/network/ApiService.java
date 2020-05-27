@@ -1,6 +1,5 @@
 package com.example.appcheckinbyqrcode.network;
 
-
 import com.example.appcheckinbyqrcode.network.response.MessageResponse;
 import com.example.appcheckinbyqrcode.ui.model.User;
 
@@ -9,6 +8,7 @@ import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
 import retrofit2.http.Query;
 
 public interface ApiService {
@@ -41,4 +41,15 @@ public interface ApiService {
                               @Query("phone") String phone,
                               @Query("password") String password,
                               @Query("password_confirmation") String confirmpassword);
+
+    //show info user
+    @GET("user")
+    Observable<userResponse> showinfo();
+
+    //reset pass
+    @PUT("update_info")
+    Observable<userResponse> update_info(@Query("name") String name,
+                                            @Query("email") String email,
+                                            @Query("phone") String phone,
+                                            @Query("address") String address);
 }
