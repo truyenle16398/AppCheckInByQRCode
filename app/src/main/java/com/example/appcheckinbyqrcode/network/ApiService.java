@@ -1,6 +1,7 @@
 package com.example.appcheckinbyqrcode.network;
 
 import com.example.appcheckinbyqrcode.network.response.MessageResponse;
+import com.example.appcheckinbyqrcode.network.response.userResponse;
 import com.example.appcheckinbyqrcode.ui.model.User;
 
 import io.reactivex.Observable;
@@ -49,7 +50,12 @@ public interface ApiService {
     //reset pass
     @PUT("update_info")
     Observable<userResponse> update_info(@Query("name") String name,
-                                            @Query("email") String email,
-                                            @Query("phone") String phone,
-                                            @Query("address") String address);
+                                         @Query("email") String email,
+                                         @Query("phone") String phone,
+                                         @Query("address") String address);
+
+    //doi mat khau
+    @PUT("update_pass")
+    Observable<MessageResponse> updatepass(@Query("old_pass") String oldpass,
+                                           @Query("new_pass") String newpass);
 }

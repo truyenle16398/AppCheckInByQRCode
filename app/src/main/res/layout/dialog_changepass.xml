@@ -2,8 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    >
+    android:layout_height="match_parent">
 
     <TextView
         android:layout_width="wrap_content"
@@ -13,7 +12,7 @@
         android:text="Change Password"
         android:textColor="#2d3057"
         android:textSize="30dp"
-        android:textStyle="bold" />
+        android:textStyle="bold"/>
 
     <EditText
         android:id="@+id/inputOldPass"
@@ -29,8 +28,7 @@
         android:textSize="15dp"
         android:drawableLeft="@drawable/ic_lock_outline_black_24dp"
         android:drawablePadding="10dp"
-        android:textColorHint="#a8a8a8"
-        />
+        android:textColorHint="#a8a8a8"/>
     <EditText
         android:id="@+id/inputNewPass"
         android:layout_width="match_parent"
@@ -45,27 +43,23 @@
         android:textSize="15dp"
         android:drawableLeft="@drawable/ic_lock_black_24dp"
         android:drawablePadding="10dp"
-        android:textColorHint="#a8a8a8"
-        />
+        android:textColorHint="#a8a8a8"/>
     <TextView
         android:id="@+id/tvMess"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="#FF0000"
         android:layout_gravity="center"
+        android:layout_marginTop="10dp"/>
+
+    <ProgressBar
+        android:id="@+id/progress"
+        style="@style/Base.Widget.AppCompat.ProgressBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        />
-    <Button
-        android:id="@+id/btnChangePassDl"
-        android:layout_width="200dp"
-        android:layout_height="50dp"
-        android:layout_gravity="center"
-        android:layout_marginTop="32dp"
-        android:layout_marginBottom="32dp"
-        android:background="@drawable/buttonlogin"
-        android:text="Change Password"
-        android:textColor="#FFFFFF"
-        android:textSize="18sp" />
+        android:indeterminate="true"
+        android:visibility="gone" />
 
 
 
