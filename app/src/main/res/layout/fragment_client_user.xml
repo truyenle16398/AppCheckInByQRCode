@@ -80,6 +80,9 @@
                         android:textSize="20dp" />
 
                     <EditText
+                        android:imeOptions="actionSearch"
+                        android:singleLine="true"
+                        android:id="@+id/edtNameClient"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginRight="20dp"
@@ -105,6 +108,9 @@
                         android:textSize="20dp" />
 
                     <EditText
+                        android:imeOptions="actionSearch"
+                        android:singleLine="true"
+                        android:id="@+id/edtEmailClient"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginRight="20dp"
@@ -132,6 +138,9 @@
                         android:textSize="20dp" />
 
                     <EditText
+                        android:imeOptions="actionSearch"
+                        android:singleLine="true"
+                        android:id="@+id/edtPhoneClient"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginRight="20dp"
@@ -159,6 +168,9 @@
                         android:textSize="20dp" />
 
                     <EditText
+                        android:imeOptions="actionSearch"
+                        android:singleLine="true"
+                        android:id="@+id/edtAddressClient"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginRight="20dp"
@@ -172,12 +184,25 @@
                 </LinearLayout>
 
                 <Button
-                    android:id="@+id/btnLogin"
+                    android:visibility="gone"
+                    android:id="@+id/btnChangeInfo"
                     android:layout_width="200dp"
                     android:layout_height="50dp"
                     android:layout_gravity="center"
-                    android:layout_marginTop="32dp"
-                    android:layout_marginBottom="32dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="20dp"
+                    android:background="@drawable/buttonlogin"
+                    android:text="Cập nhật thông tin"
+                    android:textColor="#FFFFFF"
+                    android:textSize="18sp" />
+
+                <Button
+                    android:id="@+id/btnChangePass"
+                    android:layout_width="200dp"
+                    android:layout_height="50dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="10dp"
                     android:background="@drawable/buttonlogin"
                     android:text="Change Password"
                     android:textColor="#FFFFFF"
