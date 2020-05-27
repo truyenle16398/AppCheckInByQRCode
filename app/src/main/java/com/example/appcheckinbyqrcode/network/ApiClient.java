@@ -115,9 +115,7 @@ public class ApiClient {
         });
 
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://10.0.1.230:8888/sdc_event/public/api/")//192.168.2.24
-                //192.168.43.2
-                //http://192.168.43.187:8888/cham-cong/api/
+                .baseUrl("http://10.0.2.15:8888/sdc_event/public/api/")
                 .client(okHttpBuilder.build())
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
