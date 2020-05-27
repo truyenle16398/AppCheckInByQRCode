@@ -1,5 +1,7 @@
 package com.example.appcheckinbyqrcode.ui.client.fragment;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -22,12 +24,12 @@ import android.widget.Toast;
 import com.example.appcheckinbyqrcode.R;
 import com.example.appcheckinbyqrcode.SessionManager;
 import com.example.appcheckinbyqrcode.network.ApiClient;
+import com.example.appcheckinbyqrcode.network.response.MessageResponse;
 import com.example.appcheckinbyqrcode.network.response.resetPassResponse;
 import com.example.appcheckinbyqrcode.network.response.userResponse;
 import com.example.appcheckinbyqrcode.ui.admin.HomeAdminActivity;
 import com.example.appcheckinbyqrcode.ui.login.ForgotPassActivity;
 import com.example.appcheckinbyqrcode.ui.login.LoginActivity;
-
 import butterknife.OnEditorAction;
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -104,14 +106,13 @@ public class ClientUserFragment extends Fragment implements TextView.OnEditorAct
         btnLogOut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getActivity(), "Logout thành công!", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(getActivity(), LoginActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP); // hủy trong stack
-                startActivity(intent);
-                SessionManager.getInstance().setKeySaveToken("");
-                SessionManager.getInstance().setKeySaveCheck(true);
-                SessionManager.getInstance().setKeyLogin(false);
-                getActivity().finish();
+                AlertDialog builder = new AlertDialog.Builder(getActivity()).setMessage("Bạn có muốn thoát không?")
+                        .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                logout();
+                            }
+                        }).setIcon(android.R.drawable.ic_dialog_info).show();
             }
         });
         btnChangeInfo.setOnClickListener(new View.OnClickListener() {
@@ -193,5 +194,42 @@ public class ClientUserFragment extends Fragment implements TextView.OnEditorAct
             btnChangeInfo.setVisibility(View.VISIBLE);
         }
         return false;
+    }
+    private void logout() {
+        ApiClient.getService().logout()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<MessageResponse>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(MessageResponse messageResponse) {
+                        if (messageResponse.getMessage() != null) {
+                            Log.d("nnn", "logout del token: " + SessionManager.getInstance().getKeySaveToken());
+                            Intent intent = new Intent(getActivity(), LoginActivity.class);
+                            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP); // hủy trong stack
+                            startActivity(intent);
+                            SessionManager.getInstance().setKeySaveToken("");
+                            SessionManager.getInstance().setKeySaveCheck(true);
+                            SessionManager.getInstance().setKeyLogin(false);
+                            getActivity().finish();
+                        } else {
+                            Toast.makeText(getActivity(), messageResponse.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        Log.d("nnn", "onError: logout " + e.getMessage());
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
     }
 }
