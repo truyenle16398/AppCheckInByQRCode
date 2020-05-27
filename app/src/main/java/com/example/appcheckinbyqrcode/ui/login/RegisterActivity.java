@@ -107,7 +107,6 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
     }
-
     private void hideKeybaord(View v) {
         InputMethodManager inputMethodManager = (InputMethodManager)getSystemService(INPUT_METHOD_SERVICE);
         inputMethodManager.hideSoftInputFromWindow(v.getApplicationWindowToken(),0);
