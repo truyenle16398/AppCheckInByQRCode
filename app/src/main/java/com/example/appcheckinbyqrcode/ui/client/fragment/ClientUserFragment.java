@@ -25,7 +25,6 @@ import com.example.appcheckinbyqrcode.R;
 import com.example.appcheckinbyqrcode.SessionManager;
 import com.example.appcheckinbyqrcode.network.ApiClient;
 import com.example.appcheckinbyqrcode.network.response.MessageResponse;
-import com.example.appcheckinbyqrcode.network.response.resetPassResponse;
 import com.example.appcheckinbyqrcode.network.response.userResponse;
 import com.example.appcheckinbyqrcode.ui.admin.HomeAdminActivity;
 import com.example.appcheckinbyqrcode.ui.login.ForgotPassActivity;
