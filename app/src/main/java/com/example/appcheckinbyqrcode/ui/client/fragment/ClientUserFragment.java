@@ -8,7 +8,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 
-import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 
 import android.util.Log;
@@ -30,6 +29,7 @@ import com.example.appcheckinbyqrcode.network.ApiClient;
 import com.example.appcheckinbyqrcode.network.response.MessageResponse;
 import com.example.appcheckinbyqrcode.network.response.userResponse;
 import com.example.appcheckinbyqrcode.ui.login.LoginActivity;
+
 import butterknife.OnEditorAction;
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -271,7 +271,7 @@ public class ClientUserFragment extends Fragment implements TextView.OnEditorAct
         }
         return false;
     }
-  
+
     private void initWidget() {
         edt_OldPassword = view.findViewById(R.id.inputOldPass);
         edt_NewPassword = view.findViewById(R.id.inputNewPass);
@@ -282,6 +282,7 @@ public class ClientUserFragment extends Fragment implements TextView.OnEditorAct
         edtEmail = view.findViewById(R.id.edtEmailClient);
         edtPhone = view.findViewById(R.id.edtPhoneClient);
         edtAddress = view.findViewById(R.id.edtAddressClient);
+    }
 
     private void logout() {
         ApiClient.getService().logout()
@@ -321,3 +322,4 @@ public class ClientUserFragment extends Fragment implements TextView.OnEditorAct
                 });
     }
 }
+
