@@ -1,8 +1,11 @@
 package com.example.appcheckinbyqrcode.network;
 
+import com.example.appcheckinbyqrcode.network.response.EventListResponse;
 import com.example.appcheckinbyqrcode.network.response.MessageResponse;
-import com.example.appcheckinbyqrcode.network.response.userResponse;
+import com.example.appcheckinbyqrcode.network.response.UserResponse;
 import com.example.appcheckinbyqrcode.ui.model.User;
+
+import java.util.List;
 
 import io.reactivex.Observable;
 import retrofit2.http.Field;
@@ -10,6 +13,7 @@ import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
+import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 public interface ApiService {
@@ -45,17 +49,20 @@ public interface ApiService {
 
     //show info user
     @GET("user")
-    Observable<userResponse> showinfo();
+    Observable<UserResponse> showinfo();
 
     //reset pass
     @PUT("update_info")
-    Observable<userResponse> update_info(@Query("name") String name,
-                                         @Query("email") String email,
-                                         @Query("phone") String phone,
-                                         @Query("address") String address);
+    Observable<UserResponse> updateinfo(@Query("name") String name,
+                                        @Query("email") String email,
+                                        @Query("phone") String phone,
+                                        @Query("address") String address);
 
     //doi mat khau
     @PUT("update_pass")
     Observable<MessageResponse> updatepass(@Query("old_pass") String oldpass,
                                            @Query("new_pass") String newpass);
+    //show danh sach su kien
+    @GET("event/list")
+    Observable<List<EventListResponse>> detailevents();
 }

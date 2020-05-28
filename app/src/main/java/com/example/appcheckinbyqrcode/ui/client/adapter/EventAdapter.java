@@ -1,7 +1,9 @@
 package com.example.appcheckinbyqrcode.ui.client.adapter;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,66 +17,77 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.appcheckinbyqrcode.R;
+import com.example.appcheckinbyqrcode.network.ApiClient;
+import com.example.appcheckinbyqrcode.network.response.EventListResponse;
 import com.example.appcheckinbyqrcode.ui.client.EventDetailActivity;
 import com.example.appcheckinbyqrcode.ui.client.model.Event;
 
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 
-public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder>{
+import io.reactivex.Observer;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
+
+public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventList_holder> {
 
     private static final String TAG = "nnn";
-    private List<Event> data;
+    private List<EventListResponse> items;
     private Context context;
 
 
-    public EventAdapter(List<Event> data, Context context) {
-        this.data = data;
+    public EventAdapter(List<EventListResponse> items, Context context) {
+        this.items = items;
         this.context = context;
     }
 
     @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_event_client,null,false);
-        ViewHolder viewHolder = new ViewHolder(view);
-        return viewHolder;
+    public EventList_holder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        LayoutInflater inflater = LayoutInflater.from(context);
+        View v = inflater.inflate(R.layout.item_event_client, parent, false);
+        EventList_holder vholder = new EventList_holder(v);
+        return vholder;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Glide.with(context).load(data.get(position).getEventimage()).into(holder.photo);
-        Log.d(TAG, "onBindViewHolder: "+ data.get(position).getEventname());
-        holder.name.setText(data.get(position).getEventname());
-        holder.day.setText(data.get(position).getEventday());
-        holder.address.setText(data.get(position).getEventaddress());
-        holder.time.setText(data.get(position).getEventtime());
-        holder.note.setText(data.get(position).getEventnote());
-
+    public void onBindViewHolder(@NonNull EventList_holder holder, int position) {
+        Glide.with(context).load(items.get(position).getAvatar()).into(holder.avatar);
+        // Log.d(TAG, "onBindViewHolder: "+ items.get(position).getEventname());
+        holder.name.setText(items.get(position).getName());
+        holder.intro.setText(items.get(position).getIntro());
+        holder.day.setText(items.get(position).getStart_time());
+        holder.time.setText(items.get(position).getEnd_time());
+        holder.place.setText(items.get(position).getPlace());
     }
 
     @Override
     public int getItemCount() {
-        return data.size();
+        return items.size();
     }
 
-    class ViewHolder extends RecyclerView.ViewHolder{// implements View.OnClickListener
+    class EventList_holder extends RecyclerView.ViewHolder {// implements View.OnClickListener
 
-        public TextView name, note, day, time, address;
-        public ImageView photo;
+        public TextView name, intro, day, time, place;
+        public ImageView avatar;
         public LinearLayout linearLayout;
-        public ViewHolder(View view) {
+
+        public EventList_holder(View view) {
             super(view);
             name = view.findViewById(R.id.eventname);
-            note = view.findViewById(R.id.eventnote);
+            intro = view.findViewById(R.id.eventintro);
             day = view.findViewById(R.id.eventday);
             time = view.findViewById(R.id.eventtime);
-            address = view.findViewById(R.id.eventaddress);
-            photo = view.findViewById(R.id.eventimage);
+            place = view.findViewById(R.id.eventplace);
+            avatar = view.findViewById(R.id.eventavatar);
             linearLayout = view.findViewById(R.id.linner);
             linearLayout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Log.d(TAG, "onClick: "+ getAdapterPosition());
+                    Log.d(TAG, "onClick: " + getAdapterPosition());
                     Intent intent = new Intent(context, EventDetailActivity.class);
                     context.startActivity(intent);
                 }

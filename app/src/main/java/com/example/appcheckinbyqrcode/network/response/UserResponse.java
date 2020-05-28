@@ -8,7 +8,7 @@ import lombok.EqualsAndHashCode;
 
 @EqualsAndHashCode(callSuper = false)
 @Data
-public class userResponse {
+public class UserResponse {
 
     @SerializedName("id")
     @Expose

@@ -4,7 +4,6 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -27,10 +26,9 @@ import com.example.appcheckinbyqrcode.R;
 import com.example.appcheckinbyqrcode.SessionManager;
 import com.example.appcheckinbyqrcode.network.ApiClient;
 import com.example.appcheckinbyqrcode.network.response.MessageResponse;
-import com.example.appcheckinbyqrcode.network.response.userResponse;
+import com.example.appcheckinbyqrcode.network.response.UserResponse;
 import com.example.appcheckinbyqrcode.ui.login.LoginActivity;
 
-import butterknife.OnEditorAction;
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
@@ -67,14 +65,14 @@ public class ClientUserFragment extends Fragment implements TextView.OnEditorAct
         ApiClient.getService().showinfo()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<userResponse>() {
+                .subscribe(new Observer<UserResponse>() {
                     @Override
                     public void onSubscribe(Disposable d) {
 
                     }
 
                     @Override
-                    public void onNext(userResponse userResponse) {
+                    public void onNext(UserResponse userResponse) {
                         name = userResponse.getName();
                         email = userResponse.getEmail();
                         phone = userResponse.getPhone();
@@ -139,17 +137,17 @@ public class ClientUserFragment extends Fragment implements TextView.OnEditorAct
                         Toast.makeText(getContext(), "Không được để trống!", Toast.LENGTH_SHORT).show();
                         pd.dismiss();
                     } else {
-                        ApiClient.getService().update_info(namea, emaila, phonea, addressa)
+                        ApiClient.getService().updateinfo(namea, emaila, phonea, addressa)
                                 .subscribeOn(Schedulers.io())
                                 .observeOn(AndroidSchedulers.mainThread())
-                                .subscribe(new Observer<userResponse>() {
+                                .subscribe(new Observer<UserResponse>() {
                                     @Override
                                     public void onSubscribe(Disposable d) {
 
                                     }
 
                                     @Override
-                                    public void onNext(userResponse userResponse) {
+                                    public void onNext(UserResponse userResponse) {
                                         Toast.makeText(getActivity(), "Thay đổi thông tin thành công!", Toast.LENGTH_SHORT).show();
                                         Log.d(TAG, "onNext: " + userResponse.getName());
                                         btnChangeInfo.setVisibility(View.GONE);
