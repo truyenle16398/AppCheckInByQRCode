@@ -4,10 +4,12 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#7B7979"
     tools:context=".ui.client.fragment.FavoriteEventFragment">
 
     <!-- TODO: Update blank fragment layout -->
     <androidx.recyclerview.widget.RecyclerView
+        android:layout_marginTop="7dp"
         android:id="@+id/recyclerviewFavorite"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
