@@ -24,7 +24,7 @@
                             android:background="#fff"
                             android:scaleType="center"
                             android:src="@drawable/loading"
-                            android:id="@+id/imagedetail"
+                            android:id="@+id/imageDetail"
                             android:layout_width="match_parent"
                             android:layout_height="250dp"/>
                         <LinearLayout
@@ -43,6 +43,18 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content" />
                             <TextView
+                                android:gravity="center"
+                                android:layout_marginBottom="5dp"
+                                android:id="@+id/txtNameEventDetail"
+                                android:layout_marginRight="30dp"
+                                android:layout_marginTop="5dp"
+                                android:textColor="#000"
+                                android:textStyle="bold"
+                                android:textSize="28sp"
+                                android:text="Ra mắt sự kiện Bphone"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"/>
+                            <TextView
                                 android:layout_marginBottom="5dp"
                                 android:drawablePadding="8dp"
                                 android:drawableLeft="@drawable/calendarbig"
@@ -56,7 +68,7 @@
                                 android:layout_height="wrap_content"/>
                             <TextView
                                 android:layout_marginBottom="5dp"
-                                android:id="@+id/timedetail"
+                                android:id="@+id/txtDateTimeStart"
                                 android:layout_marginTop="5dp"
                                 android:textColor="#000"
                                 android:textSize="15sp"
@@ -65,14 +77,13 @@
                                 android:layout_height="match_parent"/>
                             <TextView
                                 android:layout_marginBottom="5dp"
-                                android:id="@+id/daydetail"
+                                android:id="@+id/txtDateTimeEnd"
                                 android:layout_marginTop="5dp"
                                 android:textColor="#000"
                                 android:textSize="15sp"
                                 android:text="Ngày 19 tháng 05 năm 2020"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"/>
-                            //
                             <TextView
                                 android:layout_marginBottom="5dp"
                                 android:drawablePadding="8dp"
@@ -86,14 +97,14 @@
                                 android:layout_height="wrap_content"/>
                             <TextView
                                 android:lineSpacingExtra="4dp"
-                                android:id="@+id/infodetail"
+                                android:id="@+id/txtInfoDetail"
                                 android:layout_marginRight="30dp"
                                 android:layout_marginTop="5dp"
                                 android:textColor="#000"
                                 android:textSize="16sp"
                                 android:text="Bphone B86 sở hữu thiết kế tối giản với viền đều và không có cằm, Bkav thiết kế Bphone B86 như một khối kính, biến Bphone B86 trở thành điện thoại hiếm hoi trên thị trường có màn hình đều và không có cằm, phần trán vốn là đặc trưng của Bphone 3 nay đã được thu gọn hợp lý hơn trên Bphone B86.Bphone B86 sở hữu thiết kế tối giản với viền đều và không có cằm, Bkav thiết kế Bphone B86 như một khối kính, biến Bphone B86 trở thành điện thoại hiếm hoi trên thị trường có màn hình đều và không có cằm, phần trán vốn là đặc trưng của Bphone 3 nay đã được thu gọn hợp lý hơn trên Bphone B86."
                                 android:layout_width="match_parent"
-                                android:layout_height="match_parent"/>//
+                                android:layout_height="match_parent"/>
                             <TextView
                                 android:layout_marginBottom="5dp"
                                 android:drawablePadding="8dp"
@@ -107,25 +118,16 @@
                                 android:layout_height="wrap_content"/>
                             <TextView
                                 android:layout_marginBottom="5dp"
-                                android:id="@+id/addressinfodetail"
+                                android:id="@+id/txtAddressInfoDetail"
                                 android:layout_marginRight="30dp"
                                 android:layout_marginTop="5dp"
                                 android:textColor="#000"
                                 android:textSize="16sp"
                                 android:textStyle="bold"
-                                android:text="TÒA NHÀ B, TẦNG 5"
+                                android:text="TÒA NHÀ B, TẦNG 5, 41 Lê Duẫn, Hải Châu, Đà Nẵng"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"/>
-                            <TextView
-                                android:layout_marginBottom="5dp"
-                                android:id="@+id/addressdetail"
-                                android:layout_marginRight="30dp"
-                                android:layout_marginTop="5dp"
-                                android:textColor="#000"
-                                android:textSize="16sp"
-                                android:text="41 Lê Duẫn, Hải Châu, Đà Nẵng"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"/>
+
                         </LinearLayout>
                         <Button
                             android:layout_marginTop="5dp"
@@ -133,7 +135,7 @@
                             android:layout_marginRight="30dp"
                             android:layout_marginLeft="30dp"
                             android:background="@drawable/buttonlogin"
-                            android:id="@+id/btnregisterdetail"
+                            android:id="@+id/btnRegisterDetail"
                             android:layout_width="match_parent"
                             android:layout_height="?actionBarSize"
                             android:text="@string/text_button_register"
@@ -142,11 +144,10 @@
                 </ScrollView>
 
                 <androidx.appcompat.widget.Toolbar
-                    android:id="@+id/toolbardetail"
+                    android:id="@+id/toolbarDetail"
                     android:layout_width="match_parent"
                     android:layout_height="?actionBarSize"
                     android:background="#40000000"
-                    app:title="Ra mắt sự kiện Bphone"
                     app:titleTextColor="#fff" />
             </RelativeLayout>
         </LinearLayout>

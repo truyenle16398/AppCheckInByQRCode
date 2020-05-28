@@ -56,7 +56,7 @@ public class EventFragment extends Fragment {
         ProgressDialog dialog = new ProgressDialog(getActivity());
         dialog.setMessage("please wait...");
         dialog.show();
-        ApiClient.getService().detailevents().subscribeOn(Schedulers.io())
+        ApiClient.getService().listlevents().subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<List<EventListResponse>>() {
                     @Override
