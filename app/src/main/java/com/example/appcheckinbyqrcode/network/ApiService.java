@@ -1,5 +1,6 @@
 package com.example.appcheckinbyqrcode.network;
 
+import com.example.appcheckinbyqrcode.network.response.EventDetailResponse;
 import com.example.appcheckinbyqrcode.network.response.EventListResponse;
 import com.example.appcheckinbyqrcode.network.response.MessageResponse;
 import com.example.appcheckinbyqrcode.network.response.UserResponse;
@@ -64,5 +65,11 @@ public interface ApiService {
                                            @Query("new_pass") String newpass);
     //show danh sach su kien
     @GET("event/list")
-    Observable<List<EventListResponse>> detailevents();
+    Observable<List<EventListResponse>> listlevents();
+
+    //show chi tiet danh sach su kien
+    @GET("event/detail/{id}")
+    Observable<EventDetailResponse> detailevents(@Path("id") String id);
+
+
 }
