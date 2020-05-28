@@ -29,6 +29,7 @@ import com.example.appcheckinbyqrcode.network.response.MessageResponse;
 import com.example.appcheckinbyqrcode.network.response.UserResponse;
 import com.example.appcheckinbyqrcode.ui.login.LoginActivity;
 
+import de.hdodenhof.circleimageview.CircleImageView;
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
@@ -42,6 +43,7 @@ public class ClientUserFragment extends Fragment implements TextView.OnEditorAct
     Button btnChangePass, btnLogOut, btnChangeInfo;
     EditText edtName, edtEmail, edtPhone, edtAddress, edt_OldPassword, edt_NewPassword;
     String name, email, phone, address;
+    CircleImageView circleimg;
     private View view;
     private AlertDialog dialog;
     private ProgressBar progress;
@@ -104,6 +106,15 @@ public class ClientUserFragment extends Fragment implements TextView.OnEditorAct
     }
 
     private void onclick() {
+        circleimg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                btnLogOut.setVisibility(View.VISIBLE);
+                btnChangePass.setVisibility(View.VISIBLE);
+            }
+        });
+
+
         btnLogOut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -178,7 +189,6 @@ public class ClientUserFragment extends Fragment implements TextView.OnEditorAct
     }
 
     private void showDialog() {
-
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         LayoutInflater inflater = getActivity().getLayoutInflater();
         View view = inflater.inflate(R.layout.dialog_changepass, null);
@@ -274,7 +284,10 @@ public class ClientUserFragment extends Fragment implements TextView.OnEditorAct
         edt_OldPassword = view.findViewById(R.id.inputOldPass);
         edt_NewPassword = view.findViewById(R.id.inputNewPass);
         btnChangePass = view.findViewById(R.id.btnChangePass);
+        btnChangePass.setVisibility(View.GONE);
+        circleimg = view.findViewById(R.id.profilePic);
         btnLogOut = view.findViewById(R.id.btnLogout);
+        btnLogOut.setVisibility(View.GONE);
         btnChangeInfo = view.findViewById(R.id.btnChangeInfo);
         edtName = view.findViewById(R.id.edtNameClient);
         edtEmail = view.findViewById(R.id.edtEmailClient);
@@ -320,4 +333,3 @@ public class ClientUserFragment extends Fragment implements TextView.OnEditorAct
                 });
     }
 }
-
