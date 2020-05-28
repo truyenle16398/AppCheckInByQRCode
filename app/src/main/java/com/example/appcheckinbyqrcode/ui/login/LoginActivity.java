@@ -80,6 +80,13 @@ public class LoginActivity extends AppCompatActivity {
                                     Log.d("nnn", "onSuccess: " + us.getMessage());
                                     if (us.getMessage().equals("Tài khoản của bạn chưa xác thực!")) {
                                         Toast.makeText(LoginActivity.this, "Vui lòng xác thực tài khoản của bạn", Toast.LENGTH_SHORT).show();
+                                    } else if (us.getMessage().equals("Email hoặc mật khẩu không chính xác!")) {
+                                        Toast.makeText(LoginActivity.this, "Tài khoản hoặc mật khẩu không chính xác!!", Toast.LENGTH_SHORT).show();
+                                        pd.dismiss();
+                                    } else if (us.getMessage().equals("Tài khoản của bạn đã bị khóa!")) {
+                                        Toast.makeText(LoginActivity.this, "Tài khoản của bạn đã bị khóa!!", Toast.LENGTH_SHORT).show();
+                                        pd.dismiss();
+
                                     } else {
                                         info info = us.getUser();
                                         if (us != null && info.getId() != null) {
@@ -107,9 +114,6 @@ public class LoginActivity extends AppCompatActivity {
                                                     .build();
                                             ApiClient.getInstance().init(config);
                                             finish();
-                                        } else {
-                                            Toast.makeText(LoginActivity.this, "Tài khoản hoặc mật khẩu không chính xác!!", Toast.LENGTH_SHORT).show();
-                                            pd.dismiss();
                                         }
                                     }
                                 }
@@ -164,6 +168,7 @@ public class LoginActivity extends AppCompatActivity {
             }
         }
     }
+
     private void InitWidget() {
         btnLogin = findViewById(R.id.btnLogin);
         tvForgotPass = findViewById(R.id.tvPass);

@@ -15,7 +15,7 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/carr"
         app:cardCornerRadius="9dp"
-        app:cardElevation="8dp"
+        app:cardElevation="11dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <LinearLayout
@@ -28,7 +28,7 @@
                 android:scaleType="fitXY"
                 android:src="@drawable/loading"
                 android:layout_weight="1"
-                android:id="@+id/eventimage"
+                android:id="@+id/eventavatar"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"/>
             <LinearLayout
@@ -49,7 +49,7 @@
                     android:layout_height="wrap_content"/>
                 <TextView
                     android:layout_marginBottom="4dp"
-                    android:id="@+id/eventnote"
+                    android:id="@+id/eventintro"
                     android:gravity="center|left"
                     android:textSize="12sp"
                     android:textColor="#000"
@@ -78,7 +78,7 @@
                     android:layout_height="wrap_content"/>
                 <TextView
                     android:layout_marginBottom="4dp"
-                    android:id="@+id/eventaddress"
+                    android:id="@+id/eventplace"
                     android:gravity="center|left"
                     android:drawableLeft="@drawable/locationicon"
                     android:textSize="12sp"
