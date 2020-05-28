@@ -7,9 +7,8 @@
     tools:context=".ui.client.fragment.FavoriteEventFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:id="@+id/test"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerviewFavorite"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="match_parent"/>
 </LinearLayout>

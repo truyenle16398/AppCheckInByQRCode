@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:id="@+id/linner_favorite"
+    android:layout_height="match_parent">
+    <TextView
+        android:background="#F10707"
+        android:textStyle="bold"
+        android:id="@+id/eventname_favorite"
+        android:gravity="center|left"
+        android:textSize="20sp"
+        android:textColor="#000"
+        android:text="Tên sự kiện ở đây nè nha bạn 1 23 q123123123112ưeqw"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+</LinearLayout>
