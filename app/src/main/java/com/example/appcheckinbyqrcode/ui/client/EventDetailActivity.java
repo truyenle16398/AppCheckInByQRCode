@@ -4,6 +4,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.app.ProgressDialog;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
@@ -38,7 +40,10 @@ public class EventDetailActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 //        getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setHomeAsUpIndicator(drawable);
-        getdata();
+
+        Intent intent = getIntent();
+        int id = intent.getIntExtra("id", 0);
+        getdata(id);
     }
 
     @Override
@@ -53,8 +58,11 @@ public class EventDetailActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private void getdata() {
-        ApiClient.getService().detailevents("1").subscribeOn(Schedulers.io())
+    private void getdata(int i ) {
+        ProgressDialog dialog = new ProgressDialog(EventDetailActivity.this);
+        dialog.setMessage("please wait...");
+        dialog.show();
+        ApiClient.getService().detailevents(i).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<EventDetailResponse>() {
                     @Override
@@ -64,7 +72,8 @@ public class EventDetailActivity extends AppCompatActivity {
 
                     @Override
                     public void onNext(EventDetailResponse eventDetailResponse) {
-                        Glide.with(getApplicationContext()).load(eventDetailResponse.getAvatar()).into(imageDetail);
+                        String urls = "http://10.0.2.131:8888/sdc_event/public/"+ eventDetailResponse.getAvatar();
+                        Glide.with(getApplicationContext()).load(urls).into(imageDetail);
                         txtNameEventDetail.setText(eventDetailResponse.getName());
                         txtDateTimeStart.setText(eventDetailResponse.getStart_time());
                         txtDateTimeEnd.setText(eventDetailResponse.getEnd_time());
@@ -75,11 +84,12 @@ public class EventDetailActivity extends AppCompatActivity {
                     @Override
                     public void onError(Throwable e) {
                         Log.d("nnn", "onError nnn" + e.getMessage());
+                        dialog.dismiss();
                     }
 
                     @Override
                     public void onComplete() {
-
+                        dialog.dismiss();
                     }
                 });
     }

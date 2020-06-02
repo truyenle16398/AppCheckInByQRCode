@@ -5,11 +5,19 @@ import android.content.DialogInterface;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Rect;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.text.Layout;
+import android.transition.Explode;
+import android.transition.Slide;
+import android.transition.Transition;
+import android.transition.TransitionManager;
+import android.transition.TransitionSet;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,10 +26,12 @@ import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.example.appcheckinbyqrcode.R;
 import com.example.appcheckinbyqrcode.SessionManager;
 import com.example.appcheckinbyqrcode.network.ApiClient;
@@ -38,12 +48,13 @@ import io.reactivex.schedulers.Schedulers;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class ClientUserFragment extends Fragment implements TextView.OnEditorActionListener {
+public class ClientUserFragment extends Fragment implements TextView.OnEditorActionListener,EditText.OnClickListener {
     private static final String TAG = "nnn";
     Button btnChangePass, btnLogOut, btnChangeInfo;
     EditText edtName, edtEmail, edtPhone, edtAddress, edt_OldPassword, edt_NewPassword;
     String name, email, phone, address;
     CircleImageView circleimg;
+    ViewGroup view_changepass_logout,view_logout, view_changepass;
     private View view;
     private AlertDialog dialog;
     private ProgressBar progress;
@@ -96,12 +107,17 @@ public class ClientUserFragment extends Fragment implements TextView.OnEditorAct
                     }
                 });
     }
-
     private void oncheck() {
         edtName.setOnEditorActionListener(this::onEditorAction);
         edtEmail.setOnEditorActionListener(this::onEditorAction);
         edtPhone.setOnEditorActionListener(this::onEditorAction);
         edtAddress.setOnEditorActionListener(this::onEditorAction);
+
+
+        edtName.setOnClickListener(this::onClick);
+        edtEmail.setOnClickListener(this::onClick);
+        edtPhone.setOnClickListener(this::onClick);
+        edtAddress.setOnClickListener(this::onClick);
 
     }
 
@@ -109,8 +125,20 @@ public class ClientUserFragment extends Fragment implements TextView.OnEditorAct
         circleimg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                btnLogOut.setVisibility(View.VISIBLE);
-                btnChangePass.setVisibility(View.VISIBLE);
+
+                if (view_changepass.getVisibility()==View.INVISIBLE){// && view_logout.getVisibility()==View.INVISIBLE
+//                    TransitionManager.beginDelayedTransition(view_changepass_logout, new Slide(Gravity.START));
+                    TransitionManager.beginDelayedTransition(view_changepass, new Slide(Gravity.START));
+                    TransitionManager.beginDelayedTransition(view_logout, new Slide(Gravity.END));
+                    view_changepass.setVisibility(View.VISIBLE);
+                    view_logout.setVisibility(View.VISIBLE);
+                } else {
+//                    TransitionManager.beginDelayedTransition(view_changepass_logout);
+                    TransitionManager.beginDelayedTransition(view_changepass, new Slide(Gravity.START));
+                    TransitionManager.beginDelayedTransition(view_logout, new Slide(Gravity.END));
+                    view_changepass.setVisibility(View.INVISIBLE);
+                    view_logout.setVisibility(View.INVISIBLE);
+                }
             }
         });
 
@@ -154,9 +182,7 @@ public class ClientUserFragment extends Fragment implements TextView.OnEditorAct
                                 .subscribe(new Observer<UserResponse>() {
                                     @Override
                                     public void onSubscribe(Disposable d) {
-
                                     }
-
                                     @Override
                                     public void onNext(UserResponse userResponse) {
                                         Toast.makeText(getActivity(), "Thay đổi thông tin thành công!", Toast.LENGTH_SHORT).show();
@@ -281,13 +307,14 @@ public class ClientUserFragment extends Fragment implements TextView.OnEditorAct
     }
 
     private void initWidget() {
+        view_changepass_logout = view.findViewById(R.id.viewchangepass_logout);
+        view_changepass = view.findViewById(R.id.view_btnchangepass);
+        view_logout = view.findViewById(R.id.view_btnlogout);
         edt_OldPassword = view.findViewById(R.id.inputOldPass);
         edt_NewPassword = view.findViewById(R.id.inputNewPass);
         btnChangePass = view.findViewById(R.id.btnChangePass);
-        btnChangePass.setVisibility(View.GONE);
-        circleimg = view.findViewById(R.id.profilePic);
+        circleimg = view.findViewById(R.id.profilePic_client);
         btnLogOut = view.findViewById(R.id.btnLogout);
-        btnLogOut.setVisibility(View.GONE);
         btnChangeInfo = view.findViewById(R.id.btnChangeInfo);
         edtName = view.findViewById(R.id.edtNameClient);
         edtEmail = view.findViewById(R.id.edtEmailClient);
@@ -331,5 +358,10 @@ public class ClientUserFragment extends Fragment implements TextView.OnEditorAct
 
                     }
                 });
+    }
+
+    @Override
+    public void onClick(View v) {
+        btnChangeInfo.setVisibility(View.VISIBLE);
     }
 }
