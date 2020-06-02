@@ -25,7 +25,7 @@
             android:layout_width="match_parent"
             android:layout_height="175dp">
             <ImageView
-                android:scaleType="fitXY"
+                android:scaleType="fitCenter"
                 android:src="@drawable/loading"
                 android:layout_weight="1"
                 android:id="@+id/eventavatar"

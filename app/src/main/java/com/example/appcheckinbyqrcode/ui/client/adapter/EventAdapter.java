@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -55,7 +56,8 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventList_ho
 
     @Override
     public void onBindViewHolder(@NonNull EventList_holder holder, int position) {
-        Glide.with(context).load(items.get(position).getAvatar()).into(holder.avatar);
+        String urls = "http://10.0.2.131:8888/sdc_event/public/"+ items.get(position).getAvatar();
+        Glide.with(context).load(urls).into(holder.avatar);
         // Log.d(TAG, "onBindViewHolder: "+ items.get(position).getEventname());
         holder.name.setText(items.get(position).getName());
         holder.intro.setText(items.get(position).getIntro());
@@ -87,8 +89,8 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventList_ho
             linearLayout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Log.d(TAG, "onClick: " + getAdapterPosition());
                     Intent intent = new Intent(context, EventDetailActivity.class);
+                    intent.putExtra("id",items.get(getAdapterPosition()).getId());
                     context.startActivity(intent);
                 }
             });
