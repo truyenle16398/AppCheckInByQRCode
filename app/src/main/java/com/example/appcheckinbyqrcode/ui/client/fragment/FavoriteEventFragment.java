@@ -2,15 +2,16 @@ package com.example.appcheckinbyqrcode.ui.client.fragment;
 
 import android.app.ProgressDialog;
 import android.os.Bundle;
+
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.appcheckinbyqrcode.R;
 import com.example.appcheckinbyqrcode.network.ApiClient;
@@ -36,11 +37,9 @@ public class FavoriteEventFragment extends Fragment {
     private List<Favorite> data;
     TextView tvthongbao;
     View view;
-
     public FavoriteEventFragment() {
-// Required empty public constructor
+        // Required empty public constructor
     }
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -61,7 +60,6 @@ public class FavoriteEventFragment extends Fragment {
                     public void onSubscribe(Disposable d) {
 
                     }
-
                     @Override
                     public void onNext(List<EventFavoriteResponse> eventFavoriteResponses) {
                         if (eventFavoriteResponses.toString().equals("[]")){
@@ -71,8 +69,7 @@ public class FavoriteEventFragment extends Fragment {
                             Log.d("nnn", "onNext: "+eventFavoriteResponses.toString());
                             ArrayList<EventFavoriteResponse> arrayList = (ArrayList<EventFavoriteResponse>) eventFavoriteResponses;
 //                        Log.d("nnn", "onNext: "+arrayList.get(0).getStatus());
-                        Log.d("nnn", "onNext: " + eventFavoriteResponses.toString());
-                        ArrayList<EventFavoriteResponse> arrayList = (ArrayList<EventFavoriteResponse>) eventFavoriteResponses;
+
                             adapter = new FavoriteAdapter(arrayList, getActivity());
                             LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
                             linearLayoutManager.setOrientation(RecyclerView.VERTICAL);
@@ -83,7 +80,7 @@ public class FavoriteEventFragment extends Fragment {
 
                     @Override
                     public void onError(Throwable e) {
-                        Log.d("nnn", "onError: " + e.getMessage());
+                        Log.d("nnn", "onError: "+e.getMessage());
                         dialog.dismiss();
                     }
 
