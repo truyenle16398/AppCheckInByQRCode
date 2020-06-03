@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.example.appcheckinbyqrcode.R;
 import com.example.appcheckinbyqrcode.network.ApiClient;
@@ -34,6 +35,7 @@ public class FavoriteEventFragment extends Fragment {
     RecyclerView mRCycMs;
     private FavoriteAdapter adapter;
     private List<Favorite> data;
+    TextView tvthongbao;
     View view;
     public FavoriteEventFragment() {
         // Required empty public constructor
@@ -44,8 +46,6 @@ public class FavoriteEventFragment extends Fragment {
         view = inflater.inflate(R.layout.fragment_favorite_event, container, false);
         InitWidget();
         getData();
-
-//        data.add(new Favorite("name event111111111111111111","day","person","aaaa","https://xinhevent.com/wp-content/uploads/2018/08/b%C3%A0n-trang-tr%C3%AD-sinh-nh%E1%BA%ADt-tr%E1%BB%8Dn-g%C3%B3i-01-1200x800.jpg"));
         return view;
     }
 
@@ -62,15 +62,20 @@ public class FavoriteEventFragment extends Fragment {
                     }
                     @Override
                     public void onNext(List<EventFavoriteResponse> eventFavoriteResponses) {
-                        Log.d("nnn", "onNext: "+eventFavoriteResponses.toString());
-                        ArrayList<EventFavoriteResponse> arrayList = (ArrayList<EventFavoriteResponse>) eventFavoriteResponses;
+                        if (eventFavoriteResponses.toString().equals("[]")){
+                            mRCycMs.setVisibility(View.GONE);
+                            tvthongbao.setVisibility(View.VISIBLE);
+                        } else {
+                            Log.d("nnn", "onNext: "+eventFavoriteResponses.toString());
+                            ArrayList<EventFavoriteResponse> arrayList = (ArrayList<EventFavoriteResponse>) eventFavoriteResponses;
 //                        Log.d("nnn", "onNext: "+arrayList.get(0).getStatus());
 
-                        adapter = new FavoriteAdapter(arrayList, getActivity());
-                        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
-                        linearLayoutManager.setOrientation(RecyclerView.VERTICAL);
-                        mRCycMs.setLayoutManager(linearLayoutManager);
-                        mRCycMs.setAdapter(adapter);
+                            adapter = new FavoriteAdapter(arrayList, getActivity());
+                            LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
+                            linearLayoutManager.setOrientation(RecyclerView.VERTICAL);
+                            mRCycMs.setLayoutManager(linearLayoutManager);
+                            mRCycMs.setAdapter(adapter);
+                        }
                     }
 
                     @Override
@@ -88,5 +93,6 @@ public class FavoriteEventFragment extends Fragment {
 
     private void InitWidget() {
         mRCycMs = view.findViewById(R.id.recyclerviewFavorite);
+        tvthongbao = view.findViewById(R.id.tvthongbao_favorite);
     }
 }

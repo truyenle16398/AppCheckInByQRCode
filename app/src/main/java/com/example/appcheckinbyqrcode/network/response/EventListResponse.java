@@ -33,9 +33,9 @@ public class EventListResponse {
     @Expose
     private String end_time;
 
-    @SerializedName("avatar")
+    @SerializedName("image")
     @Expose
-    private String avatar;
+    private String image;
 
     @SerializedName("place")
     @Expose

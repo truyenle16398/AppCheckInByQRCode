@@ -20,6 +20,7 @@ import com.bumptech.glide.Glide;
 import com.example.appcheckinbyqrcode.R;
 import com.example.appcheckinbyqrcode.network.response.EventFavoriteResponse;
 import com.example.appcheckinbyqrcode.network.response.EventListResponse;
+import com.example.appcheckinbyqrcode.network.url;
 import com.example.appcheckinbyqrcode.ui.client.EventDetailActivity;
 import com.example.appcheckinbyqrcode.ui.client.HistoryDetailActivity;
 import com.example.appcheckinbyqrcode.ui.client.fragment.FavoriteEventFragment;
@@ -52,7 +53,8 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.Favori
     @Override
     public void onBindViewHolder(@NonNull Favorite_holder holder, int position) {
 //        String a = Resources.getSystem().getString(R.string.base_url);
-        String urls = "http://10.0.2.239:8888/sdc_event/public/"+ items.get(position).getAvatar();
+        String urls = url.getUrlimg()+ items.get(position).getImage();
+        Log.d(TAG, "ttttt: "+ urls);
         Glide.with(context).load(urls).into(holder.photo);
         holder.name.setText(items.get(position).getName());
         holder.day.setText(items.get(position).getStartTime());
@@ -86,9 +88,10 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.Favori
             linearLayout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-//                    Toast.makeText(context, "id "+ items.get(getAdapterPosition()).getId(), Toast.LENGTH_SHORT).show();
+//                    Log.d(TAG, "onClick: "+items.toString());
+//                    Toast.makeText(context, "id "+ items.get(getAdapterPosition()).getEventId(), Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(context, HistoryDetailActivity.class);
-                    intent.putExtra("idhistory",items.get(getAdapterPosition()).getId());
+                    intent.putExtra("idhistory",items.get(getAdapterPosition()).getEventId());
                     context.startActivity(intent);
                 }
             });

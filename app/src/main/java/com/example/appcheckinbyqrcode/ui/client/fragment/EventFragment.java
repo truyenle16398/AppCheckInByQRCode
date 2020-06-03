@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.example.appcheckinbyqrcode.R;
 import com.example.appcheckinbyqrcode.network.ApiClient;
@@ -36,6 +37,7 @@ public class EventFragment extends Fragment {
     private EventAdapter adapter;
     private List<EventListResponse> data;
     private View view;
+    TextView tvthongbao;
 
     public EventFragment() {
         // Required empty public constructor
@@ -66,14 +68,19 @@ public class EventFragment extends Fragment {
 
                     @Override
                     public void onNext(List<EventListResponse> eventListResponses) {
-                        ArrayList<EventListResponse> arrayList = (ArrayList<EventListResponse>) eventListResponses;
+                        if (eventListResponses.toString().equals("[]")){
+                            mRCycMs.setVisibility(View.GONE);
+                            tvthongbao.setVisibility(View.VISIBLE);
+                        }else {
+                            ArrayList<EventListResponse> arrayList = (ArrayList<EventListResponse>) eventListResponses;
 ////                        Log.d("nnn", "onNext: "+arrayList.get(0).getStatus());
-                        adapter = new EventAdapter(arrayList, getActivity());
-                        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
-                        linearLayoutManager.setOrientation(RecyclerView.VERTICAL);
-                        mRCycMs.setLayoutManager(linearLayoutManager);
-                        mRCycMs.setAdapter(adapter);
-                        dialog.dismiss();
+                            adapter = new EventAdapter(arrayList, getActivity());
+                            LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
+                            linearLayoutManager.setOrientation(RecyclerView.VERTICAL);
+                            mRCycMs.setLayoutManager(linearLayoutManager);
+                            mRCycMs.setAdapter(adapter);
+                            dialog.dismiss();
+                        }
 //                        Log.d("nnn", "onNext: " + arrayList.get(0).getName());
                     }
 
@@ -92,5 +99,6 @@ public class EventFragment extends Fragment {
     private void InitWidget() {
         mRCycMs = view.findViewById(R.id.recyclerviewEvent);
         mRCycMs.setLayoutManager(new LinearLayoutManager(getContext()));
+        tvthongbao = view.findViewById(R.id.tvthongbao_event);
     }
 }

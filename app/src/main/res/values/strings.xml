@@ -19,5 +19,6 @@
     <string name="already_account_back_to_login"><u>Already account? Back to Login</u></string>
     <string name="yes">OK</string>
     <string name="no">Cancel</string>
+    <string name="h_y_s_ki_n">Hủy sự kiện</string>
 
 </resources>

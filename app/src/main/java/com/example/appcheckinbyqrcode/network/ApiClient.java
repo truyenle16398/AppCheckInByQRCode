@@ -120,7 +120,7 @@ public class ApiClient {
 
 //        String mystring = getResources().getString(R.string.mystring);
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://10.0.2.239:8888/sdc_event/public/api/")
+                .baseUrl(url.getUrl())
                 .client(okHttpBuilder.build())
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
