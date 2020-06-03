@@ -238,6 +238,8 @@ public class ClientUserFragment extends Fragment implements TextView.OnEditorAct
         dialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                edt_OldPassword = view.findViewById(R.id.inputOldPass);
+                edt_NewPassword = view.findViewById(R.id.inputNewPass);
                 String old_password = edt_OldPassword.getText().toString();
                 String new_password = edt_NewPassword.getText().toString();
                 if (!old_password.isEmpty() && !new_password.isEmpty()) {
@@ -310,8 +312,6 @@ public class ClientUserFragment extends Fragment implements TextView.OnEditorAct
         view_changepass_logout = view.findViewById(R.id.viewchangepass_logout);
         view_changepass = view.findViewById(R.id.view_btnchangepass);
         view_logout = view.findViewById(R.id.view_btnlogout);
-        edt_OldPassword = view.findViewById(R.id.inputOldPass);
-        edt_NewPassword = view.findViewById(R.id.inputNewPass);
         btnChangePass = view.findViewById(R.id.btnChangePass);
         circleimg = view.findViewById(R.id.profilePic_client);
         btnLogOut = view.findViewById(R.id.btnLogout);

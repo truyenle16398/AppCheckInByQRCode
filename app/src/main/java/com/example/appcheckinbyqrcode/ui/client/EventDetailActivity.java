@@ -116,7 +116,7 @@ public class EventDetailActivity extends AppCompatActivity {
                     public void onNext(EventDetailResponse eventDetailResponse) {
                         String urls = "http://10.0.2.239:8888/sdc_event/public/"+ eventDetailResponse.getAvatar();
                         Glide.with(getApplicationContext()).load(urls).into(imageDetail);
-                        txtNameEventDetail.setText(eventDetailResponse.getName());
+                        toolbar.setTitle(eventDetailResponse.getName());
                         txtDateTimeStart.setText(eventDetailResponse.getStart_time());
                         txtDateTimeEnd.setText(eventDetailResponse.getEnd_time());
                         txtInfoDetail.setText(eventDetailResponse.getDetail());
