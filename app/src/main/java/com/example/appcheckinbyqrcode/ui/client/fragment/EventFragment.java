@@ -74,7 +74,7 @@ public class EventFragment extends Fragment {
                         mRCycMs.setLayoutManager(linearLayoutManager);
                         mRCycMs.setAdapter(adapter);
                         dialog.dismiss();
-                        Log.d("nnn", "onNext: " + arrayList.get(0).getName());
+//                        Log.d("nnn", "onNext: " + arrayList.get(0).getName());
                     }
 
                     @Override

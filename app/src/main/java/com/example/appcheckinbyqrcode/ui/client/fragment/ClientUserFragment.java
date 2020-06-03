@@ -1,15 +1,15 @@
 package com.example.appcheckinbyqrcode.ui.client.fragment;
 
 import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
+import android.transition.Slide;
+import android.transition.TransitionManager;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,6 +22,8 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.fragment.app.Fragment;
+
 import com.example.appcheckinbyqrcode.R;
 import com.example.appcheckinbyqrcode.SessionManager;
 import com.example.appcheckinbyqrcode.network.ApiClient;
@@ -29,6 +31,7 @@ import com.example.appcheckinbyqrcode.network.response.MessageResponse;
 import com.example.appcheckinbyqrcode.network.response.UserResponse;
 import com.example.appcheckinbyqrcode.ui.login.LoginActivity;
 
+import de.hdodenhof.circleimageview.CircleImageView;
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
@@ -37,17 +40,19 @@ import io.reactivex.schedulers.Schedulers;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class ClientUserFragment extends Fragment implements TextView.OnEditorActionListener {
+public class ClientUserFragment extends Fragment implements TextView.OnEditorActionListener, EditText.OnClickListener {
     private static final String TAG = "nnn";
     Button btnChangePass, btnLogOut, btnChangeInfo;
     EditText edtName, edtEmail, edtPhone, edtAddress, edt_OldPassword, edt_NewPassword;
     String name, email, phone, address;
+    CircleImageView circleimg;
+    ViewGroup view_changepass_logout, view_logout, view_changepass;
     private View view;
     private AlertDialog dialog;
     private ProgressBar progress;
 
     public ClientUserFragment() {
-        // Required empty public constructor
+// Required empty public constructor
     }
 
     @Override
@@ -101,9 +106,36 @@ public class ClientUserFragment extends Fragment implements TextView.OnEditorAct
         edtPhone.setOnEditorActionListener(this::onEditorAction);
         edtAddress.setOnEditorActionListener(this::onEditorAction);
 
+
+        edtName.setOnClickListener(this::onClick);
+        edtEmail.setOnClickListener(this::onClick);
+        edtPhone.setOnClickListener(this::onClick);
+        edtAddress.setOnClickListener(this::onClick);
+
     }
 
     private void onclick() {
+        circleimg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                if (view_changepass.getVisibility() == View.INVISIBLE) {// && view_logout.getVisibility()==View.INVISIBLE
+// TransitionManager.beginDelayedTransition(view_changepass_logout, new Slide(Gravity.START));
+                    TransitionManager.beginDelayedTransition(view_changepass, new Slide(Gravity.START));
+                    TransitionManager.beginDelayedTransition(view_logout, new Slide(Gravity.END));
+                    view_changepass.setVisibility(View.VISIBLE);
+                    view_logout.setVisibility(View.VISIBLE);
+                } else {
+// TransitionManager.beginDelayedTransition(view_changepass_logout);
+                    TransitionManager.beginDelayedTransition(view_changepass, new Slide(Gravity.START));
+                    TransitionManager.beginDelayedTransition(view_logout, new Slide(Gravity.END));
+                    view_changepass.setVisibility(View.INVISIBLE);
+                    view_logout.setVisibility(View.INVISIBLE);
+                }
+            }
+        });
+
+
         btnLogOut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -128,7 +160,7 @@ public class ClientUserFragment extends Fragment implements TextView.OnEditorAct
                 String phonea = edtPhone.getText().toString();
                 String addressa = edtAddress.getText().toString();
 
-//        Log.d("nnn", "onClick: "+email+"=="+emailedt +" và "+ name+"=="+nameedt);
+// Log.d("nnn", "onClick: "+email+"=="+emailedt +" và "+ name+"=="+nameedt);
                 if (name.equals(namea) && email.equals(emaila) && phone.equals(phonea) && address.equals(addressa)) {
                     Toast.makeText(getContext(), "Bạn chưa chỉnh sửa!", Toast.LENGTH_SHORT).show();
                     pd.dismiss();
@@ -143,7 +175,6 @@ public class ClientUserFragment extends Fragment implements TextView.OnEditorAct
                                 .subscribe(new Observer<UserResponse>() {
                                     @Override
                                     public void onSubscribe(Disposable d) {
-
                                     }
 
                                     @Override
@@ -177,14 +208,11 @@ public class ClientUserFragment extends Fragment implements TextView.OnEditorAct
 
     }
 
-    public void showDialog() {
-
+    private void showDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         LayoutInflater inflater = getActivity().getLayoutInflater();
         View view = inflater.inflate(R.layout.dialog_changepass, null);
         progress = (ProgressBar) view.findViewById(R.id.progress);
-        edt_OldPassword = view.findViewById(R.id.inputOldPass);
-        edt_NewPassword = view.findViewById(R.id.inputNewPass);
         builder.setView(view);
         builder.setTitle("Đổi mật khẩu mới");
         builder.setPositiveButton("Đổi", new DialogInterface.OnClickListener() {
@@ -204,6 +232,8 @@ public class ClientUserFragment extends Fragment implements TextView.OnEditorAct
         dialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                edt_OldPassword = view.findViewById(R.id.inputOldPass);
+                edt_NewPassword = view.findViewById(R.id.inputNewPass);
                 String old_password = edt_OldPassword.getText().toString();
                 String new_password = edt_NewPassword.getText().toString();
                 if (!old_password.isEmpty() && !new_password.isEmpty()) {
@@ -273,8 +303,11 @@ public class ClientUserFragment extends Fragment implements TextView.OnEditorAct
     }
 
     private void initWidget() {
-
+        view_changepass_logout = view.findViewById(R.id.viewchangepass_logout);
+        view_changepass = view.findViewById(R.id.view_btnchangepass);
+        view_logout = view.findViewById(R.id.view_btnlogout);
         btnChangePass = view.findViewById(R.id.btnChangePass);
+        circleimg = view.findViewById(R.id.profilePic_client);
         btnLogOut = view.findViewById(R.id.btnLogout);
         btnChangeInfo = view.findViewById(R.id.btnChangeInfo);
         edtName = view.findViewById(R.id.edtNameClient);
@@ -320,5 +353,9 @@ public class ClientUserFragment extends Fragment implements TextView.OnEditorAct
                     }
                 });
     }
-}
 
+    @Override
+    public void onClick(View v) {
+        btnChangeInfo.setVisibility(View.VISIBLE);
+    }
+}

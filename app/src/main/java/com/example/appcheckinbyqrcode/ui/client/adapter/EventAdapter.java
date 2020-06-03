@@ -1,10 +1,7 @@
 package com.example.appcheckinbyqrcode.ui.client.adapter;
 
-import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,20 +14,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.appcheckinbyqrcode.R;
-import com.example.appcheckinbyqrcode.network.ApiClient;
 import com.example.appcheckinbyqrcode.network.response.EventListResponse;
 import com.example.appcheckinbyqrcode.ui.client.EventDetailActivity;
-import com.example.appcheckinbyqrcode.ui.client.model.Event;
 
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.temporal.ChronoUnit;
 import java.util.List;
-
-import io.reactivex.Observer;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.Disposable;
-import io.reactivex.schedulers.Schedulers;
 
 public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventList_holder> {
 
@@ -55,7 +42,8 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventList_ho
 
     @Override
     public void onBindViewHolder(@NonNull EventList_holder holder, int position) {
-        Glide.with(context).load(items.get(position).getAvatar()).into(holder.avatar);
+        String urls = "http://10.0.2.239:8888/sdc_event/public/" + items.get(position).getAvatar();
+        Glide.with(context).load(urls).into(holder.avatar);
         // Log.d(TAG, "onBindViewHolder: "+ items.get(position).getEventname());
         holder.name.setText(items.get(position).getName());
         holder.intro.setText(items.get(position).getIntro());
@@ -87,8 +75,9 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventList_ho
             linearLayout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Log.d(TAG, "onClick: " + getAdapterPosition());
                     Intent intent = new Intent(context, EventDetailActivity.class);
+                    int id = Integer.parseInt(items.get(getAdapterPosition()).getId());
+                    intent.putExtra("id", id);
                     context.startActivity(intent);
                 }
             });

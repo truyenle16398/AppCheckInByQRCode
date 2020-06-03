@@ -53,8 +53,8 @@ public class ItemHistoryAdapter extends RecyclerView.Adapter<ItemHistoryAdapter.
 
         public CardViewHolder(@NonNull View itemView) {
             super(itemView);
-            imageView = itemView.findViewById(R.id.imageView);
-            txtName = itemView.findViewById(R.id.txtName);
+            imageView = itemView.findViewById(R.id.eventimage_favorite);
+            txtName = itemView.findViewById(R.id.eventname_favorite);
             txtTimeCheckInOut = itemView.findViewById(R.id.txtTimeCheckInOut);
             txtEventName = itemView.findViewById(R.id.txtEventName);
 
