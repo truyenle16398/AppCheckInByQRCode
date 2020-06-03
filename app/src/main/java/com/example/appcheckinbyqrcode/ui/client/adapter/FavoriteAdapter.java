@@ -21,6 +21,7 @@ import com.example.appcheckinbyqrcode.R;
 import com.example.appcheckinbyqrcode.network.response.EventFavoriteResponse;
 import com.example.appcheckinbyqrcode.network.response.EventListResponse;
 import com.example.appcheckinbyqrcode.ui.client.EventDetailActivity;
+import com.example.appcheckinbyqrcode.ui.client.HistoryDetailActivity;
 import com.example.appcheckinbyqrcode.ui.client.fragment.FavoriteEventFragment;
 import com.example.appcheckinbyqrcode.ui.client.model.Favorite;
 import com.squareup.picasso.Picasso;
@@ -86,7 +87,7 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.Favori
                 @Override
                 public void onClick(View v) {
 //                    Toast.makeText(context, "id "+ items.get(getAdapterPosition()).getId(), Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(context, EventDetailActivity.class);
+                    Intent intent = new Intent(context, HistoryDetailActivity.class);
                     intent.putExtra("idhistory",items.get(getAdapterPosition()).getId());
                     context.startActivity(intent);
                 }
