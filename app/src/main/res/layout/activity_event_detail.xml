@@ -63,6 +63,27 @@
                                 android:textStyle="bold"
                                 android:textColor="#000"
                                 android:textSize="25dp"
+                                android:text="@string/event_chairman"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"/>
+                            <TextView
+                                android:layout_marginBottom="5dp"
+                                android:id="@+id/txtChairman"
+                                android:layout_marginTop="5dp"
+                                android:textColor="#000"
+                                android:textSize="16sp"
+                                android:text="Teacher Hoan Rose's"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"/>
+                            <TextView
+                                android:layout_marginBottom="5dp"
+                                android:drawablePadding="8dp"
+                                android:drawableLeft="@drawable/calendarbig"
+                                android:layout_marginTop="6dp"
+                                android:layout_weight="5"
+                                android:textStyle="bold"
+                                android:textColor="#000"
+                                android:textSize="25dp"
                                 android:text="@string/event_date"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"/>

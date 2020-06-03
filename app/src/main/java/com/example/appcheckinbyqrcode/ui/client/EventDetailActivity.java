@@ -24,7 +24,7 @@ import io.reactivex.schedulers.Schedulers;
 
 public class EventDetailActivity extends AppCompatActivity {
     ImageView imageDetail;
-    TextView txtNameEventDetail, txtDateTimeStart, txtDateTimeEnd, txtInfoDetail, txtAddressInfoDetail;
+    TextView txtChairman ,txtNameEventDetail, txtDateTimeStart, txtDateTimeEnd, txtInfoDetail, txtAddressInfoDetail;
     Button btnRegisterDetail;
     Toolbar toolbar;
 
@@ -66,6 +66,7 @@ public class EventDetailActivity extends AppCompatActivity {
                     public void onNext(EventDetailResponse eventDetailResponse) {
                         Glide.with(getApplicationContext()).load(eventDetailResponse.getAvatar()).into(imageDetail);
                         txtNameEventDetail.setText(eventDetailResponse.getName());
+                        txtChairman.setText(eventDetailResponse.getChairman());
                         txtDateTimeStart.setText(eventDetailResponse.getStart_time());
                         txtDateTimeEnd.setText(eventDetailResponse.getEnd_time());
                         txtInfoDetail.setText(eventDetailResponse.getDetail());
@@ -87,6 +88,7 @@ public class EventDetailActivity extends AppCompatActivity {
     private void InitWidget() {
         toolbar = findViewById(R.id.toolbarDetail);
         txtNameEventDetail = findViewById(R.id.txtNameEventDetail);
+        txtChairman = findViewById(R.id.txtChairman);
         imageDetail = findViewById(R.id.imageDetail);
         txtDateTimeStart = findViewById(R.id.txtDateTimeStart);
         txtDateTimeEnd = findViewById(R.id.txtDateTimeEnd);

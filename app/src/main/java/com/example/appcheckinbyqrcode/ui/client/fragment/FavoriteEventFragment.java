@@ -28,7 +28,6 @@ import java.util.List;
 public class FavoriteEventFragment extends Fragment {
 
     RecyclerView mRCycMs;
-    private static final int NUM_COLUMNS = 2;
     private FavoriteAdapter adapter;
     private List<Favorite> data;
     View view;
@@ -41,6 +40,12 @@ public class FavoriteEventFragment extends Fragment {
         view = inflater.inflate(R.layout.fragment_favorite_event, container, false);
         mRCycMs = view.findViewById(R.id.recyclerviewFavorite);
         data = new ArrayList<>();
+        data.add(new Favorite("name event111111111111111111","day","person","aaaa","https://xinhevent.com/wp-content/uploads/2018/08/b%C3%A0n-trang-tr%C3%AD-sinh-nh%E1%BA%ADt-tr%E1%BB%8Dn-g%C3%B3i-01-1200x800.jpg"));
+        data.add(new Favorite("name event eventname","day","person","aaaa","https://xinhevent.com/wp-content/uploads/2018/08/b%C3%A0n-trang-tr%C3%AD-sinh-nh%E1%BA%ADt-tr%E1%BB%8Dn-g%C3%B3i-01-1200x800.jpg"));
+        data.add(new Favorite("name eventeven 11111111111111","day","person","aaaa","https://xinhevent.com/wp-content/uploads/2018/08/b%C3%A0n-trang-tr%C3%AD-sinh-nh%E1%BA%ADt-tr%E1%BB%8Dn-g%C3%B3i-01-1200x800.jpg"));
+        data.add(new Favorite("name event111111111111111111","day","person","aaaa","https://xinhevent.com/wp-content/uploads/2018/08/b%C3%A0n-trang-tr%C3%AD-sinh-nh%E1%BA%ADt-tr%E1%BB%8Dn-g%C3%B3i-01-1200x800.jpg"));
+        data.add(new Favorite("name event eventname","day","person","aaaa","https://xinhevent.com/wp-content/uploads/2018/08/b%C3%A0n-trang-tr%C3%AD-sinh-nh%E1%BA%ADt-tr%E1%BB%8Dn-g%C3%B3i-01-1200x800.jpg"));
+        data.add(new Favorite("name eventeven 11111111111111","day","person","aaaa","https://xinhevent.com/wp-content/uploads/2018/08/b%C3%A0n-trang-tr%C3%AD-sinh-nh%E1%BA%ADt-tr%E1%BB%8Dn-g%C3%B3i-01-1200x800.jpg"));
         data.add(new Favorite("name event111111111111111111","day","person","aaaa","https://xinhevent.com/wp-content/uploads/2018/08/b%C3%A0n-trang-tr%C3%AD-sinh-nh%E1%BA%ADt-tr%E1%BB%8Dn-g%C3%B3i-01-1200x800.jpg"));
         data.add(new Favorite("name event eventname","day","person","aaaa","https://xinhevent.com/wp-content/uploads/2018/08/b%C3%A0n-trang-tr%C3%AD-sinh-nh%E1%BA%ADt-tr%E1%BB%8Dn-g%C3%B3i-01-1200x800.jpg"));
         data.add(new Favorite("name eventeven 11111111111111","day","person","aaaa","https://xinhevent.com/wp-content/uploads/2018/08/b%C3%A0n-trang-tr%C3%AD-sinh-nh%E1%BA%ADt-tr%E1%BB%8Dn-g%C3%B3i-01-1200x800.jpg"));

@@ -17,77 +17,57 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.appcheckinbyqrcode.R;
 import com.example.appcheckinbyqrcode.ui.client.EventDetailActivity;
-import com.example.appcheckinbyqrcode.ui.client.model.Event;
 import com.example.appcheckinbyqrcode.ui.client.model.Favorite;
-import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
-public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.ViewHolder>{
-
+public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.Favorite_holder>  {
     private static final String TAG = "nnn";
-    private List<Favorite> data;
+    private List<Favorite> items;
     private Context context;
 
 
-    public FavoriteAdapter(List<Favorite> data, Context context) {
-        this.data = data;
+    public FavoriteAdapter(List<Favorite> items, Context context) {
+        this.items = items;
         this.context = context;
     }
 
     @NonNull
     @Override
-    public FavoriteAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_event_favorite,null,false);
-        FavoriteAdapter.ViewHolder viewHolder = new FavoriteAdapter.ViewHolder(view);
-        return viewHolder;
+    public Favorite_holder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        LayoutInflater inflater = LayoutInflater.from(context);
+        View v = inflater.inflate(R.layout.item_event_favorite, parent, false);
+        Favorite_holder vholder = new Favorite_holder(v);
+        return vholder;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull FavoriteAdapter.ViewHolder holder, int position) {
-//        String urls = data.get(position).getEventimage_favorite();
-//        Log.d(TAG, "onBindViewHolder:  aaaaaaaaaaa "+ urls);
-//        Glide.with(context).load(urls).into(holder.photo);
-//        Picasso.get()
-//                .load(urls)
-//                .placeholder(R.drawable.background)
-//                .error(R.drawable.loadingkhoa)
-//                .into(holder.photo);
-        holder.name.setText(data.get(position).getEventname_favorite());
-//        holder.day.setText(data.get(position).getEventday_favorite());
-//        holder.persion.setText(data.get(position).getEventpersion_favorite());
-//        holder.check.setText(data.get(position).getEventcheck_favorite());
-
+    public void onBindViewHolder(@NonNull Favorite_holder holder, int position) {
+        String urls = items.get(position).getEventimage_favorite();
+        Glide.with(context).load(urls).into(holder.photo);
+        holder.name.setText(items.get(position).getEventname_favorite());
+        holder.day.setText(items.get(position).getEventday_favorite());
+        holder.persion.setText(items.get(position).getEventpersion_favorite());
+        holder.check.setText(items.get(position).getEventcheck_favorite());
     }
 
     @Override
     public int getItemCount() {
-        return data.size();
+        return items.size();
     }
 
-    class ViewHolder extends RecyclerView.ViewHolder{// implements View.OnClickListener
 
+    public class Favorite_holder extends RecyclerView.ViewHolder {
         public TextView name, persion, day, check;
         public ImageView photo;
-        public LinearLayout linearLayout;
-        public ViewHolder(View view) {
+
+        public Favorite_holder(@NonNull View view) {
             super(view);
             name = view.findViewById(R.id.eventname_favorite);
-//            day = view.findViewById(R.id.eventday_favorite);
-//            persion = view.findViewById(R.id.eventpersonname_favorite);
-//            check = view.findViewById(R.id.eventcheck_favorite);
-//            photo = view.findViewById(R.id.eventimage_favorite);
-//            linearLayout = view.findViewById(R.id.linner_favorite);
-//            linearLayout.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//                    Log.d(TAG, "onClick: "+ getAdapterPosition());
-//                    Toast.makeText(context, ""+getAdapterPosition(), Toast.LENGTH_SHORT).show();
-//                    Intent intent = new Intent(context, EventDetailActivity.class);
-//                    context.startActivity(intent);
-//                }
-//            });
-
+            day = view.findViewById(R.id.eventday_favorite);
+            persion = view.findViewById(R.id.eventpersonname_favorite);
+            check = view.findViewById(R.id.eventcheck_favorite);
+            photo = view.findViewById(R.id.eventimage_favorite);
         }
     }
 }

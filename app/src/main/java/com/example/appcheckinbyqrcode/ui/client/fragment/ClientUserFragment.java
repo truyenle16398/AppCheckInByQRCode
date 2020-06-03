@@ -177,12 +177,14 @@ public class ClientUserFragment extends Fragment implements TextView.OnEditorAct
 
     }
 
-    private void showDialog() {
+    public void showDialog() {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         LayoutInflater inflater = getActivity().getLayoutInflater();
         View view = inflater.inflate(R.layout.dialog_changepass, null);
         progress = (ProgressBar) view.findViewById(R.id.progress);
+        edt_OldPassword = view.findViewById(R.id.inputOldPass);
+        edt_NewPassword = view.findViewById(R.id.inputNewPass);
         builder.setView(view);
         builder.setTitle("Đổi mật khẩu mới");
         builder.setPositiveButton("Đổi", new DialogInterface.OnClickListener() {
@@ -271,8 +273,7 @@ public class ClientUserFragment extends Fragment implements TextView.OnEditorAct
     }
 
     private void initWidget() {
-        edt_OldPassword = view.findViewById(R.id.inputOldPass);
-        edt_NewPassword = view.findViewById(R.id.inputNewPass);
+
         btnChangePass = view.findViewById(R.id.btnChangePass);
         btnLogOut = view.findViewById(R.id.btnLogout);
         btnChangeInfo = view.findViewById(R.id.btnChangeInfo);
