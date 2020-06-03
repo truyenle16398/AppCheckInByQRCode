@@ -3,6 +3,7 @@ package com.example.appcheckinbyqrcode.ui.client.adapter;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -49,8 +50,8 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.Favori
     @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(@NonNull Favorite_holder holder, int position) {
-
-        String urls = "http://10.0.2.131:8888/sdc_event/public/"+ items.get(position).getAvatar();
+//        String a = Resources.getSystem().getString(R.string.base_url);
+        String urls = "http://10.0.2.239:8888/sdc_event/public/"+ items.get(position).getAvatar();
         Glide.with(context).load(urls).into(holder.photo);
         holder.name.setText(items.get(position).getName());
         holder.day.setText(items.get(position).getStartTime());
@@ -86,7 +87,7 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.Favori
                 public void onClick(View v) {
 //                    Toast.makeText(context, "id "+ items.get(getAdapterPosition()).getId(), Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(context, EventDetailActivity.class);
-                    intent.putExtra("id",items.get(getAdapterPosition()).getId());
+                    intent.putExtra("idhistory",items.get(getAdapterPosition()).getId());
                     context.startActivity(intent);
                 }
             });

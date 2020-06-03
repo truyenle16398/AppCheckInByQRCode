@@ -22,13 +22,12 @@ import com.example.appcheckinbyqrcode.network.ApiClient;
 import com.example.appcheckinbyqrcode.network.response.EventDetailResponse;
 import com.example.appcheckinbyqrcode.network.response.MessageResponse;
 
-import io.reactivex.Observable;
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 
-public class EventDetailActivity extends AppCompatActivity {
+public class HistoryDetailActivity extends AppCompatActivity {
     ImageView imageDetail;
     TextView txtNameEventDetail, txtDateTimeStart, txtDateTimeEnd, txtInfoDetail, txtAddressInfoDetail;
     Button btnRegisterDetail;
@@ -38,7 +37,8 @@ public class EventDetailActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_event_detail);
+        setContentView(R.layout.activity_history_detail);
+
         InitWidget();
         setSupportActionBar(toolbar);
         Drawable drawable = getResources().getDrawable(R.drawable.ic_arrow_while24dp);
@@ -47,7 +47,7 @@ public class EventDetailActivity extends AppCompatActivity {
         getSupportActionBar().setHomeAsUpIndicator(drawable);
 
         Intent intent = getIntent();
-        id = intent.getIntExtra("id", 0);
+        id = intent.getIntExtra("idhistory", 0);
         getdata(id);
         onclick();
     }
@@ -56,7 +56,7 @@ public class EventDetailActivity extends AppCompatActivity {
         btnRegisterDetail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ProgressDialog dialog = new ProgressDialog(EventDetailActivity.this);
+                ProgressDialog dialog = new ProgressDialog(HistoryDetailActivity.this);
                 dialog.setMessage("please wait...");
                 dialog.show();
                 ApiClient.getService().registerevent(id)
@@ -70,7 +70,7 @@ public class EventDetailActivity extends AppCompatActivity {
 
                             @Override
                             public void onNext(MessageResponse messageResponse) {
-                                Toast.makeText(EventDetailActivity.this, messageResponse.getMessage(), Toast.LENGTH_SHORT).show();
+                                Toast.makeText(HistoryDetailActivity.this, messageResponse.getMessage(), Toast.LENGTH_SHORT).show();
                             }
 
                             @Override
@@ -101,7 +101,7 @@ public class EventDetailActivity extends AppCompatActivity {
     }
 
     private void getdata(int i ) {
-        ProgressDialog dialog = new ProgressDialog(EventDetailActivity.this);
+        ProgressDialog dialog = new ProgressDialog(HistoryDetailActivity.this);
         dialog.setMessage("please wait...");
         dialog.show();
         ApiClient.getService().detailevents(i).subscribeOn(Schedulers.io())
@@ -116,7 +116,7 @@ public class EventDetailActivity extends AppCompatActivity {
                     public void onNext(EventDetailResponse eventDetailResponse) {
                         String urls = "http://10.0.2.239:8888/sdc_event/public/"+ eventDetailResponse.getAvatar();
                         Glide.with(getApplicationContext()).load(urls).into(imageDetail);
-                        txtNameEventDetail.setText(eventDetailResponse.getName());
+                        toolbar.setTitle(eventDetailResponse.getName());
                         txtDateTimeStart.setText(eventDetailResponse.getStart_time());
                         txtDateTimeEnd.setText(eventDetailResponse.getEnd_time());
                         txtInfoDetail.setText(eventDetailResponse.getDetail());
@@ -137,13 +137,13 @@ public class EventDetailActivity extends AppCompatActivity {
     }
 
     private void InitWidget() {
-        toolbar = findViewById(R.id.toolbarDetail);
-        imageDetail = findViewById(R.id.imageDetail);
-        txtDateTimeStart = findViewById(R.id.txtDateTimeStart);
-        txtDateTimeEnd = findViewById(R.id.txtDateTimeEnd);
-        txtInfoDetail = findViewById(R.id.txtInfoDetail);
-        txtAddressInfoDetail = findViewById(R.id.txtAddressInfoDetail);
-        btnRegisterDetail = findViewById(R.id.btnRegisterDetail);
+        toolbar = findViewById(R.id.toolbarDetailHistory);
+        imageDetail = findViewById(R.id.imageDetailHistory);
+        txtDateTimeStart = findViewById(R.id.txtDateTimeStartHistory);
+        txtDateTimeEnd = findViewById(R.id.txtDateTimeEndHistory);
+        txtInfoDetail = findViewById(R.id.txtInfoDetailHistory);
+        txtAddressInfoDetail = findViewById(R.id.txtAddressInfoDetailHistory);
+        btnRegisterDetail = findViewById(R.id.btnRegisterDetailHistory);
 
     }
 }
