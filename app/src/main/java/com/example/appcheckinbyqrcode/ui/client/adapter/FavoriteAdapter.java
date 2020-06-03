@@ -2,9 +2,6 @@ package com.example.appcheckinbyqrcode.ui.client.adapter;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.content.Intent;
-import android.content.res.Resources;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,10 +23,9 @@ import com.example.appcheckinbyqrcode.ui.client.HistoryDetailActivity;
 import com.example.appcheckinbyqrcode.ui.client.fragment.FavoriteEventFragment;
 import com.example.appcheckinbyqrcode.ui.client.model.Favorite;
 import com.squareup.picasso.Picasso;
-
 import java.util.List;
 
-public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.Favorite_holder>  {
+public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.Favorite_holder> {
     private static final String TAG = "nnn";
     private List<EventFavoriteResponse> items;
     private Context context;
@@ -59,7 +55,7 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.Favori
         holder.name.setText(items.get(position).getName());
         holder.day.setText(items.get(position).getStartTime());
         holder.persion.setText(items.get(position).getEndTime());
-        if (items.get(position).getStatus()==0){
+        if (items.get(position).getStatus() == 0) {
             holder.check.setText("Đã đăng ký");
         } else {
             holder.check.setText("Đã hủy");
