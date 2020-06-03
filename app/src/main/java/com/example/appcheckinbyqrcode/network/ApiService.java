@@ -30,7 +30,7 @@ public interface ApiService {
     Observable<MessageResponse> logout();
 
     //xac nhan email de lay lai mat khau
-    @POST("create")//forgot-password
+    @POST("forgot_password")//forgot-password
     @FormUrlEncoded
     Observable<MessageResponse> forgetPass(@Field("email") String email);
 
@@ -81,6 +81,10 @@ public interface ApiService {
     //đăng kí sự kiện
     @POST("register_event/{id}")
     Observable<MessageResponse> registerevent(@Path("id") int id);
+
+    //Hủy sự kiện
+    @PUT("cancel_event/{id}")
+    Observable<MessageResponse> cancelevent(@Path("id") int id);
 
 
 

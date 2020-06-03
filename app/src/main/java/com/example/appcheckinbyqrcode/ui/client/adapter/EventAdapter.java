@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.appcheckinbyqrcode.R;
 import com.example.appcheckinbyqrcode.network.response.EventListResponse;
+import com.example.appcheckinbyqrcode.network.url;
 import com.example.appcheckinbyqrcode.ui.client.EventDetailActivity;
 
 import java.util.List;
@@ -42,8 +43,9 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventList_ho
 
     @Override
     public void onBindViewHolder(@NonNull EventList_holder holder, int position) {
-        String urls = "http://10.0.2.239:8888/sdc_event/public/" + items.get(position).getAvatar();
+        String urls = url.getUrlimg()+ items.get(position).getImage();
         Glide.with(context).load(urls).into(holder.avatar);
+        Log.d(TAG, "tuoi: "+ urls);
         // Log.d(TAG, "onBindViewHolder: "+ items.get(position).getEventname());
         holder.name.setText(items.get(position).getName());
         holder.intro.setText(items.get(position).getIntro());

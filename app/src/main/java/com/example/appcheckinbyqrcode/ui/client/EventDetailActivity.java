@@ -21,6 +21,7 @@ import com.example.appcheckinbyqrcode.R;
 import com.example.appcheckinbyqrcode.network.ApiClient;
 import com.example.appcheckinbyqrcode.network.response.EventDetailResponse;
 import com.example.appcheckinbyqrcode.network.response.MessageResponse;
+import com.example.appcheckinbyqrcode.network.url;
 
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -113,7 +114,7 @@ public class EventDetailActivity extends AppCompatActivity {
 
                     @Override
                     public void onNext(EventDetailResponse eventDetailResponse) {
-                        String urls = "http://10.0.2.239:8888/sdc_event/public/" + eventDetailResponse.getAvatar();
+                        String urls = url.getUrlimg()+ eventDetailResponse.getImage();
                         Glide.with(getApplicationContext()).load(urls).into(imageDetail);
                         toolbar.setTitle(eventDetailResponse.getName());
                         txtDateTimeStart.setText(eventDetailResponse.getStart_time());

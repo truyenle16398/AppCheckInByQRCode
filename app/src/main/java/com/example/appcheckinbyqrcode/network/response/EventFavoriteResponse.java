@@ -34,8 +34,11 @@ public class EventFavoriteResponse {
     @SerializedName("end_time")
     @Expose
     private String endTime;
-    @SerializedName("avatar")
+    @SerializedName("image")
     @Expose
-    private String avatar;
+    private String image;
+    @SerializedName("event_id")
+    @Expose
+    private Integer eventId;
 
 }

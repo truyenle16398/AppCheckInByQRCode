@@ -53,9 +53,9 @@ public class EventDetailResponse {
     @Expose
     private String updated_at;
 
-    @SerializedName("avatar")
+    @SerializedName("image")
     @Expose
-    private String avatar;
+    private String image;
 
     @SerializedName("place")
     @Expose

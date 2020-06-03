@@ -125,7 +125,7 @@
                         android:id="@+id/btnRegisterDetailHistory"
                         android:layout_width="match_parent"
                         android:layout_height="?actionBarSize"
-                        android:text="@string/text_button_register"
+                        android:text="@string/h_y_s_ki_n"
                         android:textSize="22sp" />
                 </LinearLayout>
             </ScrollView>
