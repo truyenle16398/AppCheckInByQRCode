@@ -1,9 +1,5 @@
 package com.example.appcheckinbyqrcode.ui.client;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
@@ -15,6 +11,10 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import com.bumptech.glide.Glide;
 import com.example.appcheckinbyqrcode.R;
@@ -75,7 +75,7 @@ public class HistoryDetailActivity extends AppCompatActivity {
 
                             @Override
                             public void onError(Throwable e) {
-                                Log.d("nnn", "onError: "+e.getMessage());
+                                Log.d("nnn", "onError: " + e.getMessage());
                             }
 
                             @Override
@@ -100,7 +100,7 @@ public class HistoryDetailActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private void getdata(int i ) {
+    private void getdata(int i) {
         ProgressDialog dialog = new ProgressDialog(HistoryDetailActivity.this);
         dialog.setMessage("please wait...");
         dialog.show();
@@ -114,7 +114,7 @@ public class HistoryDetailActivity extends AppCompatActivity {
 
                     @Override
                     public void onNext(EventDetailResponse eventDetailResponse) {
-                        String urls = "http://10.0.2.239:8888/sdc_event/public/"+ eventDetailResponse.getAvatar();
+                        String urls = "http://10.0.2.239:8888/sdc_event/public/" + eventDetailResponse.getAvatar();
                         Glide.with(getApplicationContext()).load(urls).into(imageDetail);
                         toolbar.setTitle(eventDetailResponse.getName());
                         txtDateTimeStart.setText(eventDetailResponse.getStart_time());

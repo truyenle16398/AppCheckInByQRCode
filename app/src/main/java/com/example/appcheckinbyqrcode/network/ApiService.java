@@ -24,6 +24,7 @@ public interface ApiService {
     @POST("login")
     Observable<User> loginnew(@Query("email") String email,
                               @Query("password") String password);
+
     //logout
     @GET("logout")
     Observable<MessageResponse> logout();
@@ -36,9 +37,9 @@ public interface ApiService {
     //reset pass
     @POST("reset")
     Observable<MessageResponse> resetPass(@Query("email") String email,
-                                            @Query("password") String password,
-                                            @Query("password_confirmation") String password_confirmation,
-                                            @Query("token") String token);
+                                          @Query("password") String password,
+                                          @Query("password_confirmation") String password_confirmation,
+                                          @Query("token") String token);
 
     //dang ky
     @POST("register")
@@ -64,6 +65,7 @@ public interface ApiService {
     @PUT("update_pass")
     Observable<MessageResponse> updatepass(@Query("old_pass") String oldpass,
                                            @Query("new_pass") String newpass);
+
     //show danh sach su kien
     @GET("event/list")
     Observable<List<EventListResponse>> listlevents();

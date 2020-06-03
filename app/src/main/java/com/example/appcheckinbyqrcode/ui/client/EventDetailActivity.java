@@ -1,9 +1,5 @@
 package com.example.appcheckinbyqrcode.ui.client;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
@@ -16,13 +12,16 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+
 import com.bumptech.glide.Glide;
 import com.example.appcheckinbyqrcode.R;
 import com.example.appcheckinbyqrcode.network.ApiClient;
 import com.example.appcheckinbyqrcode.network.response.EventDetailResponse;
 import com.example.appcheckinbyqrcode.network.response.MessageResponse;
 
-import io.reactivex.Observable;
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
@@ -43,7 +42,7 @@ public class EventDetailActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         Drawable drawable = getResources().getDrawable(R.drawable.ic_arrow_while24dp);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-//        getSupportActionBar().setDisplayShowHomeEnabled(true);
+// getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setHomeAsUpIndicator(drawable);
 
         Intent intent = getIntent();
@@ -75,7 +74,7 @@ public class EventDetailActivity extends AppCompatActivity {
 
                             @Override
                             public void onError(Throwable e) {
-                                Log.d("nnn", "onError: "+e.getMessage());
+                                Log.d("nnn", "onError: " + e.getMessage());
                             }
 
                             @Override
@@ -100,7 +99,7 @@ public class EventDetailActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private void getdata(int i ) {
+    private void getdata(int i) {
         ProgressDialog dialog = new ProgressDialog(EventDetailActivity.this);
         dialog.setMessage("please wait...");
         dialog.show();
@@ -114,7 +113,7 @@ public class EventDetailActivity extends AppCompatActivity {
 
                     @Override
                     public void onNext(EventDetailResponse eventDetailResponse) {
-                        String urls = "http://10.0.2.239:8888/sdc_event/public/"+ eventDetailResponse.getAvatar();
+                        String urls = "http://10.0.2.239:8888/sdc_event/public/" + eventDetailResponse.getAvatar();
                         Glide.with(getApplicationContext()).load(urls).into(imageDetail);
                         toolbar.setTitle(eventDetailResponse.getName());
                         txtDateTimeStart.setText(eventDetailResponse.getStart_time());

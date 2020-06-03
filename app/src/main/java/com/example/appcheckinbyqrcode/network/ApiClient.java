@@ -1,9 +1,6 @@
 package com.example.appcheckinbyqrcode.network;
 
-import android.content.res.Resources;
-
 import com.example.appcheckinbyqrcode.BuildConfig;
-import com.example.appcheckinbyqrcode.R;
 import com.example.appcheckinbyqrcode.network.core.BooleanAdapter;
 import com.example.appcheckinbyqrcode.network.core.DoubleAdapter;
 import com.example.appcheckinbyqrcode.network.core.ForbiddenInterceptor;

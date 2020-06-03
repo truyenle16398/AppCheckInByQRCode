@@ -2,15 +2,14 @@ package com.example.appcheckinbyqrcode.ui.client.fragment;
 
 import android.app.ProgressDialog;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.appcheckinbyqrcode.R;
 import com.example.appcheckinbyqrcode.network.ApiClient;
@@ -35,9 +34,11 @@ public class FavoriteEventFragment extends Fragment {
     private FavoriteAdapter adapter;
     private List<Favorite> data;
     View view;
+
     public FavoriteEventFragment() {
-        // Required empty public constructor
+// Required empty public constructor
     }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -45,7 +46,7 @@ public class FavoriteEventFragment extends Fragment {
         InitWidget();
         getData();
 
-//        data.add(new Favorite("name event111111111111111111","day","person","aaaa","https://xinhevent.com/wp-content/uploads/2018/08/b%C3%A0n-trang-tr%C3%AD-sinh-nh%E1%BA%ADt-tr%E1%BB%8Dn-g%C3%B3i-01-1200x800.jpg"));
+// data.add(new Favorite("name event111111111111111111","day","person","aaaa","https://xinhevent.com/wp-content/uploads/2018/08/b%C3%A0n-trang-tr%C3%AD-sinh-nh%E1%BA%ADt-tr%E1%BB%8Dn-g%C3%B3i-01-1200x800.jpg"));
         return view;
     }
 
@@ -60,11 +61,12 @@ public class FavoriteEventFragment extends Fragment {
                     public void onSubscribe(Disposable d) {
 
                     }
+
                     @Override
                     public void onNext(List<EventFavoriteResponse> eventFavoriteResponses) {
-                        Log.d("nnn", "onNext: "+eventFavoriteResponses.toString());
+                        Log.d("nnn", "onNext: " + eventFavoriteResponses.toString());
                         ArrayList<EventFavoriteResponse> arrayList = (ArrayList<EventFavoriteResponse>) eventFavoriteResponses;
-//                        Log.d("nnn", "onNext: "+arrayList.get(0).getStatus());
+// Log.d("nnn", "onNext: "+arrayList.get(0).getStatus());
 
                         adapter = new FavoriteAdapter(arrayList, getActivity());
                         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
@@ -75,7 +77,7 @@ public class FavoriteEventFragment extends Fragment {
 
                     @Override
                     public void onError(Throwable e) {
-                        Log.d("nnn", "onError: "+e.getMessage());
+                        Log.d("nnn", "onError: " + e.getMessage());
                         dialog.dismiss();
                     }
 
