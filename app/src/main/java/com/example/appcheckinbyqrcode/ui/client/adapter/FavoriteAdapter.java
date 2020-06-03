@@ -2,13 +2,13 @@ package com.example.appcheckinbyqrcode.ui.client.adapter;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -16,13 +16,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.appcheckinbyqrcode.R;
 import com.example.appcheckinbyqrcode.network.response.EventFavoriteResponse;
-import com.example.appcheckinbyqrcode.network.response.EventListResponse;
 import com.example.appcheckinbyqrcode.network.url;
-import com.example.appcheckinbyqrcode.ui.client.EventDetailActivity;
 import com.example.appcheckinbyqrcode.ui.client.HistoryDetailActivity;
-import com.example.appcheckinbyqrcode.ui.client.fragment.FavoriteEventFragment;
-import com.example.appcheckinbyqrcode.ui.client.model.Favorite;
-import com.squareup.picasso.Picasso;
 import java.util.List;
 
 public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.Favorite_holder> {
@@ -50,7 +45,6 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.Favori
     public void onBindViewHolder(@NonNull Favorite_holder holder, int position) {
 //        String a = Resources.getSystem().getString(R.string.base_url);
         String urls = url.getUrlimg()+ items.get(position).getImage();
-        Log.d(TAG, "ttttt: "+ urls);
         Glide.with(context).load(urls).into(holder.photo);
         holder.name.setText(items.get(position).getName());
         holder.day.setText(items.get(position).getStartTime());
