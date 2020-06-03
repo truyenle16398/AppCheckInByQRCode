@@ -68,12 +68,18 @@ public interface ApiService {
     @GET("event/list")
     Observable<List<EventListResponse>> listlevents();
 
+    // show lịch sử đăng ký sự kiện
     @GET("history_regis")
     Observable<List<EventFavoriteResponse>> listhistoryregis();
 
     //show chi tiet danh sach su kien
     @GET("event/detail/{id}")
     Observable<EventDetailResponse> detailevents(@Path("id") int id);
+
+    //đăng kí sự kiện
+    @POST("register_event/{id}")
+    Observable<MessageResponse> registerevent(@Path("id") int id);
+
 
 
 }

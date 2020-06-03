@@ -1,6 +1,9 @@
 package com.example.appcheckinbyqrcode.network;
 
+import android.content.res.Resources;
+
 import com.example.appcheckinbyqrcode.BuildConfig;
+import com.example.appcheckinbyqrcode.R;
 import com.example.appcheckinbyqrcode.network.core.BooleanAdapter;
 import com.example.appcheckinbyqrcode.network.core.DoubleAdapter;
 import com.example.appcheckinbyqrcode.network.core.ForbiddenInterceptor;
@@ -62,6 +65,7 @@ public class ApiClient {
      */
     @SuppressWarnings("unused")
     public void init(ApiConfig config) {
+//        String a = Resources.getSystem().getString(R.string.base_url);
         // Author
         final String auth;
         auth = AUTHORIZATION_TYPE + config.getAuth();
@@ -114,8 +118,9 @@ public class ApiClient {
             }
         });
 
+//        String mystring = getResources().getString(R.string.mystring);
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://10.0.2.131:8888/sdc_event/public/api/")
+                .baseUrl("http://10.0.2.239:8888/sdc_event/public/api/")
                 .client(okHttpBuilder.build())
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
