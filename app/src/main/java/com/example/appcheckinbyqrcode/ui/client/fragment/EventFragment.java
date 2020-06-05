@@ -6,6 +6,7 @@ import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -32,6 +33,7 @@ import io.reactivex.schedulers.Schedulers;
  */
 public class EventFragment extends Fragment {
 
+    SwipeRefreshLayout swipeRefreshLayout;
     RecyclerView mRCycMs;
     private static final int NUM_COLUMNS = 2;
     private EventAdapter adapter;
@@ -100,5 +102,13 @@ public class EventFragment extends Fragment {
         mRCycMs = view.findViewById(R.id.recyclerviewEvent);
         mRCycMs.setLayoutManager(new LinearLayoutManager(getContext()));
         tvthongbao = view.findViewById(R.id.tvthongbao_event);
+        swipeRefreshLayout = view.findViewById(R.id.swipeRefreshLayoutevent);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                getdata();
+                swipeRefreshLayout.setRefreshing(false);
+            }
+        });
     }
 }
