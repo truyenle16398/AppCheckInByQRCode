@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     android:background="#FFFFFF"
     tools:context=".ui.client.fragment.FavoriteEventFragment">
-
     <TextView
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
@@ -19,10 +18,14 @@
         android:text="Bạn không có sự kiện nào đang diễn ra"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
-    <androidx.recyclerview.widget.RecyclerView
-        android:layout_marginTop="7dp"
-        android:id="@+id/recyclerviewFavorite"
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipeRefreshLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
-
+        android:layout_height="match_parent">
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_marginTop="7dp"
+            android:id="@+id/recyclerviewFavorite"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 </LinearLayout>

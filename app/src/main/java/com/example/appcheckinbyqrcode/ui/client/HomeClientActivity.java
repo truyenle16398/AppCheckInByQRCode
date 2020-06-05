@@ -12,7 +12,7 @@ import com.example.appcheckinbyqrcode.ui.client.adapter.ClientPagerAdapter;
 import com.google.android.material.tabs.TabItem;
 import com.google.android.material.tabs.TabLayout;
 
-public class HomeClientActivity extends AppCompatActivity {
+public class HomeClientActivity extends AppCompatActivity implements OnIntent {
     DrawerLayout drawerLayout;
     ViewPager pager;
     TabLayout mTabLayout;
@@ -57,4 +57,8 @@ public class HomeClientActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    public void intents() {
+        pager.setCurrentItem(1);
+    }
 }

@@ -15,6 +15,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.Fragment;
 
 import com.bumptech.glide.Glide;
 import com.example.appcheckinbyqrcode.R;
@@ -28,17 +29,19 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 
-public class EventDetailActivity extends AppCompatActivity {
+public class EventDetailActivity extends AppCompatActivity  {
     ImageView imageDetail;
     TextView txtNameEventDetail, txtDateTimeStart, txtDateTimeEnd, txtInfoDetail, txtAddressInfoDetail;
     Button btnRegisterDetail;
     Toolbar toolbar;
     private int id;
+     private OnIntent home ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_event_detail);
+//         home =  (OnIntent) EventDetailActivity.this.getBaseContext();
         InitWidget();
         setSupportActionBar(toolbar);
         Drawable drawable = getResources().getDrawable(R.drawable.ic_arrow_while24dp);
@@ -51,6 +54,7 @@ public class EventDetailActivity extends AppCompatActivity {
         getdata(id);
         onclick();
     }
+
 
     private void onclick() {
         btnRegisterDetail.setOnClickListener(new View.OnClickListener() {
@@ -80,7 +84,11 @@ public class EventDetailActivity extends AppCompatActivity {
 
                             @Override
                             public void onComplete() {
+                                finish();
                                 dialog.dismiss();
+                                if (home!=null){;
+                                      home.intents();
+                                }
                             }
                         });
 
@@ -146,4 +154,6 @@ public class EventDetailActivity extends AppCompatActivity {
         btnRegisterDetail = findViewById(R.id.btnRegisterDetail);
 
     }
+
+
 }
