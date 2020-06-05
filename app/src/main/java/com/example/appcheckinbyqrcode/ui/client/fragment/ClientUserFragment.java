@@ -138,7 +138,6 @@ public class ClientUserFragment extends Fragment implements TextView.OnEditorAct
     }
 
     private void onclick() {
-
         // Xu ly buton change pass and log out
         tvmyprofile.setOnClickListener(new View.OnClickListener() {
             @Override

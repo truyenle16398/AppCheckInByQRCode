@@ -7,7 +7,10 @@
     android:background="@drawable/background"
     android:orientation="vertical"
     tools:context=".ui.admin.fragment.AdminUserFragment">
-
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipeRefreshLayoutadminUser"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -18,14 +21,33 @@
             android:gravity="center|top"
             android:orientation="vertical">
 
-            <Button
-                android:id="@+id/btnLogout"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="top|right"
-                android:text="Logout" />
+            <LinearLayout
+                android:layout_marginRight="15dp"
+                android:layout_marginLeft="15dp"
+                android:weightSum="2"
+                android:visibility="visible"
+                android:id="@+id/viewchangepass_logout"
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <Button
+                    android:visibility="invisible"
+                    android:layout_weight="1"
+                    android:layout_marginLeft="5dp"
+                    android:id="@+id/btnLogoutadmin"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:background="@drawable/ripple_effect"
+                    android:text="Logout"
+                    android:textColor="#FFFFFF"
+                    android:textSize="18sp" />
+            </LinearLayout>
 
             <TextView
+                android:id="@+id/myprofileadmin"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="40dp"
@@ -36,7 +58,7 @@
                 android:textStyle="bold" />
 
             <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/profilePic"
+                android:id="@+id/profilePicadmin"
                 android:layout_width="200dp"
                 android:layout_height="200dp"
                 android:layout_marginTop="20dp"
@@ -82,6 +104,8 @@
                         android:textSize="20dp" />
 
                     <EditText
+                        android:enabled="false"
+                        android:id="@+id/nameadmin"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginRight="20dp"
@@ -107,6 +131,8 @@
                         android:textSize="20dp" />
 
                     <EditText
+                        android:enabled="false"
+                        android:id="@+id/emailadmin"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginRight="20dp"
@@ -134,6 +160,8 @@
                         android:textSize="20dp" />
 
                     <EditText
+                        android:enabled="false"
+                        android:id="@+id/phoneadmin"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginRight="20dp"
@@ -161,6 +189,8 @@
                         android:textSize="20dp" />
 
                     <EditText
+                        android:enabled="false"
+                        android:id="@+id/addressadmin"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginRight="20dp"
@@ -176,5 +206,5 @@
             </LinearLayout>
         </LinearLayout>
     </ScrollView>
-
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 </LinearLayout>

@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.util.Log;
 import android.view.ContextThemeWrapper;
@@ -17,29 +18,33 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.appcheckinbyqrcode.R;
 import com.example.appcheckinbyqrcode.SessionManager;
 import com.example.appcheckinbyqrcode.network.ApiClient;
 import com.example.appcheckinbyqrcode.network.response.MessageResponse;
+import com.example.appcheckinbyqrcode.network.response.UserResponse;
+import com.example.appcheckinbyqrcode.network.url;
 import com.example.appcheckinbyqrcode.ui.admin.fragment.AdminUserFragment;
 import com.example.appcheckinbyqrcode.ui.login.LoginActivity;
 import com.google.android.gms.common.api.Api;
 
+import de.hdodenhof.circleimageview.CircleImageView;
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 
-
-/**
- * A simple {@link Fragment} subclass.
- */
 public class AdminUserFragment extends Fragment {
+
+    SwipeRefreshLayout refreshLayout;
     private Button BtnLogOut;
-    private EditText oldPass, newPass;
+    private EditText oldPass, newPass, edtName,edtEmail,edtPhone,edtAddress;
     private AlertDialog dialog;
     private TextView tv_mess;
     private View view;
+    CircleImageView circleImageView;
 
     public AdminUserFragment() {
         // Required empty public constructor
@@ -49,8 +54,56 @@ public class AdminUserFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_user_admin, container, false);
-        BtnLogOut = view.findViewById(R.id.btnLogout);
+        view = inflater.inflate(R.layout.fragment_user_admin, container, false);
+        InitWidget();
+        getinfo();
+        onclick();
+        return view;
+    }
+
+    private void getinfo() {
+        ApiClient.getService().showinfo()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<UserResponse>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(UserResponse userResponse) {
+                        String name = userResponse.getName();
+                        String email = userResponse.getEmail();
+                        String phone = userResponse.getPhone();
+                        String address = userResponse.getAddress();
+                        String urls = url.getUrlimg()+ userResponse.getAvatar();
+                        Log.d("nnn", "onNext: "+ userResponse.toString());
+//                        edtName.setText(name);
+//                        edtEmail.setText(email);
+//                        edtPhone.setText(phone);
+//                        edtAddress.setText(address);
+////                        Picasso.get().load(urls).into(circleimg);
+//                        Glide.with(getActivity())
+//                                .load(urls)
+//                                .diskCacheStrategy(DiskCacheStrategy.NONE)
+//                                .skipMemoryCache(true)
+//                                .into(circleImageView);
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        Log.d("nnn", "onError: " + e.getMessage());
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+    }
+
+    private void onclick() {
         BtnLogOut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -63,7 +116,21 @@ public class AdminUserFragment extends Fragment {
                         }).setIcon(android.R.drawable.ic_dialog_info).show();
             }
         });
-        return view;
+    }
+
+    private void InitWidget() {
+        edtName = view.findViewById(R.id.nameadmin);
+        edtEmail = view.findViewById(R.id.emailadmin);
+        edtPhone = view.findViewById(R.id.phoneadmin);
+        edtAddress = view.findViewById(R.id.addressadmin);
+        BtnLogOut = view.findViewById(R.id.btnLogoutadmin);
+        refreshLayout = view.findViewById(R.id.swipeRefreshLayoutadminUser);
+        refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                refreshLayout.setRefreshing(false);
+            }
+        });
     }
 
     private void logout() {
@@ -102,27 +169,6 @@ public class AdminUserFragment extends Fragment {
 
                     }
                 });
-    }
-
-    public static class HistoryCheckInFragment extends Fragment {
-
-        public HistoryCheckInFragment() {
-            // Required empty public constructor
-        }
-
-        @Override
-        public void onCreate(Bundle savedInstanceState) {
-            super.onCreate(savedInstanceState);
-
-        }
-
-        @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                                 Bundle savedInstanceState) {
-            // Inflate the layout for this fragment
-            View view = inflater.inflate(R.layout.fragment_user_admin, container, false);
-            return view;
-        }
     }
 
 }

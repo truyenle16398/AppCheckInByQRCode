@@ -44,7 +44,7 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.Favori
     @Override
     public void onBindViewHolder(@NonNull Favorite_holder holder, int position) {
 //        String a = Resources.getSystem().getString(R.string.base_url);
-        String urls = url.getUrlimg()+ items.get(position).getImage();
+        String urls = url.getUrlimgevent()+ items.get(position).getImage();
         Glide.with(context).load(urls).into(holder.photo);
         holder.name.setText(items.get(position).getName());
         holder.day.setText(items.get(position).getStartTime());

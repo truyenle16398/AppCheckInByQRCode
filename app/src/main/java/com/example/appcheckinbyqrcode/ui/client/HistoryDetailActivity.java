@@ -134,7 +134,7 @@ public class HistoryDetailActivity extends AppCompatActivity {
 
                     @Override
                     public void onNext(EventDetailResponse eventDetailResponse) {
-                        String urls = url.getUrlimg()+ eventDetailResponse.getImage();
+                        String urls = url.getUrlimgevent()+ eventDetailResponse.getImage();
                         Glide.with(getApplicationContext()).load(urls).into(imageDetail);
                         toolbar.setTitle(eventDetailResponse.getName());
                         txtDateTimeStart.setText(eventDetailResponse.getStart_time());
