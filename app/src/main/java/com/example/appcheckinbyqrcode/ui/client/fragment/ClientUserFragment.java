@@ -27,6 +27,7 @@ import android.widget.Toast;
 import androidx.core.graphics.drawable.RoundedBitmapDrawable;
 import androidx.core.graphics.drawable.RoundedBitmapDrawableFactory;
 import androidx.fragment.app.Fragment;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
@@ -54,6 +55,7 @@ import io.reactivex.schedulers.Schedulers;
  */
 public class ClientUserFragment extends Fragment implements TextView.OnEditorActionListener, EditText.OnClickListener {
     private static final String TAG = "nnn";
+    SwipeRefreshLayout swipeRefreshLayout;
     TextView tvmyprofile;
     Button btnChangePass, btnLogOut, btnChangeInfo;
     EditText edtName, edtEmail, edtPhone, edtAddress, edt_OldPassword, edt_NewPassword;
@@ -101,7 +103,12 @@ public class ClientUserFragment extends Fragment implements TextView.OnEditorAct
                         edtPhone.setText(phone);
                         edtAddress.setText(address);
                         Log.d(TAG, "onNext: "+ urls);
-                        Picasso.get().load(urls).into(circleimg);
+//                        Picasso.get().load(urls).into(circleimg);
+                        Glide.with(getActivity())
+                                .load(urls)
+                                .diskCacheStrategy(DiskCacheStrategy.NONE)
+                                .skipMemoryCache(true)
+                                .into(circleimg);
                     }
 
                     @Override
@@ -333,6 +340,14 @@ public class ClientUserFragment extends Fragment implements TextView.OnEditorAct
         edtPhone = view.findViewById(R.id.edtPhoneClient);
         edtAddress = view.findViewById(R.id.edtAddressClient);
         tvmyprofile = view.findViewById(R.id.tvmyprofile);
+        swipeRefreshLayout = view.findViewById(R.id.swipeRefreshLayoutuser);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                getinfo();
+                swipeRefreshLayout.setRefreshing(false);
+            }
+        });
     }
 
     private void logout() {
