@@ -4,17 +4,21 @@ import com.example.appcheckinbyqrcode.network.response.EventDetailResponse;
 import com.example.appcheckinbyqrcode.network.response.EventFavoriteResponse;
 import com.example.appcheckinbyqrcode.network.response.EventListResponse;
 import com.example.appcheckinbyqrcode.network.response.MessageResponse;
+import com.example.appcheckinbyqrcode.network.response.UploadAvatarResponse;
 import com.example.appcheckinbyqrcode.network.response.UserResponse;
 import com.example.appcheckinbyqrcode.ui.model.User;
 
 import java.util.List;
 
 import io.reactivex.Observable;
+import okhttp3.MultipartBody;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
+import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
+import retrofit2.http.Part;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 
@@ -54,12 +58,31 @@ public interface ApiService {
     @GET("user")
     Observable<UserResponse> showinfo();
 
+
     //reset pass
     @PUT("update_info")
     Observable<UserResponse> updateinfo(@Query("name") String name,
                                         @Query("email") String email,
                                         @Query("phone") String phone,
                                         @Query("address") String address);
+
+    //reset AVATER
+//    @POST("UploadAvatar")
+//    Observable<UploadAvatarResponse> updateAvatar(@Query("name") String name,
+//                                                  @Query("email") String email,
+//                                                  @Query("phone") String phone,
+//                                                  @Query("address") String address,
+//                                                  @Query("avatar") String avatar,
+//                                                  @Query("role_id") String role_id,
+//                                                  @Query("status") String status,
+//                                                  @Query("created_at") String created_at,
+//                                                  @Query("updated_at") String updated_at);
+
+    @Multipart
+    @POST("UploadAvatar")
+    Observable<UploadAvatarResponse> updateAvatar(@Part MultipartBody.Part file);
+
+
 
     //doi mat khau
     @PUT("update_pass")

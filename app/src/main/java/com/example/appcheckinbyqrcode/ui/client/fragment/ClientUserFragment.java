@@ -6,7 +6,9 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.transition.Slide;
 import android.transition.TransitionManager;
 import android.util.Log;
@@ -38,17 +40,26 @@ import com.example.appcheckinbyqrcode.R;
 import com.example.appcheckinbyqrcode.SessionManager;
 import com.example.appcheckinbyqrcode.network.ApiClient;
 import com.example.appcheckinbyqrcode.network.response.MessageResponse;
+import com.example.appcheckinbyqrcode.network.response.UploadAvatarResponse;
 import com.example.appcheckinbyqrcode.network.response.UserResponse;
 import com.example.appcheckinbyqrcode.network.url;
 import com.example.appcheckinbyqrcode.ui.login.LoginActivity;
 import com.example.appcheckinbyqrcode.ui.model.GlideCircleTransformation;
 import com.squareup.picasso.Picasso;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+
 import de.hdodenhof.circleimageview.CircleImageView;
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
+
+import static android.app.Activity.RESULT_OK;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -57,7 +68,7 @@ public class ClientUserFragment extends Fragment implements TextView.OnEditorAct
     private static final String TAG = "nnn";
     SwipeRefreshLayout swipeRefreshLayout;
     TextView tvmyprofile;
-    Button btnChangePass, btnLogOut, btnChangeInfo;
+    Button btnChangePass, btnLogOut, btnChangeInfo, btnChangeAvatar;
     EditText edtName, edtEmail, edtPhone, edtAddress, edt_OldPassword, edt_NewPassword;
     String name, email, phone, address;
     CircleImageView circleimg;
@@ -65,6 +76,9 @@ public class ClientUserFragment extends Fragment implements TextView.OnEditorAct
     private View view;
     private AlertDialog dialog;
     private ProgressBar progress;
+    private RequestBody fbody;
+    private static final int PICK_IMAGE = 100;
+    Uri imageUri;
 
     public ClientUserFragment() {
 // Required empty public constructor
@@ -230,6 +244,85 @@ public class ClientUserFragment extends Fragment implements TextView.OnEditorAct
                 }
             }
         });
+//        circleimg.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                openGallery();
+//            }
+//        });
+        btnChangeAvatar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.setType("image/*");
+                intent.setAction(Intent.ACTION_GET_CONTENT);
+                startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE);
+
+            }
+        });
+
+    }
+
+//    private void openGallery() {
+//        Intent gallery = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);
+//        startActivityForResult(gallery, PICK_IMAGE);
+//    }
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data){
+        super.onActivityResult(requestCode, resultCode, data);
+//        if (resultCode == RESULT_OK && requestCode == PICK_IMAGE){
+//            imageUri = data.getData();
+//            Log.d("nnn","log" +data.getData().getPath());
+//            circleimg.setImageURI(imageUri);
+//        }
+
+        if (data != null && data.getData() != null) {
+            circleimg.setImageURI(data.getData());
+            try {
+                Bitmap bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), data.getData());
+                ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                bitmap.compress(Bitmap.CompressFormat.PNG, 50, stream);
+                byte[] byteArray = stream.toByteArray();
+                bitmap.recycle();
+                //Log.v("Avatar Path", file.getAbsolutePath());
+                fbody = RequestBody.create(MediaType.parse("image/png"), byteArray);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+        }
+
+    }
+
+
+
+    //update avatar
+    private void upDateUserAvatar() {
+//        showProgressDialog();
+        MultipartBody.Part body =
+                MultipartBody.Part.createFormData("image", "avatar.png", fbody);
+        ApiClient.getService().updateAvatar(body)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<UploadAvatarResponse>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+                    }
+
+                    @Override
+                    public void onNext(UploadAvatarResponse uploadAvatarResponse) {
+                    }
+
+
+                    @Override
+                    public void onError(Throwable e) {
+                        Log.d("BBB", "onError: " + e.getMessage());
+                    }
+
+                    @Override
+                    public void onComplete() {
+                    }
+                });
 
     }
 
@@ -333,6 +426,7 @@ public class ClientUserFragment extends Fragment implements TextView.OnEditorAct
         view_logout = view.findViewById(R.id.view_btnlogout);
         btnChangePass = view.findViewById(R.id.btnChangePass);
         circleimg = view.findViewById(R.id.profilePic_client);
+        btnChangeAvatar = view.findViewById(R.id.btnChangeAvatar);
         btnLogOut = view.findViewById(R.id.btnLogout);
         btnChangeInfo = view.findViewById(R.id.btnChangeInfo);
         edtName = view.findViewById(R.id.edtNameClient);
