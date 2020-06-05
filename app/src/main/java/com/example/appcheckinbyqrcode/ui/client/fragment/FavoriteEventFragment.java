@@ -35,7 +35,7 @@ import io.reactivex.schedulers.Schedulers;
  */
 public class FavoriteEventFragment extends Fragment {
 
-//    private static final int RESULT_OK = 1;
+    ProgressDialog dialog;
     SwipeRefreshLayout refreshLayout;
     RecyclerView mRCycMs;
     private FavoriteAdapter adapter;
@@ -63,9 +63,10 @@ public class FavoriteEventFragment extends Fragment {
 //        }
 //    }
 
+
     public void getData() {
-        ProgressDialog dialog = new ProgressDialog(getActivity());
-        dialog.setMessage("please wait...");
+        dialog = new ProgressDialog(getActivity());
+        dialog.setMessage("loading...");
         dialog.show();
         ApiClient.getService().listhistoryregis().subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

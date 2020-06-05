@@ -5,6 +5,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.transition.Slide;
 import android.transition.TransitionManager;
@@ -18,18 +19,29 @@ import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.core.graphics.drawable.RoundedBitmapDrawable;
+import androidx.core.graphics.drawable.RoundedBitmapDrawableFactory;
 import androidx.fragment.app.Fragment;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.target.BitmapImageViewTarget;
+import com.bumptech.glide.request.target.Target;
 import com.example.appcheckinbyqrcode.R;
 import com.example.appcheckinbyqrcode.SessionManager;
 import com.example.appcheckinbyqrcode.network.ApiClient;
 import com.example.appcheckinbyqrcode.network.response.MessageResponse;
 import com.example.appcheckinbyqrcode.network.response.UserResponse;
+import com.example.appcheckinbyqrcode.network.url;
 import com.example.appcheckinbyqrcode.ui.login.LoginActivity;
+import com.example.appcheckinbyqrcode.ui.model.GlideCircleTransformation;
+import com.squareup.picasso.Picasso;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import io.reactivex.Observer;
@@ -42,6 +54,7 @@ import io.reactivex.schedulers.Schedulers;
  */
 public class ClientUserFragment extends Fragment implements TextView.OnEditorActionListener, EditText.OnClickListener {
     private static final String TAG = "nnn";
+    TextView tvmyprofile;
     Button btnChangePass, btnLogOut, btnChangeInfo;
     EditText edtName, edtEmail, edtPhone, edtAddress, edt_OldPassword, edt_NewPassword;
     String name, email, phone, address;
@@ -82,10 +95,13 @@ public class ClientUserFragment extends Fragment implements TextView.OnEditorAct
                         email = userResponse.getEmail();
                         phone = userResponse.getPhone();
                         address = userResponse.getAddress();
+                        String urls = url.getUrlimg()+ userResponse.getAvatar();
                         edtName.setText(name);
                         edtEmail.setText(email);
                         edtPhone.setText(phone);
                         edtAddress.setText(address);
+                        Log.d(TAG, "onNext: "+ urls);
+                        Picasso.get().load(urls).into(circleimg);
                     }
 
                     @Override
@@ -115,8 +131,9 @@ public class ClientUserFragment extends Fragment implements TextView.OnEditorAct
     }
 
     private void onclick() {
+
         // Xu ly buton change pass and log out
-        circleimg.setOnClickListener(new View.OnClickListener() {
+        tvmyprofile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
@@ -315,6 +332,7 @@ public class ClientUserFragment extends Fragment implements TextView.OnEditorAct
         edtEmail = view.findViewById(R.id.edtEmailClient);
         edtPhone = view.findViewById(R.id.edtPhoneClient);
         edtAddress = view.findViewById(R.id.edtAddressClient);
+        tvmyprofile = view.findViewById(R.id.tvmyprofile);
     }
 
     private void logout() {
