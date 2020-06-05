@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.util.Log;
 import android.view.ContextThemeWrapper;
@@ -35,6 +36,7 @@ import io.reactivex.schedulers.Schedulers;
  * A simple {@link Fragment} subclass.
  */
 public class AdminUserFragment extends Fragment {
+    SwipeRefreshLayout swipeRefreshLayout;
     private Button BtnLogOut;
     private EditText oldPass, newPass;
     private AlertDialog dialog;
@@ -51,6 +53,14 @@ public class AdminUserFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_user_admin, container, false);
         BtnLogOut = view.findViewById(R.id.btnLogout);
+        swipeRefreshLayout = view.findViewById(R.id.swipeRefreshLayoutuser);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+
+                swipeRefreshLayout.setRefreshing(false);
+            }
+        });
         BtnLogOut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
