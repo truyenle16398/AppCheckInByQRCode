@@ -2,13 +2,13 @@ package com.example.appcheckinbyqrcode.ui.client.adapter;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -16,7 +16,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.appcheckinbyqrcode.R;
 import com.example.appcheckinbyqrcode.network.response.EventFavoriteResponse;
-
+import com.example.appcheckinbyqrcode.network.url;
+import com.example.appcheckinbyqrcode.ui.client.HistoryDetailActivity;
 import java.util.List;
 
 public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.Favorite_holder> {
@@ -42,8 +43,8 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.Favori
     @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(@NonNull Favorite_holder holder, int position) {
-// String a = Resources.getSystem().getString(R.string.base_url);
-        String urls = "http://10.0.2.239:8888/sdc_event/public/" + items.get(position).getAvatar();
+//        String a = Resources.getSystem().getString(R.string.base_url);
+        String urls = url.getUrlimg()+ items.get(position).getImage();
         Glide.with(context).load(urls).into(holder.photo);
         holder.name.setText(items.get(position).getName());
         holder.day.setText(items.get(position).getStartTime());
@@ -77,10 +78,11 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.Favori
             linearLayout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Toast.makeText(context, "id " + items.get(getAdapterPosition()).getId(), Toast.LENGTH_SHORT).show();
-// Intent intent = new Intent(context, HistoryDetailActivity.class);
-// intent.putExtra("idhistory",items.get(getAdapterPosition()).getId());
-// context.startActivity(intent);
+//                    Log.d(TAG, "onClick: "+items.toString());
+//                    Toast.makeText(context, "id "+ items.get(getAdapterPosition()).getEventId(), Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(context, HistoryDetailActivity.class);
+                    intent.putExtra("idhistory",items.get(getAdapterPosition()).getEventId());
+                    context.startActivity(intent);
                 }
             });
         }

@@ -25,9 +25,9 @@ public class UserResponse {
     @SerializedName("address")
     @Expose
     private String address;
-    @SerializedName("avatar")
+    @SerializedName("image")
     @Expose
-    private String avatar;
+    private String image;
     @SerializedName("role_id")
     @Expose
     private int roleId;

@@ -13,14 +13,18 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.Fragment;
 
 import com.bumptech.glide.Glide;
 import com.example.appcheckinbyqrcode.R;
 import com.example.appcheckinbyqrcode.network.ApiClient;
 import com.example.appcheckinbyqrcode.network.response.EventDetailResponse;
 import com.example.appcheckinbyqrcode.network.response.MessageResponse;
+import com.example.appcheckinbyqrcode.network.url;
+import com.example.appcheckinbyqrcode.ui.client.fragment.FavoriteEventFragment;
 
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -59,7 +63,7 @@ public class HistoryDetailActivity extends AppCompatActivity {
                 ProgressDialog dialog = new ProgressDialog(HistoryDetailActivity.this);
                 dialog.setMessage("please wait...");
                 dialog.show();
-                ApiClient.getService().registerevent(id)
+                ApiClient.getService().cancelevent(id)
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe(new Observer<MessageResponse>() {
@@ -71,6 +75,11 @@ public class HistoryDetailActivity extends AppCompatActivity {
                             @Override
                             public void onNext(MessageResponse messageResponse) {
                                 Toast.makeText(HistoryDetailActivity.this, messageResponse.getMessage(), Toast.LENGTH_SHORT).show();
+//                                startActivityForResult(new Intent(HistoryDetailActivity.this, FavoriteEventFragment.class), 11111);
+//                                Intent intent = new Intent();
+//                                intent.putExtra("editTextValue", "value_here");
+//                                setResult(RESULT_OK, intent);
+                                finish();
                             }
 
                             @Override
@@ -86,6 +95,17 @@ public class HistoryDetailActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        requestCode &= 0xffff;
+        for (Fragment fragment : getSupportFragmentManager().getFragments()) {
+            if (fragment != null) {
+                fragment.onActivityResult(requestCode, resultCode, data);
+            }
+        }
+        super.onActivityResult(requestCode, resultCode, data);
     }
 
     @Override
@@ -114,7 +134,7 @@ public class HistoryDetailActivity extends AppCompatActivity {
 
                     @Override
                     public void onNext(EventDetailResponse eventDetailResponse) {
-                        String urls = "http://10.0.2.241:8888/sdc_event/public/" + eventDetailResponse.getAvatar();
+                        String urls = url.getUrlimg()+ eventDetailResponse.getImage();
                         Glide.with(getApplicationContext()).load(urls).into(imageDetail);
                         toolbar.setTitle(eventDetailResponse.getName());
                         txtDateTimeStart.setText(eventDetailResponse.getStart_time());

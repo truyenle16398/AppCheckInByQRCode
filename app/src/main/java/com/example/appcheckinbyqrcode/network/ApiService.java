@@ -82,6 +82,10 @@ public interface ApiService {
     @POST("register_event/{id}")
     Observable<MessageResponse> registerevent(@Path("id") int id);
 
+    //Hủy sự kiện
+    @PUT("cancel_event/{id}")
+    Observable<MessageResponse> cancelevent(@Path("id") int id);
+
 
 
 }
