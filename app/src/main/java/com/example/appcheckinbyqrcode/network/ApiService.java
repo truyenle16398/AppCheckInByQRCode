@@ -30,7 +30,7 @@ public interface ApiService {
     Observable<MessageResponse> logout();
 
     //xac nhan email de lay lai mat khau
-    @POST("create")//forgot-password
+    @POST("forgot_password")//forgot-password
     @FormUrlEncoded
     Observable<MessageResponse> forgetPass(@Field("email") String email);
 

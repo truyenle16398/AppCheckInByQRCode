@@ -115,6 +115,7 @@ public class ClientUserFragment extends Fragment implements TextView.OnEditorAct
     }
 
     private void onclick() {
+        // Xu ly buton change pass and log out
         circleimg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -134,8 +135,7 @@ public class ClientUserFragment extends Fragment implements TextView.OnEditorAct
                 }
             }
         });
-
-
+        //button log out
         btnLogOut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -148,6 +148,13 @@ public class ClientUserFragment extends Fragment implements TextView.OnEditorAct
                         }).setIcon(android.R.drawable.ic_dialog_info).show();
             }
         });
+        btnChangePass.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showDialog();
+            }
+        });
+        //button change infor
         btnChangeInfo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -197,12 +204,6 @@ public class ClientUserFragment extends Fragment implements TextView.OnEditorAct
                                 });
                     }
                 }
-            }
-        });
-        btnChangePass.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showDialog();
             }
         });
 
