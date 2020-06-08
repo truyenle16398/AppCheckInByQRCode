@@ -72,7 +72,7 @@ public class ClientUserFragment extends Fragment implements TextView.OnEditorAct
     EditText edtName, edtEmail, edtPhone, edtAddress, edt_OldPassword, edt_NewPassword;
     String name, email, phone, address;
     CircleImageView circleimg;
-    ViewGroup view_changepass_logout, view_logout, view_changepass;
+    ViewGroup view_changepass_logout, view_logout, view_changepass, viewchangeimage;
     private View view;
     private AlertDialog dialog;
     private ProgressBar progress;
@@ -152,7 +152,6 @@ public class ClientUserFragment extends Fragment implements TextView.OnEditorAct
     }
 
     private void onclick() {
-
         // Xu ly buton change pass and log out
         tvmyprofile.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -258,6 +257,12 @@ public class ClientUserFragment extends Fragment implements TextView.OnEditorAct
                 intent.setAction(Intent.ACTION_GET_CONTENT);
                 startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE);
 
+            }
+        });
+        circleimg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                viewchangeimage.setVisibility(View.VISIBLE);
             }
         });
 
@@ -427,6 +432,7 @@ public class ClientUserFragment extends Fragment implements TextView.OnEditorAct
         btnChangePass = view.findViewById(R.id.btnChangePass);
         circleimg = view.findViewById(R.id.profilePic_client);
         btnChangeAvatar = view.findViewById(R.id.btnChangeAvatar);
+        viewchangeimage = view.findViewById(R.id.viewchangeimage);
         btnLogOut = view.findViewById(R.id.btnLogout);
         btnChangeInfo = view.findViewById(R.id.btnChangeInfo);
         edtName = view.findViewById(R.id.edtNameClient);

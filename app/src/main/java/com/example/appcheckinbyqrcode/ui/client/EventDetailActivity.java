@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.text.Html;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -122,12 +123,13 @@ public class EventDetailActivity extends AppCompatActivity  {
 
                     @Override
                     public void onNext(EventDetailResponse eventDetailResponse) {
-                        String urls = url.getUrlimg()+ eventDetailResponse.getImage();
+                        String urls = url.getUrlimgevent()+ eventDetailResponse.getImage();
                         Glide.with(getApplicationContext()).load(urls).into(imageDetail);
                         toolbar.setTitle(eventDetailResponse.getName());
                         txtDateTimeStart.setText(eventDetailResponse.getStart_time());
                         txtDateTimeEnd.setText(eventDetailResponse.getEnd_time());
-                        txtInfoDetail.setText(eventDetailResponse.getDetail());
+                        String plainText = Html.fromHtml(eventDetailResponse.getDetail()).toString();
+                        txtInfoDetail.setText(plainText);
                         txtAddressInfoDetail.setText(eventDetailResponse.getPlace());
                     }
 

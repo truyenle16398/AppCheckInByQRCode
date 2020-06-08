@@ -97,18 +97,10 @@
 
 
 
-
-
-
-
-
-
-
             <LinearLayout
                 android:layout_marginRight="15dp"
                 android:layout_marginLeft="15dp"
-                android:weightSum="2"
-                android:visibility="visible"
+                android:visibility="gone"
                 android:id="@+id/viewchangeimage"
                 android:gravity="center"
                 android:layout_width="match_parent"
@@ -116,7 +108,7 @@
                     <Button
                         android:layout_marginRight="5dp"
                         android:id="@+id/btnChangeAvatar"
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_gravity="center"
                         android:layout_marginTop="10dp"
