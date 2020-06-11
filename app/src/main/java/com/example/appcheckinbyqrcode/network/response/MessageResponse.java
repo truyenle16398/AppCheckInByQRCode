@@ -1,5 +1,6 @@
 package com.example.appcheckinbyqrcode.network.response;
 
+import com.example.appcheckinbyqrcode.ui.model.User;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import com.example.appcheckinbyqrcode.ui.client.model.Event;
@@ -16,4 +17,7 @@ public class MessageResponse {
     @SerializedName("event")
     @Expose
     private Event event;
+    @SerializedName("user")
+    @Expose
+    private UserQRRespon user;
 }

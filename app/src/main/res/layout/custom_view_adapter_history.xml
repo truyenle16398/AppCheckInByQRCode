@@ -32,10 +32,11 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
+                android:singleLine="true"
                 android:id="@+id/eventname_favorite"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="6dp"
                 android:layout_marginBottom="8dp"
                 android:text="Le Huy Truyen"
                 android:textAlignment="center"
@@ -51,11 +52,10 @@
                 android:id="@+id/txtEventName"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="5dp"
                 android:text="Kiet Party"
-
                 android:textAlignment="center"
-                android:textSize="18sp"
+                android:textSize="15sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/eventimage_favorite"

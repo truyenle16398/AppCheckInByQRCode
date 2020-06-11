@@ -39,12 +39,13 @@ import io.reactivex.schedulers.Schedulers;
 public class AdminUserFragment extends Fragment {
 
     SwipeRefreshLayout refreshLayout;
-    private Button BtnLogOut;
+    private Button btnLogoutadmin;
     private EditText oldPass, newPass, edtName,edtEmail,edtPhone,edtAddress;
     private AlertDialog dialog;
-    private TextView tv_mess;
+    private TextView myprofile;
     private View view;
     CircleImageView circleImageView;
+    ViewGroup viewchangepass_logoutadmin;
 
     public AdminUserFragment() {
         // Required empty public constructor
@@ -79,16 +80,16 @@ public class AdminUserFragment extends Fragment {
                         String address = userResponse.getAddress();
                         String urls = url.getUrlimg()+ userResponse.getAvatar();
                         Log.d("nnn", "onNext: "+ userResponse.toString());
-//                        edtName.setText(name);
-//                        edtEmail.setText(email);
-//                        edtPhone.setText(phone);
-//                        edtAddress.setText(address);
-////                        Picasso.get().load(urls).into(circleimg);
-//                        Glide.with(getActivity())
-//                                .load(urls)
-//                                .diskCacheStrategy(DiskCacheStrategy.NONE)
-//                                .skipMemoryCache(true)
-//                                .into(circleImageView);
+                        edtName.setText(name);
+                        edtEmail.setText(email);
+                        edtPhone.setText(phone);
+                        edtAddress.setText(address);
+//                        Picasso.get().load(urls).into(circleimg);
+                        Glide.with(getActivity())
+                                .load(urls)
+                                .diskCacheStrategy(DiskCacheStrategy.NONE)
+                                .skipMemoryCache(true)
+                                .into(circleImageView);
                     }
 
                     @Override
@@ -104,7 +105,7 @@ public class AdminUserFragment extends Fragment {
     }
 
     private void onclick() {
-        BtnLogOut.setOnClickListener(new View.OnClickListener() {
+        btnLogoutadmin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 AlertDialog builder = new AlertDialog.Builder(getActivity()).setMessage("Bạn có muốn thoát không?")
@@ -116,18 +117,32 @@ public class AdminUserFragment extends Fragment {
                         }).setIcon(android.R.drawable.ic_dialog_info).show();
             }
         });
+        myprofile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (viewchangepass_logoutadmin.getVisibility() == View.INVISIBLE){
+                    viewchangepass_logoutadmin.setVisibility(View.VISIBLE);
+                } else {
+                    viewchangepass_logoutadmin.setVisibility(View.INVISIBLE);
+                }
+            }
+        });
     }
 
     private void InitWidget() {
+        viewchangepass_logoutadmin = view.findViewById(R.id.viewchangepass_logoutadmin);
+        myprofile = view.findViewById(R.id.myprofileadmin);
+        circleImageView = view.findViewById(R.id.profilePicadmin);
         edtName = view.findViewById(R.id.nameadmin);
         edtEmail = view.findViewById(R.id.emailadmin);
         edtPhone = view.findViewById(R.id.phoneadmin);
         edtAddress = view.findViewById(R.id.addressadmin);
-        BtnLogOut = view.findViewById(R.id.btnLogoutadmin);
+        btnLogoutadmin = view.findViewById(R.id.btnLogoutadmin);
         refreshLayout = view.findViewById(R.id.swipeRefreshLayoutadminUser);
         refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
+                getinfo();
                 refreshLayout.setRefreshing(false);
             }
         });

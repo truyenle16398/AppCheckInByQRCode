@@ -1,5 +1,6 @@
 package com.example.appcheckinbyqrcode.sqlite;
 
+import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -17,23 +18,24 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MyDatabaseHelper extends SQLiteOpenHelper {
-    private static final String TAG = "SQLite";
+    private static final String TAG = "nnn";
 
     // Database Version
     private static final int DATABASE_VERSION = 1;
 
     // Database Name
-    private static final String DATABASE_NAME = "InfoQR";
+    private static final String DATABASE_NAME = "infoqr.db";
 
     // Table name: Note.
-    private static final String TABLE_INFO = "Info";
+    private static final String TABLE_INFO = "info";
 
-    private static final Integer COLUMN_INFO_ID = 0;
+    private static final String COLUMN_INFO_ID = "id";
     private static final String COLUMN_INFO_NAME ="name";
     private static final String COLUMN_INFO_EMAIL ="email";
     private static final String COLUMN_INFO_AVATAR = "avatar";
     private static final String COLUMN_INFO_PHONE = "phone";
     private static final String COLUMN_INFO_ADDRESS = "address";
+    private static final String COLUMN_INFO_TIMECHECKIN = "timecheckin";
 
     public MyDatabaseHelper(Context context)  {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -44,12 +46,13 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         Log.i(TAG, "MyDatabaseHelper.onCreate ... ");
         // Script.
         String script = "CREATE TABLE " + TABLE_INFO + "(" +
-                COLUMN_INFO_EMAIL + " TEXT," +
-                COLUMN_INFO_EMAIL + " TEXT," +
-                COLUMN_INFO_NAME + " TEXT," +
-                COLUMN_INFO_AVATAR + " TEXT," +
-                COLUMN_INFO_PHONE + " TEXT," +
-                COLUMN_INFO_ADDRESS + " TEXT" + ")";
+                "COLUMN_INFO_ID INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                COLUMN_INFO_EMAIL + " VARCHAR (255)," +
+                COLUMN_INFO_NAME + " VARCHAR (255)," +
+                COLUMN_INFO_AVATAR + " VARCHAR (255)," +
+                COLUMN_INFO_PHONE + " VARCHAR (255)," +
+                COLUMN_INFO_ADDRESS + " VARCHAR (255)," +
+                COLUMN_INFO_TIMECHECKIN + " VARCHAR (255)" + ")";
         // Execute Script.
         db.execSQL(script);
     }
@@ -64,82 +67,52 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public void createDefaultNotesIfNeed()  {
-        int count = this.getNotesCount();
-        if(count ==0 ) {
-            InfoQR note1 = new InfoQR("Firstly see Android ListView",
-                    "See Android ListView Example in o7planning.org");
-            InfoQR note2 = new InfoQR("Learning Android SQLite",
-                    "See Android SQLite Example in o7planning.org");
-            this.addInfo(note1);
-            this.addInfo(note2);
-        }
-    }
-
-    public void addInfo(InfoQR infoQR) {
-        Log.i(TAG, "MyDatabaseHelper.addNote ... " + infoQR.getName());
-
-        SQLiteDatabase db = this.getWritableDatabase();
-
-        ContentValues values = new ContentValues();
-        values.put(COLUMN_INFO_NAME,infoQR.getName());
-        values.put(COLUMN_INFO_EMAIL,infoQR.getEmail());
-        values.put(COLUMN_INFO_AVATAR,infoQR.getAvatar());
-        values.put(COLUMN_INFO_PHONE,infoQR.getPhone());
-        values.put(COLUMN_INFO_ADDRESS,infoQR.getAddress());
-
-        // Inserting Row
-        db.insert(TABLE_INFO, null, values);
-
-        // Closing database connection
-        db.close();
-    }
-//
-//
-//    public InfoQR getinfo(int id) {
-//        Log.i(TAG, "MyDatabaseHelper.getNote ... " + id);
-//
-//        SQLiteDatabase db = this.getReadableDatabase();
-//
-//        Cursor cursor = db.query(TABLE_INFO, new String[] { COLUMN_INFO_NAME,
-//                        COLUMN_INFO_NAME, COLUMN_INFO_NAME }, COLUMN_INFO_NAME + "=?",
-//                new String[] { String.valueOf(id) }, null, null, null, null);
-//        if (cursor != null)
-//            cursor.moveToFirst();
-//
-//        InfoQR note = new InfoQR(Integer.parseInt(cursor.getString(0)),
-//                cursor.getString(1), cursor.getString(2));
-//        // return note
-//        return note;
+//    public void createDefaultNotesIfNeed()  {
+//        int count = this.getNotesCount();
+//        if(count ==0 ) {
+//            InfoQR note1 = new InfoQR("Firstly see Android ListView",
+//                    "See Android ListView Example in o7planning.org","aaa","aa","aa");
+//            InfoQR note2 = new InfoQR("Learning Android SQLite",
+//                    "See Android SQLite Example in o7planning.org","aaa","aa","aa");
+////            this.addInfo(note1);
+////            this.addInfo(note2);
+//        }
 //    }
-//
-//
-    public List<InfoQR> getAllNotes() {
+
+    public void insertInfo(InfoQR infoQR) {
+        Log.d(TAG, "insertInfo: inserting.......");
+
+        SQLiteDatabase db = getWritableDatabase();
+        db.execSQL("INSERT INTO "+TABLE_INFO+" (name, email, avatar, phone, address, timecheckin) VALUES (?,?,?,?,?,?)",
+                new String[]{infoQR.name, infoQR.email, infoQR.avatar, infoQR.phone, infoQR.address, infoQR.timecheckin});
+    }
+
+    public List<InfoQR> getAllInfo() {
         Log.i(TAG, "MyDatabaseHelper.getAllNotes ... " );
 
-        List<InfoQR> noteList = new ArrayList<InfoQR>();
-        // Select All Query
-        String selectQuery = "SELECT  * FROM " + TABLE_INFO;
+        List<InfoQR> infoQRList = new ArrayList<InfoQR>();
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * from "+TABLE_INFO, null);//id, name, email, avatar, phone, address
 
-        SQLiteDatabase db = this.getWritableDatabase();
-        Cursor cursor = db.rawQuery(selectQuery, null);
-
-        // looping through all rows and adding to list
-        if (cursor.moveToFirst()) {
-            do {
-                InfoQR infoQR = new InfoQR();
-                infoQR.setName(cursor.getString(0));
-                infoQR.setEmail(cursor.getString(1));
-                infoQR.setAvatar(cursor.getString(2));
-                // Adding note to list
-                noteList.add(infoQR);
-            } while (cursor.moveToNext());
+        //Đến dòng đầu của tập dữ liệu
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast()) {
+            int id = cursor.getInt(0);
+            String email = cursor.getString(1);
+            String name = cursor.getString(2);
+            String avatar = cursor.getString(3);
+            String phone = cursor.getString(4);
+            String address = cursor.getString(5);
+            String timecheckin = cursor.getString(6);
+            Log.d(TAG, "getAllInfo: "+id +name+email+avatar+phone+ address + timecheckin + cursor.getString(6));
+            infoQRList.add(new InfoQR(id, name, email, avatar, phone, address,timecheckin));
+            cursor.moveToNext();
         }
         // return note list
-        return noteList;
+        return infoQRList;
     }
-//
-    public int getNotesCount() {
+
+    public int getInfoCount() {
         Log.i(TAG, "MyDatabaseHelper.getNotesCount ... " );
 
         String countQuery = "SELECT  * FROM " + TABLE_INFO;
@@ -153,28 +126,9 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         // return count
         return count;
     }
-//
-//
-//    public int updateNote(Note note) {
-//        Log.i(TAG, "MyDatabaseHelper.updateNote ... "  + note.getNoteTitle());
-//
-//        SQLiteDatabase db = this.getWritableDatabase();
-//
-//        ContentValues values = new ContentValues();
-//        values.put(COLUMN_NOTE_TITLE, note.getNoteTitle());
-//        values.put(COLUMN_NOTE_CONTENT, note.getNoteContent());
-//
-//        // updating row
-//        return db.update(TABLE_NOTE, values, COLUMN_NOTE_ID + " = ?",
-//                new String[]{String.valueOf(note.getNoteId())});
-//    }
-//
-//    public void deleteNote(Note note) {
-//        Log.i(TAG, "MyDatabaseHelper.updateNote ... " + note.getNoteTitle() );
-//
-//        SQLiteDatabase db = this.getWritableDatabase();
-//        db.delete(TABLE_NOTE, COLUMN_NOTE_ID + " = ?",
-//                new String[] { String.valueOf(note.getNoteId()) });
-//        db.close();
-//    }
+
+    public void deleteall() {
+        SQLiteDatabase db = getWritableDatabase();
+        db.execSQL("DELETE FROM "+TABLE_INFO);
+    }
 }
