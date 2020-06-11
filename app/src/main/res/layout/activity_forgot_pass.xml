@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:background="@drawable/background"
     tools:context=".ui.login.ForgotPassActivity">
@@ -76,21 +77,26 @@
                     android:textSize="15dp"
                     android:textColorHint="#a8a8a8"
                     />
-
-                <EditText
-                    android:id="@+id/inputPass"
+                <com.google.android.material.textfield.TextInputLayout
+                    app:counterEnabled="true"
+                    app:passwordToggleEnabled="true"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="10dp"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginRight="20dp"
-                    android:layout_marginTop="16dp"
-                    android:ems="10"
-                    android:inputType="textPassword"
-                    android:hint="@string/enter_your_password"
-                    android:textSize="15dp"
-                    android:textColorHint="#a8a8a8"
-                    />
+                    android:layout_height="wrap_content">
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/inputPass"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
+                        android:layout_marginTop="16dp"
+                        android:ems="10"
+                        android:inputType="textPassword"
+                        android:hint="@string/enter_your_password"
+                        android:textSize="15dp"
+                        android:textColorHint="#a8a8a8"
+                        />
+                </com.google.android.material.textfield.TextInputLayout>
                 <TextView
                     android:id="@+id/tvBack"
                     android:layout_width="wrap_content"

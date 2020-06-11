@@ -1,6 +1,7 @@
 package com.example.appcheckinbyqrcode.ui.admin.adapter;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,16 +13,18 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.appcheckinbyqrcode.R;
+import com.example.appcheckinbyqrcode.network.url;
 import com.example.appcheckinbyqrcode.ui.admin.model.HistoryCheckIn;
+import com.example.appcheckinbyqrcode.ui.admin.model.InfoQR;
 
 import java.util.ArrayList;
 
 
 public class ItemHistoryAdapter extends RecyclerView.Adapter<ItemHistoryAdapter.CardViewHolder> {
     private Context context;
-    private ArrayList<HistoryCheckIn> listHistory;
+    private ArrayList<InfoQR> listHistory;
 
-    public ItemHistoryAdapter(Context context, ArrayList<HistoryCheckIn> listHistory) {
+    public ItemHistoryAdapter(Context context, ArrayList<InfoQR> listHistory) {
         this.context = context;
         this.listHistory = listHistory;
     }
@@ -36,10 +39,13 @@ public class ItemHistoryAdapter extends RecyclerView.Adapter<ItemHistoryAdapter.
     @Override
     public void onBindViewHolder(@NonNull CardViewHolder holder, final int position) {
 //        holder.imageView.setImageDrawable(getListMountain().get(position).getmImage());
-        Glide.with(context).load(listHistory.get(position).getmImage()).into(holder.imageView);
-        holder.txtName.setText(listHistory.get(position).getmName());
-        holder.txtTimeCheckInOut.setText(listHistory.get(position).getmTimeCheck());
-        holder.txtEventName.setText(listHistory.get(position).getmEventName());
+        InfoQR infoQR = listHistory.get(position);
+        String urls = url.getUrlimg()+ infoQR.avatar;
+        Glide.with(context).load(urls).into(holder.imageView);
+        holder.txtEventName.setText(infoQR.name);
+        holder.txtName.setText(infoQR.email);
+        holder.txtTimeCheckInOut.setText(infoQR.timecheckin);
+        Log.d("nnn", "onBindViewHolder: "+infoQR.timecheckin);
     }
 
     @Override

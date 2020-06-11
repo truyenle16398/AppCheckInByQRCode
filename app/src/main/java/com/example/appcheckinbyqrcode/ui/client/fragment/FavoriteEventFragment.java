@@ -35,6 +35,7 @@ import io.reactivex.schedulers.Schedulers;
  */
 public class FavoriteEventFragment extends Fragment {
 
+    ArrayList<EventFavoriteResponse> arrayList;
     ProgressDialog dialog;
     SwipeRefreshLayout refreshLayout;
     RecyclerView mRCycMs;
@@ -84,7 +85,7 @@ public class FavoriteEventFragment extends Fragment {
                             mRCycMs.setVisibility(View.VISIBLE);
                             tvthongbao.setVisibility(View.GONE);
                             Log.d("nnn", "onNext: "+eventFavoriteResponses.toString());
-                            ArrayList<EventFavoriteResponse> arrayList = (ArrayList<EventFavoriteResponse>) eventFavoriteResponses;
+                            arrayList = (ArrayList<EventFavoriteResponse>) eventFavoriteResponses;
 //                        Log.d("nnn", "onNext: "+arrayList.get(0).getStatus());
 
                             adapter = new FavoriteAdapter(arrayList, getActivity());
@@ -110,6 +111,7 @@ public class FavoriteEventFragment extends Fragment {
     }
 
     private void InitWidget() {
+        arrayList = new ArrayList<>();
         mRCycMs = view.findViewById(R.id.recyclerviewFavorite);
         tvthongbao = view.findViewById(R.id.tvthongbao_favorite);
         refreshLayout = view.findViewById(R.id.swipeRefreshLayout);

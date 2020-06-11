@@ -17,6 +17,7 @@ import android.widget.Toast;
 import com.example.appcheckinbyqrcode.R;
 import com.example.appcheckinbyqrcode.network.ApiClient;
 import com.example.appcheckinbyqrcode.network.response.MessageResponse;
+import com.google.android.material.textfield.TextInputEditText;
 
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -26,7 +27,8 @@ import io.reactivex.schedulers.Schedulers;
 public class ForgotPassActivity extends AppCompatActivity {
     Button btnGetCode;
     TextView tvBack, tvTimer;
-    EditText edtCode, edtPass, edtEmail;
+    EditText edtCode, edtEmail;
+    TextInputEditText edtPass;
     String email, pass, code, message;
     CountDownTimer countDownTimer;
     private String TAG="nnn";
