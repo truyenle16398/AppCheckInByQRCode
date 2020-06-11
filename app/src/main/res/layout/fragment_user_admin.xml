@@ -104,7 +104,6 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:padding="10dp"
-                        android:text="Nguyen Xuan Kiet"
                         android:textColorHint="#a8a8a8"
                         android:textSize="20dp" />
                 </LinearLayout>
@@ -126,7 +125,6 @@
                         android:ems="10"
                         android:inputType="textEmailAddress"
                         android:padding="10dp"
-                        android:text="kietnguyen711998@gmail.com"
                         android:textColorHint="#a8a8a8"
                         android:textSize="20dp" />
                 </LinearLayout>
@@ -148,7 +146,6 @@
                         android:ems="10"
                         android:inputType="phone"
                         android:padding="10dp"
-                        android:text="079 079 079"
                         android:textColorHint="#a8a8a8"
                         android:textSize="20dp" />
                 </LinearLayout>
@@ -170,7 +167,6 @@
                         android:ems="10"
                         android:inputType="text"
                         android:padding="10dp"
-                        android:text="Hoa Xuan - Da Nang"
                         android:textColorHint="#a8a8a8"
                         android:textSize="20dp" />
                 </LinearLayout>
