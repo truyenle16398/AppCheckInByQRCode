@@ -10,7 +10,7 @@
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#4F5EDA">
+        android:background="#5257f2">
 
         <androidx.appcompat.widget.SearchView
             android:theme="@style/SearchViewTheme"
@@ -32,7 +32,7 @@
         android:id="@+id/tabLayoutEvent"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#4F5EDA"
+        android:background="#5257f2"
         app:tabGravity="fill"
         app:tabMode="scrollable"
         app:tabIndicatorColor="@color/colorAccent"

@@ -7,7 +7,6 @@
     tools:context=".ui.admin.fragment.HistoryCheckInFragment">
 
     <LinearLayout
-        android:background="#35D2E6"
         android:gravity="center"
         android:weightSum="2"
         android:orientation="horizontal"
