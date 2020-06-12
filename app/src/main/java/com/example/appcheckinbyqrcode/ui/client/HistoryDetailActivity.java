@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.text.Html;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -139,8 +140,9 @@ public class HistoryDetailActivity extends AppCompatActivity {
                         toolbar.setTitle(eventDetailResponse.getName());
                         txtDateTimeStart.setText(eventDetailResponse.getStart_time());
                         txtDateTimeEnd.setText(eventDetailResponse.getEnd_time());
-                        txtInfoDetail.setText(eventDetailResponse.getDetail());
+                        txtInfoDetail.setText(Html.fromHtml(eventDetailResponse.getDetail()));
                         txtAddressInfoDetail.setText(eventDetailResponse.getPlace());
+
                     }
 
                     @Override

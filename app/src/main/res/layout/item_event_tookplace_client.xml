@@ -1,16 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:id="@+id/linner"
+    android:id="@+id/linnerTookPlace"
     app:cardCornerRadius="9dp"
     app:cardElevation="11dp"
     android:layout_marginTop="5dp"
     android:layout_marginBottom="5dp"
     android:layout_marginRight="7dp"
     android:layout_marginLeft="7dp"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    tools:context="com.example.appcheckinbyqrcode.ui.client.adapter.fragmentevenstadapter.EventAdapterTookPlace">
     <LinearLayout
         android:paddingTop="5dp"
         android:paddingLeft="7dp"
@@ -25,7 +27,7 @@
             android:scaleType="centerCrop"
             android:src="@drawable/loading"
             android:layout_weight="1"
-            android:id="@+id/eventavatar"
+            android:id="@+id/eventavatarTookPlace"
             android:layout_width="0dp"
             android:layout_height="match_parent"/>
         <LinearLayout
@@ -38,7 +40,7 @@
                 android:maxLines="2"
                 android:layout_marginBottom="4dp"
                 android:textStyle="bold"
-                android:id="@+id/eventname"
+                android:id="@+id/eventnameTookPlace"
                 android:gravity="center|left"
                 android:textSize="20sp"
                 android:textColor="#000"
@@ -48,7 +50,7 @@
             <TextView
                 android:singleLine="true"
                 android:layout_marginBottom="4dp"
-                android:id="@+id/eventintro"
+                android:id="@+id/eventintroTookPlace"
                 android:gravity="center|left"
                 android:textSize="12sp"
                 android:textColor="#000"
@@ -58,7 +60,7 @@
             <TextView
                 android:singleLine="true"
                 android:layout_marginBottom="4dp"
-                android:id="@+id/eventday"
+                android:id="@+id/eventdayTookPlace"
                 android:gravity="center|left"
                 android:drawableLeft="@drawable/calendar"
                 android:textSize="12sp"
@@ -69,7 +71,7 @@
             <TextView
                 android:singleLine="true"
                 android:layout_marginBottom="4dp"
-                android:id="@+id/eventtime"
+                android:id="@+id/eventtimeTookPlace"
                 android:gravity="center|left"
                 android:drawableLeft="@drawable/time"
                 android:textSize="12sp"
@@ -80,7 +82,7 @@
             <TextView
                 android:singleLine="true"
                 android:layout_marginBottom="4dp"
-                android:id="@+id/eventplace"
+                android:id="@+id/eventplaceTookPlace"
                 android:gravity="center|left"
                 android:drawableLeft="@drawable/locationicon"
                 android:textSize="12sp"

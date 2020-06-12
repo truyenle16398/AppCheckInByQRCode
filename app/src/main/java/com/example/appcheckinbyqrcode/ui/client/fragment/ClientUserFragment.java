@@ -314,6 +314,8 @@ public class ClientUserFragment extends Fragment implements TextView.OnEditorAct
                     public void onNext(UploadAvatarResponse uploadAvatarResponse) {
                       //  Toast.makeText(getActivity(), "Thay đổi image thành công!", Toast.LENGTH_SHORT).show();
                         Log.d(TAG, "onNext: " + uploadAvatarResponse.getAvatar());
+                        String urls = url.getUrlimg() + uploadAvatarResponse.getAvatar();
+                        Glide.with(getContext()).load(urls).into(circleimg);
 
                     }
 

@@ -4,32 +4,32 @@
     android:id="@+id/carr"
     app:cardCornerRadius="10dp"
     app:cardElevation="20dp"
-    android:layout_marginTop="5dp"
-    android:layout_marginBottom="5dp"
+    android:layout_marginTop="2dp"
+    android:layout_marginBottom="2dp"
     android:layout_marginRight="7dp"
     android:layout_marginLeft="7dp"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
         <LinearLayout
             android:visibility="visible"
-            android:weightSum="3"
-            android:padding="5dp"
+            android:weightSum="5"
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+
             <ImageView
-                android:layout_weight="1"
-                android:padding="10dp"
-                android:scaleType="fitCenter"
-                android:src="@drawable/loadingkhoa"
                 android:id="@+id/eventimage_favorite"
                 android:layout_width="0dp"
-                android:layout_height="match_parent"/>
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:scaleType="centerCrop"
+                android:src="@drawable/loadingkhoa" />
+
             <LinearLayout
-                android:weightSum="2"
+                android:weightSum="3"
                 android:layout_marginLeft="5dp"
                 android:orientation="vertical"
-                android:layout_weight="2"
+                android:layout_weight="3"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content">
                 <TextView
