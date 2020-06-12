@@ -32,6 +32,7 @@ import io.reactivex.schedulers.Schedulers;
  */
 public class FavoriteEventFragment extends Fragment {
 
+    ArrayList<EventFavoriteResponse> arrayList;
     ProgressDialog dialog;
     SwipeRefreshLayout refreshLayout;
     RecyclerView mRCycMs;
@@ -39,11 +40,9 @@ public class FavoriteEventFragment extends Fragment {
     private List<Favorite> data;
     TextView tvthongbao;
     View view;
-
     public FavoriteEventFragment() {
         // Required empty public constructor
     }
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -74,17 +73,16 @@ public class FavoriteEventFragment extends Fragment {
                     public void onSubscribe(Disposable d) {
 
                     }
-
                     @Override
                     public void onNext(List<EventFavoriteResponse> eventFavoriteResponses) {
-                        if (eventFavoriteResponses.toString().equals("[]")) {
+                        if (eventFavoriteResponses.toString().equals("[]")){
                             mRCycMs.setVisibility(View.GONE);
                             tvthongbao.setVisibility(View.VISIBLE);
                         } else {
                             mRCycMs.setVisibility(View.VISIBLE);
                             tvthongbao.setVisibility(View.GONE);
-                            Log.d("nnn", "onNext: " + eventFavoriteResponses.toString());
-                            ArrayList<EventFavoriteResponse> arrayList = (ArrayList<EventFavoriteResponse>) eventFavoriteResponses;
+                            Log.d("nnn", "onNext: "+eventFavoriteResponses.toString());
+                            arrayList = (ArrayList<EventFavoriteResponse>) eventFavoriteResponses;
 //                        Log.d("nnn", "onNext: "+arrayList.get(0).getStatus());
 
                             adapter = new FavoriteAdapter(arrayList, getActivity());
@@ -98,7 +96,7 @@ public class FavoriteEventFragment extends Fragment {
 
                     @Override
                     public void onError(Throwable e) {
-                        Log.d("nnn", "onError: " + e.getMessage());
+                        Log.d("nnn", "onError: "+e.getMessage());
                         dialog.dismiss();
                     }
 
@@ -110,6 +108,7 @@ public class FavoriteEventFragment extends Fragment {
     }
 
     private void InitWidget() {
+        arrayList = new ArrayList<>();
         mRCycMs = view.findViewById(R.id.recyclerviewFavorite);
         tvthongbao = view.findViewById(R.id.tvthongbao_favorite);
         refreshLayout = view.findViewById(R.id.swipeRefreshLayout);

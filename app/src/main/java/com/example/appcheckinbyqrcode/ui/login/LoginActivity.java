@@ -4,7 +4,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -22,7 +25,12 @@ import com.example.appcheckinbyqrcode.ui.model.ApiConfig;
 import com.example.appcheckinbyqrcode.SessionManager;
 import com.example.appcheckinbyqrcode.ui.model.User;
 import com.example.appcheckinbyqrcode.ui.model.info;
+import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
 
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import io.reactivex.Observer;
 import io.reactivex.SingleObserver;
@@ -33,8 +41,11 @@ import io.reactivex.schedulers.Schedulers;
 public class LoginActivity extends AppCompatActivity {
     Button btnLogin;
     TextView tvForgotPass, tvRegister;
-    EditText edtEmail, edtPass;
-    String email, pass;
+//    EditText edtEmail, edtPass;
+    TextInputEditText edtEmail,edtPass;
+    TextInputLayout tilemail,tilpass;
+    String email;
+    String pass;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,21 +61,24 @@ public class LoginActivity extends AppCompatActivity {
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ProgressDialog pd = new ProgressDialog(LoginActivity.this);
-                pd.setMessage("loading");
-                pd.show();
                 email = edtEmail.getText().toString();
                 pass = edtPass.getText().toString();
                 if (email.isEmpty() && pass.isEmpty()) {
-                    Toast.makeText(LoginActivity.this, "Vui lòng nhập đầy đủ!!", Toast.LENGTH_SHORT).show();
-                    pd.dismiss();
+                    tilemail.setError("Vui lòng nhập trường này");
+                    tilpass.setError("Vui lòng nhập trường này");
+//                    Toast.makeText(LoginActivity.this, "Vui lòng nhập đầy đủ!!", Toast.LENGTH_SHORT).show();
                 } else if (email.isEmpty()) {
-                    Toast.makeText(LoginActivity.this, "Vui lòng nhập tài khoản Email!!", Toast.LENGTH_SHORT).show();
-                    pd.dismiss();
+                    tilemail.setError("Vui lòng nhập trường này");
+//                    Toast.makeText(LoginActivity.this, "Vui lòng nhập tài khoản Email!!", Toast.LENGTH_SHORT).show();
                 } else if (pass.isEmpty()) {
-                    Toast.makeText(LoginActivity.this, "Vui lòng nhập mật khẩu!!", Toast.LENGTH_SHORT).show();
-                    pd.dismiss();
+                    tilpass.setError("Vui lòng nhập trường này");
+//                    Toast.makeText(LoginActivity.this, "Vui lòng nhập mật khẩu!!", Toast.LENGTH_SHORT).show();
                 } else {
+                    tilemail.setError(null);
+                    tilpass.setError(null);
+                    ProgressDialog pd = new ProgressDialog(LoginActivity.this);
+                    pd.setMessage("loading");
+                    pd.show();
                     //code in here
                     ApiClient.getService().loginnew(email, pass)
                             .subscribeOn(Schedulers.io())
@@ -151,6 +165,52 @@ public class LoginActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        edtEmail.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+            @Override
+            public void afterTextChanged(Editable s) {
+                email = edtEmail.getText().toString().trim();
+                if (isEmailValid(email))
+                {
+                    tilemail.setError(null);
+                }
+                else
+                {
+                    tilemail.setError("Invalid Email Address");
+                }
+            }
+        });
+        edtPass.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+            @Override
+            public void afterTextChanged(Editable s) {
+                pass = edtPass.getText().toString().trim();
+                if (pass.isEmpty())
+                {
+                    edtPass.setError("Vui lòng nhập trường này");
+                }
+                else
+                {
+                    edtPass.setError(null);
+                }
+            }
+        });
 
     }
 
@@ -170,10 +230,40 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void InitWidget() {
+        tilemail = findViewById(R.id.text_input_layout_email);
+        tilpass = findViewById(R.id.text_input_layout_pass);
         btnLogin = findViewById(R.id.btnLogin);
         tvForgotPass = findViewById(R.id.tvPass);
         edtEmail = findViewById(R.id.inputEmail);
         edtPass = findViewById(R.id.inputPass);
         tvRegister = findViewById(R.id.tvRegister);
+    }
+
+//    private boolean validateEmail(String email) {
+//        String emails = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@" + "[_A-Za-z0-9-]+(\\.[_A-Za-z0-9-]+)*(\\.[A-Za-z]{2,})$";
+//        Pattern pattern = Pattern.compile(emails);
+//        Matcher matcher = pattern.matcher(email);
+//        return matcher.matches();
+//    }
+
+    public boolean isEmailValid(String email)
+    {
+        String regExpn =
+                "^(([\\w-]+\\.)+[\\w-]+|([a-zA-Z]{1}|[\\w-]{2,}))@"
+                        +"((([0-1]?[0-9]{1,2}|25[0-5]|2[0-4][0-9])\\.([0-1]?"
+                        +"[0-9]{1,2}|25[0-5]|2[0-4][0-9])\\."
+                        +"([0-1]?[0-9]{1,2}|25[0-5]|2[0-4][0-9])\\.([0-1]?"
+                        +"[0-9]{1,2}|25[0-5]|2[0-4][0-9])){1}|"
+                        +"([a-zA-Z]+[\\w-]+\\.)+[a-zA-Z]{2,4})$";
+
+        CharSequence inputStr = email;
+
+        Pattern pattern = Pattern.compile(regExpn,Pattern.CASE_INSENSITIVE);
+        Matcher matcher = pattern.matcher(inputStr);
+
+        if(matcher.matches())
+            return true;
+        else
+            return false;
     }
 }

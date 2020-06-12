@@ -11,6 +11,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -65,7 +66,7 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.Favori
     public class Favorite_holder extends RecyclerView.ViewHolder {
         public TextView name, persion, day, check;
         public ImageView photo;
-        public LinearLayout linearLayout;
+        public CardView cardView;
 
         public Favorite_holder(@NonNull View view) {
             super(view);
@@ -74,8 +75,8 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.Favori
             persion = view.findViewById(R.id.eventpersonname_favorite);
             check = view.findViewById(R.id.eventcheck_favorite);
             photo = view.findViewById(R.id.eventimage_favorite);
-            linearLayout = view.findViewById(R.id.linner_favorite);
-            linearLayout.setOnClickListener(new View.OnClickListener() {
+            cardView = view.findViewById(R.id.carr);
+            cardView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
 //                    Log.d(TAG, "onClick: "+items.toString());

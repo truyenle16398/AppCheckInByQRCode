@@ -20,7 +20,7 @@
         android:id="@+id/tablayout"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:background="#6ADDDD"
+        android:background="#4F5EDA"
         android:theme="@style/ThemeOverlay.AppCompat.Dark"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toBottomOf="parent">

@@ -10,15 +10,17 @@
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#6ADDDD">
+        android:background="#4F5EDA">
 
         <androidx.appcompat.widget.SearchView
+            android:theme="@style/SearchViewTheme"
             android:id="@+id/search_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginLeft="30dp"
             android:layout_marginTop="30dp"
             android:layout_marginRight="30dp"
+            app:tabSelectedTextColor="@color/colorTextPrimary"
             android:focusable="false"
             android:queryHint="@string/string_search"
             app:defaultQueryHint="@string/string_search"
@@ -30,28 +32,28 @@
         android:id="@+id/tabLayoutEvent"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#00BCD4"
+        android:background="#4F5EDA"
         app:tabGravity="fill"
+        app:tabMode="scrollable"
         app:tabIndicatorColor="@color/colorAccent"
-        app:tabMode="fixed"
         app:tabSelectedTextColor="@color/colorTextPrimary"
         app:tabTextColor="@color/colorTextDisable">
 
         <com.google.android.material.tabs.TabItem
             android:id="@+id/firstItemEvent"
-            android:layout_width="wrap_content"
+            android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:text="On going" />
 
         <com.google.android.material.tabs.TabItem
             android:id="@+id/secondItemEvent"
-            android:layout_width="wrap_content"
+            android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:text="Up Coming" />
 
         <com.google.android.material.tabs.TabItem
             android:id="@+id/thirdItemEvent"
-            android:layout_width="wrap_content"
+            android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:text="Took Place" />
 

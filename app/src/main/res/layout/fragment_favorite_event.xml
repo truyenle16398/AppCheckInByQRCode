@@ -4,7 +4,6 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFFF"
     tools:context=".ui.client.fragment.FavoriteEventFragment">
     <TextView
         android:layout_marginLeft="10dp"
@@ -23,7 +22,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <androidx.recyclerview.widget.RecyclerView
-            android:layout_marginTop="7dp"
+            android:background="#D8D7D7"
             android:id="@+id/recyclerviewFavorite"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>

@@ -5,14 +5,24 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.appcheckinbyqrcode.R;
+import com.example.appcheckinbyqrcode.sqlite.MyDatabaseHelper;
 import com.example.appcheckinbyqrcode.ui.admin.ScanCodeActivity;
+import com.example.appcheckinbyqrcode.ui.admin.model.InfoQR;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -20,6 +30,9 @@ import com.example.appcheckinbyqrcode.ui.admin.ScanCodeActivity;
 public class ScannerFragment extends Fragment {
     public static TextView resulttextview;
     Button scanbutton;
+    private MyDatabaseHelper myDatabaseHelper;
+    ArrayList<InfoQR> listinfo;
+    InfoQR infoQR;
 
     public ScannerFragment() {
         // Required empty public constructor
@@ -30,11 +43,22 @@ public class ScannerFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_scanner, container, false);
+        myDatabaseHelper = new MyDatabaseHelper(getActivity());
+        listinfo = new ArrayList<>();
+        infoQR = new InfoQR(0,"","","","","","");
         resulttextview = view.findViewById(R.id.barcodetextview);
         scanbutton = view.findViewById(R.id.buttonscan);
         scanbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+//                try {
+//
+////                    SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+////                    Date date = formatter.parse(Calendar.getInstance().getTime());
+//                } catch (ParseException e) {
+//                    e.printStackTrace();
+//                }
+
                 startActivity(new Intent(getActivity(), ScanCodeActivity.class));
             }
         });

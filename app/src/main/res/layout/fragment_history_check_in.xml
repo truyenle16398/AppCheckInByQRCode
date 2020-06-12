@@ -6,23 +6,37 @@
     android:orientation="vertical"
     tools:context=".ui.admin.fragment.HistoryCheckInFragment">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+    <LinearLayout
+        android:background="#35D2E6"
         android:gravity="center"
-        android:text="History Check In" />
-
-    <TextView
+        android:weightSum="2"
+        android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="Total : 10" />
+        android:layout_height="40dp">
+        <TextView
+            android:background="@drawable/ripple_default"
+            android:gravity="center"
+            android:layout_weight="1"
+            android:id="@+id/countman"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:text="Total : 10" />
+        <TextView
+            android:id="@+id/tvclearhistory"
+            android:background="@drawable/ripple_default"
+            android:gravity="center"
+            android:text="Clear"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"/>
+    </LinearLayout>
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/swipeRefreshLayoutHistory"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
     <androidx.recyclerview.widget.RecyclerView
+        android:background="#ccc"
         android:id="@+id/recycle_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>

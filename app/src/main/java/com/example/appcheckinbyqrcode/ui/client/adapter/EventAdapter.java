@@ -11,6 +11,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -64,7 +65,7 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventList_ho
 
         public TextView name, intro, day, time, place;
         public ImageView avatar;
-        public LinearLayout linearLayout;
+        public CardView cardView;
 
         public EventList_holder(View view) {
             super(view);
@@ -74,8 +75,8 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventList_ho
             time = view.findViewById(R.id.eventtime);
             place = view.findViewById(R.id.eventplace);
             avatar = view.findViewById(R.id.eventavatar);
-            linearLayout = view.findViewById(R.id.linner);
-            linearLayout.setOnClickListener(new View.OnClickListener() {
+            cardView = view.findViewById(R.id.linner);
+            cardView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(context, EventDetailActivity.class);

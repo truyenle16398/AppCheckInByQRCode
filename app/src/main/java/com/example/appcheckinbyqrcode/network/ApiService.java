@@ -109,6 +109,10 @@ public interface ApiService {
     @PUT("cancel_event/{id}")
     Observable<MessageResponse> cancelevent(@Path("id") int id);
 
+    //Quét qr
+    @PUT("save_checkin/{id}")
+    Observable<MessageResponse> savecheckin(@Path("id") int id,@Query("code") String code);
+
 
 
 }

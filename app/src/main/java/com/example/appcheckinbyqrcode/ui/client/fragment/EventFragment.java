@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -38,6 +39,7 @@ public class EventFragment extends Fragment {
     private List<EventListResponse> data;
     private View view;
     TextView tvthongbao;
+    SearchView search_view;
 
     public EventFragment() {
         // Required empty public constructor
@@ -100,6 +102,7 @@ public class EventFragment extends Fragment {
         mRCycMs = view.findViewById(R.id.recyclerviewEvent);
         mRCycMs.setLayoutManager(new LinearLayoutManager(getContext()));
         tvthongbao = view.findViewById(R.id.tvthongbaoEvent);
+        search_view = view.findViewById(R.id.search_view);
         swipeRefreshLayout = view.findViewById(R.id.swipeRefreshLayoutEvent);
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
