@@ -1,24 +1,21 @@
 package com.example.appcheckinbyqrcode.ui.client.fragment;
 
 import android.app.ProgressDialog;
-import android.content.Intent;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
-
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+
 import com.example.appcheckinbyqrcode.R;
 import com.example.appcheckinbyqrcode.network.ApiClient;
 import com.example.appcheckinbyqrcode.network.response.EventFavoriteResponse;
-import com.example.appcheckinbyqrcode.ui.client.HistoryDetailActivity;
 import com.example.appcheckinbyqrcode.ui.client.adapter.FavoriteAdapter;
 import com.example.appcheckinbyqrcode.ui.client.model.Favorite;
 
@@ -42,9 +39,11 @@ public class FavoriteEventFragment extends Fragment {
     private List<Favorite> data;
     TextView tvthongbao;
     View view;
+
     public FavoriteEventFragment() {
         // Required empty public constructor
     }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -75,15 +74,16 @@ public class FavoriteEventFragment extends Fragment {
                     public void onSubscribe(Disposable d) {
 
                     }
+
                     @Override
                     public void onNext(List<EventFavoriteResponse> eventFavoriteResponses) {
-                        if (eventFavoriteResponses.toString().equals("[]")){
+                        if (eventFavoriteResponses.toString().equals("[]")) {
                             mRCycMs.setVisibility(View.GONE);
                             tvthongbao.setVisibility(View.VISIBLE);
                         } else {
                             mRCycMs.setVisibility(View.VISIBLE);
                             tvthongbao.setVisibility(View.GONE);
-                            Log.d("nnn", "onNext: "+eventFavoriteResponses.toString());
+                            Log.d("nnn", "onNext: " + eventFavoriteResponses.toString());
                             ArrayList<EventFavoriteResponse> arrayList = (ArrayList<EventFavoriteResponse>) eventFavoriteResponses;
 //                        Log.d("nnn", "onNext: "+arrayList.get(0).getStatus());
 
@@ -98,7 +98,7 @@ public class FavoriteEventFragment extends Fragment {
 
                     @Override
                     public void onError(Throwable e) {
-                        Log.d("nnn", "onError: "+e.getMessage());
+                        Log.d("nnn", "onError: " + e.getMessage());
                         dialog.dismiss();
                     }
 

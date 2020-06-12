@@ -21,21 +21,15 @@ import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.core.graphics.drawable.RoundedBitmapDrawable;
-import androidx.core.graphics.drawable.RoundedBitmapDrawableFactory;
 import androidx.fragment.app.Fragment;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.bumptech.glide.request.RequestListener;
-import com.bumptech.glide.request.target.BitmapImageViewTarget;
-import com.bumptech.glide.request.target.Target;
 import com.example.appcheckinbyqrcode.R;
 import com.example.appcheckinbyqrcode.SessionManager;
 import com.example.appcheckinbyqrcode.network.ApiClient;
@@ -44,8 +38,6 @@ import com.example.appcheckinbyqrcode.network.response.UploadAvatarResponse;
 import com.example.appcheckinbyqrcode.network.response.UserResponse;
 import com.example.appcheckinbyqrcode.network.url;
 import com.example.appcheckinbyqrcode.ui.login.LoginActivity;
-import com.example.appcheckinbyqrcode.ui.model.GlideCircleTransformation;
-import com.squareup.picasso.Picasso;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -58,8 +50,6 @@ import io.reactivex.schedulers.Schedulers;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
-
-import static android.app.Activity.RESULT_OK;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -92,6 +82,7 @@ public class ClientUserFragment extends Fragment implements TextView.OnEditorAct
         getinfo();
         onclick();
         oncheck();
+//        upDateUserAvatar();
         return view;
     }
 
@@ -111,12 +102,12 @@ public class ClientUserFragment extends Fragment implements TextView.OnEditorAct
                         email = userResponse.getEmail();
                         phone = userResponse.getPhone();
                         address = userResponse.getAddress();
-                        String urls = url.getUrlimg()+ userResponse.getAvatar();
+                        String urls = url.getUrlimg() + userResponse.getAvatar();
                         edtName.setText(name);
                         edtEmail.setText(email);
                         edtPhone.setText(phone);
                         edtAddress.setText(address);
-                        Log.d(TAG, "onNext: "+ urls);
+                        Log.d(TAG, "onNext: " + urls);
 //                        Picasso.get().load(urls).into(circleimg);
                         Glide.with(getActivity())
                                 .load(urls)
@@ -257,8 +248,12 @@ public class ClientUserFragment extends Fragment implements TextView.OnEditorAct
                 intent.setAction(Intent.ACTION_GET_CONTENT);
                 startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE);
 
+//                upDateUserAvatar();
+
+
             }
         });
+
         circleimg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -268,12 +263,12 @@ public class ClientUserFragment extends Fragment implements TextView.OnEditorAct
 
     }
 
-//    private void openGallery() {
+    //    private void openGallery() {
 //        Intent gallery = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);
 //        startActivityForResult(gallery, PICK_IMAGE);
 //    }
     @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data){
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 //        if (resultCode == RESULT_OK && requestCode == PICK_IMAGE){
 //            imageUri = data.getData();
@@ -286,19 +281,20 @@ public class ClientUserFragment extends Fragment implements TextView.OnEditorAct
             try {
                 Bitmap bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), data.getData());
                 ByteArrayOutputStream stream = new ByteArrayOutputStream();
-                bitmap.compress(Bitmap.CompressFormat.PNG, 50, stream);
+                bitmap.compress(Bitmap.CompressFormat.PNG, 45, stream);
                 byte[] byteArray = stream.toByteArray();
                 bitmap.recycle();
                 //Log.v("Avatar Path", file.getAbsolutePath());
                 fbody = RequestBody.create(MediaType.parse("image/png"), byteArray);
+
+                //choose image finsh update image
+                upDateUserAvatar();
             } catch (IOException e) {
                 e.printStackTrace();
             }
-
         }
 
     }
-
 
 
     //update avatar
@@ -316,16 +312,20 @@ public class ClientUserFragment extends Fragment implements TextView.OnEditorAct
 
                     @Override
                     public void onNext(UploadAvatarResponse uploadAvatarResponse) {
+                      //  Toast.makeText(getActivity(), "Thay đổi image thành công!", Toast.LENGTH_SHORT).show();
+                        Log.d(TAG, "onNext: " + uploadAvatarResponse.getAvatar());
+
                     }
 
 
                     @Override
                     public void onError(Throwable e) {
-                        Log.d("BBB", "onError: " + e.getMessage());
+                        Log.d("BBB", "onError: " +e.getMessage());
                     }
 
                     @Override
                     public void onComplete() {
+                        Log.d("BBB", "onError: " );
                     }
                 });
 

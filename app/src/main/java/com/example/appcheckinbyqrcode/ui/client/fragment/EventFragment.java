@@ -2,23 +2,21 @@ package com.example.appcheckinbyqrcode.ui.client.fragment;
 
 import android.app.ProgressDialog;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
-
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+
 import com.example.appcheckinbyqrcode.R;
 import com.example.appcheckinbyqrcode.network.ApiClient;
 import com.example.appcheckinbyqrcode.network.response.EventListResponse;
 import com.example.appcheckinbyqrcode.ui.client.adapter.EventAdapter;
-import com.example.appcheckinbyqrcode.ui.client.model.Event;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -70,10 +68,10 @@ public class EventFragment extends Fragment {
 
                     @Override
                     public void onNext(List<EventListResponse> eventListResponses) {
-                        if (eventListResponses.toString().equals("[]")){
+                        if (eventListResponses.toString().equals("[]")) {
                             mRCycMs.setVisibility(View.GONE);
                             tvthongbao.setVisibility(View.VISIBLE);
-                        }else {
+                        } else {
                             ArrayList<EventListResponse> arrayList = (ArrayList<EventListResponse>) eventListResponses;
 ////                        Log.d("nnn", "onNext: "+arrayList.get(0).getStatus());
                             adapter = new EventAdapter(arrayList, getActivity());
@@ -101,8 +99,8 @@ public class EventFragment extends Fragment {
     private void InitWidget() {
         mRCycMs = view.findViewById(R.id.recyclerviewEvent);
         mRCycMs.setLayoutManager(new LinearLayoutManager(getContext()));
-        tvthongbao = view.findViewById(R.id.tvthongbao_event);
-        swipeRefreshLayout = view.findViewById(R.id.swipeRefreshLayoutevent);
+        tvthongbao = view.findViewById(R.id.tvthongbaoEvent);
+        swipeRefreshLayout = view.findViewById(R.id.swipeRefreshLayoutEvent);
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {

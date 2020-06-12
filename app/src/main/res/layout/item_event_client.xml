@@ -1,91 +1,100 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
+    android:id="@+id/linner"
     android:layout_width="match_parent"
-    android:background="#C4C2C2"
-    app:cardCornerRadius="9dp"
+    android:layout_height="wrap_content"
     android:layout_marginBottom="10dp"
-    android:paddingTop="5dp"
+    android:background="#C4C2C2"
+    android:orientation="vertical"
     android:paddingLeft="7dp"
+    android:paddingTop="5dp"
     android:paddingRight="7dp"
     android:paddingBottom="5dp"
-    android:id="@+id/linner"
-    android:layout_height="wrap_content">
+    app:cardCornerRadius="9dp">
+
     <androidx.cardview.widget.CardView
         android:id="@+id/carr"
-        app:cardCornerRadius="9dp"
-        app:cardElevation="11dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="9dp"
+        app:cardElevation="11dp">
+
         <LinearLayout
-            android:padding="5dp"
-            android:weightSum="2"
-            android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="175dp">
+            android:layout_height="175dp"
+            android:orientation="horizontal"
+            android:padding="5dp"
+            android:weightSum="2">
+
             <ImageView
-                android:scaleType="fitCenter"
-                android:src="@drawable/loading"
-                android:layout_weight="1"
                 android:id="@+id/eventavatar"
                 android:layout_width="0dp"
-                android:layout_height="match_parent"/>
-            <LinearLayout
-                android:layout_marginLeft="5dp"
-                android:orientation="vertical"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:scaleType="fitCenter"
+                android:src="@drawable/loading" />
+
+            <LinearLayout
                 android:layout_width="0dp"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
                 <TextView
-                    android:layout_marginBottom="4dp"
-                    android:textStyle="bold"
                     android:id="@+id/eventname"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="4dp"
                     android:gravity="center|left"
-                    android:textSize="20sp"
-                    android:textColor="#000"
                     android:text="Kiet's BirthDay Party at home"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
+                    android:textColor="#000"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
                 <TextView
-                    android:layout_marginBottom="4dp"
                     android:id="@+id/eventintro"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="4dp"
                     android:gravity="center|left"
-                    android:textSize="12sp"
-                    android:textColor="#000"
                     android:text="Pool Party and Live Music"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
+                    android:textColor="#000"
+                    android:textSize="12sp" />
+
                 <TextView
-                    android:layout_marginBottom="4dp"
                     android:id="@+id/eventday"
-                    android:gravity="center|left"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="4dp"
                     android:drawableLeft="@drawable/calendar"
-                    android:textSize="12sp"
-                    android:textColor="#000"
+                    android:gravity="center|left"
                     android:text="19-05-2020"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
+                    android:textColor="#000"
+                    android:textSize="12sp" />
+
                 <TextView
-                    android:layout_marginBottom="4dp"
                     android:id="@+id/eventtime"
-                    android:gravity="center|left"
-                    android:drawableLeft="@drawable/time"
-                    android:textSize="12sp"
-                    android:textColor="#000"
-                    android:text="08:00 đến 17:00"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
-                <TextView
+                    android:layout_height="wrap_content"
                     android:layout_marginBottom="4dp"
-                    android:id="@+id/eventplace"
+                    android:drawableLeft="@drawable/time"
                     android:gravity="center|left"
-                    android:drawableLeft="@drawable/locationicon"
-                    android:textSize="12sp"
+                    android:text="08:00 đến 17:00"
                     android:textColor="#000"
-                    android:text="41 Le Duan, Hai Chau, DN"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/eventplace"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="4dp"
+                    android:drawableLeft="@drawable/locationicon"
+                    android:gravity="center|left"
+                    android:text="41 Le Duan, Hai Chau, DN"
+                    android:textColor="#000"
+                    android:textSize="12sp" />
 
             </LinearLayout>
         </LinearLayout>

@@ -1,29 +1,92 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".ui.client.fragment.EventFragment">
 
-    <TextView
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:visibility="gone"
-        android:id="@+id/tvthongbao_event"
-        android:layout_marginTop="50dp"
-        android:textColor="#000"
-        android:textSize="30sp"
-        android:gravity="center"
-        android:text="Bạn không có sự kiện nào đang diễn ra"
+    <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
-    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-        android:id="@+id/swipeRefreshLayoutevent"
+        android:layout_height="wrap_content"
+        android:background="#6ADDDD">
+
+        <androidx.appcompat.widget.SearchView
+            android:id="@+id/search_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginRight="30dp"
+            android:focusable="false"
+            android:queryHint="@string/string_search"
+            app:defaultQueryHint="@string/string_search"
+            app:iconifiedByDefault="false"
+            app:queryHint="@string/string_search" />
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tabLayoutEvent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#00BCD4"
+        app:tabGravity="fill"
+        app:tabIndicatorColor="@color/colorAccent"
+        app:tabMode="fixed"
+        app:tabSelectedTextColor="@color/colorTextPrimary"
+        app:tabTextColor="@color/colorTextDisable">
+
+        <com.google.android.material.tabs.TabItem
+            android:id="@+id/firstItemEvent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="On going" />
+
+        <com.google.android.material.tabs.TabItem
+            android:id="@+id/secondItemEvent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Up Coming" />
+
+        <com.google.android.material.tabs.TabItem
+            android:id="@+id/thirdItemEvent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Took Place" />
+
+
+    </com.google.android.material.tabs.TabLayout>
+
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/viewPagerEvent"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerviewEvent"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
-    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
-</FrameLayout>
+
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/swipeRefreshLayoutEvent"
+            android:layout_width="match_parent"
+            android:layout_height="0dp">
+
+            <TextView
+                android:id="@+id/tvthongbaoEvent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="50dp"
+                android:layout_marginRight="10dp"
+                android:gravity="center"
+                android:text="Bạn không có sự kiện nào đang diễn ra"
+                android:textColor="#000"
+                android:textSize="30sp"
+                android:visibility="gone" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerviewEvent"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+    </androidx.viewpager.widget.ViewPager>
+
+
+</LinearLayout>
