@@ -1,44 +1,32 @@
 package com.example.appcheckinbyqrcode.ui.client.fragment;
 
-import android.app.ProgressDialog;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+import androidx.fragment.app.FragmentPagerAdapter;
+import androidx.viewpager.widget.ViewPager;
 
 import com.example.appcheckinbyqrcode.R;
-import com.example.appcheckinbyqrcode.network.ApiClient;
-import com.example.appcheckinbyqrcode.network.response.EventListResponse;
-import com.example.appcheckinbyqrcode.ui.client.adapter.EventAdapter;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import io.reactivex.Observer;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.Disposable;
-import io.reactivex.schedulers.Schedulers;
+import com.example.appcheckinbyqrcode.ui.client.OnIntent;
+import com.example.appcheckinbyqrcode.ui.client.adapter.EventsClientPagerAdapter;
+import com.google.android.material.tabs.TabItem;
+import com.google.android.material.tabs.TabLayout;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class EventFragment extends Fragment {
-
-    SwipeRefreshLayout swipeRefreshLayout;
-    RecyclerView mRCycMs;
-    private static final int NUM_COLUMNS = 2;
-    private EventAdapter adapter;
-    private List<EventListResponse> data;
+public class EventFragment extends Fragment implements OnIntent {
+    ViewPager pager;
+    TabLayout mTabLayoutEvent;
+    TabItem firstItem, secondItem, thirdItem;
+    EventsClientPagerAdapter adapter;
     private View view;
-    TextView tvthongbao;
     SearchView search_view;
 
     public EventFragment() {
@@ -51,65 +39,47 @@ public class EventFragment extends Fragment {
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_event, container, false);
         InitWidget();
-        data = new ArrayList<>();
-        getdata();
+
+        adapter = new EventsClientPagerAdapter(getChildFragmentManager(), FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT, mTabLayoutEvent.getTabCount());
+        pager.setAdapter(adapter);
+
+        mTabLayoutEvent.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                pager.setCurrentItem(tab.getPosition());
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });
+
+        pager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(mTabLayoutEvent));
+        pager.setOffscreenPageLimit(3);
         return view;
     }
 
-    private void getdata() {
-        ProgressDialog dialog = new ProgressDialog(getActivity());
-        dialog.setMessage("please wait...");
-        dialog.show();
-        ApiClient.getService().listlevents().subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<List<EventListResponse>>() {
-                    @Override
-                    public void onSubscribe(Disposable d) {
 
-                    }
 
-                    @Override
-                    public void onNext(List<EventListResponse> eventListResponses) {
-                        if (eventListResponses.toString().equals("[]")) {
-                            mRCycMs.setVisibility(View.GONE);
-                            tvthongbao.setVisibility(View.VISIBLE);
-                        } else {
-                            ArrayList<EventListResponse> arrayList = (ArrayList<EventListResponse>) eventListResponses;
-////                        Log.d("nnn", "onNext: "+arrayList.get(0).getStatus());
-                            adapter = new EventAdapter(arrayList, getActivity());
-                            LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
-                            linearLayoutManager.setOrientation(RecyclerView.VERTICAL);
-                            mRCycMs.setLayoutManager(linearLayoutManager);
-                            mRCycMs.setAdapter(adapter);
-                            dialog.dismiss();
-                        }
-//                        Log.d("nnn", "onNext: " + arrayList.get(0).getName());
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        Log.d("nnn", "onError: " + e.getMessage());
-                    }
-
-                    @Override
-                    public void onComplete() {
-
-                    }
-                });
-    }
 
     private void InitWidget() {
-        mRCycMs = view.findViewById(R.id.recyclerviewEvent);
-        mRCycMs.setLayoutManager(new LinearLayoutManager(getContext()));
-        tvthongbao = view.findViewById(R.id.tvthongbaoEvent);
+        pager = view.findViewById(R.id.viewPagerEvent);
+        mTabLayoutEvent = view.findViewById(R.id.tabLayoutEvent);
+
+        firstItem = view.findViewById(R.id.firstItemEvent);
+        secondItem = view.findViewById(R.id.secondItemEvent);
+        thirdItem = view.findViewById(R.id.thirdItemEvent);
         search_view = view.findViewById(R.id.search_view);
-        swipeRefreshLayout = view.findViewById(R.id.swipeRefreshLayoutEvent);
-        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                getdata();
-                swipeRefreshLayout.setRefreshing(false);
-            }
-        });
+    }
+
+    @Override
+    public void intents() {
+
     }
 }
