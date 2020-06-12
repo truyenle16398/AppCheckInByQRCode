@@ -23,6 +23,9 @@ import com.example.appcheckinbyqrcode.ui.model.ApiConfig;
 import com.example.appcheckinbyqrcode.ui.model.User;
 import com.example.appcheckinbyqrcode.ui.model.info;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import io.reactivex.Observable;
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -107,6 +110,12 @@ public class RegisterActivity extends AppCompatActivity {
 
             }
         });
+    }
+    private boolean validateEmail(String email) {
+        String emails = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@" + "[_A-Za-z0-9-]+(\\.[_A-Za-z0-9-]+)*(\\.[A-Za-z]{2,})$";
+        Pattern pattern = Pattern.compile(emails);
+        Matcher matcher = pattern.matcher(email);
+        return matcher.matches();
     }
     private void hideKeybaord(View v) {
         InputMethodManager inputMethodManager = (InputMethodManager)getSystemService(INPUT_METHOD_SERVICE);

@@ -77,7 +77,7 @@ public interface ApiService {
 //                                                  @Query("status") String status,
 //                                                  @Query("created_at") String created_at,
 //                                                  @Query("updated_at") String updated_at);
-
+    //thay doi image
     @Multipart
     @POST("UploadAvatar")
     Observable<UploadAvatarResponse> updateAvatar(@Part MultipartBody.Part file);

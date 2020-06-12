@@ -45,9 +45,9 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventList_ho
 
     @Override
     public void onBindViewHolder(@NonNull EventList_holder holder, int position) {
-        String urls = url.getUrlimgevent()+ items.get(position).getImage();
+        String urls = url.getUrlimgevent() + items.get(position).getImage();
         Glide.with(context).load(urls).into(holder.avatar);
-        Log.d(TAG, "tuoi: "+ urls);
+        Log.d(TAG, "tuoi: " + urls);
         // Log.d(TAG, "onBindViewHolder: "+ items.get(position).getEventname());
         holder.name.setText(items.get(position).getName());
         holder.intro.setText(items.get(position).getIntro());
