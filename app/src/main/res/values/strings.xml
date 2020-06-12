@@ -21,5 +21,6 @@
     <string name="yes">OK</string>
     <string name="no">Cancel</string>
     <string name="h_y_s_ki_n">Hủy sự kiện</string>
+    <string name="string_search">Search Something ...</string>
 
 </resources>

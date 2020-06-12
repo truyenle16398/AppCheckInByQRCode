@@ -19,7 +19,7 @@
         android:id="@+id/tablayout"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:background="#35D2E6"
+        android:background="#5257f2"
         android:theme="@style/ThemeOverlay.AppCompat.Dark"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
