@@ -33,7 +33,6 @@ public class HomeClientActivity extends AppCompatActivity implements OnIntent {
 
 
         adapter = new ClientPagerAdapter(getSupportFragmentManager(), FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT, mTabLayout.getTabCount());
-        pager.setAdapter(adapter);
 
         mTabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
@@ -53,8 +52,8 @@ public class HomeClientActivity extends AppCompatActivity implements OnIntent {
         });
 
         pager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(mTabLayout));
-
-
+        pager.setOffscreenPageLimit(3);
+        pager.setAdapter(adapter);
     }
 
     @Override
