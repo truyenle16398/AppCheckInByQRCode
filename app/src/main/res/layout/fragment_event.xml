@@ -18,7 +18,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginLeft="30dp"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="20dp"
             android:layout_marginRight="30dp"
             app:tabSelectedTextColor="@color/colorTextPrimary"
             android:focusable="false"
@@ -64,30 +64,6 @@
         android:id="@+id/viewPagerEvent"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
-        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-            android:id="@+id/swipeRefreshLayoutEvent"
-            android:layout_width="match_parent"
-            android:layout_height="0dp">
-
-            <TextView
-                android:id="@+id/tvthongbaoEvent"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="50dp"
-                android:layout_marginRight="10dp"
-                android:gravity="center"
-                android:text="Bạn không có sự kiện nào đang diễn ra"
-                android:textColor="#000"
-                android:textSize="30sp"
-                android:visibility="gone" />
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerviewEvent"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
-        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
     </androidx.viewpager.widget.ViewPager>
 
 

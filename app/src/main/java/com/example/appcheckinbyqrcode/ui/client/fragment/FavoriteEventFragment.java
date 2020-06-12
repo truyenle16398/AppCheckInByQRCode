@@ -8,6 +8,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -48,11 +50,16 @@ public class FavoriteEventFragment extends Fragment {
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_favorite_event, container, false);
         InitWidget();
-        getData();
         return view;
     }
 
-//    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        getData();
+    }
+
+    //    public void onActivityResult(int requestCode, int resultCode, Intent data) {
 //        super.onActivityResult(requestCode, resultCode, data);
 //        if (requestCode == 1) {
 //            if(resultCode == RESULT_OK) {
@@ -124,6 +131,6 @@ public class FavoriteEventFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        getData();
+       // getData();
     }
 }
