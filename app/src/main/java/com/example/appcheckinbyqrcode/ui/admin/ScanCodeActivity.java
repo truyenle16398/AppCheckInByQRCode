@@ -21,8 +21,10 @@ import com.google.zxing.Result;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -68,23 +70,24 @@ public class ScanCodeActivity extends AppCompatActivity implements ZXingScannerV
                     }
                     @Override
                     public void onNext(MessageResponse messageResponse) {
-                        ScannerFragment.resulttextview.setText(messageResponse.getMessage());
-                        Log.d("nnn", "onNext: "+messageResponse.getMessage());
-//                        Toast.makeText(ScanCodeActivity.this, messageResponse.getMessage(), Toast.LENGTH_SHORT).show();
-                        if (messageResponse.getMessage().equals("checkin thành công")){
-                            UserQRRespon user = messageResponse.getUser();
-                            ScannerFragment.resulttextview.setText(user.getName());
-                            infoQR.name=user.getName();
-                            infoQR.email=user.getEmail();
-                            infoQR.avatar=user.getAvatar();
-                            infoQR.phone=user.getPhone();
-                            infoQR.address=user.getAddress();
+                        Toast.makeText(ScanCodeActivity.this, messageResponse.getMessage(), Toast.LENGTH_SHORT).show();
+                        if (messageResponse.getUser()!=null){
+                                Log.d("nnn", "for: "+ messageResponse.getUser().get(0).getName());
+                            ScannerFragment.resulttextview.setText(messageResponse.getUser().get(0).getName());
+                            infoQR.name=messageResponse.getUser().get(0).getName();
+                            infoQR.email=messageResponse.getUser().get(0).getEmail();
+                            infoQR.avatar=messageResponse.getUser().get(0).getAvatar();
+                            infoQR.phone=messageResponse.getUser().get(0).getPhone();
+                            infoQR.address=messageResponse.getUser().get(0).getAddress();
                             Date date = new Date();
                             SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
                             String strDate = formatter.format(date);
                             infoQR.timecheckin=strDate;
-                            Log.d("nnn", "aaaaaaaaaaa: "+ strDate);
                             myDatabaseHelper.insertInfo(infoQR);
+                            Log.d("nnn", "aaaaaaaaaaa: "+ strDate);
+                        } else {
+                            ScannerFragment.resulttextview.setText(messageResponse.getMessage());
+                            Log.d("nnn", "onNext: "+messageResponse.getMessage());
                         }
                     }
                     @Override
