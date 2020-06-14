@@ -5,6 +5,8 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import com.example.appcheckinbyqrcode.ui.client.model.Event;
 
+import java.util.ArrayList;
+
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -19,5 +21,6 @@ public class MessageResponse {
     private Event event;
     @SerializedName("user")
     @Expose
-    private UserQRRespon user;
+//    private UserQRRespon user;
+    private ArrayList<UserQRRespon> user;
 }

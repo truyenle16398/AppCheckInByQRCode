@@ -80,7 +80,7 @@ public interface ApiService {
     //thay doi image
     @Multipart
     @POST("UploadAvatar")
-    Observable<UploadAvatarResponse> updateAvatar(@Part MultipartBody.Part file);
+    Observable<UploadAvatarResponse> updateAvatar(@Part MultipartBody.Part avatar);
 
 
 

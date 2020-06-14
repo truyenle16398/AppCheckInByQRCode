@@ -5,7 +5,9 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -40,7 +42,11 @@ import com.example.appcheckinbyqrcode.network.url;
 import com.example.appcheckinbyqrcode.ui.login.LoginActivity;
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
+import java.lang.reflect.Field;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import io.reactivex.Observer;
@@ -68,6 +74,7 @@ public class ClientUserFragment extends Fragment implements TextView.OnEditorAct
     private ProgressBar progress;
     private RequestBody fbody;
     private static final int PICK_IMAGE = 100;
+    String realpath = "";
     Uri imageUri;
 
     public ClientUserFragment() {
@@ -82,7 +89,6 @@ public class ClientUserFragment extends Fragment implements TextView.OnEditorAct
         getinfo();
         onclick();
         oncheck();
-//        upDateUserAvatar();
         return view;
     }
 
@@ -234,30 +240,20 @@ public class ClientUserFragment extends Fragment implements TextView.OnEditorAct
                 }
             }
         });
-//        circleimg.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                openGallery();
-//            }
-//        });
         btnChangeAvatar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent();
-                intent.setType("image/*");
-                intent.setAction(Intent.ACTION_GET_CONTENT);
-                startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE);
-
-//                upDateUserAvatar();
-
-
+                upDateUserAvatar(realpath);
             }
         });
 
         circleimg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                viewchangeimage.setVisibility(View.VISIBLE);
+                Intent intent = new Intent();
+                intent.setType("image/*");
+                intent.setAction(Intent.ACTION_GET_CONTENT);
+                startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE);
             }
         });
 
@@ -272,36 +268,66 @@ public class ClientUserFragment extends Fragment implements TextView.OnEditorAct
         super.onActivityResult(requestCode, resultCode, data);
 //        if (resultCode == RESULT_OK && requestCode == PICK_IMAGE){
 //            imageUri = data.getData();
-//            Log.d("nnn","log" +data.getData().getPath());
+//            Log.d("nnn","log khoa img" +data.getData().getPath());
 //            circleimg.setImageURI(imageUri);
 //        }
 
         if (data != null && data.getData() != null) {
-            circleimg.setImageURI(data.getData());
-            try {
-                Bitmap bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), data.getData());
-                ByteArrayOutputStream stream = new ByteArrayOutputStream();
-                bitmap.compress(Bitmap.CompressFormat.PNG, 45, stream);
-                byte[] byteArray = stream.toByteArray();
-                bitmap.recycle();
-                //Log.v("Avatar Path", file.getAbsolutePath());
-                fbody = RequestBody.create(MediaType.parse("image/png"), byteArray);
+//            circleimg.setImageURI(data.getData());
+            Uri uri = data.getData();
+            realpath = getRealPathFromURI(uri);
 
-                //choose image finsh update image
-                upDateUserAvatar();
-            } catch (IOException e) {
+            try {
+                InputStream inputStream = getActivity().getContentResolver().openInputStream(uri);
+                Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
+                circleimg.setImageBitmap(bitmap);
+            } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }
+            btnChangeAvatar.setVisibility(View.VISIBLE);
+//            try {
+//                Bitmap bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), data.getData());
+//                ByteArrayOutputStream stream = new ByteArrayOutputStream();
+//                bitmap.compress(Bitmap.CompressFormat.PNG, 45, stream);
+//                byte[] byteArray = stream.toByteArray();
+//                bitmap.recycle();
+//                //Log.v("Avatar Path", file.getAbsolutePath());
+//                fbody = RequestBody.create(MediaType.parse("image/png"), byteArray);
+//
+//                //choose image finsh update image
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
         }
 
     }
 
+    public String getRealPathFromURI (Uri contentUri) {
+        String path = null;
+        String[] proj = { MediaStore.MediaColumns.DATA};
+        Cursor cursor = getActivity().getContentResolver().query(contentUri, proj, null, null, null);
+        if (cursor.moveToFirst()) {
+            int column_index = cursor.getColumnIndexOrThrow(MediaStore.MediaColumns.DATA);
+            path = cursor.getString(column_index);
+        }
+        cursor.close();
+        return path;
+    }
 
     //update avatar
-    private void upDateUserAvatar() {
-//        showProgressDialog();
-        MultipartBody.Part body =
-                MultipartBody.Part.createFormData("image", "avatar.png", fbody);
+    private void upDateUserAvatar(String filename) {
+        ProgressDialog pd = new ProgressDialog(getActivity());
+        pd.setMessage("loading");
+        pd.show();
+//        MultipartBody.Part body =
+//                MultipartBody.Part.createFormData("image", "avatar.png", fbody);
+        File file = new File(filename);
+        String filepath = file.getAbsolutePath();
+        String[] arraynamefile = filepath.split("\\.");
+        filepath = arraynamefile[0]  + System.currentTimeMillis() + "."+ arraynamefile[1];
+        RequestBody requestBody = RequestBody.create(MediaType.parse("multipart/form-data"), file);
+        MultipartBody.Part body = MultipartBody.Part.createFormData("avatar", filepath, requestBody);
+        Log.d(TAG, "upDateUserAvatar: "+ filepath);
         ApiClient.getService().updateAvatar(body)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -312,25 +338,23 @@ public class ClientUserFragment extends Fragment implements TextView.OnEditorAct
 
                     @Override
                     public void onNext(UploadAvatarResponse uploadAvatarResponse) {
-                      //  Toast.makeText(getActivity(), "Thay đổi image thành công!", Toast.LENGTH_SHORT).show();
-                        Log.d(TAG, "onNext: " + uploadAvatarResponse.getAvatar());
-                        String urls = url.getUrlimg() + uploadAvatarResponse.getAvatar();
-                        Glide.with(getContext()).load(urls).into(circleimg);
+                        Toast.makeText(getActivity(), "Thay đổi thành công!", Toast.LENGTH_SHORT).show();
+                        Log.d(TAG, "log api upload image: " + uploadAvatarResponse.getName());
+//                        String urls = url.getUrlimg() + uploadAvatarResponse.getAvatar();
+//                        Glide.with(getContext()).load(urls).into(circleimg);
 
                     }
-
-
                     @Override
                     public void onError(Throwable e) {
-                        Log.d("BBB", "onError: " +e.getMessage());
+                        Log.d(TAG, "onError: " +e.getMessage());
+                        pd.dismiss();
                     }
 
                     @Override
                     public void onComplete() {
-                        Log.d("BBB", "onError: " );
+                        pd.dismiss();
                     }
                 });
-
     }
 
     private void showDialog() {

@@ -39,4 +39,5 @@ public class UserQRRespon {
     @SerializedName("updated_at")
     @Expose
     private String updatedAt;
+
 }
