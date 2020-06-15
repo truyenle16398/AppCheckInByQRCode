@@ -259,19 +259,9 @@ public class ClientUserFragment extends Fragment implements TextView.OnEditorAct
 
     }
 
-    //    private void openGallery() {
-//        Intent gallery = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);
-//        startActivityForResult(gallery, PICK_IMAGE);
-//    }
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-//        if (resultCode == RESULT_OK && requestCode == PICK_IMAGE){
-//            imageUri = data.getData();
-//            Log.d("nnn","log khoa img" +data.getData().getPath());
-//            circleimg.setImageURI(imageUri);
-//        }
-
         if (data != null && data.getData() != null) {
 //            circleimg.setImageURI(data.getData());
             Uri uri = data.getData();

@@ -89,9 +89,20 @@ public interface ApiService {
     Observable<MessageResponse> updatepass(@Query("old_pass") String oldpass,
                                            @Query("new_pass") String newpass);
 
-    //show danh sach su kien
+    //show danh sach su kien danh sách sự kiện sắp diễn ra going to happen (tuong lai)
     @GET("event/list")
     Observable<List<EventListResponse>> listlevents();
+
+    //show danh sách sự kiện đang diễn ra going on (hien tai)
+    @GET("event/list_happen")
+    Observable<List<EventListResponse>> listleventgoingon();
+
+    //show danh sách sự kiện đã diễn ra happened (qua khu)
+    @GET("event/list_happened")
+    Observable<List<EventListResponse>> listleventhappened();
+
+
+
 
     // show lịch sử đăng ký sự kiện
     @GET("event/history_regis")
