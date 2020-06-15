@@ -5,12 +5,9 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
-import com.example.appcheckinbyqrcode.ui.client.fragment.ClientUserFragment;
-import com.example.appcheckinbyqrcode.ui.client.fragment.EventFragment;
-import com.example.appcheckinbyqrcode.ui.client.fragment.FavoriteEventFragment;
-import com.example.appcheckinbyqrcode.ui.client.fragment.eventsfragment.EventOnGoingFragment;
-import com.example.appcheckinbyqrcode.ui.client.fragment.eventsfragment.EventTookPlaceFragment;
-import com.example.appcheckinbyqrcode.ui.client.fragment.eventsfragment.EventUpComingFragment;
+import com.example.appcheckinbyqrcode.ui.client.fragment.eventsfragment.EventGoingOnFragment;
+import com.example.appcheckinbyqrcode.ui.client.fragment.eventsfragment.EventHappenedFragment;
+import com.example.appcheckinbyqrcode.ui.client.fragment.eventsfragment.EventGoingOnHappenFragment;
 
 public class EventsClientPagerAdapter extends FragmentPagerAdapter {
     private int tabsNumber;
@@ -25,11 +22,11 @@ public class EventsClientPagerAdapter extends FragmentPagerAdapter {
     public Fragment getItem(int position) {
         switch (position) {
             case 0:
-                return new EventOnGoingFragment();
+                return new EventGoingOnFragment();
             case 1:
-                return new EventUpComingFragment();
+                return new EventGoingOnHappenFragment();
             case 2:
-                return new EventTookPlaceFragment();
+                return new EventHappenedFragment();
             default:
                 return null;
         }

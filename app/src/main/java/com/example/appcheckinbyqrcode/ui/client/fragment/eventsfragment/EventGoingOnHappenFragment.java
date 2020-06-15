@@ -17,8 +17,8 @@ import android.widget.TextView;
 import com.example.appcheckinbyqrcode.R;
 import com.example.appcheckinbyqrcode.network.ApiClient;
 import com.example.appcheckinbyqrcode.network.response.EventListResponse;
-import com.example.appcheckinbyqrcode.ui.client.adapter.fragmentevenstadapter.EventAdapterOnGoing;
-import com.example.appcheckinbyqrcode.ui.client.adapter.fragmentevenstadapter.EventAdapterTookPlace;
+import com.example.appcheckinbyqrcode.ui.client.adapter.fragmentevenstadapter.EventAdapterGoingOn;
+import com.example.appcheckinbyqrcode.ui.client.adapter.fragmentevenstadapter.EventAdapterGoingOnHappen;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,17 +31,17 @@ import io.reactivex.schedulers.Schedulers;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class EventTookPlaceFragment extends Fragment {
+public class EventGoingOnHappenFragment extends Fragment {
     SwipeRefreshLayout swipeRefreshLayout;
     RecyclerView mRCycMs;
     private static final int NUM_COLUMNS = 2;
-    private EventAdapterTookPlace adapter;
+    private EventAdapterGoingOnHappen adapter;
     private List<EventListResponse> data;
     private View view;
     TextView tvthongbao;
     private ArrayList<EventListResponse> arrayList = new ArrayList<>();
 
-    public EventTookPlaceFragment() {
+    public EventGoingOnHappenFragment() {
         // Required empty public constructor
     }
 
@@ -50,7 +50,7 @@ public class EventTookPlaceFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        view = inflater.inflate(R.layout.fragment_event_took_place, container, false);
+        view = inflater.inflate(R.layout.fragment_event_going_on_happen, container, false);
         InitWidget(view);
         getdata();
         return view;
@@ -75,7 +75,7 @@ public class EventTookPlaceFragment extends Fragment {
                         } else {
                             arrayList = (ArrayList<EventListResponse>) eventListResponses;
                             mRCycMs.setLayoutManager(new LinearLayoutManager(getActivity()));
-                            adapter = new EventAdapterTookPlace( eventListResponses, getActivity());
+                            adapter = new EventAdapterGoingOnHappen( eventListResponses, getActivity());
                             mRCycMs.setAdapter(adapter);
                             dialog.dismiss();
 
@@ -96,9 +96,9 @@ public class EventTookPlaceFragment extends Fragment {
     }
 
     private void InitWidget(View view) {
-        mRCycMs = view.findViewById(R.id.recyclerviewEventUpComing);
-        tvthongbao = view.findViewById(R.id.tvthongbaoEvent1);
-        swipeRefreshLayout = view.findViewById(R.id.swipeRefreshLayoutEvent1);
+        mRCycMs = view.findViewById(R.id.recyclerviewEventGoingOnHappen);
+        tvthongbao = view.findViewById(R.id.tvthongbaoEvent2);
+        swipeRefreshLayout = view.findViewById(R.id.swipeRefreshLayoutEvent2);
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {

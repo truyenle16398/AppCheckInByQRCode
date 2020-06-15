@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:id="@+id/linnerOnGoing"
+    android:id="@+id/linnerHappened"
     app:cardCornerRadius="9dp"
     app:cardElevation="11dp"
     android:layout_marginTop="5dp"
@@ -12,7 +12,7 @@
     android:layout_marginRight="7dp"
     android:layout_marginLeft="7dp"
     android:layout_height="wrap_content"
-    tools:context="com.example.appcheckinbyqrcode.ui.client.adapter.fragmentevenstadapter.EventAdapterOnGoing">
+    tools:context="com.example.appcheckinbyqrcode.ui.client.adapter.fragmentevenstadapter.EventAdapterHappened">
     <LinearLayout
         android:paddingTop="5dp"
         android:paddingLeft="7dp"
@@ -24,10 +24,10 @@
         android:layout_width="match_parent"
         android:layout_height="175dp">
         <ImageView
+            android:scaleType="centerCrop"
             android:src="@drawable/loading"
             android:layout_weight="1"
-            android:scaleType="centerCrop"
-            android:id="@+id/eventavatarOnGoing"
+            android:id="@+id/eventavatarHappened"
             android:layout_width="0dp"
             android:layout_height="match_parent"/>
         <LinearLayout
@@ -40,7 +40,7 @@
                 android:maxLines="2"
                 android:layout_marginBottom="4dp"
                 android:textStyle="bold"
-                android:id="@+id/eventnameOnGoing"
+                android:id="@+id/eventnameHappened"
                 android:gravity="center|left"
                 android:textSize="20sp"
                 android:textColor="#000"
@@ -50,7 +50,7 @@
             <TextView
                 android:singleLine="true"
                 android:layout_marginBottom="4dp"
-                android:id="@+id/eventintroOnGoing"
+                android:id="@+id/eventintroHappened"
                 android:gravity="center|left"
                 android:textSize="12sp"
                 android:textColor="#000"
@@ -60,7 +60,7 @@
             <TextView
                 android:singleLine="true"
                 android:layout_marginBottom="4dp"
-                android:id="@+id/eventdayOnGoing"
+                android:id="@+id/eventdayHappened"
                 android:gravity="center|left"
                 android:drawableLeft="@drawable/calendar"
                 android:textSize="12sp"
@@ -71,7 +71,7 @@
             <TextView
                 android:singleLine="true"
                 android:layout_marginBottom="4dp"
-                android:id="@+id/eventtimeOnGoing"
+                android:id="@+id/eventtimeHappened"
                 android:gravity="center|left"
                 android:drawableLeft="@drawable/time"
                 android:textSize="12sp"
@@ -82,7 +82,7 @@
             <TextView
                 android:singleLine="true"
                 android:layout_marginBottom="4dp"
-                android:id="@+id/eventplaceOnGoing"
+                android:id="@+id/eventplaceHappened"
                 android:gravity="center|left"
                 android:drawableLeft="@drawable/locationicon"
                 android:textSize="12sp"
