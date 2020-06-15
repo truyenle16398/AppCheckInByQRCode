@@ -14,40 +14,37 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.bumptech.glide.module.AppGlideModule;
 import com.example.appcheckinbyqrcode.R;
 import com.example.appcheckinbyqrcode.network.response.EventListResponse;
 import com.example.appcheckinbyqrcode.network.url;
 import com.example.appcheckinbyqrcode.ui.client.EventDetailActivity;
-import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class EventAdapterOnGoing extends RecyclerView.Adapter<EventAdapterOnGoing.EventList_holder> {
+public class EventAdapterGoingOnHappen extends RecyclerView.Adapter<EventAdapterGoingOnHappen.EventList_holder> {
 
     private static final String TAG = "nnn";
     private List<EventListResponse> items= new ArrayList<>();
     private Context context;
 
 
-    public EventAdapterOnGoing(List<EventListResponse> items, Context context) {
+    public EventAdapterGoingOnHappen(List<EventListResponse> items, Context context) {
         this.items = items;
         this.context = context;
     }
 
     @NonNull
     @Override
-    public EventList_holder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public EventAdapterGoingOnHappen.EventList_holder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(context);
-        View v = inflater.inflate(R.layout.item_event_ongoing_client, parent, false);
-        EventList_holder vholder = new EventList_holder(v);
+        View v = inflater.inflate(R.layout.item_event_goingon_happen_client, parent, false);
+        EventAdapterGoingOnHappen.EventList_holder vholder = new EventAdapterGoingOnHappen.EventList_holder(v);
         return  vholder;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull EventList_holder holder, int position) {
+    public void onBindViewHolder(@NonNull EventAdapterGoingOnHappen.EventList_holder holder, int position) {
         String urls = url.getUrlimgevent() + items.get(position).getImage();
         Glide.with(context).load(urls).into(holder.avatar);
 //        Glide.with(context)
@@ -73,13 +70,13 @@ public class EventAdapterOnGoing extends RecyclerView.Adapter<EventAdapterOnGoin
 
         public EventList_holder(View view) {
             super(view);
-            name = view.findViewById(R.id.eventnameOnGoing);
-            intro = view.findViewById(R.id.eventintroOnGoing);
-            day = view.findViewById(R.id.eventdayOnGoing);
-            time = view.findViewById(R.id.eventtimeOnGoing);
-            place = view.findViewById(R.id.eventplaceOnGoing);
-            avatar = view.findViewById(R.id.eventavatarOnGoing);
-            cardView = view.findViewById(R.id.linnerOnGoing);
+            name = view.findViewById(R.id.eventnameOnGoingHappen);
+            intro = view.findViewById(R.id.eventintroOnGoingHappen);
+            day = view.findViewById(R.id.eventdayOnGoingHappen);
+            time = view.findViewById(R.id.eventtimeOnGoingHappen);
+            place = view.findViewById(R.id.eventplaceOnGoingHappen);
+            avatar = view.findViewById(R.id.eventavatarOnGoingHappen);
+            cardView = view.findViewById(R.id.linnerOnGoingHappen);
             cardView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

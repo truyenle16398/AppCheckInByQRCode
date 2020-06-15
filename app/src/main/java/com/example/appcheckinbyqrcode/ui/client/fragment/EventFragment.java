@@ -1,5 +1,7 @@
 package com.example.appcheckinbyqrcode.ui.client.fragment;
 
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -51,7 +53,6 @@ public class EventFragment extends Fragment implements OnIntent {
 
             @Override
             public void onTabUnselected(TabLayout.Tab tab) {
-
             }
 
             @Override

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:id="@+id/linnerTookPlace"
+    android:id="@+id/linnerOnGoing"
     app:cardCornerRadius="9dp"
     app:cardElevation="11dp"
     android:layout_marginTop="5dp"
@@ -12,7 +12,7 @@
     android:layout_marginRight="7dp"
     android:layout_marginLeft="7dp"
     android:layout_height="wrap_content"
-    tools:context="com.example.appcheckinbyqrcode.ui.client.adapter.fragmentevenstadapter.EventAdapterTookPlace">
+    tools:context="com.example.appcheckinbyqrcode.ui.client.adapter.fragmentevenstadapter.EventAdapterGoingOn">
     <LinearLayout
         android:paddingTop="5dp"
         android:paddingLeft="7dp"
@@ -22,12 +22,12 @@
         android:weightSum="2"
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="175dp">
+        android:layout_height="200dp">
         <ImageView
-            android:scaleType="centerCrop"
             android:src="@drawable/loading"
             android:layout_weight="1"
-            android:id="@+id/eventavatarTookPlace"
+            android:scaleType="centerCrop"
+            android:id="@+id/eventavatarOnGoing"
             android:layout_width="0dp"
             android:layout_height="match_parent"/>
         <LinearLayout
@@ -36,11 +36,12 @@
             android:layout_weight="1"
             android:layout_width="0dp"
             android:layout_height="wrap_content">
+
             <TextView
                 android:maxLines="2"
                 android:layout_marginBottom="4dp"
                 android:textStyle="bold"
-                android:id="@+id/eventnameTookPlace"
+                android:id="@+id/eventnameOnGoing"
                 android:gravity="center|left"
                 android:textSize="20sp"
                 android:textColor="#000"
@@ -50,17 +51,27 @@
             <TextView
                 android:singleLine="true"
                 android:layout_marginBottom="4dp"
-                android:id="@+id/eventintroTookPlace"
+                android:id="@+id/eventintroOnGoing"
                 android:gravity="center|left"
                 android:textSize="12sp"
                 android:textColor="#000"
                 android:text="Pool Party and Live Music"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
+            <ImageButton
+                android:singleLine="true"
+                android:layout_marginBottom="4dp"
+                android:gravity="center|left"
+                android:scaleType="centerCrop"
+                android:src="@drawable/ic_favorite_red_24dp"
+                android:id="@+id/btnImageFavorite"
+                android:layout_width="50dp"
+                android:layout_height="30dp"/>
+            
             <TextView
                 android:singleLine="true"
                 android:layout_marginBottom="4dp"
-                android:id="@+id/eventdayTookPlace"
+                android:id="@+id/eventdayOnGoing"
                 android:gravity="center|left"
                 android:drawableLeft="@drawable/calendar"
                 android:textSize="12sp"
@@ -71,7 +82,7 @@
             <TextView
                 android:singleLine="true"
                 android:layout_marginBottom="4dp"
-                android:id="@+id/eventtimeTookPlace"
+                android:id="@+id/eventtimeOnGoing"
                 android:gravity="center|left"
                 android:drawableLeft="@drawable/time"
                 android:textSize="12sp"
@@ -82,7 +93,7 @@
             <TextView
                 android:singleLine="true"
                 android:layout_marginBottom="4dp"
-                android:id="@+id/eventplaceTookPlace"
+                android:id="@+id/eventplaceOnGoing"
                 android:gravity="center|left"
                 android:drawableLeft="@drawable/locationicon"
                 android:textSize="12sp"

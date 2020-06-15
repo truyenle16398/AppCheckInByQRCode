@@ -22,29 +22,29 @@ import com.example.appcheckinbyqrcode.ui.client.EventDetailActivity;
 import java.util.ArrayList;
 import java.util.List;
 
-public class EventAdapterTookPlace extends RecyclerView.Adapter<EventAdapterTookPlace.EventList_holder> {
+public class EventAdapterHappened extends RecyclerView.Adapter<EventAdapterHappened.EventList_holder> {
 
     private static final String TAG = "nnn";
     private List<EventListResponse> items= new ArrayList<>();
     private Context context;
 
 
-    public EventAdapterTookPlace(List<EventListResponse> items, Context context) {
+    public EventAdapterHappened(List<EventListResponse> items, Context context) {
         this.items = items;
         this.context = context;
     }
 
     @NonNull
     @Override
-    public EventAdapterTookPlace.EventList_holder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public EventAdapterHappened.EventList_holder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(context);
-        View v = inflater.inflate(R.layout.item_event_tookplace_client, parent, false);
-        EventAdapterTookPlace.EventList_holder vholder = new EventAdapterTookPlace.EventList_holder(v);
+        View v = inflater.inflate(R.layout.item_event_happened_client, parent, false);
+        EventAdapterHappened.EventList_holder vholder = new EventAdapterHappened.EventList_holder(v);
         return  vholder;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull EventAdapterTookPlace.EventList_holder holder, int position) {
+    public void onBindViewHolder(@NonNull EventAdapterHappened.EventList_holder holder, int position) {
         String urls = url.getUrlimgevent() + items.get(position).getImage();
         Glide.with(context).load(urls).into(holder.avatar);
 //        Glide.with(context)
@@ -70,13 +70,13 @@ public class EventAdapterTookPlace extends RecyclerView.Adapter<EventAdapterTook
 
         public EventList_holder(View view) {
             super(view);
-            name = view.findViewById(R.id.eventnameTookPlace);
-            intro = view.findViewById(R.id.eventintroTookPlace);
-            day = view.findViewById(R.id.eventdayTookPlace);
-            time = view.findViewById(R.id.eventtimeTookPlace);
-            place = view.findViewById(R.id.eventplaceTookPlace);
-            avatar = view.findViewById(R.id.eventavatarTookPlace);
-            cardView = view.findViewById(R.id.linnerTookPlace);
+            name = view.findViewById(R.id.eventnameHappened);
+            intro = view.findViewById(R.id.eventintroHappened);
+            day = view.findViewById(R.id.eventdayHappened);
+            time = view.findViewById(R.id.eventtimeHappened);
+            place = view.findViewById(R.id.eventplaceHappened);
+            avatar = view.findViewById(R.id.eventavatarHappened);
+            cardView = view.findViewById(R.id.linnerHappened);
             cardView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

@@ -17,7 +17,7 @@ import android.widget.TextView;
 import com.example.appcheckinbyqrcode.R;
 import com.example.appcheckinbyqrcode.network.ApiClient;
 import com.example.appcheckinbyqrcode.network.response.EventListResponse;
-import com.example.appcheckinbyqrcode.ui.client.adapter.fragmentevenstadapter.EventAdapterOnGoing;
+import com.example.appcheckinbyqrcode.ui.client.adapter.fragmentevenstadapter.EventAdapterHappened;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,19 +30,17 @@ import io.reactivex.schedulers.Schedulers;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class EventOnGoingFragment extends Fragment {
+public class EventHappenedFragment extends Fragment {
     SwipeRefreshLayout swipeRefreshLayout;
     RecyclerView mRCycMs;
     private static final int NUM_COLUMNS = 2;
-    private EventAdapterOnGoing adapter;
+    private EventAdapterHappened adapter;
     private List<EventListResponse> data;
     private View view;
     TextView tvthongbao;
     private ArrayList<EventListResponse> arrayList = new ArrayList<>();
 
-
-
-    public EventOnGoingFragment() {
+    public EventHappenedFragment() {
         // Required empty public constructor
     }
 
@@ -50,17 +48,17 @@ public class EventOnGoingFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.fragment_event_on_going, container, false);
+        // Inflate the layout for this fragment
+        view = inflater.inflate(R.layout.fragment_event_happened, container, false);
         InitWidget(view);
         getdata();
         return view;
     }
-
     private void getdata() {
         ProgressDialog dialog = new ProgressDialog(getActivity());
         dialog.setMessage("please wait...");
         dialog.show();
-        ApiClient.getService().listlevents().subscribeOn(Schedulers.io())
+        ApiClient.getService().listleventhappened().subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<List<EventListResponse>>() {
                     @Override
@@ -74,9 +72,9 @@ public class EventOnGoingFragment extends Fragment {
                             mRCycMs.setVisibility(View.GONE);
                             tvthongbao.setVisibility(View.VISIBLE);
                         } else {
-                             arrayList = (ArrayList<EventListResponse>) eventListResponses;
+                            arrayList = (ArrayList<EventListResponse>) eventListResponses;
                             mRCycMs.setLayoutManager(new LinearLayoutManager(getActivity()));
-                            adapter = new EventAdapterOnGoing( eventListResponses, getActivity());
+                            adapter = new EventAdapterHappened( eventListResponses, getActivity());
                             mRCycMs.setAdapter(adapter);
                             dialog.dismiss();
 
@@ -97,9 +95,9 @@ public class EventOnGoingFragment extends Fragment {
     }
 
     private void InitWidget(View view) {
-        mRCycMs = view.findViewById(R.id.recyclerviewEventOnGoing);
-        tvthongbao = view.findViewById(R.id.tvthongbaoEvent);
-        swipeRefreshLayout = view.findViewById(R.id.swipeRefreshLayoutEvent);
+        mRCycMs = view.findViewById(R.id.recyclerviewEventUpComing);
+        tvthongbao = view.findViewById(R.id.tvthongbaoEvent1);
+        swipeRefreshLayout = view.findViewById(R.id.swipeRefreshLayoutEvent1);
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
