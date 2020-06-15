@@ -83,6 +83,7 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.Favori
 //                    Toast.makeText(context, "id "+ items.get(getAdapterPosition()).getEventId(), Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(context, HistoryDetailActivity.class);
                     intent.putExtra("idhistory",items.get(getAdapterPosition()).getEventId());
+                    intent.putExtra("postion",getAdapterPosition());
                     context.startActivity(intent);
                 }
             });

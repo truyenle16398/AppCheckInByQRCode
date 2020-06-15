@@ -1,6 +1,8 @@
 package com.example.appcheckinbyqrcode.ui.client.fragment;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -18,6 +20,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import com.example.appcheckinbyqrcode.R;
 import com.example.appcheckinbyqrcode.network.ApiClient;
 import com.example.appcheckinbyqrcode.network.response.EventFavoriteResponse;
+import com.example.appcheckinbyqrcode.ui.client.HistoryDetailActivity;
 import com.example.appcheckinbyqrcode.ui.client.adapter.FavoriteAdapter;
 import com.example.appcheckinbyqrcode.ui.client.model.Favorite;
 
@@ -34,6 +37,7 @@ import io.reactivex.schedulers.Schedulers;
  */
 public class FavoriteEventFragment extends Fragment {
 
+    private static final int REQUEST_CODE_CANCEL = 0x9345;
     ArrayList<EventFavoriteResponse> arrayList;
     ProgressDialog dialog;
     SwipeRefreshLayout refreshLayout;
@@ -42,6 +46,7 @@ public class FavoriteEventFragment extends Fragment {
     private List<Favorite> data;
     TextView tvthongbao;
     View view;
+    LinearLayoutManager linearLayoutManager;
     public FavoriteEventFragment() {
         // Required empty public constructor
     }
@@ -50,6 +55,8 @@ public class FavoriteEventFragment extends Fragment {
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_favorite_event, container, false);
         InitWidget();
+        final Intent intent = new Intent(getActivity(), HistoryDetailActivity.class);
+        startActivityForResult(intent, REQUEST_CODE_CANCEL);
         return view;
     }
 
@@ -59,14 +66,26 @@ public class FavoriteEventFragment extends Fragment {
         getData();
     }
 
-    //    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-//        super.onActivityResult(requestCode, resultCode, data);
-//        if (requestCode == 1) {
-//            if(resultCode == RESULT_OK) {
-//                String strEditText = data.getStringExtra("editTextValue");
-//            }
-//        }
-//    }
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(resultCode == REQUEST_CODE_CANCEL) {
+            if(resultCode == Activity.RESULT_OK) {
+                int result = data.getIntExtra("EXTRA_DATA",0);
+                removeitem(result);
+            }
+        }
+    }
+
+    public void removeitem(int position){
+        adapter.notifyDataSetChanged();
+        arrayList.remove(position);
+        adapter.notifyDataSetChanged();
+        adapter = new FavoriteAdapter(arrayList, getActivity());
+        linearLayoutManager = new LinearLayoutManager(getActivity());
+        linearLayoutManager.setOrientation(RecyclerView.VERTICAL);
+        mRCycMs.setLayoutManager(linearLayoutManager);
+        mRCycMs.setAdapter(adapter);
+    }
 
 
     public void getData() {
@@ -91,9 +110,8 @@ public class FavoriteEventFragment extends Fragment {
                             Log.d("nnn", "onNext: "+eventFavoriteResponses.toString());
                             arrayList = (ArrayList<EventFavoriteResponse>) eventFavoriteResponses;
 //                        Log.d("nnn", "onNext: "+arrayList.get(0).getStatus());
-
                             adapter = new FavoriteAdapter(arrayList, getActivity());
-                            LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
+                            linearLayoutManager = new LinearLayoutManager(getActivity());
                             linearLayoutManager.setOrientation(RecyclerView.VERTICAL);
                             mRCycMs.setLayoutManager(linearLayoutManager);
                             mRCycMs.setAdapter(adapter);

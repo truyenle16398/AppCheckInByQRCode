@@ -38,22 +38,24 @@ public class HistoryDetailActivity extends AppCompatActivity {
     Button btnRegisterDetail;
     Toolbar toolbar;
     private int id;
+    private int postion;
+    public static final String EXTRA_DATA = "EXTRA_DATA";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_history_detail);
-
         InitWidget();
         setSupportActionBar(toolbar);
         Drawable drawable = getResources().getDrawable(R.drawable.ic_arrow_while24dp);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 //        getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setHomeAsUpIndicator(drawable);
-
         Intent intent = getIntent();
         id = intent.getIntExtra("idhistory", 0);
-        getdata(id);
+        postion = intent.getIntExtra("postion", 0);
+        getdata(id,postion);
         onclick();
     }
 
@@ -76,10 +78,10 @@ public class HistoryDetailActivity extends AppCompatActivity {
                             @Override
                             public void onNext(MessageResponse messageResponse) {
                                 Toast.makeText(HistoryDetailActivity.this, messageResponse.getMessage(), Toast.LENGTH_SHORT).show();
-//                                startActivityForResult(new Intent(HistoryDetailActivity.this, FavoriteEventFragment.class), 11111);
-//                                Intent intent = new Intent();
-//                                intent.putExtra("editTextValue", "value_here");
-//                                setResult(RESULT_OK, intent);
+//                                startActivityForResult(new Intent(HistoryDetailActivity.this, FavoriteEventFragment.class), 0x9345);
+                                Intent intent = new Intent();
+                                intent.putExtra("EXTRA_DATA",postion);
+                                setResult(RESULT_OK, intent);
                                 finish();
                             }
 
@@ -121,11 +123,11 @@ public class HistoryDetailActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private void getdata(int i) {
+    private void getdata(int id, int postion) {
         ProgressDialog dialog = new ProgressDialog(HistoryDetailActivity.this);
         dialog.setMessage("please wait...");
         dialog.show();
-        ApiClient.getService().detailevents(i).subscribeOn(Schedulers.io())
+        ApiClient.getService().detailevents(id).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<EventDetailResponse>() {
                     @Override
@@ -140,7 +142,7 @@ public class HistoryDetailActivity extends AppCompatActivity {
                         toolbar.setTitle(eventDetailResponse.getName());
                         txtDateTimeStart.setText(eventDetailResponse.getStart_time());
                         txtDateTimeEnd.setText(eventDetailResponse.getEnd_time());
-                        txtInfoDetail.setText(Html.fromHtml(eventDetailResponse.getDetail()));
+//                        txtInfoDetail.setText(Html.fromHtml(eventDetailResponse.getDetail()));
                         txtAddressInfoDetail.setText(eventDetailResponse.getPlace());
 
                     }
