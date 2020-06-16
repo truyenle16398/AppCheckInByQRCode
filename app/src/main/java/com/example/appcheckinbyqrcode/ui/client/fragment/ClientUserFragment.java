@@ -1,5 +1,7 @@
 package com.example.appcheckinbyqrcode.ui.client.fragment;
 
+import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -23,6 +25,7 @@ import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -39,6 +42,7 @@ import com.example.appcheckinbyqrcode.network.response.MessageResponse;
 import com.example.appcheckinbyqrcode.network.response.UploadAvatarResponse;
 import com.example.appcheckinbyqrcode.network.response.UserResponse;
 import com.example.appcheckinbyqrcode.network.url;
+import com.example.appcheckinbyqrcode.ui.client.UpdatedProfileActivity;
 import com.example.appcheckinbyqrcode.ui.login.LoginActivity;
 
 import java.io.ByteArrayOutputStream;
@@ -60,19 +64,19 @@ import okhttp3.RequestBody;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class ClientUserFragment extends Fragment implements TextView.OnEditorActionListener, EditText.OnClickListener {
+public class ClientUserFragment extends Fragment{
     private static final String TAG = "nnn";
-    SwipeRefreshLayout swipeRefreshLayout;
-    TextView tvmyprofile;
-    Button btnChangePass, btnLogOut, btnChangeInfo, btnChangeAvatar;
-    EditText edtName, edtEmail, edtPhone, edtAddress, edt_OldPassword, edt_NewPassword;
-    String name, email, phone, address;
-    CircleImageView circleimg;
-    ViewGroup view_changepass_logout, view_logout, view_changepass, viewchangeimage;
+    private SwipeRefreshLayout swipeRefreshLayout;
+    private TextView tvMyProfile, tvName, tvEmail, tvPhone, tvAddress;
+    private LinearLayout lnchangInfo, lnchangPass, lnlogOut;
+    private Button btnChangeAvatar;
+    private EditText edt_OldPassword, edt_NewPassword;
+    private String name, email, phone, address;
+    String urls;
+    private CircleImageView circleimg;
     private View view;
     private AlertDialog dialog;
     private ProgressBar progress;
-    private RequestBody fbody;
     private static final int PICK_IMAGE = 100;
     String realpath = "";
     Uri imageUri;
@@ -88,7 +92,6 @@ public class ClientUserFragment extends Fragment implements TextView.OnEditorAct
         initWidget();
         getinfo();
         onclick();
-        oncheck();
         return view;
     }
 
@@ -108,11 +111,11 @@ public class ClientUserFragment extends Fragment implements TextView.OnEditorAct
                         email = userResponse.getEmail();
                         phone = userResponse.getPhone();
                         address = userResponse.getAddress();
-                        String urls = url.getUrlimg() + userResponse.getAvatar();
-                        edtName.setText(name);
-                        edtEmail.setText(email);
-                        edtPhone.setText(phone);
-                        edtAddress.setText(address);
+                        urls = url.getUrlimg() + userResponse.getAvatar();
+                        tvName.setText(name);
+                        tvEmail.setText(email);
+                        tvPhone.setText(phone);
+                        tvAddress.setText(address);
                         Log.d(TAG, "onNext: " + urls);
 //                        Picasso.get().load(urls).into(circleimg);
                         Glide.with(getActivity())
@@ -134,43 +137,9 @@ public class ClientUserFragment extends Fragment implements TextView.OnEditorAct
                 });
     }
 
-    private void oncheck() {
-        edtName.setOnEditorActionListener(this::onEditorAction);
-        edtEmail.setOnEditorActionListener(this::onEditorAction);
-        edtPhone.setOnEditorActionListener(this::onEditorAction);
-        edtAddress.setOnEditorActionListener(this::onEditorAction);
-
-
-        edtName.setOnClickListener(this::onClick);
-        edtEmail.setOnClickListener(this::onClick);
-        edtPhone.setOnClickListener(this::onClick);
-        edtAddress.setOnClickListener(this::onClick);
-
-    }
-
     private void onclick() {
-        // Xu ly buton change pass and log out
-        tvmyprofile.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                if (view_changepass.getVisibility() == View.INVISIBLE) {// && view_logout.getVisibility()==View.INVISIBLE
-// TransitionManager.beginDelayedTransition(view_changepass_logout, new Slide(Gravity.START));
-                    TransitionManager.beginDelayedTransition(view_changepass, new Slide(Gravity.START));
-                    TransitionManager.beginDelayedTransition(view_logout, new Slide(Gravity.END));
-                    view_changepass.setVisibility(View.VISIBLE);
-                    view_logout.setVisibility(View.VISIBLE);
-                } else {
-// TransitionManager.beginDelayedTransition(view_changepass_logout);
-                    TransitionManager.beginDelayedTransition(view_changepass, new Slide(Gravity.START));
-                    TransitionManager.beginDelayedTransition(view_logout, new Slide(Gravity.END));
-                    view_changepass.setVisibility(View.INVISIBLE);
-                    view_logout.setVisibility(View.INVISIBLE);
-                }
-            }
-        });
         //button log out
-        btnLogOut.setOnClickListener(new View.OnClickListener() {
+        lnlogOut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 AlertDialog builder = new AlertDialog.Builder(getActivity()).setMessage("Bạn có muốn thoát không?")
@@ -179,65 +148,33 @@ public class ClientUserFragment extends Fragment implements TextView.OnEditorAct
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 logout();
                             }
-                        }).setIcon(android.R.drawable.ic_dialog_info).show();
+                        }).setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                // do nothing
+                            }
+                        })
+                        .setIcon(android.R.drawable.ic_dialog_info).show();
             }
         });
-        btnChangePass.setOnClickListener(new View.OnClickListener() {
+        lnchangPass.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 showDialog();
             }
         });
         //button change infor
-        btnChangeInfo.setOnClickListener(new View.OnClickListener() {
+        lnchangInfo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                hideKeybaord(v);
-                ProgressDialog pd = new ProgressDialog(getActivity());
-                pd.setMessage("loading");
-                pd.show();
-                String namea = edtName.getText().toString();
-                String emaila = edtEmail.getText().toString();
-                String phonea = edtPhone.getText().toString();
-                String addressa = edtAddress.getText().toString();
-
-// Log.d("nnn", "onClick: "+email+"=="+emailedt +" và "+ name+"=="+nameedt);
-                if (name.equals(namea) && email.equals(emaila) && phone.equals(phonea) && address.equals(addressa)) {
-                    Toast.makeText(getContext(), "Bạn chưa chỉnh sửa!", Toast.LENGTH_SHORT).show();
-                    pd.dismiss();
-                } else {
-                    if (namea.equals("") || emaila.equals("") || phonea.equals("") || addressa.equals("")) {
-                        Toast.makeText(getContext(), "Không được để trống!", Toast.LENGTH_SHORT).show();
-                        pd.dismiss();
-                    } else {
-                        ApiClient.getService().updateinfo(namea, emaila, phonea, addressa)
-                                .subscribeOn(Schedulers.io())
-                                .observeOn(AndroidSchedulers.mainThread())
-                                .subscribe(new Observer<UserResponse>() {
-                                    @Override
-                                    public void onSubscribe(Disposable d) {
-                                    }
-
-                                    @Override
-                                    public void onNext(UserResponse userResponse) {
-                                        Toast.makeText(getActivity(), "Thay đổi thông tin thành công!", Toast.LENGTH_SHORT).show();
-                                        Log.d(TAG, "onNext: " + userResponse.getName());
-                                        btnChangeInfo.setVisibility(View.GONE);
-                                    }
-
-                                    @Override
-                                    public void onError(Throwable e) {
-                                        Log.d(TAG, "onError update pass " + e.getMessage());
-                                        pd.dismiss();
-                                    }
-
-                                    @Override
-                                    public void onComplete() {
-                                        pd.dismiss();
-                                    }
-                                });
-                    }
-                }
+                Intent intent = new Intent(getActivity(), UpdatedProfileActivity.class);
+                intent.putExtra("name",tvName.getText().toString());
+                intent.putExtra("email",tvEmail.getText().toString());
+                intent.putExtra("phone",tvPhone.getText().toString());
+                intent.putExtra("address",tvAddress.getText().toString());
+                intent.putExtra("address",tvAddress.getText().toString());
+                intent.putExtra("url",urls);
+                startActivityForResult(intent, 0x5462);
+//                getActivity().startActivity(intent);
             }
         });
         btnChangeAvatar.setOnClickListener(new View.OnClickListener() {
@@ -263,38 +200,33 @@ public class ClientUserFragment extends Fragment implements TextView.OnEditorAct
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (data != null && data.getData() != null) {
-//            circleimg.setImageURI(data.getData());
-            Uri uri = data.getData();
-            realpath = getRealPathFromURI(uri);
-
-            try {
-                InputStream inputStream = getActivity().getContentResolver().openInputStream(uri);
-                Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
-                circleimg.setImageBitmap(bitmap);
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
+            switch (requestCode) {
+                case 0x5462:
+                    Toast.makeText(getActivity(), "Khoa click finish!", Toast.LENGTH_SHORT).show();
+                    Log.d("nnn", "onActivityResult: khoa click finish");
+                    break;
+                case 0x9345:
+                    Uri uri = data.getData();
+                    realpath = getRealPathFromURI(uri);
+                    try {
+                        InputStream inputStream = getActivity().getContentResolver().openInputStream(uri);
+                        Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
+                        circleimg.setImageBitmap(bitmap);
+                    } catch (FileNotFoundException e) {
+                        e.printStackTrace();
+                    }
+                    btnChangeAvatar.setVisibility(View.VISIBLE);
+                    break;
+                default:
+                    break;
             }
-            btnChangeAvatar.setVisibility(View.VISIBLE);
-//            try {
-//                Bitmap bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), data.getData());
-//                ByteArrayOutputStream stream = new ByteArrayOutputStream();
-//                bitmap.compress(Bitmap.CompressFormat.PNG, 45, stream);
-//                byte[] byteArray = stream.toByteArray();
-//                bitmap.recycle();
-//                //Log.v("Avatar Path", file.getAbsolutePath());
-//                fbody = RequestBody.create(MediaType.parse("image/png"), byteArray);
-//
-//                //choose image finsh update image
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
         }
 
     }
 
-    public String getRealPathFromURI (Uri contentUri) {
+    public String getRealPathFromURI(Uri contentUri) {
         String path = null;
-        String[] proj = { MediaStore.MediaColumns.DATA};
+        String[] proj = {MediaStore.MediaColumns.DATA};
         Cursor cursor = getActivity().getContentResolver().query(contentUri, proj, null, null, null);
         if (cursor.moveToFirst()) {
             int column_index = cursor.getColumnIndexOrThrow(MediaStore.MediaColumns.DATA);
@@ -314,10 +246,10 @@ public class ClientUserFragment extends Fragment implements TextView.OnEditorAct
         File file = new File(filename);
         String filepath = file.getAbsolutePath();
         String[] arraynamefile = filepath.split("\\.");
-        filepath = arraynamefile[0]  + System.currentTimeMillis() + "."+ arraynamefile[1];
+        filepath = arraynamefile[0] + System.currentTimeMillis() + "." + arraynamefile[1];
         RequestBody requestBody = RequestBody.create(MediaType.parse("multipart/form-data"), file);
         MultipartBody.Part body = MultipartBody.Part.createFormData("avatar", filepath, requestBody);
-        Log.d(TAG, "upDateUserAvatar: "+ filepath);
+        Log.d(TAG, "upDateUserAvatar: " + filepath);
         ApiClient.getService().updateAvatar(body)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -334,9 +266,10 @@ public class ClientUserFragment extends Fragment implements TextView.OnEditorAct
 //                        Glide.with(getContext()).load(urls).into(circleimg);
 
                     }
+
                     @Override
                     public void onError(Throwable e) {
-                        Log.d(TAG, "onError: " +e.getMessage());
+                        Log.d(TAG, "onError: " + e.getMessage());
                         pd.dismiss();
                     }
 
@@ -351,7 +284,7 @@ public class ClientUserFragment extends Fragment implements TextView.OnEditorAct
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         LayoutInflater inflater = getActivity().getLayoutInflater();
         View view = inflater.inflate(R.layout.dialog_changepass, null);
-        progress = (ProgressBar) view.findViewById(R.id.progress);
+        progress = view.findViewById(R.id.progress);
         builder.setView(view);
         builder.setTitle("Đổi mật khẩu mới");
         builder.setPositiveButton("Đổi", new DialogInterface.OnClickListener() {
@@ -390,10 +323,6 @@ public class ClientUserFragment extends Fragment implements TextView.OnEditorAct
         });
     }
 
-    private void hideKeybaord(View v) {
-        InputMethodManager inputMethodManager = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
-        inputMethodManager.hideSoftInputFromWindow(v.getApplicationWindowToken(), 0);
-    }
 
     private void changePassword(String old_password1, String new_password1) {
         if (old_password1 != new_password1) {
@@ -429,33 +358,17 @@ public class ClientUserFragment extends Fragment implements TextView.OnEditorAct
         }
     }
 
-
-    @Override
-    public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-        if (actionId == EditorInfo.IME_ACTION_SEARCH
-                || actionId == EditorInfo.IME_ACTION_DONE
-                || event.getAction() == EditorInfo.IME_ACTION_DONE
-                || event.getAction() == KeyEvent.KEYCODE_ENTER) {
-            btnChangeInfo.setVisibility(View.VISIBLE);
-        }
-        return false;
-    }
-
+    @SuppressLint("CutPasteId")
     private void initWidget() {
-        view_changepass_logout = view.findViewById(R.id.viewchangepass_logout);
-        view_changepass = view.findViewById(R.id.view_btnchangepass);
-        view_logout = view.findViewById(R.id.view_btnlogout);
-        btnChangePass = view.findViewById(R.id.btnChangePass);
         circleimg = view.findViewById(R.id.profilePic_client);
         btnChangeAvatar = view.findViewById(R.id.btnChangeAvatar);
-        viewchangeimage = view.findViewById(R.id.viewchangeimage);
-        btnLogOut = view.findViewById(R.id.btnLogout);
-        btnChangeInfo = view.findViewById(R.id.btnChangeInfo);
-        edtName = view.findViewById(R.id.edtNameClient);
-        edtEmail = view.findViewById(R.id.edtEmailClient);
-        edtPhone = view.findViewById(R.id.edtPhoneClient);
-        edtAddress = view.findViewById(R.id.edtAddressClient);
-        tvmyprofile = view.findViewById(R.id.tvmyprofile);
+        tvName = view.findViewById(R.id.tvNameClient);
+        tvEmail = view.findViewById(R.id.tvEmailClient);
+        tvPhone = view.findViewById(R.id.tvPhoneClient);
+        tvAddress = view.findViewById(R.id.tvAddressClient);
+        lnchangInfo = view.findViewById(R.id.linearChangeInfo);
+        lnchangPass = view.findViewById(R.id.linearChangePass);
+        lnlogOut = view.findViewById(R.id.linearLogOut);
         swipeRefreshLayout = view.findViewById(R.id.swipeRefreshLayoutuser);
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -504,8 +417,20 @@ public class ClientUserFragment extends Fragment implements TextView.OnEditorAct
                 });
     }
 
-    @Override
-    public void onClick(View v) {
-        btnChangeInfo.setVisibility(View.VISIBLE);
-    }
 }
+
+
+
+//            try {
+//                Bitmap bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), data.getData());
+//                ByteArrayOutputStream stream = new ByteArrayOutputStream();
+//                bitmap.compress(Bitmap.CompressFormat.PNG, 45, stream);
+//                byte[] byteArray = stream.toByteArray();
+//                bitmap.recycle();
+//                //Log.v("Avatar Path", file.getAbsolutePath());
+//                fbody = RequestBody.create(MediaType.parse("image/png"), byteArray);
+//
+//                //choose image finsh update image
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }

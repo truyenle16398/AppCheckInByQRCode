@@ -110,7 +110,7 @@ public interface ApiService {
 
     //show chi tiet danh sach su kien
     @GET("event/detail/{id}")
-    Observable<EventDetailResponse> detailevents(@Path("id") int id);
+    Observable<MessageResponse> detailevents(@Path("id") int id);
 
     //đăng kí sự kiện
     @POST("event/register/{id}")
