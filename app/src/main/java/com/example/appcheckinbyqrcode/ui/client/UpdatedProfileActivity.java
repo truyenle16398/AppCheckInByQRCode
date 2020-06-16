@@ -212,6 +212,11 @@ public class UpdatedProfileActivity extends AppCompatActivity {
             case R.id.updateok:
 //                changeInfo();
                 Intent intent = new Intent();
+                Log.d("nnn", "onOptionsItemSelected: "+tvName.getText().toString());
+                intent.putExtra("name",tvName.getText().toString());
+                intent.putExtra("email",tvEmail.getText().toString());
+                intent.putExtra("phone",tvPhone.getText().toString());
+                intent.putExtra("address",tvAddress.getText().toString());
                 setResult(RESULT_OK, intent);
                 finish();
                 return true;

@@ -37,7 +37,7 @@ import io.reactivex.schedulers.Schedulers;
  */
 public class FavoriteEventFragment extends Fragment {
 
-    private static final int REQUEST_CODE_CANCEL = 0x9345;
+    public static final int REQUEST_CODE_CANCEL =5555;
     ArrayList<EventFavoriteResponse> arrayList;
     ProgressDialog dialog;
     SwipeRefreshLayout refreshLayout;
@@ -56,7 +56,11 @@ public class FavoriteEventFragment extends Fragment {
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_favorite_event, container, false);
         InitWidget();
+        onclick();
         return view;
+    }
+
+    private void onclick() {
     }
 
     @Override
@@ -64,14 +68,20 @@ public class FavoriteEventFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         getData();
     }
+
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(resultCode == REQUEST_CODE_CANCEL) {
-            if(resultCode == Activity.RESULT_OK) {
+        adapter.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == REQUEST_CODE_CANCEL) {
+            if(resultCode==getActivity().RESULT_OK) {
                 Log.d("nnn", "onActivityResult goingiiiiiiiiiiiii ");
                 int result = data.getIntExtra("EXTRA_DATA",0);
-                removeitem(result);
+//                removeitem(result);
+            }else {
+                Log.d("nnn", "eeeeeeeeeeeeeeeeeeeeeee ");
             }
+        } else {
+            Log.d("nnn", "fffffffffffffffffffffffffffffffffffff ");
         }
     }
 
@@ -106,7 +116,7 @@ public class FavoriteEventFragment extends Fragment {
                         } else {
                             mRCycMs.setVisibility(View.VISIBLE);
                             tvthongbao.setVisibility(View.GONE);
-                            Log.d("nnn", "onNext: "+eventFavoriteResponses.toString());
+//                            Log.d("nnn", "onNext: "+eventFavoriteResponses.toString());
                             arrayList = (ArrayList<EventFavoriteResponse>) eventFavoriteResponses;
 //                        Log.d("nnn", "onNext: "+arrayList.get(0).getStatus());
                             adapter = new FavoriteAdapter(arrayList, getActivity());
@@ -148,10 +158,10 @@ public class FavoriteEventFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        if (!checkBack){
-             getData();
-             checkBack=true;
-        }
+//        if (!checkBack){
+//             getData();
+//             checkBack=true;
+//        }
 
     }
 }

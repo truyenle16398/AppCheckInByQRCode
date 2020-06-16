@@ -66,6 +66,11 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.Favori
         return items.size();
     }
 
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode==5555){
+            Log.d(TAG, "onActivityResult: okeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee");
+        }
+    }
 
     public class Favorite_holder extends RecyclerView.ViewHolder {
         public TextView name, persion, day, check;
@@ -88,7 +93,8 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.Favori
                     Intent intent = new Intent(context, HistoryDetailActivity.class);
                     intent.putExtra("idhistory",items.get(getAdapterPosition()).getEventId());
                     intent.putExtra("postion",getAdapterPosition());
-                    ((Activity) context).startActivityForResult(intent, 0x9345);
+                    ((Activity) context).startActivityForResult(intent, FavoriteEventFragment.REQUEST_CODE_CANCEL);
+//                    context.startActivityForResult(intent, 5555);
 //                    context.startActivity(intent);
                 }
             });
