@@ -47,6 +47,7 @@ public class FavoriteEventFragment extends Fragment {
     TextView tvthongbao;
     View view;
     LinearLayoutManager linearLayoutManager;
+    public static Boolean  checkBack=true;
     public FavoriteEventFragment() {
         // Required empty public constructor
     }
@@ -55,8 +56,6 @@ public class FavoriteEventFragment extends Fragment {
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_favorite_event, container, false);
         InitWidget();
-        final Intent intent = new Intent(getActivity(), HistoryDetailActivity.class);
-        startActivityForResult(intent, REQUEST_CODE_CANCEL);
         return view;
     }
 
@@ -65,11 +64,11 @@ public class FavoriteEventFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         getData();
     }
-
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if(resultCode == REQUEST_CODE_CANCEL) {
             if(resultCode == Activity.RESULT_OK) {
+                Log.d("nnn", "onActivityResult goingiiiiiiiiiiiii ");
                 int result = data.getIntExtra("EXTRA_DATA",0);
                 removeitem(result);
             }
@@ -77,9 +76,9 @@ public class FavoriteEventFragment extends Fragment {
     }
 
     public void removeitem(int position){
+        Log.d("nnn", "removeitem goingiiiiiiiiiiiii ");
         adapter.notifyDataSetChanged();
         arrayList.remove(position);
-        adapter.notifyDataSetChanged();
         adapter = new FavoriteAdapter(arrayList, getActivity());
         linearLayoutManager = new LinearLayoutManager(getActivity());
         linearLayoutManager.setOrientation(RecyclerView.VERTICAL);
@@ -149,6 +148,10 @@ public class FavoriteEventFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-       // getData();
+        if (!checkBack){
+             getData();
+             checkBack=true;
+        }
+
     }
 }

@@ -16,11 +16,20 @@ public class MessageResponse {
     @SerializedName("message")
     @Expose
     private String message;
+
     @SerializedName("event")
     @Expose
     private Event event;
+
     @SerializedName("user")
     @Expose
-//    private UserQRRespon user;
     private ArrayList<UserQRRespon> user;
+
+    @SerializedName("number_register")
+    @Expose
+    private String number_register;
+
+    @SerializedName("detail")
+    @Expose
+    private EventDetailResponse detail;
 }

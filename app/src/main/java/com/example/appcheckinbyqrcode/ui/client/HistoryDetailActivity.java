@@ -63,6 +63,7 @@ public class HistoryDetailActivity extends AppCompatActivity {
         btnRegisterDetail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                FavoriteEventFragment.checkBack=false;
                 ProgressDialog dialog = new ProgressDialog(HistoryDetailActivity.this);
                 dialog.setMessage("please wait...");
                 dialog.show();
@@ -78,11 +79,11 @@ public class HistoryDetailActivity extends AppCompatActivity {
                             @Override
                             public void onNext(MessageResponse messageResponse) {
                                 Toast.makeText(HistoryDetailActivity.this, messageResponse.getMessage(), Toast.LENGTH_SHORT).show();
-//                                startActivityForResult(new Intent(HistoryDetailActivity.this, FavoriteEventFragment.class), 0x9345);
                                 Intent intent = new Intent();
                                 intent.putExtra("EXTRA_DATA",postion);
                                 setResult(RESULT_OK, intent);
                                 finish();
+//                                onBackPressed();
                             }
 
                             @Override
@@ -100,16 +101,6 @@ public class HistoryDetailActivity extends AppCompatActivity {
         });
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        requestCode &= 0xffff;
-        for (Fragment fragment : getSupportFragmentManager().getFragments()) {
-            if (fragment != null) {
-                fragment.onActivityResult(requestCode, resultCode, data);
-            }
-        }
-        super.onActivityResult(requestCode, resultCode, data);
-    }
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
@@ -129,15 +120,17 @@ public class HistoryDetailActivity extends AppCompatActivity {
         dialog.show();
         ApiClient.getService().detailevents(id).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<EventDetailResponse>() {
+                .subscribe(new Observer<MessageResponse>() {
                     @Override
                     public void onSubscribe(Disposable d) {
 
                     }
 
                     @Override
-                    public void onNext(EventDetailResponse eventDetailResponse) {
+                    public void onNext(MessageResponse messageResponse) {
+                        EventDetailResponse eventDetailResponse = messageResponse.getDetail();
                         String urls = url.getUrlimgevent()+ eventDetailResponse.getImage();
+                        Log.d("nnn", "onNext: "+urls);
                         Glide.with(getApplicationContext()).load(urls).into(imageDetail);
                         toolbar.setTitle(eventDetailResponse.getName());
                         txtDateTimeStart.setText(eventDetailResponse.getStart_time());

@@ -9,6 +9,7 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = false)
 @Data
 public class EventDetailResponse {
+
     @SerializedName("id")
     @Expose
     private String id;

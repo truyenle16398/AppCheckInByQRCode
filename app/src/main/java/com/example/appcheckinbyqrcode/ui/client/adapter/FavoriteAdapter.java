@@ -1,8 +1,10 @@
 package com.example.appcheckinbyqrcode.ui.client.adapter;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,13 +21,15 @@ import com.example.appcheckinbyqrcode.R;
 import com.example.appcheckinbyqrcode.network.response.EventFavoriteResponse;
 import com.example.appcheckinbyqrcode.network.url;
 import com.example.appcheckinbyqrcode.ui.client.HistoryDetailActivity;
+import com.example.appcheckinbyqrcode.ui.client.fragment.FavoriteEventFragment;
+
 import java.util.List;
 
 public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.Favorite_holder> {
     private static final String TAG = "nnn";
     private List<EventFavoriteResponse> items;
     private Context context;
-
+    FavoriteEventFragment fm;
 
     public FavoriteAdapter(List<EventFavoriteResponse> items, Context context) {
         this.items = items;
@@ -84,7 +88,8 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.Favori
                     Intent intent = new Intent(context, HistoryDetailActivity.class);
                     intent.putExtra("idhistory",items.get(getAdapterPosition()).getEventId());
                     intent.putExtra("postion",getAdapterPosition());
-                    context.startActivity(intent);
+                    ((Activity) context).startActivityForResult(intent, 0x9345);
+//                    context.startActivity(intent);
                 }
             });
         }

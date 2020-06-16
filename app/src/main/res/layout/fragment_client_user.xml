@@ -19,63 +19,11 @@
             android:layout_height="match_parent"
             android:gravity="center|top"
             android:orientation="vertical">
-
-            <LinearLayout
-                android:layout_marginRight="15dp"
-                android:layout_marginLeft="15dp"
-                android:weightSum="2"
-                android:visibility="visible"
-                android:id="@+id/viewchangepass_logout"
-                android:gravity="center"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <LinearLayout
-                    android:visibility="invisible"
-                    android:id="@+id/view_btnchangepass"
-                    android:layout_weight="1"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content">
-                    <Button
-                        android:layout_marginRight="5dp"
-                        android:id="@+id/btnChangePass"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_gravity="center"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginBottom="10dp"
-                        android:background="@drawable/ripple_effect"
-                        android:text="Change Password"
-                        android:textColor="#FFFFFF"
-                        android:textSize="18sp" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:visibility="invisible"
-                    android:id="@+id/view_btnlogout"
-                    android:layout_weight="1"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent">
-                    <Button
-                        android:layout_weight="1"
-                        android:layout_marginLeft="5dp"
-                        android:id="@+id/btnLogout"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_gravity="center"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginBottom="10dp"
-                        android:background="@drawable/ripple_effect"
-                        android:text="Logout"
-                        android:textColor="#FFFFFF"
-                        android:textSize="18sp" />
-                </LinearLayout>
-            </LinearLayout>
-
             <TextView
                 android:id="@+id/tvmyprofile"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="30dp"
                 android:gravity="center"
                 android:text="MY PROFILE"
                 android:textColor="#ffffff"
@@ -124,10 +72,12 @@
                 android:layout_marginTop="20dp"
                 android:layout_marginRight="25dp"
                 android:layout_marginBottom="60dp"
+                android:padding="10dp"
                 android:background="@drawable/box_bg"
                 android:gravity="center|top"
                 android:orientation="vertical">
                 <TextView
+                    android:visibility="gone"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="32dp"
@@ -137,108 +87,223 @@
                     android:textStyle="bold" />
 
                 <LinearLayout
+                    android:layout_marginBottom="10dp"
+                    android:background="@drawable/ripper"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="20dp"
+                    android:paddingBottom="7dp"
+                    android:paddingTop="7dp"
+                    android:weightSum="4"
+                    android:orientation="horizontal"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="20dp"
-                    android:orientation="horizontal">
-
-                    <EditText
-                        android:imeOptions="actionSearch"
-                        android:singleLine="true"
-                        android:id="@+id/edtNameClient"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="20dp"
-                        android:layout_marginRight="20dp"
-                        android:gravity="right"
-                        android:padding="10dp"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:layout_weight="1"
+                        android:text="Name"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:gravity="left"
+                        android:textColor="#000"
                         android:textColorHint="#a8a8a8"
-                        android:textSize="20dp" />
+                        android:textSize="15sp" />
+                    <TextView
+                        android:layout_weight="3"
+                        android:text="Quách Hồng Khoa"
+                        android:id="@+id/tvNameClient"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:gravity="right"
+                        android:textColor="#000"
+                        android:textColorHint="#a8a8a8"
+                        android:textSize="15sp" />
                 </LinearLayout>
-
                 <LinearLayout
+                    android:layout_marginBottom="10dp"
+                    android:background="@drawable/ripper"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="20dp"
+                    android:paddingBottom="7dp"
+                    android:paddingTop="7dp"
+                    android:weightSum="4"
+                    android:orientation="horizontal"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="20dp"
-                    android:orientation="horizontal">
-
-                    <EditText
-                        android:imeOptions="actionSearch"
-                        android:singleLine="true"
-                        android:id="@+id/edtEmailClient"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="20dp"
-                        android:layout_marginRight="20dp"
-                        android:ems="10"
-                        android:gravity="right"
-                        android:inputType="textEmailAddress"
-                        android:padding="10dp"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:layout_weight="1"
+                        android:text="Email"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:gravity="left"
+                        android:textColor="#000"
                         android:textColorHint="#a8a8a8"
-                        android:textSize="20dp" />
+                        android:textSize="15sp" />
+                    <TextView
+                        android:id="@+id/tvEmailClient"
+                        android:layout_weight="3"
+                        android:text="quachhongkhoa.it@gmail.com"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:gravity="right"
+                        android:textColor="#000"
+                        android:textColorHint="#a8a8a8"
+                        android:textSize="15sp" />
                 </LinearLayout>
-
                 <LinearLayout
+                    android:layout_marginBottom="10dp"
+                    android:background="@drawable/ripper"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="20dp"
+                    android:paddingBottom="7dp"
+                    android:paddingTop="7dp"
+                    android:weightSum="4"
+                    android:orientation="horizontal"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="20dp"
-                    android:orientation="horizontal">
-
-                    <EditText
-                        android:imeOptions="actionSearch"
-                        android:singleLine="true"
-                        android:id="@+id/edtPhoneClient"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="20dp"
-                        android:layout_marginRight="20dp"
-                        android:ems="10"
-                        android:gravity="right"
-                        android:inputType="phone"
-                        android:padding="10dp"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:layout_weight="1"
+                        android:text="Phone"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:gravity="left"
+                        android:textColor="#000"
                         android:textColorHint="#a8a8a8"
-                        android:textSize="20dp" />
+                        android:textSize="15sp" />
+                    <TextView
+                        android:layout_weight="3"
+                        android:text="0985645057"
+                        android:id="@+id/tvPhoneClient"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:gravity="right"
+                        android:textColor="#000"
+                        android:textColorHint="#a8a8a8"
+                        android:textSize="15sp" />
                 </LinearLayout>
-
                 <LinearLayout
+                    android:layout_marginBottom="10dp"
+                    android:background="@drawable/ripper"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="20dp"
+                    android:paddingBottom="7dp"
+                    android:paddingTop="7dp"
+                    android:weightSum="4"
+                    android:orientation="horizontal"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="20dp"
-                    android:orientation="horizontal">
-
-                    <EditText
-                        android:imeOptions="actionSearch"
-                        android:singleLine="true"
-                        android:id="@+id/edtAddressClient"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="20dp"
-                        android:layout_marginRight="20dp"
-                        android:ems="10"
-                        android:gravity="right"
-                        android:inputType="text"
-                        android:padding="10dp"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:layout_weight="1"
+                        android:text="Address"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:gravity="left"
+                        android:textColor="#000"
                         android:textColorHint="#a8a8a8"
-                        android:textSize="20dp" />
+                        android:textSize="15sp" />
+                    <TextView
+                        android:id="@+id/tvAddressClient"
+                        android:layout_weight="3"
+                        android:text="Hoài Ân- Bình Định"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:gravity="right"
+                        android:textColor="#000"
+                        android:textColorHint="#a8a8a8"
+                        android:textSize="15sp" />
                 </LinearLayout>
-
-                <Button
-                    android:visibility="gone"
-                    android:id="@+id/btnChangeInfo"
-                    android:layout_width="200dp"
-                    android:layout_height="50dp"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginBottom="20dp"
-                    android:background="@drawable/ripple_effect"
-                    android:text="Cập nhật thông tin"
-                    android:textColor="#FFFFFF"
-                    android:textSize="18sp" />
-
-
+                <LinearLayout
+                    android:id="@+id/linearChangePass"
+                    android:layout_marginBottom="10dp"
+                    android:background="@drawable/ripper"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:paddingBottom="7dp"
+                    android:paddingTop="7dp"
+                    android:weightSum="4"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:singleLine="true"
+                        android:layout_weight="2"
+                        android:text="Đổi mật khẩu"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:gravity="left"
+                        android:textColor="#000"
+                        android:textSize="15sp" />
+                    <TextView
+                        android:drawableRight="@drawable/ic_chevron_right_defaul_20dp"
+                        android:enabled="true"
+                        android:layout_weight="2"
+                        android:text="Thiết lập ngay"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:gravity="right"
+                        android:textSize="15sp" />
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/linearChangeInfo"
+                    android:layout_marginBottom="10dp"
+                    android:background="@drawable/ripper"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:paddingBottom="7dp"
+                    android:paddingTop="7dp"
+                    android:weightSum="4"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:singleLine="true"
+                        android:layout_weight="2"
+                        android:text="Sửa hồ sơ"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:gravity="left"
+                        android:textColor="#000"
+                        android:textSize="15sp" />
+                    <TextView
+                        android:drawableRight="@drawable/ic_chevron_right_defaul_20dp"
+                        android:enabled="true"
+                        android:layout_weight="2"
+                        android:text="Thiết lập ngay"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:gravity="right"
+                        android:textSize="15sp" />
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/linearLogOut"
+                    android:layout_marginBottom="10dp"
+                    android:background="@drawable/ripper"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:paddingBottom="7dp"
+                    android:paddingTop="7dp"
+                    android:weightSum="4"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:singleLine="true"
+                        android:layout_weight="2"
+                        android:text="Đăng xuất"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:gravity="left"
+                        android:textColor="#000"
+                        android:textSize="15sp" />
+                    <TextView
+                        android:drawableRight="@drawable/ic_chevron_right_defaul_20dp"
+                        android:enabled="true"
+                        android:layout_weight="2"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:gravity="right"
+                        android:textSize="15sp" />
+                </LinearLayout>
             </LinearLayout>
         </LinearLayout>
     </ScrollView>
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
-
 </LinearLayout>

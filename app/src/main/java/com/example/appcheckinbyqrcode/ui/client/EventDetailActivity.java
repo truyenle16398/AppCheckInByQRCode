@@ -115,14 +115,15 @@ public class EventDetailActivity extends AppCompatActivity  {
         dialog.show();
         ApiClient.getService().detailevents(i).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<EventDetailResponse>() {
+                .subscribe(new Observer<MessageResponse>() {
                     @Override
                     public void onSubscribe(Disposable d) {
 
                     }
 
                     @Override
-                    public void onNext(EventDetailResponse eventDetailResponse) {
+                    public void onNext(MessageResponse messageResponse) {
+                        EventDetailResponse eventDetailResponse = messageResponse.getDetail();
                         String urls = url.getUrlimgevent()+ eventDetailResponse.getImage();
                         Glide.with(getApplicationContext()).load(urls).into(imageDetail);
                         toolbar.setTitle(eventDetailResponse.getName());

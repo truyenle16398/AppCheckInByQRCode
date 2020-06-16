@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/ripper"
+            android:paddingRight="10dp"
+            android:paddingLeft="10dp"
+            android:weightSum="8"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/tvBackDialogUpdate"
+                android:layout_weight="1"
+                android:drawableLeft="@drawable/ic_arrow_back_black_24dp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:id="@+id/tvhoi"
+                android:layout_marginTop="9dp"
+                android:gravity="center"
+                android:textColor="#000"
+                android:textSize="23sp"
+                android:text="Sửa tên"
+                android:layout_weight="6"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"/>
+            <TextView
+                android:id="@+id/tvOkDialogUpdate"
+                android:layout_weight="1"
+                android:drawableRight="@drawable/ic_check_black_24dp"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+        <EditText
+
+            android:paddingRight="10dp"
+            android:paddingLeft="10dp"
+            android:id="@+id/edtnhap"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="20dp"
+            android:hint="Nhập tên của bạn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:visibility="invisible"
+            android:paddingRight="10dp"
+            android:paddingLeft="10dp"
+            android:id="@+id/tvthongbaoupdate"
+            android:textColor="#FD2828"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="20dp"
+            android:textSize="15sp"
+            android:text="Sửa tên"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+    </LinearLayout>
+</LinearLayout>
