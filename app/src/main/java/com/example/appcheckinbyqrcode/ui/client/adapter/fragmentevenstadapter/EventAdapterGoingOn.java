@@ -15,10 +15,12 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.appcheckinbyqrcode.R;
 import com.example.appcheckinbyqrcode.network.response.EventListResponse;
 import com.example.appcheckinbyqrcode.network.url;
 import com.example.appcheckinbyqrcode.ui.client.EventDetailActivity;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -47,13 +49,13 @@ public class EventAdapterGoingOn extends RecyclerView.Adapter<EventAdapterGoingO
     @Override
     public void onBindViewHolder(@NonNull EventList_holder holder, int position) {
         String urls = url.getUrlimgevent() + items.get(position).getImage();
-        Glide.with(context).load(urls).into(holder.avatar);
-//        Glide.with(context)
-//                .load(urls)
-//                .diskCacheStrategy(DiskCacheStrategy.NONE)
-//                .skipMemoryCache(true)
-//                .into(holder.avatar);
-//        Picasso.get().load(urls).into(holder.avatar);
+//        Glide.with(context).load(urls).into(holder.avatar);
+        Glide.with(context)
+                .load(urls)
+                .diskCacheStrategy(DiskCacheStrategy.NONE)
+                .skipMemoryCache(true)
+                .into(holder.avatar);
+        Picasso.get().load(urls).into(holder.avatar);
 
         holder.getData(items.get(position));
     }
@@ -92,7 +94,6 @@ public class EventAdapterGoingOn extends RecyclerView.Adapter<EventAdapterGoingO
 
         }
         void getData(EventListResponse ex){
-            Log.d("nnn", "tuoi: " + ex.getName());
             // Log.d(TAG, "onBindViewHolder: "+ items.get(position).getEventname());
             name.setText(ex.getName());
             intro.setText(ex.getIntro());

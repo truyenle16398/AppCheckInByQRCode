@@ -80,7 +80,7 @@ public class HistoryDetailActivity extends AppCompatActivity {
                             public void onNext(MessageResponse messageResponse) {
                                 Toast.makeText(HistoryDetailActivity.this, messageResponse.getMessage(), Toast.LENGTH_SHORT).show();
                                 Intent intent = new Intent();
-                                intent.putExtra("EXTRA_DATA",postion);
+//                                intent.putExtra("EXTRA_DATA",postion);
                                 setResult(RESULT_OK, intent);
                                 finish();
 //                                onBackPressed();
@@ -130,7 +130,7 @@ public class HistoryDetailActivity extends AppCompatActivity {
                     public void onNext(MessageResponse messageResponse) {
                         EventDetailResponse eventDetailResponse = messageResponse.getDetail();
                         String urls = url.getUrlimgevent()+ eventDetailResponse.getImage();
-                        Log.d("nnn", "onNext: "+urls);
+//                        Log.d("nnn", "onNext: "+urls);
                         Glide.with(getApplicationContext()).load(urls).into(imageDetail);
                         toolbar.setTitle(eventDetailResponse.getName());
                         txtDateTimeStart.setText(eventDetailResponse.getStart_time());

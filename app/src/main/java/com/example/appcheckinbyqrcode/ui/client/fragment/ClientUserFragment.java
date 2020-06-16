@@ -80,6 +80,7 @@ public class ClientUserFragment extends Fragment{
     private static final int PICK_IMAGE = 100;
     String realpath = "";
     Uri imageUri;
+    private static final int REQUEST_CODE = 5462;
 
     public ClientUserFragment() {
 // Required empty public constructor
@@ -171,9 +172,8 @@ public class ClientUserFragment extends Fragment{
                 intent.putExtra("email",tvEmail.getText().toString());
                 intent.putExtra("phone",tvPhone.getText().toString());
                 intent.putExtra("address",tvAddress.getText().toString());
-                intent.putExtra("address",tvAddress.getText().toString());
                 intent.putExtra("url",urls);
-                startActivityForResult(intent, 0x5462);
+                startActivityForResult(intent, 5462);
 //                getActivity().startActivity(intent);
             }
         });
@@ -199,13 +199,20 @@ public class ClientUserFragment extends Fragment{
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (data != null && data.getData() != null) {
-            switch (requestCode) {
-                case 0x5462:
-                    Toast.makeText(getActivity(), "Khoa click finish!", Toast.LENGTH_SHORT).show();
-                    Log.d("nnn", "onActivityResult: khoa click finish");
-                    break;
-                case 0x9345:
+        switch (requestCode) {
+            case REQUEST_CODE:
+//                name = data.getStringExtra("namee");
+//                email = data.getStringExtra("emaile");
+//                phone = data.getStringExtra("phonee");
+//                address = data.getStringExtra("addresse");
+                tvName.setText(name = data.getStringExtra("name"));
+                tvEmail.setText(email = data.getStringExtra("email"));
+                tvPhone.setText(phone = data.getStringExtra("phone"));
+                tvAddress.setText(address = data.getStringExtra("address"));
+                Log.d(TAG, "onActivityResult: "+name+ email+phone+address);
+                break;
+            case PICK_IMAGE:
+                if (data != null && data.getData() != null) {
                     Uri uri = data.getData();
                     realpath = getRealPathFromURI(uri);
                     try {
@@ -216,11 +223,12 @@ public class ClientUserFragment extends Fragment{
                         e.printStackTrace();
                     }
                     btnChangeAvatar.setVisibility(View.VISIBLE);
-                    break;
-                default:
-                    break;
-            }
+                }
+                break;
+            default:
+                break;
         }
+
 
     }
 
