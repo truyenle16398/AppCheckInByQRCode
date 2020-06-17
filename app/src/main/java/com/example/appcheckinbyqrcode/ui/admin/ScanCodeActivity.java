@@ -57,8 +57,8 @@ public class ScanCodeActivity extends AppCompatActivity implements ZXingScannerV
 //        Log.d("nnn", "111handleResult: "+re.substring(0,1)+ " code: "+ re.substring(1));
         int id = Integer.parseInt(words[0].trim());
         String code = words[1].trim();
-//        Log.d("nnn", " và id: "+id+ " code: "+ code);
-//        Toast.makeText(this, "id:"+id +" code:"+ code, Toast.LENGTH_SHORT).show();
+        Log.d("nnn", " và id: "+id+ " code: "+ code);
+        Toast.makeText(this, "id:"+id +" code:"+ code, Toast.LENGTH_SHORT).show();
 
         ApiClient.getService().savecheckin(id,code)
                 .subscribeOn(Schedulers.io())

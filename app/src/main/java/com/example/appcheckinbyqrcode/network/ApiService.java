@@ -121,7 +121,7 @@ public interface ApiService {
     Observable<MessageResponse> cancelevent(@Path("id") int id);
 
     //Quét qr
-    @PUT("save_checkin/{id}")
+    @PUT("checkin/{id}")
     Observable<MessageResponse> savecheckin(@Path("id") int id,@Query("code") String code);
 
 
