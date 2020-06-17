@@ -121,7 +121,7 @@ public class ClientUserFragment extends Fragment{
                         tvPhone.setText(phone);
                         tvAddress.setText(address);
                         Log.d(TAG, "onNext: " + urls);
-//                        Picasso.get().load(urls).into(circleimg);
+// Picasso.get().load(urls).into(circleimg);
                         Glide.with(getActivity())
                                 .load(urls)
                                 .diskCacheStrategy(DiskCacheStrategy.NONE)
@@ -142,7 +142,7 @@ public class ClientUserFragment extends Fragment{
     }
 
     private void onclick() {
-        //button log out
+//button log out
         lnlogOut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -154,7 +154,7 @@ public class ClientUserFragment extends Fragment{
                             }
                         }).setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
-                                // do nothing
+// do nothing
                             }
                         })
                         .setIcon(android.R.drawable.ic_dialog_info).show();
@@ -166,7 +166,7 @@ public class ClientUserFragment extends Fragment{
                 showDialog();
             }
         });
-        //button change infor
+//button change infor
         lnchangInfo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -177,13 +177,13 @@ public class ClientUserFragment extends Fragment{
                 intent.putExtra("address",tvAddress.getText().toString());
                 intent.putExtra("url",urls);
                 startActivityForResult(intent, 5462);
-//                getActivity().startActivity(intent);
+// getActivity().startActivity(intent);
             }
         });
         btnChangeAvatar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                upDateUserAvatar(realpath);
+// upDateUserAvatar(realpath);
             }
         });
 
@@ -198,25 +198,25 @@ public class ClientUserFragment extends Fragment{
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-            switch (requestCode) {
-                case REQUEST_CODE:
-                    if (resultCode==RESULT_OK){
-                        tvName.setText(name = data.getStringExtra("name"));
-                        tvEmail.setText(email = data.getStringExtra("email"));
-                        tvPhone.setText(phone = data.getStringExtra("phone"));
-                        tvAddress.setText(address = data.getStringExtra("address"));
-                        Glide.with(getActivity())
-                                .load(data.getStringExtra("avatar"))
-                                .diskCacheStrategy(DiskCacheStrategy.NONE)
-                                .skipMemoryCache(true)
-                                .into(circleimg);
-                        Log.d(TAG, "onActivityResult: "+name+ email+phone+address);
-                    }
-                    break;
-                case PICK_IMAGE:
-                    break;
-                default:
-                    break;
+        switch (requestCode) {
+            case REQUEST_CODE:
+                if (resultCode==RESULT_OK){
+                    tvName.setText(name = data.getStringExtra("name"));
+                    tvEmail.setText(email = data.getStringExtra("email"));
+                    tvPhone.setText(phone = data.getStringExtra("phone"));
+                    tvAddress.setText(address = data.getStringExtra("address"));
+                    Glide.with(getActivity())
+                            .load(data.getStringExtra("avatar"))
+                            .diskCacheStrategy(DiskCacheStrategy.NONE)
+                            .skipMemoryCache(true)
+                            .into(circleimg);
+                    Log.d(TAG, "onActivityResult: "+name+ email+phone+address);
+                }
+                break;
+            case PICK_IMAGE:
+                break;
+            default:
+                break;
         }
     }
     private void showDialog() {
@@ -360,16 +360,16 @@ public class ClientUserFragment extends Fragment{
 
 
 
-//            try {
-//                Bitmap bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), data.getData());
-//                ByteArrayOutputStream stream = new ByteArrayOutputStream();
-//                bitmap.compress(Bitmap.CompressFormat.PNG, 45, stream);
-//                byte[] byteArray = stream.toByteArray();
-//                bitmap.recycle();
-//                //Log.v("Avatar Path", file.getAbsolutePath());
-//                fbody = RequestBody.create(MediaType.parse("image/png"), byteArray);
+// try {
+// Bitmap bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), data.getData());
+// ByteArrayOutputStream stream = new ByteArrayOutputStream();
+// bitmap.compress(Bitmap.CompressFormat.PNG, 45, stream);
+// byte[] byteArray = stream.toByteArray();
+// bitmap.recycle();
+// //Log.v("Avatar Path", file.getAbsolutePath());
+// fbody = RequestBody.create(MediaType.parse("image/png"), byteArray);
 //
-//                //choose image finsh update image
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
+// //choose image finsh update image
+// } catch (IOException e) {
+// e.printStackTrace();
+// }

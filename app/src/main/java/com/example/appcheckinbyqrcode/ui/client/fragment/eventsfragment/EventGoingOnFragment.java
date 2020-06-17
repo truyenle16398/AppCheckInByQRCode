@@ -92,8 +92,7 @@ public class EventGoingOnFragment extends Fragment {
                     @Override
                     public void onComplete() {
                         adapter.notifyDataSetChanged();
-                    }
-                });
+                    }});
     }
 
     private void InitWidget(View view) {

@@ -49,12 +49,12 @@ public class EventAdapterHappened extends RecyclerView.Adapter<EventAdapterHappe
     public void onBindViewHolder(@NonNull EventAdapterHappened.EventList_holder holder, int position) {
         String urls = url.getUrlimgevent() + items.get(position).getImage();
 //        Glide.with(context).load(urls).into(holder.avatar);
-        Glide.with(context)
-                .load(urls)
-                .diskCacheStrategy(DiskCacheStrategy.NONE)
-                .skipMemoryCache(true)
-                .into(holder.avatar);
-//        Picasso.get().load(urls).into(holder.avatar);
+//        Glide.with(context)
+//                .load(urls)
+//                .diskCacheStrategy(DiskCacheStrategy.NONE)
+//                .skipMemoryCache(true)
+//                .into(holder.avatar);
+        Picasso.get().load(urls).into(holder.avatar);
 
         holder.getData(items.get(position));
     }

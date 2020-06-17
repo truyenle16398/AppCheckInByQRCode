@@ -3,6 +3,7 @@ package com.example.appcheckinbyqrcode.network;
 import com.example.appcheckinbyqrcode.network.response.EventDetailResponse;
 import com.example.appcheckinbyqrcode.network.response.EventFavoriteResponse;
 import com.example.appcheckinbyqrcode.network.response.EventListResponse;
+import com.example.appcheckinbyqrcode.network.response.EventSearchListResponse;
 import com.example.appcheckinbyqrcode.network.response.MessageResponse;
 import com.example.appcheckinbyqrcode.network.response.UploadAvatarResponse;
 import com.example.appcheckinbyqrcode.network.response.UserResponse;
@@ -12,6 +13,7 @@ import java.util.List;
 
 import io.reactivex.Observable;
 import okhttp3.MultipartBody;
+import retrofit2.Call;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
@@ -101,6 +103,12 @@ public interface ApiService {
     @GET("event/list_happened")
     Observable<List<EventListResponse>> listleventhappened();
 
+
+    //search view theo name event
+    @GET("search")
+    Observable<List<EventSearchListResponse>> getListSearch(
+            @Query("key") String keyword
+    );
 
 
 
