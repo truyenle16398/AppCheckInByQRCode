@@ -205,11 +205,13 @@ public class ClientUserFragment extends Fragment{
 //                email = data.getStringExtra("emaile");
 //                phone = data.getStringExtra("phonee");
 //                address = data.getStringExtra("addresse");
-                tvName.setText(name = data.getStringExtra("name"));
-                tvEmail.setText(email = data.getStringExtra("email"));
-                tvPhone.setText(phone = data.getStringExtra("phone"));
-                tvAddress.setText(address = data.getStringExtra("address"));
-                Log.d(TAG, "onActivityResult: "+name+ email+phone+address);
+                if (resultCode == REQUEST_CODE){
+                    tvName.setText(name = data.getStringExtra("name"));
+                    tvEmail.setText(email = data.getStringExtra("email"));
+                    tvPhone.setText(phone = data.getStringExtra("phone"));
+                    tvAddress.setText(address = data.getStringExtra("address"));
+                    Log.d(TAG, "onActivityResult: "+name+ email+phone+address);
+                }
                 break;
             case PICK_IMAGE:
                 if (data != null && data.getData() != null) {

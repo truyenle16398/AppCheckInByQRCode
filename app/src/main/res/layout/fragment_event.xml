@@ -6,28 +6,11 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".ui.client.fragment.EventFragment">
-
-    <com.google.android.material.appbar.AppBarLayout
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbarSearchView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#5257f2">
-
-        <androidx.appcompat.widget.SearchView
-            android:theme="@style/SearchViewTheme"
-            android:id="@+id/search_view"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="30dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginRight="30dp"
-            app:tabSelectedTextColor="@color/colorTextPrimary"
-            android:focusable="false"
-            android:queryHint="@string/string_search"
-            app:defaultQueryHint="@string/string_search"
-            app:iconifiedByDefault="false"
-            app:queryHint="@string/string_search" />
-    </com.google.android.material.appbar.AppBarLayout>
-
+        android:background="#5257f2"
+        android:layout_height="?actionBarSize"/>
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tabLayoutEvent"
         android:layout_width="match_parent"
@@ -36,7 +19,6 @@
         app:tabGravity="fill"
         app:tabMode="scrollable"
         app:tabIndicatorColor="@color/colorAccent"
-        app:tabSelectedTextColor="@color/colorTextPrimary"
         app:tabTextColor="@color/colorTextDisable">
 
         <com.google.android.material.tabs.TabItem
@@ -59,6 +41,11 @@
 
 
     </com.google.android.material.tabs.TabLayout>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycleViewSearch"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
 
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/viewPagerEvent"
