@@ -158,10 +158,10 @@ public class FavoriteEventFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-//        if (!checkBack){
-//             getData();
-//             checkBack=true;
-//        }
+        if (!checkBack){
+             getData();
+             checkBack=true;
+        }
 
     }
 }
