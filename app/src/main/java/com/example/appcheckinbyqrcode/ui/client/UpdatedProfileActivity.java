@@ -1,6 +1,7 @@
 package com.example.appcheckinbyqrcode.ui.client;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
@@ -9,8 +10,14 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -27,17 +34,25 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.appcheckinbyqrcode.R;
 import com.example.appcheckinbyqrcode.network.ApiClient;
+import com.example.appcheckinbyqrcode.network.response.UploadAvatarResponse;
 import com.example.appcheckinbyqrcode.network.response.UserResponse;
 import com.orhanobut.dialogplus.DialogPlus;
 import com.orhanobut.dialogplus.OnItemClickListener;
 
 import org.w3c.dom.Text;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
+
 import de.hdodenhof.circleimageview.CircleImageView;
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 
 public class UpdatedProfileActivity extends AppCompatActivity {
 
@@ -48,19 +63,37 @@ public class UpdatedProfileActivity extends AppCompatActivity {
     private String name, email, phone, address;
     private EditText edtNhap;
     private CircleImageView circleimg;
+    String realpath = "";
+    Rect pic1Rect;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_updated_profile);
         initWidget();
         addinfo();
+        pic1Rect = new Rect();
+        circleimg.getDrawingRect(pic1Rect);
         onclick();
+    }
+
+    public static boolean hasCollision(Rect one, Rect two) {
+        return (one.left < two.right &&
+                one.right > two.left &&
+                one.top < two.bottom &&
+                one.bottom > two.top);
+    }
+
+    private void onCheckUpLoad() {
+        Rect pic2Rect = new Rect();
+        circleimg.getDrawingRect(pic2Rect);
+//        Log.e("nnn", "hasCollision: " + hasCollision(pic1Rect, pic2Rect));
     }
 
     private void addinfo() {
         Intent intent = getIntent();
+        realpath = intent.getStringExtra("url");
         Glide.with(getApplicationContext())
-                .load(intent.getStringExtra("url"))
+                .load(realpath)
                 .diskCacheStrategy(DiskCacheStrategy.NONE)
                 .skipMemoryCache(true)
                 .into(circleimg);
@@ -75,10 +108,22 @@ public class UpdatedProfileActivity extends AppCompatActivity {
     }
 
     private void onclick(){
+        circleimg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.setType("image/*");
+                intent.setAction(Intent.ACTION_GET_CONTENT);
+                startActivityForResult(Intent.createChooser(intent, "Select Picture"), 1);
+            }
+        });
         lnimg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent();
+                intent.setType("image/*");
+                intent.setAction(Intent.ACTION_GET_CONTENT);
+                startActivityForResult(Intent.createChooser(intent, "Select Picture"), 1);
             }
         });
         lnname.setOnClickListener(new View.OnClickListener() {
@@ -113,6 +158,34 @@ public class UpdatedProfileActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (data != null && data.getData() != null) {
+            Uri uri = data.getData();
+            realpath = getRealPathFromURI(uri);
+            try {
+                InputStream inputStream = getContentResolver().openInputStream(uri);
+                Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
+                circleimg.setImageBitmap(bitmap);
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public String getRealPathFromURI(Uri contentUri) {
+        String path = null;
+        String[] proj = {MediaStore.MediaColumns.DATA};
+        Cursor cursor = getContentResolver().query(contentUri, proj, null, null, null);
+        if (cursor.moveToFirst()) {
+            int column_index = cursor.getColumnIndexOrThrow(MediaStore.MediaColumns.DATA);
+            path = cursor.getString(column_index);
+        }
+        cursor.close();
+        return path;
+    }
+
     private void changeInfo(){
         String namea = tvName.getText().toString();
         String emaila = tvEmail.getText().toString();
@@ -121,10 +194,12 @@ public class UpdatedProfileActivity extends AppCompatActivity {
 
 // Log.d("nnn", "onClick: "+email+"=="+emailedt +" và "+ name+"=="+nameedt);
         if (name.equals(namea) && email.equals(emaila) && phone.equals(phonea) && address.equals(addressa)) {
-            Toast.makeText(UpdatedProfileActivity.this, "Bạn chưa chỉnh sửa!", Toast.LENGTH_SHORT).show();
+//            Toast.makeText(UpdatedProfileActivity.this, "Bạn chưa chỉnh sửa!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(UpdatedProfileActivity.this, "Đã lưu hồ sơ!", Toast.LENGTH_SHORT).show();
         } else {
             if (namea.equals("") || emaila.equals("") || phonea.equals("") || addressa.equals("")) {
-                Toast.makeText(UpdatedProfileActivity.this, "Không được để trống!", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(UpdatedProfileActivity.this, "Không được để trống!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(UpdatedProfileActivity.this, "Đã lưu hồ sơ!", Toast.LENGTH_SHORT).show();
             } else {
                 ApiClient.getService().updateinfo(namea, emaila, phonea, addressa)
                         .subscribeOn(Schedulers.io())
@@ -136,8 +211,7 @@ public class UpdatedProfileActivity extends AppCompatActivity {
 
                             @Override
                             public void onNext(UserResponse userResponse) {
-                                Toast.makeText(UpdatedProfileActivity.this, "Thay đổi thông tin thành công!", Toast.LENGTH_SHORT).show();
-                                Log.d("nnn", "onNext: " + userResponse.getName());
+//                                Toast.makeText(UpdatedProfileActivity.this, "Thay đổi thông tin thành công!", Toast.LENGTH_SHORT).show();
                             }
 
                             @Override
@@ -147,10 +221,11 @@ public class UpdatedProfileActivity extends AppCompatActivity {
 
                             @Override
                             public void onComplete() {
-                                Toast.makeText(UpdatedProfileActivity.this, "Đã cập nhật!", Toast.LENGTH_SHORT).show();
-                                Intent intent = new Intent();
-                                setResult(RESULT_OK, intent);
-                                finish();
+                                Toast.makeText(UpdatedProfileActivity.this, "Đã lưu hồ sơ!", Toast.LENGTH_SHORT).show();
+//                                Toast.makeText(UpdatedProfileActivity.this, "Đã cập nhật!", Toast.LENGTH_SHORT).show();
+//                                Intent intent = new Intent();
+//                                setResult(RESULT_OK, intent);
+//                                finish();
                             }
                         });
             }
@@ -205,18 +280,26 @@ public class UpdatedProfileActivity extends AppCompatActivity {
     }
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        Intent intent = new Intent();
         switch (item.getItemId()) {
             case android.R.id.home:
+                setResult(RESULT_CANCELED, intent);
                 onBackPressed();
                 return true;
             case R.id.updateok:
-//                changeInfo();
-                Intent intent = new Intent();
+                if (realpath.isEmpty()){
+                    changeInfo();
+                } else {
+                    upDateUserAvatar(realpath);
+                    changeInfo();
+                }
+//                Intent intent = new Intent();
                 Log.d("nnn", "onOptionsItemSelected: "+tvName.getText().toString());
                 intent.putExtra("name",tvName.getText().toString());
                 intent.putExtra("email",tvEmail.getText().toString());
                 intent.putExtra("phone",tvPhone.getText().toString());
                 intent.putExtra("address",tvAddress.getText().toString());
+                intent.putExtra("avatar",realpath);
                 setResult(RESULT_OK, intent);
                 finish();
                 return true;
@@ -224,6 +307,50 @@ public class UpdatedProfileActivity extends AppCompatActivity {
                 break;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    //update avatar
+    private void upDateUserAvatar(String filename) {
+//        ProgressDialog pd = new ProgressDialog(this);
+//        pd.setMessage("loading");
+//        pd.show();
+//        MultipartBody.Part body =
+//                MultipartBody.Part.createFormData("image", "avatar.png", fbody);
+        File file = new File(filename);
+        String filepath = file.getAbsolutePath();
+        String[] arraynamefile = filepath.split("\\.");
+        filepath = arraynamefile[0] + System.currentTimeMillis() + "." + arraynamefile[1];
+        RequestBody requestBody = RequestBody.create(MediaType.parse("multipart/form-data"), file);
+        MultipartBody.Part body = MultipartBody.Part.createFormData("avatar", filepath, requestBody);
+        Log.d("nnn", "upDateUserAvatar: " + filepath);
+        ApiClient.getService().updateAvatar(body)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<UploadAvatarResponse>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+                    }
+
+                    @Override
+                    public void onNext(UploadAvatarResponse uploadAvatarResponse) {
+//                        Toast.makeText(UpdatedProfileActivity.this, "Thay đổi thành công!", Toast.LENGTH_SHORT).show();
+                        Log.d("nnn", "log api upload image: " + uploadAvatarResponse.getName());
+//                        String urls = url.getUrlimg() + uploadAvatarResponse.getAvatar();
+//                        Glide.with(getContext()).load(urls).into(circleimg);
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        Log.d("nn", "onError: " + e.getMessage());
+//                        pd.dismiss();
+                    }
+
+                    @Override
+                    public void onComplete() {
+//                        pd.dismiss();
+                    }
+                });
     }
 
     private void initWidget() {
@@ -244,10 +371,5 @@ public class UpdatedProfileActivity extends AppCompatActivity {
         tvAddress = findViewById(R.id.tvAddress);
         circleimg = findViewById(R.id.avatarCircler);
 
-    }
-
-    private void hideKeybaord(View v) {
-        InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-        inputMethodManager.hideSoftInputFromWindow(v.getApplicationWindowToken(), 0);
     }
 }

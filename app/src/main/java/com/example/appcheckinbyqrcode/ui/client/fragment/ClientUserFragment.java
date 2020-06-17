@@ -61,6 +61,9 @@ import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 
+import static android.app.Activity.RESULT_CANCELED;
+import static android.app.Activity.RESULT_OK;
+
 /**
  * A simple {@link Fragment} subclass.
  */
@@ -180,17 +183,13 @@ public class ClientUserFragment extends Fragment{
         btnChangeAvatar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                upDateUserAvatar(realpath);
+//                upDateUserAvatar(realpath);
             }
         });
 
         circleimg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent();
-                intent.setType("image/*");
-                intent.setAction(Intent.ACTION_GET_CONTENT);
-                startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE);
             }
         });
 
@@ -199,95 +198,27 @@ public class ClientUserFragment extends Fragment{
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        switch (requestCode) {
-            case REQUEST_CODE:
-//                name = data.getStringExtra("namee");
-//                email = data.getStringExtra("emaile");
-//                phone = data.getStringExtra("phonee");
-//                address = data.getStringExtra("addresse");
-                tvName.setText(name = data.getStringExtra("name"));
-                tvEmail.setText(email = data.getStringExtra("email"));
-                tvPhone.setText(phone = data.getStringExtra("phone"));
-                tvAddress.setText(address = data.getStringExtra("address"));
-                Log.d(TAG, "onActivityResult: "+name+ email+phone+address);
-                break;
-            case PICK_IMAGE:
-                if (data != null && data.getData() != null) {
-                    Uri uri = data.getData();
-                    realpath = getRealPathFromURI(uri);
-                    try {
-                        InputStream inputStream = getActivity().getContentResolver().openInputStream(uri);
-                        Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
-                        circleimg.setImageBitmap(bitmap);
-                    } catch (FileNotFoundException e) {
-                        e.printStackTrace();
+            switch (requestCode) {
+                case REQUEST_CODE:
+                    if (resultCode==RESULT_OK){
+                        tvName.setText(name = data.getStringExtra("name"));
+                        tvEmail.setText(email = data.getStringExtra("email"));
+                        tvPhone.setText(phone = data.getStringExtra("phone"));
+                        tvAddress.setText(address = data.getStringExtra("address"));
+                        Glide.with(getActivity())
+                                .load(data.getStringExtra("avatar"))
+                                .diskCacheStrategy(DiskCacheStrategy.NONE)
+                                .skipMemoryCache(true)
+                                .into(circleimg);
+                        Log.d(TAG, "onActivityResult: "+name+ email+phone+address);
                     }
-                    btnChangeAvatar.setVisibility(View.VISIBLE);
-                }
-                break;
-            default:
-                break;
+                    break;
+                case PICK_IMAGE:
+                    break;
+                default:
+                    break;
         }
-
-
     }
-
-    public String getRealPathFromURI(Uri contentUri) {
-        String path = null;
-        String[] proj = {MediaStore.MediaColumns.DATA};
-        Cursor cursor = getActivity().getContentResolver().query(contentUri, proj, null, null, null);
-        if (cursor.moveToFirst()) {
-            int column_index = cursor.getColumnIndexOrThrow(MediaStore.MediaColumns.DATA);
-            path = cursor.getString(column_index);
-        }
-        cursor.close();
-        return path;
-    }
-
-    //update avatar
-    private void upDateUserAvatar(String filename) {
-        ProgressDialog pd = new ProgressDialog(getActivity());
-        pd.setMessage("loading");
-        pd.show();
-//        MultipartBody.Part body =
-//                MultipartBody.Part.createFormData("image", "avatar.png", fbody);
-        File file = new File(filename);
-        String filepath = file.getAbsolutePath();
-        String[] arraynamefile = filepath.split("\\.");
-        filepath = arraynamefile[0] + System.currentTimeMillis() + "." + arraynamefile[1];
-        RequestBody requestBody = RequestBody.create(MediaType.parse("multipart/form-data"), file);
-        MultipartBody.Part body = MultipartBody.Part.createFormData("avatar", filepath, requestBody);
-        Log.d(TAG, "upDateUserAvatar: " + filepath);
-        ApiClient.getService().updateAvatar(body)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<UploadAvatarResponse>() {
-                    @Override
-                    public void onSubscribe(Disposable d) {
-                    }
-
-                    @Override
-                    public void onNext(UploadAvatarResponse uploadAvatarResponse) {
-                        Toast.makeText(getActivity(), "Thay đổi thành công!", Toast.LENGTH_SHORT).show();
-                        Log.d(TAG, "log api upload image: " + uploadAvatarResponse.getName());
-//                        String urls = url.getUrlimg() + uploadAvatarResponse.getAvatar();
-//                        Glide.with(getContext()).load(urls).into(circleimg);
-
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        Log.d(TAG, "onError: " + e.getMessage());
-                        pd.dismiss();
-                    }
-
-                    @Override
-                    public void onComplete() {
-                        pd.dismiss();
-                    }
-                });
-    }
-
     private void showDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         LayoutInflater inflater = getActivity().getLayoutInflater();

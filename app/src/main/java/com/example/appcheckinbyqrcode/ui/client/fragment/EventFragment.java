@@ -4,6 +4,8 @@ import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -83,4 +85,5 @@ public class EventFragment extends Fragment implements OnIntent {
     public void intents() {
 
     }
+
 }
