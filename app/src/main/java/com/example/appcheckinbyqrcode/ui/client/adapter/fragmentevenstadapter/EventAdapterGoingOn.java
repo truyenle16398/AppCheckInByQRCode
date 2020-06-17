@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
@@ -30,6 +31,7 @@ public class EventAdapterGoingOn extends RecyclerView.Adapter<EventAdapterGoingO
     private static final String TAG = "nnn";
     private List<EventListResponse> items= new ArrayList<>();
     private Context context;
+    public  boolean changgColorButon = true;
 
 
     public EventAdapterGoingOn(List<EventListResponse> items, Context context) {
@@ -70,7 +72,7 @@ public class EventAdapterGoingOn extends RecyclerView.Adapter<EventAdapterGoingO
         public TextView name, intro, day, time, place;
         public ImageView avatar;
         public CardView cardView;
-        public ImageButton imageButton;
+        public TextView imageButton;
 
         public EventList_holder(View view) {
             super(view);
@@ -81,8 +83,8 @@ public class EventAdapterGoingOn extends RecyclerView.Adapter<EventAdapterGoingO
             place = view.findViewById(R.id.eventplaceOnGoing);
             avatar = view.findViewById(R.id.eventavatarOnGoing);
             cardView = view.findViewById(R.id.linnerOnGoing);
-            imageButton = view.findViewById(R.id.btnImageFavorite);
-            cardView.setOnClickListener(new View.OnClickListener() {
+            imageButton = view.findViewById(R.id.txtImageFavorite);
+            avatar.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(context, EventDetailActivity.class);
@@ -91,6 +93,25 @@ public class EventAdapterGoingOn extends RecyclerView.Adapter<EventAdapterGoingO
                     context.startActivity(intent);
                 }
             });
+
+            imageButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (!changgColorButon){
+                        changgColorButon = true;
+                        imageButton.setBackgroundResource(R.drawable.ic_favorite_red_24dp);
+                        Toast.makeText(context, "aaaa" + v.toString(), Toast.LENGTH_SHORT).show();
+                    }else {
+                        changgColorButon = true;
+                        imageButton.setBackgroundResource(R.drawable.ic_favorite_border_red_24dp);
+                        Toast.makeText(context, "aaaa" + v.toString(), Toast.LENGTH_SHORT).show();
+                    }
+
+
+
+                }
+            });
+
 
         }
         void getData(EventListResponse ex){
@@ -101,5 +122,7 @@ public class EventAdapterGoingOn extends RecyclerView.Adapter<EventAdapterGoingO
             time.setText(ex.getEnd_time());
             place.setText(ex.getPlace());
         }
+
+
     }
 }
