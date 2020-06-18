@@ -103,7 +103,7 @@ public class EventAdapterGoingOn extends RecyclerView.Adapter<EventAdapterGoingO
                         Toast.makeText(context, "aaaa" + v.toString(), Toast.LENGTH_SHORT).show();
                     }else {
                         changgColorButon = true;
-                        imageButton.setBackgroundResource(R.drawable.ic_favorite_border_black_24dp);
+                        imageButton.setBackgroundResource(R.drawable.ic_favorite_border_red_24dp);
                         Toast.makeText(context, "aaaa" + v.toString(), Toast.LENGTH_SHORT).show();
                     }
 

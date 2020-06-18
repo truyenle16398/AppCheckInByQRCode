@@ -1,85 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/itemSearch"
+<LinearLayout
+    android:id="@+id/linerSearch"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginLeft="7dp"
-    android:layout_marginTop="5dp"
-    android:layout_marginRight="7dp"
-    android:layout_marginBottom="5dp"
     android:orientation="vertical"
-    app:cardCornerRadius="9dp"
-    app:cardElevation="11dp">
+    android:layout_height="wrap_content">
 
-    <LinearLayout
+    <TextView
+        android:paddingTop="10dp"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:textSize="20sp"
+        android:textColor="#111"
+        android:id="@+id/name"
+        android:text="Name"
         android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:orientation="horizontal"
-        android:padding="5dp"
-        android:paddingLeft="7dp"
-        android:paddingTop="5dp"
-        android:paddingRight="7dp"
-        android:paddingBottom="5dp"
-        android:weightSum="3">
-
-        <ImageView
-            android:id="@+id/avatar"
-            android:layout_width="0dp"
-            android:src="@drawable/loading"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:scaleType="centerCrop" />
-
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginLeft="5dp"
-            android:layout_weight="2"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/name"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="2dp"
-                android:layout_weight="3"
-                android:gravity="center|left"
-                android:singleLine="true"
-                android:maxLines="2"
-                android:text="Kiet's BirthDay Party at home"
-                android:textColor="#000"
-                android:textSize="20sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/intro"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="4dp"
-                android:gravity="center|left"
-                android:singleLine="true"
-                android:text="Pool Party and Live Music"
-                android:textColor="#000"
-                android:textSize="12sp" />
-
-            <TextView
-                android:id="@+id/place"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="4dp"
-                android:gravity="center|left"
-                android:singleLine="true"
-                android:text="41 Le Duan, Hai Chau, DN"
-                android:textColor="#000"
-                android:textSize="12sp" />
-
-        </LinearLayout>
-    </LinearLayout>
+        android:layout_height="wrap_content" />
 
     <View
+        android:background="#bfbfbf"
         android:layout_width="match_parent"
-        android:layout_height="0.1dp"
-        android:background="#bfbfbf" />
-</androidx.cardview.widget.CardView>
+        android:layout_height="0.1dp"/>
+
+</LinearLayout>
