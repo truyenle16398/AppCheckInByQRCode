@@ -1,5 +1,6 @@
 package com.example.appcheckinbyqrcode.network;
 
+import com.example.appcheckinbyqrcode.network.response.EventDetailResponse;
 import com.example.appcheckinbyqrcode.network.response.EventFavoriteResponse;
 import com.example.appcheckinbyqrcode.network.response.EventListResponse;
 import com.example.appcheckinbyqrcode.network.response.EventSearchListResponse;
@@ -12,6 +13,7 @@ import java.util.List;
 
 import io.reactivex.Observable;
 import okhttp3.MultipartBody;
+import retrofit2.Call;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
@@ -23,6 +25,7 @@ import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 public interface ApiService {
+
     //dang nhap
     @POST("login")
     Observable<User> loginnew(@Query("email") String email,
@@ -65,10 +68,22 @@ public interface ApiService {
                                         @Query("phone") String phone,
                                         @Query("address") String address);
 
+    //reset AVATER
+//    @POST("UploadAvatar")
+//    Observable<UploadAvatarResponse> updateAvatar(@Query("name") String name,
+//                                                  @Query("email") String email,
+//                                                  @Query("phone") String phone,
+//                                                  @Query("address") String address,
+//                                                  @Query("avatar") String avatar,
+//                                                  @Query("role_id") String role_id,
+//                                                  @Query("status") String status,
+//                                                  @Query("created_at") String created_at,
+//                                                  @Query("updated_at") String updated_at);
     //thay doi image
     @Multipart
     @POST("UploadAvatar")
     Observable<UploadAvatarResponse> updateAvatar(@Part MultipartBody.Part avatar);
+
 
 
     //doi mat khau
@@ -95,6 +110,8 @@ public interface ApiService {
             @Query("key") String keyword
     );
 
+
+
     // show lịch sử đăng ký sự kiện
     @GET("event/history_regis")
     Observable<List<EventFavoriteResponse>> listhistoryregis();
@@ -113,7 +130,8 @@ public interface ApiService {
 
     //Quét qr
     @PUT("checkin/{id}")
-    Observable<MessageResponse> savecheckin(@Path("id") int id, @Query("code") String code);
+    Observable<MessageResponse> savecheckin(@Path("id") int id,@Query("code") String code);
+
 
 
 }

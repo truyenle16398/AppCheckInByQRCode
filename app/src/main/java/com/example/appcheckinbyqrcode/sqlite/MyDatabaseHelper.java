@@ -1,10 +1,16 @@
 package com.example.appcheckinbyqrcode.sqlite;
 
+import android.annotation.SuppressLint;
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.database.DatabaseErrorHandler;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import com.example.appcheckinbyqrcode.ui.admin.model.InfoQR;
 
@@ -24,14 +30,14 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
     private static final String TABLE_INFO = "info";
 
     private static final String COLUMN_INFO_ID = "id";
-    private static final String COLUMN_INFO_NAME = "name";
-    private static final String COLUMN_INFO_EMAIL = "email";
+    private static final String COLUMN_INFO_NAME ="name";
+    private static final String COLUMN_INFO_EMAIL ="email";
     private static final String COLUMN_INFO_AVATAR = "avatar";
     private static final String COLUMN_INFO_PHONE = "phone";
     private static final String COLUMN_INFO_ADDRESS = "address";
     private static final String COLUMN_INFO_TIMECHECKIN = "timecheckin";
 
-    public MyDatabaseHelper(Context context) {
+    public MyDatabaseHelper(Context context)  {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
@@ -77,16 +83,16 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         Log.d(TAG, "insertInfo: inserting.......");
 
         SQLiteDatabase db = getWritableDatabase();
-        db.execSQL("INSERT INTO " + TABLE_INFO + " (name, email, avatar, phone, address, timecheckin) VALUES (?,?,?,?,?,?)",
+        db.execSQL("INSERT INTO "+TABLE_INFO+" (name, email, avatar, phone, address, timecheckin) VALUES (?,?,?,?,?,?)",
                 new String[]{infoQR.name, infoQR.email, infoQR.avatar, infoQR.phone, infoQR.address, infoQR.timecheckin});
     }
 
     public List<InfoQR> getAllInfo() {
-        Log.i(TAG, "MyDatabaseHelper.getAllNotes ... ");
+        Log.i(TAG, "MyDatabaseHelper.getAllNotes ... " );
 
         List<InfoQR> infoQRList = new ArrayList<InfoQR>();
         SQLiteDatabase db = getReadableDatabase();
-        Cursor cursor = db.rawQuery("SELECT * from " + TABLE_INFO, null);//id, name, email, avatar, phone, address
+        Cursor cursor = db.rawQuery("SELECT * from "+TABLE_INFO, null);//id, name, email, avatar, phone, address
 
         //Đến dòng đầu của tập dữ liệu
         cursor.moveToFirst();
@@ -98,8 +104,8 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
             String phone = cursor.getString(4);
             String address = cursor.getString(5);
             String timecheckin = cursor.getString(6);
-            Log.d(TAG, "getAllInfo: " + id + name + email + avatar + phone + address + timecheckin + cursor.getString(6));
-            infoQRList.add(new InfoQR(id, name, email, avatar, phone, address, timecheckin));
+            Log.d(TAG, "getAllInfo: "+id +name+email+avatar+phone+ address + timecheckin + cursor.getString(6));
+            infoQRList.add(new InfoQR(id, name, email, avatar, phone, address,timecheckin));
             cursor.moveToNext();
         }
         // return note list
@@ -107,7 +113,7 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
     }
 
     public int getInfoCount() {
-        Log.i(TAG, "MyDatabaseHelper.getNotesCount ... ");
+        Log.i(TAG, "MyDatabaseHelper.getNotesCount ... " );
 
         String countQuery = "SELECT  * FROM " + TABLE_INFO;
         SQLiteDatabase db = this.getReadableDatabase();
@@ -123,6 +129,6 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
 
     public void deleteall() {
         SQLiteDatabase db = getWritableDatabase();
-        db.execSQL("DELETE FROM " + TABLE_INFO);
+        db.execSQL("DELETE FROM "+TABLE_INFO);
     }
 }

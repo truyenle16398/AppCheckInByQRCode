@@ -4,10 +4,7 @@
     <item android:id="@+id/search"
         android:title="Search"
         android:icon="@drawable/ic_search_white_24dp"
-        app:queryHint="@string/string_search"
-        app:defaultQueryHint="@string/string_search"
-        app:showAsAction="ifRoom|collapseActionView"
-        android:queryHint="This is a hint"
+        app:showAsAction="always"
         app:actionViewClass="androidx.appcompat.widget.SearchView"/>
 
 </menu>

@@ -1,25 +1,32 @@
 package com.example.appcheckinbyqrcode.ui.login;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import com.example.appcheckinbyqrcode.R;
+import com.example.appcheckinbyqrcode.SessionManager;
 import com.example.appcheckinbyqrcode.network.ApiClient;
+import com.example.appcheckinbyqrcode.ui.admin.HomeAdminActivity;
+import com.example.appcheckinbyqrcode.ui.client.HomeClientActivity;
+import com.example.appcheckinbyqrcode.ui.model.ApiConfig;
 import com.example.appcheckinbyqrcode.ui.model.User;
+import com.example.appcheckinbyqrcode.ui.model.info;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import io.reactivex.Observable;
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
@@ -104,17 +111,15 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
     }
-
     private boolean validateEmail(String email) {
         String emails = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@" + "[_A-Za-z0-9-]+(\\.[_A-Za-z0-9-]+)*(\\.[A-Za-z]{2,})$";
         Pattern pattern = Pattern.compile(emails);
         Matcher matcher = pattern.matcher(email);
         return matcher.matches();
     }
-
     private void hideKeybaord(View v) {
-        InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
-        inputMethodManager.hideSoftInputFromWindow(v.getApplicationWindowToken(), 0);
+        InputMethodManager inputMethodManager = (InputMethodManager)getSystemService(INPUT_METHOD_SERVICE);
+        inputMethodManager.hideSoftInputFromWindow(v.getApplicationWindowToken(),0);
     }
 
     private void initWidget() {
