@@ -65,6 +65,7 @@ public class UpdatedProfileActivity extends AppCompatActivity {
     private CircleImageView circleimg;
     String realpath = "";
     Rect pic1Rect;
+    Intent inte;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -74,20 +75,9 @@ public class UpdatedProfileActivity extends AppCompatActivity {
         pic1Rect = new Rect();
         circleimg.getDrawingRect(pic1Rect);
         onclick();
+         inte = new Intent(this, ChangeActivity.class);
     }
 
-    public static boolean hasCollision(Rect one, Rect two) {
-        return (one.left < two.right &&
-                one.right > two.left &&
-                one.top < two.bottom &&
-                one.bottom > two.top);
-    }
-
-    private void onCheckUpLoad() {
-        Rect pic2Rect = new Rect();
-        circleimg.getDrawingRect(pic2Rect);
-//        Log.e("nnn", "hasCollision: " + hasCollision(pic1Rect, pic2Rect));
-    }
 
     private void addinfo() {
         Intent intent = getIntent();
@@ -111,43 +101,61 @@ public class UpdatedProfileActivity extends AppCompatActivity {
         circleimg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent();
+//                Intent intent = new Intent();
+//                intent.setType("image/*");
+//                intent.setAction(Intent.ACTION_GET_CONTENT);
+//                startActivityForResult(Intent.createChooser(intent, "Select Picture"), 1);
+                Intent intent = new Intent(Intent.ACTION_PICK);
                 intent.setType("image/*");
-                intent.setAction(Intent.ACTION_GET_CONTENT);
-                startActivityForResult(Intent.createChooser(intent, "Select Picture"), 1);
+                startActivityForResult(intent, 1);
             }
         });
         lnimg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent();
+                Intent intent = new Intent(Intent.ACTION_PICK);
                 intent.setType("image/*");
-                intent.setAction(Intent.ACTION_GET_CONTENT);
-                startActivityForResult(Intent.createChooser(intent, "Select Picture"), 1);
+                startActivityForResult(intent, 1);
             }
         });
         lnname.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showdialog(tvName.getText().toString(),"Sửa tên?",tvName);
+                inte.putExtra("title","Sửa tên");
+                inte.putExtra("edtnhan",tvName.getText().toString());
+                inte.putExtra("check","name");
+                startActivityForResult(inte, 9999);
+//                showdialog(tvName.getText().toString(),"Sửa tên?",tvName);
             }
         });
         lnemail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showdialog(tvEmail.getText().toString(),"Sửa email?",tvEmail);
+//                inte.putExtra("title","Sửa email");
+//                inte.putExtra("edtnhan",tvName.getText().toString());
+//                inte.putExtra("check","email");
+//                startActivityForResult(inte, 9999);
+//                showdialog(tvEmail.getText().toString(),"Sửa email?",tvEmail);
             }
         });
         lnphone.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showdialog(tvPhone.getText().toString(),"Sửa số điện thoại?",tvPhone);
+                inte.putExtra("title","Sửa số điện thoại");
+                inte.putExtra("edtnhan",tvPhone.getText().toString());
+                inte.putExtra("check","phone");
+                startActivityForResult(inte, 9999);
+//                showdialog(tvPhone.getText().toString(),"Sửa số điện thoại?",tvPhone);
             }
         });
         lnaddress.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showdialog(tvAddress.getText().toString(),"Sửa địa chỉ?",tvAddress);
+                inte.putExtra("title","Sửa địa chỉ");
+                inte.putExtra("edtnhan",tvAddress.getText().toString());
+                inte.putExtra("check","address");
+                startActivityForResult(inte, 9999);
+//                showdialog(tvAddress.getText().toString(),"Sửa địa chỉ?",tvAddress);
             }
         });
         lnupdatepass.setOnClickListener(new View.OnClickListener() {
@@ -161,16 +169,33 @@ public class UpdatedProfileActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (data != null && data.getData() != null) {
-            Uri uri = data.getData();
-            realpath = getRealPathFromURI(uri);
-            try {
-                InputStream inputStream = getContentResolver().openInputStream(uri);
-                Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
-                circleimg.setImageBitmap(bitmap);
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            }
+        switch (requestCode) {
+            case 9999:
+                if (resultCode==RESULT_OK){
+                    if(data.getStringExtra("check").equals("name")){
+                        tvName.setText(data.getStringExtra("edttrave"));
+                    } else if(data.getStringExtra("check").equals("phone")){
+                        tvPhone.setText(data.getStringExtra("edttrave"));
+                    } else if(data.getStringExtra("check").equals("address")){
+                        tvAddress.setText(data.getStringExtra("edttrave"));
+                    }
+                }
+                break;
+            case 1:
+                if (data != null && data.getData() != null) {
+                    Uri uri = data.getData();
+                    realpath = getRealPathFromURI(uri);
+                    try {
+                        InputStream inputStream = getContentResolver().openInputStream(uri);
+                        Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
+                        circleimg.setImageBitmap(bitmap);
+                    } catch (FileNotFoundException e) {
+                        e.printStackTrace();
+                    }
+                }
+                break;
+            default:
+                break;
         }
     }
 
@@ -191,45 +216,33 @@ public class UpdatedProfileActivity extends AppCompatActivity {
         String emaila = tvEmail.getText().toString();
         String phonea = tvPhone.getText().toString();
         String addressa = tvAddress.getText().toString();
+        ApiClient.getService().updateinfo(namea, emaila, phonea, addressa)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<UserResponse>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+                    }
 
-// Log.d("nnn", "onClick: "+email+"=="+emailedt +" và "+ name+"=="+nameedt);
-        if (name.equals(namea) && email.equals(emaila) && phone.equals(phonea) && address.equals(addressa)) {
-//            Toast.makeText(UpdatedProfileActivity.this, "Bạn chưa chỉnh sửa!", Toast.LENGTH_SHORT).show();
-            Toast.makeText(UpdatedProfileActivity.this, "Đã lưu hồ sơ!", Toast.LENGTH_SHORT).show();
-        } else {
-            if (namea.equals("") || emaila.equals("") || phonea.equals("") || addressa.equals("")) {
-//                Toast.makeText(UpdatedProfileActivity.this, "Không được để trống!", Toast.LENGTH_SHORT).show();
-                Toast.makeText(UpdatedProfileActivity.this, "Đã lưu hồ sơ!", Toast.LENGTH_SHORT).show();
-            } else {
-                ApiClient.getService().updateinfo(namea, emaila, phonea, addressa)
-                        .subscribeOn(Schedulers.io())
-                        .observeOn(AndroidSchedulers.mainThread())
-                        .subscribe(new Observer<UserResponse>() {
-                            @Override
-                            public void onSubscribe(Disposable d) {
-                            }
-
-                            @Override
-                            public void onNext(UserResponse userResponse) {
+                    @Override
+                    public void onNext(UserResponse userResponse) {
 //                                Toast.makeText(UpdatedProfileActivity.this, "Thay đổi thông tin thành công!", Toast.LENGTH_SHORT).show();
-                            }
+                    }
 
-                            @Override
-                            public void onError(Throwable e) {
-                                Log.d("nnn", "onError update pass " + e.getMessage());
-                            }
+                    @Override
+                    public void onError(Throwable e) {
+                        Log.d("nnn", "onError update pass " + e.getMessage());
+                    }
 
-                            @Override
-                            public void onComplete() {
-                                Toast.makeText(UpdatedProfileActivity.this, "Đã lưu hồ sơ!", Toast.LENGTH_SHORT).show();
+                    @Override
+                    public void onComplete() {
+                        Toast.makeText(UpdatedProfileActivity.this, "Đã lưu hồ sơ!", Toast.LENGTH_SHORT).show();
 //                                Toast.makeText(UpdatedProfileActivity.this, "Đã cập nhật!", Toast.LENGTH_SHORT).show();
 //                                Intent intent = new Intent();
 //                                setResult(RESULT_OK, intent);
 //                                finish();
-                            }
-                        });
-            }
-        }
+                    }
+                });
     }
 
     private void showdialog(String text, String hoi,TextView tvnhan){
