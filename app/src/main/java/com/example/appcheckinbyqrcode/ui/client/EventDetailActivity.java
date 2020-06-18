@@ -24,11 +24,6 @@ import com.example.appcheckinbyqrcode.network.ApiClient;
 import com.example.appcheckinbyqrcode.network.response.EventDetailResponse;
 import com.example.appcheckinbyqrcode.network.response.MessageResponse;
 import com.example.appcheckinbyqrcode.network.url;
-import com.example.appcheckinbyqrcode.sqlite.MyDatabaseHelper;
-import com.example.appcheckinbyqrcode.ui.admin.model.FavoriteList;
-import com.example.appcheckinbyqrcode.ui.admin.model.InfoQR;
-
-import java.util.ArrayList;
 
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -36,11 +31,8 @@ import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 
 public class EventDetailActivity extends AppCompatActivity  {
-    private MyDatabaseHelper myDatabaseHelper;
-    ArrayList<FavoriteList> favoriteLists;
-    FavoriteList favorites;
     ImageView imageDetail;
-    TextView txtNameEventDetail, txtDateTimeStart, txtDateTimeEnd, txtInfoDetail, txtAddressInfoDetail,txtFavorite;
+    TextView txtNameEventDetail, txtDateTimeStart, txtDateTimeEnd, txtInfoDetail, txtAddressInfoDetail;
     Button btnRegisterDetail;
     Toolbar toolbar;
     private int id;
@@ -52,12 +44,10 @@ public class EventDetailActivity extends AppCompatActivity  {
         setContentView(R.layout.activity_event_detail);
 //         home =  (OnIntent) EventDetailActivity.this.getBaseContext();
         InitWidget();
-        myDatabaseHelper = new MyDatabaseHelper(this);
-        favoriteLists = new ArrayList<>();
-        favorites = new FavoriteList(0,1,true);
         setSupportActionBar(toolbar);
         Drawable drawable = getResources().getDrawable(R.drawable.ic_arrow_while24dp);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+// getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setHomeAsUpIndicator(drawable);
 
         Intent intent = getIntent();
@@ -102,12 +92,6 @@ public class EventDetailActivity extends AppCompatActivity  {
                                 }
                             }
                         });
-
-            }
-        });
-        txtFavorite.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
 
             }
         });
@@ -167,7 +151,6 @@ public class EventDetailActivity extends AppCompatActivity  {
         toolbar = findViewById(R.id.toolbarDetail);
         imageDetail = findViewById(R.id.imageDetail);
         txtDateTimeStart = findViewById(R.id.txtDateTimeStart);
-        txtFavorite = findViewById(R.id.txtFavorite);
         txtDateTimeEnd = findViewById(R.id.txtDateTimeEnd);
         txtInfoDetail = findViewById(R.id.txtInfoDetail);
         txtAddressInfoDetail = findViewById(R.id.txtAddressInfoDetail);
