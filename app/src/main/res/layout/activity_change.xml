@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#EAE8E8"
+    android:orientation="vertical"
+    tools:context=".ui.client.ChangeActivity">
+    <androidx.appcompat.widget.Toolbar
+        android:background="#fff"
+        android:id="@+id/changeToolBar"
+        app:title=" "
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize"/>
+    <LinearLayout
+        android:layout_marginTop="10dp"
+        android:background="#fff"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/inputlayout_change"
+            app:boxBackgroundColor="#000"
+            android:background="#fff"
+            android:layout_marginRight="5dp"
+            android:layout_marginLeft="5dp"
+            style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/hint_activity_change">
+            <com.google.android.material.textfield.TextInputEditText
+                android:maxLines="1"
+                android:id="@+id/changeEdt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+        </com.google.android.material.textfield.TextInputLayout>
+    </LinearLayout>
+</LinearLayout>

@@ -21,7 +21,10 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:replace="android:icon">
-        <activity android:name=".ui.client.UpdatedProfileActivity" android:launchMode = "singleInstance"/>
+        <activity android:name=".ui.client.ChangeActivity"></activity>
+        <activity
+            android:name=".ui.client.UpdatedProfileActivity"
+            android:launchMode="singleInstance" />
         <activity android:name=".ui.client.HistoryDetailActivity" />
         <activity android:name=".ui.login.RegisterActivity" />
         <activity android:name=".ui.client.EventDetailActivity" />
@@ -31,12 +34,15 @@
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.intent.action.SEARCH" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity android:name=".ui.admin.ScanCodeActivity" />
         <activity android:name=".ui.admin.HomeAdminActivity" />
-        <meta-data android:name="android.app.searchable"
+
+        <meta-data
+            android:name="android.app.searchable"
             android:resource="@xml/searchable" />
     </application>
 
