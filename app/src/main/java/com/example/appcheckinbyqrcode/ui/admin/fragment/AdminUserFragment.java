@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -39,10 +40,10 @@ import io.reactivex.schedulers.Schedulers;
 public class AdminUserFragment extends Fragment {
 
     SwipeRefreshLayout refreshLayout;
-    private Button btnLogoutadmin;
-    private EditText oldPass, newPass, edtName,edtEmail,edtPhone,edtAddress;
+    private LinearLayout linearLayout;
+    private EditText oldPass, newPass;
     private AlertDialog dialog;
-    private TextView myprofile;
+    private TextView myprofile, tvname, tvemail, tvphone, tvaddress;
     private View view;
     CircleImageView circleImageView;
     ViewGroup viewchangepass_logoutadmin;
@@ -80,10 +81,10 @@ public class AdminUserFragment extends Fragment {
                         String address = userResponse.getAddress();
                         String urls = url.getUrlimg()+ userResponse.getAvatar();
                         Log.d("nnn", "onNext: "+ userResponse.toString());
-                        edtName.setText(name);
-                        edtEmail.setText(email);
-                        edtPhone.setText(phone);
-                        edtAddress.setText(address);
+                        tvname.setText(name);
+                        tvemail.setText(email);
+                        tvphone.setText(phone);
+                        tvaddress.setText(address);
 //                        Picasso.get().load(urls).into(circleimg);
                         Glide.with(getActivity())
                                 .load(urls)
@@ -105,7 +106,7 @@ public class AdminUserFragment extends Fragment {
     }
 
     private void onclick() {
-        btnLogoutadmin.setOnClickListener(new View.OnClickListener() {
+        linearLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 AlertDialog builder = new AlertDialog.Builder(getActivity()).setMessage("Bạn có muốn thoát không?")
@@ -114,30 +115,23 @@ public class AdminUserFragment extends Fragment {
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 logout();
                             }
+                        }).setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+// do nothing
+                            }
                         }).setIcon(android.R.drawable.ic_dialog_info).show();
-            }
-        });
-        myprofile.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (viewchangepass_logoutadmin.getVisibility() == View.INVISIBLE){
-                    viewchangepass_logoutadmin.setVisibility(View.VISIBLE);
-                } else {
-                    viewchangepass_logoutadmin.setVisibility(View.INVISIBLE);
-                }
             }
         });
     }
 
     private void InitWidget() {
-        viewchangepass_logoutadmin = view.findViewById(R.id.viewchangepass_logoutadmin);
         myprofile = view.findViewById(R.id.myprofileadmin);
         circleImageView = view.findViewById(R.id.profilePicadmin);
-        edtName = view.findViewById(R.id.nameadmin);
-        edtEmail = view.findViewById(R.id.emailadmin);
-        edtPhone = view.findViewById(R.id.phoneadmin);
-        edtAddress = view.findViewById(R.id.addressadmin);
-        btnLogoutadmin = view.findViewById(R.id.btnLogoutadmin);
+        tvname = view.findViewById(R.id.tvNameAdmin);
+        tvemail = view.findViewById(R.id.tvEmailAdmin);
+        tvphone = view.findViewById(R.id.tvPhoneAdmin);
+        tvaddress = view.findViewById(R.id.tvAddressAdmin);
+        linearLayout = view.findViewById(R.id.linearLogOutAdmin);
         refreshLayout = view.findViewById(R.id.swipeRefreshLayoutadminUser);
         refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override

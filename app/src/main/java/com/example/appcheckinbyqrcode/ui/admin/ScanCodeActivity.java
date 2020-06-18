@@ -5,6 +5,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.util.Log;
@@ -53,13 +54,12 @@ public class ScanCodeActivity extends AppCompatActivity implements ZXingScannerV
     public void handleResult(Result result) {
         String re = result.getText().toString();
 //        String re = "9 Fe59Xm09a3WXMUf04nmvlhJEDJpIMOLrGMLdJDoFjatUb55DbXkTZjYJIkcj";
-        String[] words = re.split("\\s");
+        String[] words = re.split("-");
 //        Log.d("nnn", "111handleResult: "+re.substring(0,1)+ " code: "+ re.substring(1));
         int id = Integer.parseInt(words[0].trim());
         String code = words[1].trim();
         Log.d("nnn", " và id: "+id+ " code: "+ code);
-        Toast.makeText(this, "id:"+id +" code:"+ code, Toast.LENGTH_SHORT).show();
-
+//        Toast.makeText(this, "id:"+id +" code:"+ code, Toast.LENGTH_SHORT).show();
         ApiClient.getService().savecheckin(id,code)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

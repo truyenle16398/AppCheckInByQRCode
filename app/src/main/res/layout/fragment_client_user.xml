@@ -76,16 +76,6 @@
                 android:background="@drawable/box_bg"
                 android:gravity="center|top"
                 android:orientation="vertical">
-                <TextView
-                    android:visibility="gone"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="32dp"
-                    android:text="User Informations"
-                    android:textColor="#2d3057"
-                    android:textSize="30dp"
-                    android:textStyle="bold" />
-
                 <LinearLayout
                     android:layout_marginBottom="10dp"
                     android:background="@drawable/ripper"

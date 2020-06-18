@@ -177,6 +177,7 @@ public class ClientUserFragment extends Fragment{
                 intent.putExtra("address",tvAddress.getText().toString());
                 intent.putExtra("url",urls);
                 startActivityForResult(intent, 5462);
+                lnchangInfo.setEnabled(false);
 // getActivity().startActivity(intent);
             }
         });
@@ -356,6 +357,11 @@ public class ClientUserFragment extends Fragment{
                 });
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        lnchangInfo.setEnabled(true);
+    }
 }
 
 
