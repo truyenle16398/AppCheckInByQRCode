@@ -19,10 +19,10 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="5dp">
+            >
 
             <ImageView
-                android:layout_margin="5dp"
+                android:scaleType="centerCrop"
                 android:id="@+id/eventimage_favorite"
                 android:layout_width="130dp"
                 android:layout_height="130dp"

@@ -135,9 +135,8 @@ public class HistoryDetailActivity extends AppCompatActivity {
                         toolbar.setTitle(eventDetailResponse.getName());
                         txtDateTimeStart.setText(eventDetailResponse.getStart_time());
                         txtDateTimeEnd.setText(eventDetailResponse.getEnd_time());
-//                        txtInfoDetail.setText(Html.fromHtml(eventDetailResponse.getDetail()));
+                        txtInfoDetail.setText(Html.fromHtml(eventDetailResponse.getDetail()));
                         txtAddressInfoDetail.setText(eventDetailResponse.getPlace());
-
                     }
 
                     @Override
