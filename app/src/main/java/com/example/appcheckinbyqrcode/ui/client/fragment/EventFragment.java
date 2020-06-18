@@ -11,13 +11,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
-import androidx.core.view.MenuItemCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -27,9 +25,6 @@ import androidx.viewpager.widget.ViewPager;
 import com.example.appcheckinbyqrcode.R;
 import com.example.appcheckinbyqrcode.network.ApiClient;
 import com.example.appcheckinbyqrcode.network.response.EventSearchListResponse;
-import com.example.appcheckinbyqrcode.network.response.UploadAvatarResponse;
-import com.example.appcheckinbyqrcode.ui.client.EventDetailActivity;
-import com.example.appcheckinbyqrcode.ui.client.OnIntent;
 import com.example.appcheckinbyqrcode.ui.client.adapter.EventSearchViewAdapter;
 import com.example.appcheckinbyqrcode.ui.client.adapter.EventsClientPagerAdapter;
 import com.google.android.material.tabs.TabItem;
@@ -71,6 +66,7 @@ public class EventFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_event, container, false);
+
         initWidget();
 
         adapterPager = new EventsClientPagerAdapter(getChildFragmentManager(), FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT, mTabLayoutEvent.getTabCount());
@@ -98,7 +94,7 @@ public class EventFragment extends Fragment {
         return view;
     }
 
-    public void fetchSearch( String key){
+    public void fetchSearch(String key) {
         ApiClient.getService().getListSearch(key)
                 .debounce(300, TimeUnit.MILLISECONDS)
                 .subscribeOn(Schedulers.io())
@@ -113,7 +109,6 @@ public class EventFragment extends Fragment {
                         adapterSearch = new EventSearchViewAdapter(listResponses, getActivity());
                         recyclerView.setVisibility(View.VISIBLE);
                         recyclerView.setAdapter(adapterSearch);
-
                         adapterSearch.notifyDataSetChanged();
                     }
 
@@ -126,7 +121,8 @@ public class EventFragment extends Fragment {
                     @Override
                     public void onComplete() {
                         adapterSearch.notifyDataSetChanged();
-                    }});
+                    }
+                });
 
     }
 
@@ -134,12 +130,13 @@ public class EventFragment extends Fragment {
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         //inflater = getActivity().getMenuInflater();
         inflater.inflate(R.menu.menu_search, menu);
-        super.onCreateOptionsMenu(menu,inflater);
+        super.onCreateOptionsMenu(menu, inflater);
 
 //        MenuItem item = menu.findItem(R.id.search);
 
         SearchManager searchManager = (SearchManager) getActivity().getSystemService(Context.SEARCH_SERVICE);
         SearchView searchView = (SearchView) menu.findItem(R.id.search).getActionView();
+        searchView.setQueryHint("Search Something ...");
         searchView.setSearchableInfo(
                 searchManager.getSearchableInfo(getActivity().getComponentName()));
         searchView.setIconifiedByDefault(false);
@@ -149,13 +146,12 @@ public class EventFragment extends Fragment {
 
 
                 //Toast.makeText(getActivity(), "xxx" + query, Toast.LENGTH_SHORT).show();
-                if (query.isEmpty()){
+                if (query.isEmpty()) {
                     recyclerView.setVisibility(View.GONE);
-                }else {
+                } else {
                     recyclerView.setVisibility(View.VISIBLE);
-                    fetchSearch( query);
+                    fetchSearch(query);
                 }
-
                 return false;
             }
 
@@ -164,11 +160,11 @@ public class EventFragment extends Fragment {
 
                 //Toast.makeText(getActivity(), "yyy" + newText, Toast.LENGTH_SHORT).show();
 
-                if (newText.isEmpty()){
+                if (newText.isEmpty()) {
                     recyclerView.setVisibility(View.GONE);
-                }else {
+                } else {
                     recyclerView.setVisibility(View.VISIBLE);
-                    fetchSearch( newText);
+                    fetchSearch(newText);
                 }
                 return false;
             }
@@ -191,7 +187,6 @@ public class EventFragment extends Fragment {
     }
 
 
-
     private void initWidget() {
         pager = view.findViewById(R.id.viewPagerEvent);
         mTabLayoutEvent = view.findViewById(R.id.tabLayoutEvent);
@@ -201,17 +196,17 @@ public class EventFragment extends Fragment {
         thirdItem = view.findViewById(R.id.thirdItemEvent);
 
         toolbar = view.findViewById(R.id.toolbarSearchView);
-        AppCompatActivity appCompatActivity = (AppCompatActivity)getActivity();
+        AppCompatActivity appCompatActivity = (AppCompatActivity) getActivity();
         appCompatActivity.setSupportActionBar(toolbar);
         appCompatActivity.getSupportActionBar().setDisplayShowTitleEnabled(false);
-        toolbar.setTitle(null);
-        toolbar.setSubtitle(null);
-        search = view.findViewById(R.id.search);
+//        toolbar.setTitle(null);
+//        toolbar.setSubtitle(null);
+
         recyclerView = view.findViewById(R.id.recycleViewSearch);
         layoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setHasFixedSize(true);
-        fetchSearch( "");
+        fetchSearch("");
     }
 
 }

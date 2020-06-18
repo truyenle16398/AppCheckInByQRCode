@@ -1,7 +1,5 @@
 package com.example.appcheckinbyqrcode.ui.login;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,6 +11,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.appcheckinbyqrcode.R;
 import com.example.appcheckinbyqrcode.network.ApiClient;
@@ -31,7 +31,7 @@ public class ForgotPassActivity extends AppCompatActivity {
     TextInputEditText edtPass;
     String email, pass, code, message;
     CountDownTimer countDownTimer;
-    private String TAG="nnn";
+    private String TAG = "nnn";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +62,7 @@ public class ForgotPassActivity extends AppCompatActivity {
                                 public void onSubscribe(Disposable d) {
 
                                 }
+
                                 @Override
                                 public void onNext(MessageResponse messageResponse) {
                                     //forgetPassResponse.getMessage().equals("We cant find a user with that e-mail address.");
@@ -108,7 +109,7 @@ public class ForgotPassActivity extends AppCompatActivity {
 
                                                                 @Override
                                                                 public void onError(Throwable e) {
-                                                                    Log.d(TAG, "onError in click BtnGetCode: "+e.getMessage());
+                                                                    Log.d(TAG, "onError in click BtnGetCode: " + e.getMessage());
                                                                 }
 
                                                                 @Override
@@ -145,9 +146,10 @@ public class ForgotPassActivity extends AppCompatActivity {
             }
         });
     }
+
     private void hideKeybaord(View v) {
-        InputMethodManager inputMethodManager = (InputMethodManager)getSystemService(INPUT_METHOD_SERVICE);
-        inputMethodManager.hideSoftInputFromWindow(v.getApplicationWindowToken(),0);
+        InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+        inputMethodManager.hideSoftInputFromWindow(v.getApplicationWindowToken(), 0);
     }
 
     private void startCountdownTimer() {

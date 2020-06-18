@@ -3,17 +3,16 @@ package com.example.appcheckinbyqrcode.ui.admin.fragment;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
-
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.example.appcheckinbyqrcode.R;
 import com.example.appcheckinbyqrcode.sqlite.MyDatabaseHelper;
@@ -30,7 +29,7 @@ public class HistoryCheckInFragment extends Fragment {
 
     SwipeRefreshLayout refreshLayout;
     View view;
-    TextView tvCountMan,tvclear;
+    TextView tvCountMan, tvclear;
     RecyclerView recyclerView;
     ItemHistoryAdapter adapter;
     ArrayList<HistoryCheckIn> items;
@@ -59,8 +58,8 @@ public class HistoryCheckInFragment extends Fragment {
         InitWidget();
         getdata();
         onclick();
-        Log.d("nnn", "show total: "+ myDatabaseHelper.getInfoCount());
-        tvCountMan.setText("Total: "+myDatabaseHelper.getInfoCount());
+        Log.d("nnn", "show total: " + myDatabaseHelper.getInfoCount());
+        tvCountMan.setText("Total: " + myDatabaseHelper.getInfoCount());
         return view;
     }
 
@@ -98,7 +97,7 @@ public class HistoryCheckInFragment extends Fragment {
             public void onRefresh() {
                 listinfo = (ArrayList<InfoQR>) myDatabaseHelper.getAllInfo();
                 adapter.notifyDataSetChanged();
-                tvCountMan.setText("Total: "+myDatabaseHelper.getInfoCount());
+                tvCountMan.setText("Total: " + myDatabaseHelper.getInfoCount());
                 getdata();
                 refreshLayout.setRefreshing(false);
             }
@@ -108,7 +107,7 @@ public class HistoryCheckInFragment extends Fragment {
     private void getdata() {
         recyclerView = view.findViewById(R.id.recycle_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        adapter = new ItemHistoryAdapter(getActivity(),listinfo);
+        adapter = new ItemHistoryAdapter(getActivity(), listinfo);
         recyclerView.setAdapter(adapter);
     }
 

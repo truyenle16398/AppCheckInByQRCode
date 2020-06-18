@@ -4,12 +4,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
-
 import android.util.Log;
-import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +12,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.fragment.app.Fragment;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
@@ -26,9 +24,7 @@ import com.example.appcheckinbyqrcode.network.ApiClient;
 import com.example.appcheckinbyqrcode.network.response.MessageResponse;
 import com.example.appcheckinbyqrcode.network.response.UserResponse;
 import com.example.appcheckinbyqrcode.network.url;
-import com.example.appcheckinbyqrcode.ui.admin.fragment.AdminUserFragment;
 import com.example.appcheckinbyqrcode.ui.login.LoginActivity;
-import com.google.android.gms.common.api.Api;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import io.reactivex.Observer;
@@ -40,7 +36,7 @@ public class AdminUserFragment extends Fragment {
 
     SwipeRefreshLayout refreshLayout;
     private Button btnLogoutadmin;
-    private EditText oldPass, newPass, edtName,edtEmail,edtPhone,edtAddress;
+    private EditText oldPass, newPass, edtName, edtEmail, edtPhone, edtAddress;
     private AlertDialog dialog;
     private TextView myprofile;
     private View view;
@@ -78,8 +74,8 @@ public class AdminUserFragment extends Fragment {
                         String email = userResponse.getEmail();
                         String phone = userResponse.getPhone();
                         String address = userResponse.getAddress();
-                        String urls = url.getUrlimg()+ userResponse.getAvatar();
-                        Log.d("nnn", "onNext: "+ userResponse.toString());
+                        String urls = url.getUrlimg() + userResponse.getAvatar();
+                        Log.d("nnn", "onNext: " + userResponse.toString());
                         edtName.setText(name);
                         edtEmail.setText(email);
                         edtPhone.setText(phone);
@@ -120,7 +116,7 @@ public class AdminUserFragment extends Fragment {
         myprofile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (viewchangepass_logoutadmin.getVisibility() == View.INVISIBLE){
+                if (viewchangepass_logoutadmin.getVisibility() == View.INVISIBLE) {
                     viewchangepass_logoutadmin.setVisibility(View.VISIBLE);
                 } else {
                     viewchangepass_logoutadmin.setVisibility(View.INVISIBLE);
