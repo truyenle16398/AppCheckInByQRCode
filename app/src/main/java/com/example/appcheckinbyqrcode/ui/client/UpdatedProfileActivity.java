@@ -172,6 +172,7 @@ public class UpdatedProfileActivity extends AppCompatActivity {
         switch (requestCode) {
             case 9999:
                 if (resultCode==RESULT_OK){
+                    assert data != null;
                     if(data.getStringExtra("check").equals("name")){
                         tvName.setText(data.getStringExtra("edttrave"));
                     } else if(data.getStringExtra("check").equals("phone")){

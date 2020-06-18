@@ -79,8 +79,7 @@ public class HistoryCheckInFragment extends Fragment {
                                 adapter.notifyDataSetChanged();
                                 getdata();
                             }
-                        }).setPositiveButton(R.string.no, new DialogInterface.OnClickListener() {
-                            @Override
+                        }).setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
                                 dialog.dismiss();
                             }
