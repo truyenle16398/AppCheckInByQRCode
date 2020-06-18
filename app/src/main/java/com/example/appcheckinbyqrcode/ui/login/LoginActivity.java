@@ -1,39 +1,34 @@
 package com.example.appcheckinbyqrcode.ui.login;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.appcheckinbyqrcode.R;
+import com.example.appcheckinbyqrcode.SessionManager;
 import com.example.appcheckinbyqrcode.network.ApiClient;
 import com.example.appcheckinbyqrcode.ui.admin.HomeAdminActivity;
 import com.example.appcheckinbyqrcode.ui.client.HomeClientActivity;
 import com.example.appcheckinbyqrcode.ui.model.ApiConfig;
-import com.example.appcheckinbyqrcode.SessionManager;
 import com.example.appcheckinbyqrcode.ui.model.User;
 import com.example.appcheckinbyqrcode.ui.model.info;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
-
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import io.reactivex.Observer;
-import io.reactivex.SingleObserver;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
@@ -41,9 +36,9 @@ import io.reactivex.schedulers.Schedulers;
 public class LoginActivity extends AppCompatActivity {
     Button btnLogin;
     TextView tvForgotPass, tvRegister;
-//    EditText edtEmail, edtPass;
-    TextInputEditText edtEmail,edtPass;
-    TextInputLayout tilemail,tilpass;
+    //    EditText edtEmail, edtPass;
+    TextInputEditText edtEmail, edtPass;
+    TextInputLayout tilemail, tilpass;
     String email;
     String pass;
 
@@ -175,15 +170,13 @@ public class LoginActivity extends AppCompatActivity {
             public void onTextChanged(CharSequence s, int start, int before, int count) {
 
             }
+
             @Override
             public void afterTextChanged(Editable s) {
                 email = edtEmail.getText().toString().trim();
-                if (isEmailValid(email))
-                {
+                if (isEmailValid(email)) {
                     tilemail.setError(null);
-                }
-                else
-                {
+                } else {
                     tilemail.setError("Invalid Email Address");
                 }
             }
@@ -198,15 +191,13 @@ public class LoginActivity extends AppCompatActivity {
             public void onTextChanged(CharSequence s, int start, int before, int count) {
 
             }
+
             @Override
             public void afterTextChanged(Editable s) {
                 pass = edtPass.getText().toString().trim();
-                if (pass.isEmpty())
-                {
+                if (pass.isEmpty()) {
                     edtPass.setError("Vui lòng nhập trường này");
-                }
-                else
-                {
+                } else {
                     edtPass.setError(null);
                 }
             }
@@ -246,22 +237,21 @@ public class LoginActivity extends AppCompatActivity {
 //        return matcher.matches();
 //    }
 
-    public boolean isEmailValid(String email)
-    {
+    public boolean isEmailValid(String email) {
         String regExpn =
                 "^(([\\w-]+\\.)+[\\w-]+|([a-zA-Z]{1}|[\\w-]{2,}))@"
-                        +"((([0-1]?[0-9]{1,2}|25[0-5]|2[0-4][0-9])\\.([0-1]?"
-                        +"[0-9]{1,2}|25[0-5]|2[0-4][0-9])\\."
-                        +"([0-1]?[0-9]{1,2}|25[0-5]|2[0-4][0-9])\\.([0-1]?"
-                        +"[0-9]{1,2}|25[0-5]|2[0-4][0-9])){1}|"
-                        +"([a-zA-Z]+[\\w-]+\\.)+[a-zA-Z]{2,4})$";
+                        + "((([0-1]?[0-9]{1,2}|25[0-5]|2[0-4][0-9])\\.([0-1]?"
+                        + "[0-9]{1,2}|25[0-5]|2[0-4][0-9])\\."
+                        + "([0-1]?[0-9]{1,2}|25[0-5]|2[0-4][0-9])\\.([0-1]?"
+                        + "[0-9]{1,2}|25[0-5]|2[0-4][0-9])){1}|"
+                        + "([a-zA-Z]+[\\w-]+\\.)+[a-zA-Z]{2,4})$";
 
         CharSequence inputStr = email;
 
-        Pattern pattern = Pattern.compile(regExpn,Pattern.CASE_INSENSITIVE);
+        Pattern pattern = Pattern.compile(regExpn, Pattern.CASE_INSENSITIVE);
         Matcher matcher = pattern.matcher(inputStr);
 
-        if(matcher.matches())
+        if (matcher.matches())
             return true;
         else
             return false;

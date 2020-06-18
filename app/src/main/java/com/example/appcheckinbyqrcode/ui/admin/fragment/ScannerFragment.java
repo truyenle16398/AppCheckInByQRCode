@@ -2,27 +2,20 @@ package com.example.appcheckinbyqrcode.ui.admin.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import androidx.fragment.app.Fragment;
 
 import com.example.appcheckinbyqrcode.R;
 import com.example.appcheckinbyqrcode.sqlite.MyDatabaseHelper;
 import com.example.appcheckinbyqrcode.ui.admin.ScanCodeActivity;
 import com.example.appcheckinbyqrcode.ui.admin.model.InfoQR;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -45,7 +38,7 @@ public class ScannerFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_scanner, container, false);
         myDatabaseHelper = new MyDatabaseHelper(getActivity());
         listinfo = new ArrayList<>();
-        infoQR = new InfoQR(0,"","","","","","");
+        infoQR = new InfoQR(0, "", "", "", "", "", "");
         resulttextview = view.findViewById(R.id.barcodetextview);
         scanbutton = view.findViewById(R.id.buttonscan);
         scanbutton.setOnClickListener(new View.OnClickListener() {
