@@ -23,6 +23,7 @@ public class SessionManager {
     private static final String KEY_ROLE = "key_role";
 
 
+
     private static SessionManager sInstance;
 
     private SharedPreferences sharedPref;
@@ -46,8 +47,7 @@ public class SessionManager {
     public void setKeyRole(String role) {
         sharedPref.edit().putString(KEY_ROLE, role).apply();
     }
-
-    public String getKeyRole() {
+    public String getKeyRole(){
         return sharedPref.getString(KEY_ROLE, "");
     }
 
@@ -55,111 +55,109 @@ public class SessionManager {
     public void setKeyLogin(boolean islogin) {
         sharedPref.edit().putBoolean(KEY_LOGIN, islogin).apply();
     }
-
     //    public void getKeyLogin(boolean islogin) {
 //        sharedPref.edit().putBoolean(KEY_LOGIN,islogin).apply();
 //    }
-    public boolean CheckKeyLogin() {
-        return sharedPref.getBoolean(KEY_LOGIN, false);
+    public boolean CheckKeyLogin(){
+        return sharedPref.getBoolean(KEY_LOGIN,false);
     }
 
     /**
      * Set key save name
+     *
      */
     public void setKeySaveName(String name) {
         sharedPref.edit().putString(KEY_SAVE_NAME, name).apply();
     }
 
-    public String getKeySaveName() {
+    public String getKeySaveName(){
         return sharedPref.getString(KEY_SAVE_NAME, "");
     }
-
     /**
      * Set key save checkin/out
+     *
      */
     public void setKeySaveCheck(Boolean check) {
         sharedPref.edit().putBoolean(KEY_SAVE_CHECK, check).apply();
     }
-
-    public Boolean getKeySaveCheck() {
+    public Boolean getKeySaveCheck(){
         return sharedPref.getBoolean(KEY_SAVE_CHECK, false);
     }
-
-    public boolean CheckKeyInOut() {
-        return sharedPref.getBoolean(KEY_SAVE_CHECK, false);
+    public boolean CheckKeyInOut(){
+        return sharedPref.getBoolean(KEY_SAVE_CHECK,false);
     }
+
 
 
     //-------------------------------------------------------------------------------------------
-
     /**
      * Set key save language
+     *
      */
     public void setKeySaveLanguage(String language) {
         sharedPref.edit().putString(KEY_SAVE_LANGUAGE, language).apply();
     }
 
-    public String getKeySaveLanguage() {
+    public String getKeySaveLanguage(){
         return sharedPref.getString(KEY_SAVE_LANGUAGE, "vn");
     }
 
     /**
      * Set key save color
+     *
      */
     public void setKeySaveColor(String color) {
         sharedPref.edit().putString(KEY_SAVE_COLOR, color).apply();
     }
-
-    public String getKeySaveColor() {
+    public String getKeySaveColor(){
         return sharedPref.getString(KEY_SAVE_COLOR, "#F6B934");
     }
 
     /**
      * Set key save AddressCity
+     *
      */
     public void setKeySaveAddressCity(String cityName) {
         sharedPref.edit().putString(KEY_SAVE_CITY_NAME, cityName).apply();
     }
-
-    public String getKeySaveCityName() {
+    public String getKeySaveCityName(){
         return sharedPref.getString(KEY_SAVE_CITY_NAME, "");
     }
 
     /**
      * Set key save Lat
+     *
      */
     public void setKeySaveLat(String lat) {
         sharedPref.edit().putString(KEY_SAVE_CITY_NAME_LAT, lat).apply();
     }
-
-    public String getKeySaveLat() {
+    public String getKeySaveLat(){
         return sharedPref.getString(KEY_SAVE_CITY_NAME_LAT, "");
     }
 
     /**
      * Set key save Log
+     *
      */
     public void setKeySaveLong(String Long) {
         sharedPref.edit().putString(KEY_SAVE_CITY_NAME_LONG, Long).apply();
     }
-
-    public String getKeySaveLong() {
+    public String getKeySaveLong(){
         return sharedPref.getString(KEY_SAVE_CITY_NAME_LONG, "");
     }
-
     /**
      * Set key save city name
+     *
      */
     public void setKeySaveCity(String city) {
         sharedPref.edit().putString(KEY_SAVE_CITY, city).apply();
     }
-
-    public String getKeySaveCity() {
+    public String getKeySaveCity(){
         return sharedPref.getString(KEY_SAVE_CITY, "");
     }
-
     /**
      * Set key save token
+     *
      */
     public void setKeySaveToken(String token) {
         sharedPref.edit().putString(KEY_SAVE_TOKEN, token).apply();
@@ -167,6 +165,7 @@ public class SessionManager {
 
     /**
      * get key save mToken
+     *
      */
     public String getKeySaveToken() {
         return sharedPref.getString(KEY_SAVE_TOKEN, "");
@@ -174,6 +173,7 @@ public class SessionManager {
 
     /**
      * Set key save token device
+     *
      */
     public void setKeySaveTokenDevice(String token) {
         sharedPref.edit().putString(KEY_SAVE_TOKEN_USER_DEVICE, token).apply();
@@ -181,13 +181,14 @@ public class SessionManager {
 
     /**
      * get key save mToken device
+     *
      */
     public String getKeySaveTokenDeviCe() {
         return sharedPref.getString(KEY_SAVE_TOKEN_USER_DEVICE, "");
     }
-
     /**
      * Set key save token
+     *
      */
     public void setKeySaveVersion(String token) {
         sharedPref.edit().putString(KEY_SAVE_VERSION, token).apply();
@@ -195,6 +196,7 @@ public class SessionManager {
 
     /**
      * get key save mToken
+     *
      */
     public String getKeySaveVersion() {
         return sharedPref.getString(KEY_SAVE_VERSION, "");
@@ -203,6 +205,7 @@ public class SessionManager {
 
     /**
      * Set key save token
+     *
      */
     public void setKeySaveSize(String size) {
         sharedPref.edit().putString(KEY_SAVE_SIZE_TEXT, size).apply();
@@ -210,6 +213,7 @@ public class SessionManager {
 
     /**
      * get key save mToken
+     *
      */
     public String getKeySaveSizeText() {
         return sharedPref.getString(KEY_SAVE_SIZE_TEXT, "");
@@ -218,6 +222,7 @@ public class SessionManager {
 
     /**
      * Set key save token
+     *
      */
     public void setKeySaveFirstApp(boolean inapp) {
         sharedPref.edit().putBoolean(KEY_SAVE_FIRST_APP, inapp).apply();
@@ -225,6 +230,7 @@ public class SessionManager {
 
     /**
      * get key save mToken
+     *
      */
     public boolean getKeySaveSizeFirstApp() {//lấy ra cái key de kt may nao da tai lan dau tien
         return sharedPref.getBoolean(KEY_SAVE_FIRST_APP, false);
