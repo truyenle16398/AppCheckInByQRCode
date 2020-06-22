@@ -1,22 +1,25 @@
 package com.example.appcheckinbyqrcode.ui.client;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.Html;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.fragment.app.Fragment;
 
 import com.bumptech.glide.Glide;
 import com.example.appcheckinbyqrcode.R;
@@ -35,16 +38,18 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 
-public class EventDetailActivity extends AppCompatActivity  {
+public class EventDetailActivity extends AppCompatActivity {
     private MyDatabaseHelper myDatabaseHelper;
     ArrayList<FavoriteList> favoriteLists;
     FavoriteList favorites;
     ImageView imageDetail;
-    TextView txtNameEventDetail, txtDateTimeStart, txtDateTimeEnd, txtInfoDetail, txtAddressInfoDetail,txtFavorite;
-    Button btnRegisterDetail;
+    TextView txtNameEventDetail, txtDateTimeStart, txtDateTimeEnd, txtInfoDetail, txtAddressInfoDetail, txtFavorite;
+    Button btnRegisterDetail, btnNo, btnYes;
     Toolbar toolbar;
     private int id;
-     private OnIntent home ;
+    private OnIntent home;
+    private AlertDialog dialog;
+    private ProgressBar progress;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,8 +58,9 @@ public class EventDetailActivity extends AppCompatActivity  {
 //         home =  (OnIntent) EventDetailActivity.this.getBaseContext();
         InitWidget();
         myDatabaseHelper = new MyDatabaseHelper(this);
+        myDatabaseHelper.getWritableDatabase();
         favoriteLists = new ArrayList<>();
-        favorites = new FavoriteList(0,1,true);
+        favorites = new FavoriteList(0, 1);
         setSupportActionBar(toolbar);
         Drawable drawable = getResources().getDrawable(R.drawable.ic_arrow_while24dp);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -97,8 +103,9 @@ public class EventDetailActivity extends AppCompatActivity  {
                             public void onComplete() {
                                 finish();
                                 dialog.dismiss();
-                                if (home!=null){;
-                                      home.intents();
+                                if (home != null) {
+                                    ;
+                                    home.intents();
                                 }
                             }
                         });
@@ -108,7 +115,7 @@ public class EventDetailActivity extends AppCompatActivity  {
         txtFavorite.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                showDialog();
             }
         });
     }
@@ -140,7 +147,7 @@ public class EventDetailActivity extends AppCompatActivity  {
                     @Override
                     public void onNext(MessageResponse messageResponse) {
                         EventDetailResponse eventDetailResponse = messageResponse.getDetail();
-                        String urls = url.getUrlimgevent()+ eventDetailResponse.getImage();
+                        String urls = url.getUrlimgevent() + eventDetailResponse.getImage();
                         Glide.with(getApplicationContext()).load(urls).into(imageDetail);
                         toolbar.setTitle(eventDetailResponse.getName());
                         txtDateTimeStart.setText(eventDetailResponse.getStart_time());
@@ -161,6 +168,89 @@ public class EventDetailActivity extends AppCompatActivity  {
                         dialog.dismiss();
                     }
                 });
+    }
+
+    //    private void showDialog() {
+//        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+//        LayoutInflater inflater = this.getLayoutInflater();
+//        View view = inflater.inflate(R.layout.dialog_favoriteevent, null);
+//        progress = view.findViewById(R.id.progress);
+//        dialog = builder.create();
+//
+//        builder.setView(view);
+//        builder.setTitle("Yeu Thich Su Kien Nay");
+//        builder.setPositiveButton("Dong Y", new DialogInterface.OnClickListener() {
+//            @Override
+//            public void onClick(DialogInterface dialog, int which) {
+//                myDatabaseHelper.insertFavorite(favorites);
+//                Intent intent = new Intent(getApplication(), HomeClientActivity.class);
+//                startActivity(intent);
+//            }
+//        });
+//        builder.setNegativeButton("Hủy", new DialogInterface.OnClickListener() {
+//            @Override
+//            public void onClick(DialogInterface dialog, int which) {
+//                dialog.dismiss();
+//            }
+//        });
+//        dialog.show();
+//
+////        dialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(new View.OnClickListener() {
+////            @Override
+////            public void onClick(View v) {
+////                btnYes = view.findViewById(R.id.btnYes);
+////                btnNo = view.findViewById(R.id.btnNo);
+////                btnNo.setOnClickListener(new View.OnClickListener() {
+////                    @Override
+////                    public void onClick(View v) {
+////                        dialog.dismiss();
+////                    }
+////                });
+////                btnYes.setOnClickListener(new View.OnClickListener() {
+////                    @Override
+////                    public void onClick(View v) {
+////                        myDatabaseHelper.insertFavorite(favorites);
+////                        Intent intent = new Intent(getApplication(), HomeClientActivity.class);
+////                        startActivity(intent);
+////                    }
+////                });
+////            }
+////        });
+//    }
+    private void showDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        LayoutInflater inflater = getLayoutInflater();
+        View view = inflater.inflate(R.layout.dialog_favoriteevent, null);
+        progress = view.findViewById(R.id.progress);
+        builder.setView(view);
+        builder.setPositiveButton("Thich", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Toast.makeText(EventDetailActivity.this, "okInster", Toast.LENGTH_SHORT).show();
+                myDatabaseHelper.
+                myDatabaseHelper.insertFavorite(favorites);
+
+//                Intent intent = new Intent(getApplication(), HomeClientActivity.class);
+//                startActivity(intent);
+
+            }
+        });
+        builder.setNegativeButton("Hủy", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                //dialog.dismiss();
+                myDatabaseHelper.insertFavorite(favorites);
+                Toast.makeText(EventDetailActivity.this, "okInster", Toast.LENGTH_SHORT).show();
+            }
+        });
+        dialog = builder.create();
+        dialog.show();
+        dialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
     }
 
     private void InitWidget() {

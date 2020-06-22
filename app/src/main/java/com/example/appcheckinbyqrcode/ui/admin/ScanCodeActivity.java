@@ -83,7 +83,7 @@ public class ScanCodeActivity extends AppCompatActivity implements ZXingScannerV
                             SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
                             String strDate = formatter.format(date);
                             infoQR.timecheckin=strDate;
-                            myDatabaseHelper.insertInfo(infoQR);
+
                             Log.d("nnn", "aaaaaaaaaaa: "+ strDate);
                         } else {
                             ScannerFragment.resulttextview.setText(messageResponse.getMessage());

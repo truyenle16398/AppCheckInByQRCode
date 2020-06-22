@@ -45,7 +45,6 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
     //COLUMN_FAVORITE
     private static final String COLUMN_FAVORITE_ID = "idFavo";
     private static final String COLUMN_FAVORITE_EVENT_ID = "idEventFavo";
-    private static final String COLUMN_FAVORITE_CHECK = "favoriteCheck";
 
     public MyDatabaseHelper(Context context)  {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -69,8 +68,7 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         // Script. COLUMN_FAVORITE
         String favorites = "CREATE TABLE " + TABLE_FAVORITE + "(" +
                 "COLUMN_FAVORITE_ID INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                "COLUMN_FAVORITE_EVENT_ID INTEGER , " +
-                "COLUMN_FAVORITE_CHECK  INTEGER"  + ")";
+                "COLUMN_FAVORITE_EVENT_ID  INTEGER"  + ")";
         // Execute favorites
         db.execSQL(favorites);
 
@@ -111,8 +109,8 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         Log.d(TAG, "insertFavorite: inserting.......");
 
         SQLiteDatabase db = getWritableDatabase();
-        db.execSQL("INSERT INTO "+TABLE_FAVORITE+" (idEvent, favoriteCheck) VALUES (?,?)",
-                new String[]{String.valueOf(favoriteList.idEvent), String.valueOf(favoriteList.favoriteCheck)});
+        db.execSQL("INSERT INTO "+TABLE_FAVORITE+" (idEvent) VALUES (?)",
+                new String[]{String.valueOf(favoriteList.idEvent)});
     }
 
 
@@ -155,9 +153,8 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         while (!cursor.isAfterLast()) {
             int id = cursor.getInt(0);
             int idEvent = cursor.getInt(1);
-            boolean favoriteCheck = (cursor.getInt(cursor.getColumnIndex(COLUMN_FAVORITE_CHECK )) == 1 );
-            Log.d(TAG, "getAllFavorite: "+id +idEvent+favoriteCheck + cursor.getString(3));
-            favoriteList.add(new FavoriteList(id, idEvent, favoriteCheck));
+            Log.d(TAG, "getAllFavorite: "+id +idEvent + cursor.getString(2));
+            favoriteList.add(new FavoriteList(id, idEvent));
             cursor.moveToNext();
         }
         // return favorite list
