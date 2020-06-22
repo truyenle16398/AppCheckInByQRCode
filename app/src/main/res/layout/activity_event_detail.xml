@@ -35,13 +35,20 @@
                             android:orientation="vertical"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content">
-                            <RatingBar
-                                android:saveEnabled="true"
-                                android:layout_gravity="center"
-                                android:rating="3.5"
-                                android:id="@+id/ratingBar"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content" />
+                            <TextView
+                                android:id="@+id/txtFavorite"
+                                android:layout_marginBottom="5dp"
+                                android:layout_marginTop="5dp"
+                                android:visibility="visible"
+                                android:layout_weight="5"
+                                android:drawablePadding="5dp"
+                                android:drawableLeft="@drawable/ic_favorite_red_24dp"
+                                android:gravity="center|left"
+                                android:textColor="#000"
+                                android:textSize="22dp"
+                                android:text="Would you like to like this event?"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"/>
 
                             <TextView
                                 android:layout_marginBottom="5dp"

@@ -84,8 +84,6 @@ public interface ApiService {
     @POST("UploadAvatar")
     Observable<UploadAvatarResponse> updateAvatar(@Part MultipartBody.Part avatar);
 
-
-
     //doi mat khau
     @PUT("update_pass")
     Observable<MessageResponse> updatepass(@Query("old_pass") String oldpass,
@@ -131,7 +129,5 @@ public interface ApiService {
     //Quét qr
     @PUT("checkin/{id}")
     Observable<MessageResponse> savecheckin(@Path("id") int id,@Query("code") String code);
-
-
 
 }
