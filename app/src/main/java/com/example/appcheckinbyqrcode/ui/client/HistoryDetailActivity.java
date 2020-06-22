@@ -6,10 +6,12 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.Html;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -26,6 +28,7 @@ import com.example.appcheckinbyqrcode.network.response.EventDetailResponse;
 import com.example.appcheckinbyqrcode.network.response.MessageResponse;
 import com.example.appcheckinbyqrcode.network.url;
 import com.example.appcheckinbyqrcode.ui.client.fragment.FavoriteEventFragment;
+import com.google.android.material.bottomsheet.BottomSheetDialog;
 
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -34,11 +37,11 @@ import io.reactivex.schedulers.Schedulers;
 
 public class HistoryDetailActivity extends AppCompatActivity {
     ImageView imageDetail;
-    TextView txtNameEventDetail, txtDateTimeStart, txtDateTimeEnd, txtInfoDetail, txtAddressInfoDetail;
+    TextView tvshowqrcode, txtDateTimeStart, txtDateTimeEnd, txtInfoDetail, txtAddressInfoDetail;
     Button btnRegisterDetail;
     Toolbar toolbar;
     private int id;
-    private int postion;
+    private int code;
     public static final String EXTRA_DATA = "EXTRA_DATA";
 
 
@@ -54,12 +57,35 @@ public class HistoryDetailActivity extends AppCompatActivity {
         getSupportActionBar().setHomeAsUpIndicator(drawable);
         Intent intent = getIntent();
         id = intent.getIntExtra("idhistory", 0);
-        postion = intent.getIntExtra("postion", 0);
-        getdata(id,postion);
+        code = intent.getIntExtra("code", 0);
+        getdata(id,code);
         onclick();
     }
 
     private void onclick() {
+        tvshowqrcode.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ProgressDialog dialog = new ProgressDialog(HistoryDetailActivity.this);
+                dialog.setMessage("please wait...");
+                String qr = id+"-"+code;
+                BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(HistoryDetailActivity.this,R.style.BottomSheetDialogTheme);
+                View bottomSheetView = LayoutInflater.from(getApplicationContext()).inflate(R.layout.bottom_dialog_qrcode,(LinearLayout)findViewById(R.id.viewidbottom));
+                ImageView imageView = bottomSheetView.findViewById(R.id.imagebottomdialog);
+                new ImageDownloaderTask(imageView).execute("https://api.qrserver.com/v1/create-qr-code/?size=1000x1000&data="+qr);
+
+                try {
+                    dialog.show();
+                    Thread.sleep(2000);
+                    dialog.dismiss();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                bottomSheetDialog.setContentView(bottomSheetView);
+                bottomSheetDialog.show();
+
+            }
+        });
         btnRegisterDetail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -160,6 +186,7 @@ public class HistoryDetailActivity extends AppCompatActivity {
         txtInfoDetail = findViewById(R.id.txtInfoDetailHistory);
         txtAddressInfoDetail = findViewById(R.id.txtAddressInfoDetailHistory);
         btnRegisterDetail = findViewById(R.id.btnRegisterDetailHistory);
+        tvshowqrcode =findViewById(R.id.tvshowqrcode);
 
     }
 }

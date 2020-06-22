@@ -17,4 +17,10 @@
         <item name="android:tint">@android:color/white</item>
         <item name="android:textColorHint">@android:color/white</item>
     </style>
+    <style name="BottomSheetDialogTheme" parent="Theme.Design.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/BottomSheetStyle</item>
+    </style>
+    <style name="BottomSheetStyle" parent="Widget.Design.BottomSheet.Modal">
+<!--        <item name="background">#fff</item>-->
+    </style>
 </resources>

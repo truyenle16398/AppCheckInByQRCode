@@ -34,13 +34,16 @@
                         android:orientation="vertical"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
-                        <RatingBar
-                            android:saveEnabled="true"
-                            android:layout_gravity="center"
-                            android:rating="3.5"
-                            android:id="@+id/ratingBar"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content" />
+                        <TextView
+                            android:id="@+id/tvshowqrcode"
+                            android:background="@drawable/ripper"
+                            android:drawablePadding="-30dp"
+                            android:textColor="#000"
+                            android:gravity="center"
+                            android:drawableLeft="@drawable/ic_arrow_forward_black_24dp"
+                            android:text="Click to get QRCODE"
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"/>
                         <TextView
                             android:layout_marginBottom="5dp"
                             android:drawablePadding="8dp"
