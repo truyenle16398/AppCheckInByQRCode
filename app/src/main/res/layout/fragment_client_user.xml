@@ -25,7 +25,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
                 android:gravity="center"
-                android:text="MY PROFILE"
+                android:text="@string/hint_my_profile"
                 android:textColor="#ffffff"
                 android:textSize="30dp"
                 android:textStyle="bold" />
@@ -89,7 +89,7 @@
                     android:layout_height="wrap_content">
                     <TextView
                         android:layout_weight="1"
-                        android:text="Name"
+                        android:text="@string/namedit"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:gravity="left"
@@ -120,7 +120,7 @@
                     android:layout_height="wrap_content">
                     <TextView
                         android:layout_weight="1"
-                        android:text="Email"
+                        android:text="@string/emailedit"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:gravity="left"
@@ -151,7 +151,7 @@
                     android:layout_height="wrap_content">
                     <TextView
                         android:layout_weight="1"
-                        android:text="Phone"
+                        android:text="@string/phoneedit"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:gravity="left"
@@ -182,7 +182,7 @@
                     android:layout_height="wrap_content">
                     <TextView
                         android:layout_weight="1"
-                        android:text="Address"
+                        android:text="@string/addressedit"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:gravity="left"
@@ -215,7 +215,7 @@
                     <TextView
                         android:singleLine="true"
                         android:layout_weight="2"
-                        android:text="Đổi mật khẩu"
+                        android:text="@string/change_password"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:gravity="left"
@@ -246,7 +246,7 @@
                     <TextView
                         android:singleLine="true"
                         android:layout_weight="2"
-                        android:text="Sửa hồ sơ"
+                        android:text="@string/hint_your_edit_profile"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:gravity="left"
@@ -277,7 +277,7 @@
                     <TextView
                         android:singleLine="true"
                         android:layout_weight="2"
-                        android:text="Đăng xuất"
+                        android:text="@string/logout"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:gravity="left"

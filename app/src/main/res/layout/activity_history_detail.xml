@@ -128,7 +128,7 @@
                         android:id="@+id/btnRegisterDetailHistory"
                         android:layout_width="match_parent"
                         android:layout_height="?actionBarSize"
-                        android:text="@string/h_y_s_ki_n"
+                        android:text="@string/event_cancel"
                         android:textSize="22sp" />
                 </LinearLayout>
             </ScrollView>

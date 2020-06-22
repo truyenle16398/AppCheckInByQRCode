@@ -14,7 +14,7 @@
         android:layout_marginTop="50dp"
         android:layout_marginRight="10dp"
         android:gravity="center"
-        android:text="Bạn không có sự kiện nào đang diễn ra"
+        android:text="@string/notificationevent"
         android:textColor="#000"
         android:textSize="30sp"
         android:visibility="gone" />

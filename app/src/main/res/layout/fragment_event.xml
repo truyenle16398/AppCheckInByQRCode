@@ -25,19 +25,19 @@
             android:id="@+id/firstItemEvent"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
-            android:text="Going On" />
+            android:text="@string/going_on" />
 
         <com.google.android.material.tabs.TabItem
             android:id="@+id/secondItemEvent"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
-            android:text="Going On Happened" />
+            android:text="@string/going_on_happened" />
 
         <com.google.android.material.tabs.TabItem
             android:id="@+id/thirdItemEvent"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
-            android:text="Happened" />
+            android:text="@string/happened" />
 
 
     </com.google.android.material.tabs.TabLayout>
