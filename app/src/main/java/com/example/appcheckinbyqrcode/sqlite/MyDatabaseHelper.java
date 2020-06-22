@@ -1,17 +1,12 @@
 package com.example.appcheckinbyqrcode.sqlite;
 
-import android.annotation.SuppressLint;
-import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
-import android.database.DatabaseErrorHandler;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-
+import com.example.appcheckinbyqrcode.ui.admin.model.FavoriteList;
 import com.example.appcheckinbyqrcode.ui.admin.model.InfoQR;
 
 import java.util.ArrayList;
@@ -28,6 +23,7 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
 
     // Table name: Note.
     private static final String TABLE_INFO = "info";
+    private static final String TABLE_FAVORITE = "favo";
 
     private static final String COLUMN_INFO_ID = "id";
     private static final String COLUMN_INFO_NAME ="name";
@@ -36,6 +32,9 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
     private static final String COLUMN_INFO_PHONE = "phone";
     private static final String COLUMN_INFO_ADDRESS = "address";
     private static final String COLUMN_INFO_TIMECHECKIN = "timecheckin";
+
+    private static final String COLUMN_FAVORITE_ID = "idfavo";
+    private static final String COLUMN_FAVORITE_EVENT_ID = "idevent";
 
     public MyDatabaseHelper(Context context)  {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -54,7 +53,17 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
                 COLUMN_INFO_ADDRESS + " VARCHAR (255)," +
                 COLUMN_INFO_TIMECHECKIN + " VARCHAR (255)" + ")";
         // Execute Script.
+
+
+        // Script. COLUMN_FAVORITE
+        String favorites = "CREATE TABLE " + TABLE_FAVORITE + "(" +
+                "COLUMN_FAVORITE_ID INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                COLUMN_FAVORITE_EVENT_ID + " INTEGER "  + ")";
+        // Execute favorites
+        db.execSQL(favorites);
         db.execSQL(script);
+
+
     }
 
     @Override
@@ -62,6 +71,7 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         Log.i(TAG, "MyDatabaseHelper.onUpgrade ... ");
         // Drop older table if existed
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_INFO);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_FAVORITE);
 
         // Create tables again
         onCreate(db);
@@ -87,6 +97,18 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
                 new String[]{infoQR.name, infoQR.email, infoQR.avatar, infoQR.phone, infoQR.address, infoQR.timecheckin});
     }
 
+    public void insertFavorite(int a) {
+        Log.d(TAG, "insertFavorite: inserting.......");
+
+        SQLiteDatabase db = getWritableDatabase();
+//        db.execSQL("INSERT INTO "+TABLE_FAVORITE + " (idevent)VALUES (?)",
+//                new String[]{String.valueOf(favoriteList.idEvent)});
+        db.execSQL("INSERT INTO " + TABLE_FAVORITE + "(idevent) VALUES ("+a+")");
+        db.close();
+    }
+
+
+    //infor
     public List<InfoQR> getAllInfo() {
         Log.i(TAG, "MyDatabaseHelper.getAllNotes ... " );
 
@@ -112,6 +134,19 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         return infoQRList;
     }
 
+    //Favorite
+    public int getFavoriteID(int id) {
+        Log.i(TAG, "MyDatabaseHelper.getAllFavorite ... " );
+
+        List<FavoriteList> favoriteList = new ArrayList<FavoriteList>();
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * from "+TABLE_FAVORITE+" where idevent = " +id,null);//id, idEvent, favoriteCheck
+
+        int count = cursor.getCount();
+        // return favorite list
+        return count;
+    }
+    // infor
     public int getInfoCount() {
         Log.i(TAG, "MyDatabaseHelper.getNotesCount ... " );
 
@@ -131,4 +166,13 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = getWritableDatabase();
         db.execSQL("DELETE FROM "+TABLE_INFO);
     }
+    public boolean deleteFavoriteID(int id) {
+        SQLiteDatabase db = getWritableDatabase();
+        Log.d(TAG, "deleteFavoriteID: ");
+//        db.execSQL("DELETE FROM "+TABLE_FAVORITE+" where TABLE_FAVORITE = " +id,null);
+
+        return db.delete(TABLE_FAVORITE, id + "=" + id, null) > 0;
+
+    }
+
 }

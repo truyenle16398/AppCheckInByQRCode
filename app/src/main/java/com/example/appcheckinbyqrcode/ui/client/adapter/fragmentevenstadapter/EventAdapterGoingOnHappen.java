@@ -18,6 +18,7 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.appcheckinbyqrcode.R;
 import com.example.appcheckinbyqrcode.network.response.EventListResponse;
 import com.example.appcheckinbyqrcode.network.url;
+import com.example.appcheckinbyqrcode.sqlite.MyDatabaseHelper;
 import com.example.appcheckinbyqrcode.ui.client.EventDetailActivity;
 import com.squareup.picasso.Picasso;
 
@@ -25,11 +26,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class EventAdapterGoingOnHappen extends RecyclerView.Adapter<EventAdapterGoingOnHappen.EventList_holder> {
-
+    private MyDatabaseHelper myDatabaseHelper;
     private static final String TAG = "nnn";
     private List<EventListResponse> items= new ArrayList<>();
     private Context context;
-
+    public boolean changgColorButon = true;
 
     public EventAdapterGoingOnHappen(List<EventListResponse> items, Context context) {
         this.items = items;
@@ -48,6 +49,20 @@ public class EventAdapterGoingOnHappen extends RecyclerView.Adapter<EventAdapter
     @Override
     public void onBindViewHolder(@NonNull EventAdapterGoingOnHappen.EventList_holder holder, int position) {
         String urls = url.getUrlimgevent() + items.get(position).getImage();
+        int id = Integer.parseInt(items.get(position).getId());
+        myDatabaseHelper = new MyDatabaseHelper(context);
+        if (myDatabaseHelper.getFavoriteID(id) == 1) {
+            Log.d(TAG, "onBindViewHolder: id okkkkkkkkkk" + id);
+            changgColorButon = true;
+            holder.imageButton2.setVisibility(View.VISIBLE);
+            holder.imageButton2.setBackgroundResource(R.drawable.ic_favorite_red_24dp);
+//            Toast.makeText(context, "aaaa" + , Toast.LENGTH_SHORT).show();
+        } else {
+            Log.d(TAG, "ttttttttttttttttttt: ");
+            changgColorButon = true;
+            holder.imageButton2.setVisibility(View.GONE);
+            holder.imageButton2.setBackgroundResource(R.drawable.ic_favorite_red_24dp);
+        }
 //        Glide.with(context).load(urls).into(holder.avatar);
 //        Glide.with(context)
 //                .load(urls)
@@ -69,6 +84,7 @@ public class EventAdapterGoingOnHappen extends RecyclerView.Adapter<EventAdapter
         public TextView name, intro, day, time, place;
         public ImageView avatar;
         public CardView cardView;
+        public TextView imageButton2;
 
         public EventList_holder(View view) {
             super(view);
@@ -79,6 +95,7 @@ public class EventAdapterGoingOnHappen extends RecyclerView.Adapter<EventAdapter
             place = view.findViewById(R.id.eventplaceOnGoingHappen);
             avatar = view.findViewById(R.id.eventavatarOnGoingHappen);
             cardView = view.findViewById(R.id.linnerOnGoingHappen);
+            imageButton2 = view.findViewById(R.id.txtImageFavorite2);
             cardView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

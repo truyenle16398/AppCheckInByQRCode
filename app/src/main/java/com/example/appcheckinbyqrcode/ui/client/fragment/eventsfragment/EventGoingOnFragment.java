@@ -91,7 +91,7 @@ public class EventGoingOnFragment extends Fragment {
 
                     @Override
                     public void onComplete() {
-                        adapter.notifyDataSetChanged();
+//                        adapter.notifyDataSetChanged();
                     }});
     }
 
