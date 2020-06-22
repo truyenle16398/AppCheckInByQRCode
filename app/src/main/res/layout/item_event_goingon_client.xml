@@ -64,11 +64,10 @@
                     android:gravity="center|left"
                     android:scaleType="centerCrop"
                     android:background="@drawable/ic_favorite_red_24dp"
-                    android:id="@+id/txtImageFavorite"
+                    android:id="@+id/txtImageFavorite1"
+                    android:visibility="gone"
                     android:layout_width="45dp"
                     android:layout_height="35dp"/>
-
-
 
 
             </LinearLayout>

@@ -29,11 +29,8 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
 
     // Table name: Note.
     private static final String TABLE_INFO = "info";
+    private static final String TABLE_FAVORITE = "favo";
 
-    // Table name: Favorite.
-    private static final String TABLE_FAVORITE = "favorite";
-
-    //COLUMN_INFO
     private static final String COLUMN_INFO_ID = "id";
     private static final String COLUMN_INFO_NAME ="name";
     private static final String COLUMN_INFO_EMAIL ="email";
@@ -42,9 +39,8 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
     private static final String COLUMN_INFO_ADDRESS = "address";
     private static final String COLUMN_INFO_TIMECHECKIN = "timecheckin";
 
-    //COLUMN_FAVORITE
-    private static final String COLUMN_FAVORITE_ID = "idFavo";
-    private static final String COLUMN_FAVORITE_EVENT_ID = "idEventFavo";
+    private static final String COLUMN_FAVORITE_ID = "idfavo";
+    private static final String COLUMN_FAVORITE_EVENT_ID = "idevent";
 
     public MyDatabaseHelper(Context context)  {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -53,7 +49,7 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         Log.i(TAG, "MyDatabaseHelper.onCreate ... ");
-        // Script. COLUMN_INFO
+        // Script.
         String script = "CREATE TABLE " + TABLE_INFO + "(" +
                 "COLUMN_INFO_ID INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 COLUMN_INFO_EMAIL + " VARCHAR (255)," +
@@ -63,14 +59,15 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
                 COLUMN_INFO_ADDRESS + " VARCHAR (255)," +
                 COLUMN_INFO_TIMECHECKIN + " VARCHAR (255)" + ")";
         // Execute Script.
-        db.execSQL(script);
+
 
         // Script. COLUMN_FAVORITE
         String favorites = "CREATE TABLE " + TABLE_FAVORITE + "(" +
                 "COLUMN_FAVORITE_ID INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                "COLUMN_FAVORITE_EVENT_ID  INTEGER"  + ")";
+                COLUMN_FAVORITE_EVENT_ID + " INTEGER "  + ")";
         // Execute favorites
         db.execSQL(favorites);
+        db.execSQL(script);
 
 
     }
@@ -81,6 +78,7 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         // Drop older table if existed
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_INFO);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_FAVORITE);
+
         // Create tables again
         onCreate(db);
     }
@@ -105,12 +103,14 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
                 new String[]{infoQR.name, infoQR.email, infoQR.avatar, infoQR.phone, infoQR.address, infoQR.timecheckin});
     }
 
-    public void insertFavorite(FavoriteList favoriteList) {
+    public void insertFavorite(int a) {
         Log.d(TAG, "insertFavorite: inserting.......");
 
         SQLiteDatabase db = getWritableDatabase();
-        db.execSQL("INSERT INTO "+TABLE_FAVORITE+" (idEvent) VALUES (?)",
-                new String[]{String.valueOf(favoriteList.idEvent)});
+//        db.execSQL("INSERT INTO "+TABLE_FAVORITE + " (idevent)VALUES (?)",
+//                new String[]{String.valueOf(favoriteList.idEvent)});
+        db.execSQL("INSERT INTO " + TABLE_FAVORITE + "(idevent) VALUES ("+a+")");
+        db.close();
     }
 
 
@@ -141,24 +141,16 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
     }
 
     //Favorite
-    public List<FavoriteList> getAllFavorite() {
+    public int getFavoriteID(int id) {
         Log.i(TAG, "MyDatabaseHelper.getAllFavorite ... " );
 
         List<FavoriteList> favoriteList = new ArrayList<FavoriteList>();
         SQLiteDatabase db = getReadableDatabase();
-        Cursor cursor = db.rawQuery("SELECT * from "+TABLE_FAVORITE, null);//id, idEvent, favoriteCheck
+        Cursor cursor = db.rawQuery("SELECT * from "+TABLE_FAVORITE+" where idevent = " +id,null);//id, idEvent, favoriteCheck
 
-        //Đến dòng đầu của tập dữ liệu
-        cursor.moveToFirst();
-        while (!cursor.isAfterLast()) {
-            int id = cursor.getInt(0);
-            int idEvent = cursor.getInt(1);
-            Log.d(TAG, "getAllFavorite: "+id +idEvent + cursor.getString(2));
-            favoriteList.add(new FavoriteList(id, idEvent));
-            cursor.moveToNext();
-        }
+        int count = cursor.getCount();
         // return favorite list
-        return favoriteList;
+        return count;
     }
     // infor
     public int getInfoCount() {
@@ -176,34 +168,14 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         return count;
     }
 
-    // favorite
-    public int getFavoriteount() {
-        Log.i(TAG, "MyDatabaseHelper.getFavoriteount ... " );
-
-        String countQuery = "SELECT  * FROM " + TABLE_FAVORITE;
-        SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.rawQuery(countQuery, null);
-
-        int count = cursor.getCount();
-
-        cursor.close();
-
-        // return count
-        return count;
-    }
-    //info
     public void deleteall() {
         SQLiteDatabase db = getWritableDatabase();
         db.execSQL("DELETE FROM "+TABLE_INFO);
     }
-
-    //favorite
-    public void deleteFavoriteAll() {
+    public void deleteFavoriteID(int id) {
         SQLiteDatabase db = getWritableDatabase();
-        db.execSQL("DELETE FROM "+TABLE_FAVORITE);
+        db.execSQL("DELETE FROM "+TABLE_FAVORITE+" where idevent = " +id,null);
+
     }
-
-
-
 
 }

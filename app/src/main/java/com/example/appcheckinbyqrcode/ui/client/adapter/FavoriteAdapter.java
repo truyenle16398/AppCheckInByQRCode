@@ -20,12 +20,14 @@ import com.bumptech.glide.Glide;
 import com.example.appcheckinbyqrcode.R;
 import com.example.appcheckinbyqrcode.network.response.EventFavoriteResponse;
 import com.example.appcheckinbyqrcode.network.url;
+import com.example.appcheckinbyqrcode.sqlite.MyDatabaseHelper;
 import com.example.appcheckinbyqrcode.ui.client.HistoryDetailActivity;
 import com.example.appcheckinbyqrcode.ui.client.fragment.FavoriteEventFragment;
 
 import java.util.List;
 
 public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.Favorite_holder> {
+    private MyDatabaseHelper myDatabaseHelper;
     private static final String TAG = "nnn";
     private List<EventFavoriteResponse> items;
     private Context context;

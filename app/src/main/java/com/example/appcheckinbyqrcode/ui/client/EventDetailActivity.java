@@ -29,7 +29,6 @@ import com.example.appcheckinbyqrcode.network.response.MessageResponse;
 import com.example.appcheckinbyqrcode.network.url;
 import com.example.appcheckinbyqrcode.sqlite.MyDatabaseHelper;
 import com.example.appcheckinbyqrcode.ui.admin.model.FavoriteList;
-import com.example.appcheckinbyqrcode.ui.admin.model.InfoQR;
 
 import java.util.ArrayList;
 
@@ -39,16 +38,17 @@ import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 
 public class EventDetailActivity extends AppCompatActivity {
-    private MyDatabaseHelper myDatabaseHelper;
+    MyDatabaseHelper myDatabaseHelper;
     ArrayList<FavoriteList> favoriteLists;
-    FavoriteList favorites;
+    FavoriteList favoritemodel;
     ImageView imageDetail;
     TextView txtNameEventDetail, txtDateTimeStart, txtDateTimeEnd, txtInfoDetail, txtAddressInfoDetail, txtFavorite;
-    Button btnRegisterDetail, btnNo, btnYes;
+    Button btnRegisterDetail;
     Toolbar toolbar;
     private int id;
     private OnIntent home;
     private AlertDialog dialog;
+    private static final String TAG = "nnn";
     private ProgressBar progress;
 
     @Override
@@ -58,18 +58,27 @@ public class EventDetailActivity extends AppCompatActivity {
 //         home =  (OnIntent) EventDetailActivity.this.getBaseContext();
         InitWidget();
         myDatabaseHelper = new MyDatabaseHelper(this);
-        myDatabaseHelper.getWritableDatabase();
+//        myDatabaseHelper.getWritableDatabase();
         favoriteLists = new ArrayList<>();
-        favorites = new FavoriteList(0, 1);
+        favoritemodel = new FavoriteList(0, 0);
         setSupportActionBar(toolbar);
         Drawable drawable = getResources().getDrawable(R.drawable.ic_arrow_while24dp);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+// getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setHomeAsUpIndicator(drawable);
-
+        txtFavorite = findViewById(R.id.txtFavorite);
         Intent intent = getIntent();
         id = intent.getIntExtra("id", 0);
         getdata(id);
         onclick();
+        if (myDatabaseHelper.getFavoriteID(id) == 1) {
+            Log.d(TAG, "onBindViewHolder: id okkkkkkkkkk" + id);
+            txtFavorite.setVisibility(View.GONE);
+//            Toast.makeText(context, "aaaa" + , Toast.LENGTH_SHORT).show();
+        } else {
+            Log.d(TAG, "ttttttttttttttttttt: ");
+            txtFavorite.setVisibility(View.VISIBLE);
+        }
     }
 
 
@@ -112,12 +121,14 @@ public class EventDetailActivity extends AppCompatActivity {
 
             }
         });
+
         txtFavorite.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 showDialog();
             }
         });
+
     }
 
     @Override
@@ -170,53 +181,6 @@ public class EventDetailActivity extends AppCompatActivity {
                 });
     }
 
-    //    private void showDialog() {
-//        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-//        LayoutInflater inflater = this.getLayoutInflater();
-//        View view = inflater.inflate(R.layout.dialog_favoriteevent, null);
-//        progress = view.findViewById(R.id.progress);
-//        dialog = builder.create();
-//
-//        builder.setView(view);
-//        builder.setTitle("Yeu Thich Su Kien Nay");
-//        builder.setPositiveButton("Dong Y", new DialogInterface.OnClickListener() {
-//            @Override
-//            public void onClick(DialogInterface dialog, int which) {
-//                myDatabaseHelper.insertFavorite(favorites);
-//                Intent intent = new Intent(getApplication(), HomeClientActivity.class);
-//                startActivity(intent);
-//            }
-//        });
-//        builder.setNegativeButton("Hủy", new DialogInterface.OnClickListener() {
-//            @Override
-//            public void onClick(DialogInterface dialog, int which) {
-//                dialog.dismiss();
-//            }
-//        });
-//        dialog.show();
-//
-////        dialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(new View.OnClickListener() {
-////            @Override
-////            public void onClick(View v) {
-////                btnYes = view.findViewById(R.id.btnYes);
-////                btnNo = view.findViewById(R.id.btnNo);
-////                btnNo.setOnClickListener(new View.OnClickListener() {
-////                    @Override
-////                    public void onClick(View v) {
-////                        dialog.dismiss();
-////                    }
-////                });
-////                btnYes.setOnClickListener(new View.OnClickListener() {
-////                    @Override
-////                    public void onClick(View v) {
-////                        myDatabaseHelper.insertFavorite(favorites);
-////                        Intent intent = new Intent(getApplication(), HomeClientActivity.class);
-////                        startActivity(intent);
-////                    }
-////                });
-////            }
-////        });
-//    }
     private void showDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         LayoutInflater inflater = getLayoutInflater();
@@ -227,37 +191,31 @@ public class EventDetailActivity extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 Toast.makeText(EventDetailActivity.this, "okInster", Toast.LENGTH_SHORT).show();
-                myDatabaseHelper.
-                myDatabaseHelper.insertFavorite(favorites);
 
-//                Intent intent = new Intent(getApplication(), HomeClientActivity.class);
-//                startActivity(intent);
+                myDatabaseHelper.insertFavorite(id);
+
+                Intent intent = new Intent(getApplication(), HomeClientActivity.class);
+                startActivity(intent);
 
             }
         });
         builder.setNegativeButton("Hủy", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                //dialog.dismiss();
-                myDatabaseHelper.insertFavorite(favorites);
+                dialog.dismiss();
+//                myDatabaseHelper.insertFavorite(id);
                 Toast.makeText(EventDetailActivity.this, "okInster", Toast.LENGTH_SHORT).show();
+
             }
         });
         dialog = builder.create();
         dialog.show();
-        dialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
     }
 
     private void InitWidget() {
         toolbar = findViewById(R.id.toolbarDetail);
         imageDetail = findViewById(R.id.imageDetail);
         txtDateTimeStart = findViewById(R.id.txtDateTimeStart);
-        txtFavorite = findViewById(R.id.txtFavorite);
         txtDateTimeEnd = findViewById(R.id.txtDateTimeEnd);
         txtInfoDetail = findViewById(R.id.txtInfoDetail);
         txtAddressInfoDetail = findViewById(R.id.txtAddressInfoDetail);
