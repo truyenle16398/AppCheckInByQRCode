@@ -94,7 +94,7 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.Favori
 //                    Toast.makeText(context, "id "+ items.get(getAdapterPosition()).getEventId(), Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(context, HistoryDetailActivity.class);
                     intent.putExtra("idhistory",items.get(getAdapterPosition()).getEventId());
-                    intent.putExtra("postion",getAdapterPosition());
+                    intent.putExtra("code",items.get(getAdapterPosition()).getCode());
                     ((Activity) context).startActivityForResult(intent, FavoriteEventFragment.REQUEST_CODE_CANCEL);
 //                    context.startActivityForResult(intent, 5555);
 //                    context.startActivity(intent);

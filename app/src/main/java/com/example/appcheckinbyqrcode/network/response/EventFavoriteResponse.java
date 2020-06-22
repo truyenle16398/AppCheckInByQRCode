@@ -40,5 +40,8 @@ public class EventFavoriteResponse {
     @SerializedName("event_id")
     @Expose
     private Integer eventId;
+    @SerializedName("code")
+    @Expose
+    private Integer code;
 
 }
