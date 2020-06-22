@@ -1,16 +1,10 @@
 package com.example.appcheckinbyqrcode.sqlite;
 
-import android.annotation.SuppressLint;
-import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
-import android.database.DatabaseErrorHandler;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 
 import com.example.appcheckinbyqrcode.ui.admin.model.FavoriteList;
 import com.example.appcheckinbyqrcode.ui.admin.model.InfoQR;
@@ -172,9 +166,12 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = getWritableDatabase();
         db.execSQL("DELETE FROM "+TABLE_INFO);
     }
-    public void deleteFavoriteID(int id) {
+    public boolean deleteFavoriteID(int id) {
         SQLiteDatabase db = getWritableDatabase();
-        db.execSQL("DELETE FROM "+TABLE_FAVORITE+" where idevent = " +id,null);
+        Log.d(TAG, "deleteFavoriteID: ");
+//        db.execSQL("DELETE FROM "+TABLE_FAVORITE+" where TABLE_FAVORITE = " +id,null);
+
+        return db.delete(TABLE_FAVORITE, id + "=" + id, null) > 0;
 
     }
 

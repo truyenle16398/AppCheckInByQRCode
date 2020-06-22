@@ -68,8 +68,12 @@ public class EventAdapterGoingOn extends RecyclerView.Adapter<EventAdapterGoingO
         holder.imageButton1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                myDatabaseHelper.deleteFavoriteID(id);
-                Log.d(TAG, "delete: ");
+                //myDatabaseHelper.deleteFavoriteID(id);
+                if (myDatabaseHelper.deleteFavoriteID(id)){
+                    holder.imageButton1.setVisibility(View.GONE);
+                    Toast.makeText(context, "Ban Da Xoa Thanh Cong Su Kien Yeu Thich Nay", Toast.LENGTH_SHORT).show();
+                }
+
             }
         });
 //        Glide.with(context).load(urls).into(holder.avatar);
