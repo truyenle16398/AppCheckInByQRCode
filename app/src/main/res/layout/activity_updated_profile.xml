@@ -8,7 +8,7 @@
     tools:context=".ui.client.UpdatedProfileActivity">
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/updateToolBar"
-        app:title="Sửa hồ sơ"
+        app:title="@string/hint_your_edit_profile"
         android:layout_width="match_parent"
         android:layout_height="?actionBarSize"/>
     <ScrollView
@@ -44,7 +44,7 @@
                     android:background="#90000000"
                     android:textColor="#fff"
                     android:gravity="center"
-                    android:text="Chạm để thay đổi"
+                    android:text="@string/hint_your_touch_to_change"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
             </LinearLayout>
@@ -63,7 +63,7 @@
                     android:gravity="left|center"
                     android:layout_weight="1"
                     android:textColor="#000"
-                    android:text="Tên"
+                    android:text="@string/namedit"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"/>
                 <TextView
@@ -93,7 +93,7 @@
                     android:gravity="left|center"
                     android:layout_weight="1"
                     android:textColor="#000"
-                    android:text="Email"
+                    android:text="@string/emailedit"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"/>
                 <TextView
@@ -123,7 +123,7 @@
                     android:gravity="left|center"
                     android:layout_weight="1"
                     android:textColor="#000"
-                    android:text="Số điện thoại"
+                    android:text="@string/phoneedit"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"/>
                 <TextView
@@ -153,7 +153,7 @@
                     android:gravity="left|center"
                     android:layout_weight="1"
                     android:textColor="#000"
-                    android:text="Địa chỉ"
+                    android:text="@string/addressedit"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"/>
                 <TextView
@@ -165,35 +165,6 @@
                     android:layout_weight="3"
                     android:textColor="#807E7E"
                     android:text="Bình Định"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"/>
-            </LinearLayout>
-            <LinearLayout
-                android:visibility="gone"
-                android:id="@+id/updatePass"
-                android:paddingRight="10dp"
-                android:paddingLeft="10dp"
-                android:paddingTop="10dp"
-                android:paddingBottom="10dp"
-                android:weightSum="4"
-                android:orientation="horizontal"
-                android:background="@drawable/ripper"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                <TextView
-                    android:gravity="left|center"
-                    android:layout_weight="1"
-                    android:textColor="#000"
-                    android:text="Đổi mật khẩu"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"/>
-                <TextView
-                    android:textStyle="bold"
-                    android:drawablePadding="5dp"
-                    android:drawableRight="@drawable/ic_chevron_right_default_24dp"
-                    android:gravity="right|center"
-                    android:layout_weight="3"
-                    android:textColor="#807E7E"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"/>
             </LinearLayout>

@@ -10,7 +10,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         android:layout_gravity="center"
-        android:text="Did you like this event?"
+        android:text="@string/hint_question_dialog"
         android:textColor="#2d3057"
         android:textSize="30dp"
         android:textStyle="bold"/>

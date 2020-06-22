@@ -14,7 +14,7 @@
         android:textColor="#000"
         android:textSize="30sp"
         android:gravity="center"
-        android:text="Bạn không có sự kiện nào đang diễn ra"
+        android:text="@string/notificationevent"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout

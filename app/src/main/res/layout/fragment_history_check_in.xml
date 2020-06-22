@@ -19,12 +19,12 @@
             android:id="@+id/countman"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:text="Total : 10" />
+            android:text="@string/totalevent" />
         <TextView
             android:id="@+id/tvclearhistory"
             android:background="@drawable/ripple_default"
             android:gravity="center"
-            android:text="Clear"
+            android:text="@string/clearevent"
             android:layout_weight="1"
             android:layout_width="0dp"
             android:layout_height="match_parent"/>
