@@ -15,8 +15,8 @@
         android:layout_marginTop="10dp"
         android:background="@drawable/logo" />
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="350dp"
+        android:layout_height="350dp"
         android:layout_marginLeft="25dp"
         android:layout_marginRight="25dp"
         android:layout_marginBottom="60dp"
@@ -24,24 +24,19 @@
         android:orientation="vertical"
         android:gravity="center|top"
         android:layout_gravity="center"
-        android:layout_marginTop="32dp"
-        >
-
+        android:layout_marginTop="32dp">
         <ImageView
             android:background="@drawable/qr"
             android:layout_width="150dp"
             android:layout_height="150dp"
             android:layout_marginTop="50dp">
-
         </ImageView>
         <TextView
-
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:text="@string/notificationscanner"
             android:id="@+id/barcodetextview"/>
-
         <Button
             android:id="@+id/buttonscan"
             android:layout_marginTop="10dp"

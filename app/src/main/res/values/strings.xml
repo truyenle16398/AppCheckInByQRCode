@@ -46,9 +46,11 @@
     <string name="notificationevent">You have no ongoing events</string>
     <string name="totalevent">Total</string>
     <string name="clearevent">Clear</string>
-    <string name="notificationscanner">" Please scan to get through the port"</string>
+    <string name="notificationscanner">" Please scan to get through the Port"</string>
     <string name="scan_qr_code">Scan QR Code</string>
     <string name="my_profile_admin">MY PROFILE</string>
     <string name="save">Save</string>
     <string name="forgotyourpassword">Forgot Password</string>
+    <string name="setupnow">Set up now</string>
+    <string name="click_to_get_qrcode">Click to get QR CODE</string>
 </resources>

@@ -158,12 +158,6 @@ public class UpdatedProfileActivity extends AppCompatActivity {
 //                showdialog(tvAddress.getText().toString(),"Sửa địa chỉ?",tvAddress);
             }
         });
-        lnupdatepass.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
     }
 
     @Override
@@ -378,7 +372,6 @@ public class UpdatedProfileActivity extends AppCompatActivity {
         lnemail = findViewById(R.id.updateEmail);
         lnphone = findViewById(R.id.updatePhone);
         lnaddress = findViewById(R.id.updateAddress);
-        lnupdatepass = findViewById(R.id.updatePass);
         tvName = findViewById(R.id.tvName);
         tvEmail = findViewById(R.id.tvEmail);
         tvPhone = findViewById(R.id.tvPhone);
