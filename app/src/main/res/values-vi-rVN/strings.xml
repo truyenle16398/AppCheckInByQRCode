@@ -51,4 +51,6 @@
     <string name="save">Lưu</string>
     <string name="forgotyourpassword">Quên mật khẩu</string>
     <string name="base_url">base_url</string>
+    <string name="setupnow">Thiết lập ngay</string>
+    <string name="click_to_get_qrcode">Nhấp để nhận mã QR</string>
 </resources>
