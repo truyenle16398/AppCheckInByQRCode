@@ -41,7 +41,7 @@ public class HistoryDetailActivity extends AppCompatActivity {
     Button btnRegisterDetail;
     Toolbar toolbar;
     private int id;
-    private int code;
+    private String code;
     public static final String EXTRA_DATA = "EXTRA_DATA";
 
 
@@ -57,8 +57,8 @@ public class HistoryDetailActivity extends AppCompatActivity {
         getSupportActionBar().setHomeAsUpIndicator(drawable);
         Intent intent = getIntent();
         id = intent.getIntExtra("idhistory", 0);
-        code = intent.getIntExtra("code", 0);
-        getdata(id,code);
+        code = intent.getStringExtra("code");
+        getdata(id);
         onclick();
     }
 
@@ -69,6 +69,7 @@ public class HistoryDetailActivity extends AppCompatActivity {
                 ProgressDialog dialog = new ProgressDialog(HistoryDetailActivity.this);
                 dialog.setMessage("please wait...");
                 String qr = id+"-"+code;
+                Log.d("nnn", "onClick: "+ qr);
                 BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(HistoryDetailActivity.this,R.style.BottomSheetDialogTheme);
                 View bottomSheetView = LayoutInflater.from(getApplicationContext()).inflate(R.layout.bottom_dialog_qrcode,(LinearLayout)findViewById(R.id.viewidbottom));
                 ImageView imageView = bottomSheetView.findViewById(R.id.imagebottomdialog);
@@ -140,7 +141,7 @@ public class HistoryDetailActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private void getdata(int id, int postion) {
+    private void getdata(int id) {
         ProgressDialog dialog = new ProgressDialog(HistoryDetailActivity.this);
         dialog.setMessage("please wait...");
         dialog.show();
