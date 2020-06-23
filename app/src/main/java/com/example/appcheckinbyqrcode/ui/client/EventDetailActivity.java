@@ -50,6 +50,11 @@ public class EventDetailActivity extends AppCompatActivity {
     private AlertDialog dialog;
     private static final String TAG = "nnn";
     private ProgressBar progress;
+    public int idevents = 0;
+    public String name = null;
+    public String intro = null;
+    public String chariman = null;
+    public String image = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,7 +65,7 @@ public class EventDetailActivity extends AppCompatActivity {
         myDatabaseHelper = new MyDatabaseHelper(this);
 //        myDatabaseHelper.getWritableDatabase();
         favoriteLists = new ArrayList<>();
-        favoritemodel = new FavoriteList(0, 0);
+        favoritemodel = new FavoriteList(0, 0,null,null,null,null);
         setSupportActionBar(toolbar);
         Drawable drawable = getResources().getDrawable(R.drawable.ic_arrow_while24dp);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -166,6 +171,14 @@ public class EventDetailActivity extends AppCompatActivity {
                         String plainText = Html.fromHtml(eventDetailResponse.getDetail()).toString();
                         txtInfoDetail.setText(plainText);
                         txtAddressInfoDetail.setText(eventDetailResponse.getPlace());
+                        idevents = Integer.parseInt(eventDetailResponse.getId());
+                        name = eventDetailResponse.getName();
+                        intro = eventDetailResponse.getIntro();
+                        chariman = eventDetailResponse.getChairman();
+                        image = eventDetailResponse.getImage();
+
+
+
                     }
 
                     @Override
@@ -191,9 +204,10 @@ public class EventDetailActivity extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 Toast.makeText(EventDetailActivity.this, "okInster", Toast.LENGTH_SHORT).show();
-
-                myDatabaseHelper.insertFavorite(id);
-
+                FavoriteList favoriteList = new FavoriteList(0,idevents,name, intro, chariman, image);
+                myDatabaseHelper.insertFavorite(favoriteList);
+//                Log.d(TAG, "onNext: "+eventDetailResponse.toString());
+//                Log.d(TAG, "onNext1: "+id );
                 Intent intent = new Intent(getApplication(), HomeClientActivity.class);
                 startActivity(intent);
 

@@ -1,12 +1,6 @@
 package com.example.appcheckinbyqrcode.ui.client;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
@@ -22,13 +16,13 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
@@ -66,6 +60,7 @@ public class UpdatedProfileActivity extends AppCompatActivity {
     String realpath = "";
     Rect pic1Rect;
     Intent inte;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -75,7 +70,7 @@ public class UpdatedProfileActivity extends AppCompatActivity {
         pic1Rect = new Rect();
         circleimg.getDrawingRect(pic1Rect);
         onclick();
-         inte = new Intent(this, ChangeActivity.class);
+        inte = new Intent(this, ChangeActivity.class);
     }
 
 
@@ -97,7 +92,7 @@ public class UpdatedProfileActivity extends AppCompatActivity {
         tvAddress.setText(address);
     }
 
-    private void onclick(){
+    private void onclick() {
         circleimg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -121,9 +116,9 @@ public class UpdatedProfileActivity extends AppCompatActivity {
         lnname.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                inte.putExtra("title","Sửa tên");
-                inte.putExtra("edtnhan",tvName.getText().toString());
-                inte.putExtra("check","name");
+                inte.putExtra("title", "Sửa tên");
+                inte.putExtra("edtnhan", tvName.getText().toString());
+                inte.putExtra("check", "name");
                 startActivityForResult(inte, 9999);
 //                showdialog(tvName.getText().toString(),"Sửa tên?",tvName);
             }
@@ -141,9 +136,9 @@ public class UpdatedProfileActivity extends AppCompatActivity {
         lnphone.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                inte.putExtra("title","Sửa số điện thoại");
-                inte.putExtra("edtnhan",tvPhone.getText().toString());
-                inte.putExtra("check","phone");
+                inte.putExtra("title", "Sửa số điện thoại");
+                inte.putExtra("edtnhan", tvPhone.getText().toString());
+                inte.putExtra("check", "phone");
                 startActivityForResult(inte, 9999);
 //                showdialog(tvPhone.getText().toString(),"Sửa số điện thoại?",tvPhone);
             }
@@ -151,9 +146,9 @@ public class UpdatedProfileActivity extends AppCompatActivity {
         lnaddress.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                inte.putExtra("title","Sửa địa chỉ");
-                inte.putExtra("edtnhan",tvAddress.getText().toString());
-                inte.putExtra("check","address");
+                inte.putExtra("title", "Sửa địa chỉ");
+                inte.putExtra("edtnhan", tvAddress.getText().toString());
+                inte.putExtra("check", "address");
                 startActivityForResult(inte, 9999);
 //                showdialog(tvAddress.getText().toString(),"Sửa địa chỉ?",tvAddress);
             }
@@ -165,13 +160,13 @@ public class UpdatedProfileActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         switch (requestCode) {
             case 9999:
-                if (resultCode==RESULT_OK){
+                if (resultCode == RESULT_OK) {
                     assert data != null;
-                    if(data.getStringExtra("check").equals("name")){
+                    if (data.getStringExtra("check").equals("name")) {
                         tvName.setText(data.getStringExtra("edttrave"));
-                    } else if(data.getStringExtra("check").equals("phone")){
+                    } else if (data.getStringExtra("check").equals("phone")) {
                         tvPhone.setText(data.getStringExtra("edttrave"));
-                    } else if(data.getStringExtra("check").equals("address")){
+                    } else if (data.getStringExtra("check").equals("address")) {
                         tvAddress.setText(data.getStringExtra("edttrave"));
                     }
                 }
@@ -206,7 +201,7 @@ public class UpdatedProfileActivity extends AppCompatActivity {
         return path;
     }
 
-    private void changeInfo(){
+    private void changeInfo() {
         String namea = tvName.getText().toString();
         String emaila = tvEmail.getText().toString();
         String phonea = tvPhone.getText().toString();
@@ -240,7 +235,7 @@ public class UpdatedProfileActivity extends AppCompatActivity {
                 });
     }
 
-    private void showdialog(String text, String hoi,TextView tvnhan){
+    private void showdialog(String text, String hoi, TextView tvnhan) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         LayoutInflater inflater = getLayoutInflater();
         View view = inflater.inflate(R.layout.dialogupdate, null);
@@ -260,10 +255,10 @@ public class UpdatedProfileActivity extends AppCompatActivity {
         ok.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!edtNhap.getText().toString().isEmpty()){
+                if (!edtNhap.getText().toString().isEmpty()) {
                     tvnhan.setText(edtNhap.getText().toString());
                     dialog.dismiss();
-                }else {
+                } else {
                     thongbao.setText("Vui lòng không bỏ trống trường này!");
                     thongbao.setVisibility(View.VISIBLE);
 
@@ -278,7 +273,9 @@ public class UpdatedProfileActivity extends AppCompatActivity {
             public void onClick(View v) {
             }
         });
-    };
+    }
+
+    ;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -286,6 +283,7 @@ public class UpdatedProfileActivity extends AppCompatActivity {
         inflater.inflate(R.menu.menu, menu);
         return true;
     }
+
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         Intent intent = new Intent();
@@ -295,19 +293,19 @@ public class UpdatedProfileActivity extends AppCompatActivity {
                 onBackPressed();
                 return true;
             case R.id.updateok:
-                if (realpath.isEmpty()){
+                if (realpath.isEmpty()) {
                     changeInfo();
                 } else {
                     upDateUserAvatar(realpath);
                     changeInfo();
                 }
 //                Intent intent = new Intent();
-                Log.d("nnn", "onOptionsItemSelected: "+tvName.getText().toString());
-                intent.putExtra("name",tvName.getText().toString());
-                intent.putExtra("email",tvEmail.getText().toString());
-                intent.putExtra("phone",tvPhone.getText().toString());
-                intent.putExtra("address",tvAddress.getText().toString());
-                intent.putExtra("avatar",realpath);
+                Log.d("nnn", "onOptionsItemSelected: " + tvName.getText().toString());
+                intent.putExtra("name", tvName.getText().toString());
+                intent.putExtra("email", tvEmail.getText().toString());
+                intent.putExtra("phone", tvPhone.getText().toString());
+                intent.putExtra("address", tvAddress.getText().toString());
+                intent.putExtra("avatar", realpath);
                 setResult(RESULT_OK, intent);
                 finish();
                 return true;
@@ -368,7 +366,7 @@ public class UpdatedProfileActivity extends AppCompatActivity {
         Drawable drawable = getResources().getDrawable(R.drawable.ic_arrow_back_black_24dp);
         getSupportActionBar().setHomeAsUpIndicator(drawable);
         lnimg = findViewById(R.id.updateImage);
-        lnname =  findViewById(R.id.updateName);
+        lnname = findViewById(R.id.updateName);
         lnemail = findViewById(R.id.updateEmail);
         lnphone = findViewById(R.id.updatePhone);
         lnaddress = findViewById(R.id.updateAddress);

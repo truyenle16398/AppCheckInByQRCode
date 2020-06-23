@@ -53,9 +53,9 @@ public class MyFirebaseService extends FirebaseMessagingService {
 
         NotificationCompat.Builder notificationBuilder =
                 new NotificationCompat.Builder(this, channelId)
-                        .setSmallIcon(R.drawable.ic_call_to_action_black_24dp)
-                        .setLargeIcon(BitmapFactory.decodeResource(getResources(), R.drawable.ic_call_to_action_black_24dp))
-                        .setContentTitle("SDC Thông báo")
+                        .setSmallIcon(R.drawable.logo)
+                        .setLargeIcon(BitmapFactory.decodeResource(getResources(), R.drawable.logo))
+                        .setContentTitle(getResources().getString(R.string.notificationeventsdc))
                         .setContentText(messageBody)
                         .setAutoCancel(true)
                         .setSound(defaultSoundUri)
