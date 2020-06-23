@@ -11,7 +11,7 @@
         android:overScrollMode="never"
         android:clipToPadding="false"
         android:layout_width="match_parent"
-        android:layout_height="340dp">
+        android:layout_height="250dp">
     </androidx.viewpager.widget.ViewPager>
     <TextView
         android:id="@+id/tvthongbaoEvent"
