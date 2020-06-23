@@ -58,7 +58,7 @@ public class UpdatedProfileActivity extends AppCompatActivity {
 
     private AlertDialog dialog;
     private Toolbar toolbar;
-    private LinearLayout lnimg, lnname, lnemail, lnphone, lnaddress, lnupdatepass;
+    private LinearLayout lnimg, lnname, lnemail, lnphone, lnaddress;
     private TextView tvName, tvEmail, tvPhone, tvAddress, tvupdatepass, tvHoi;
     private String name, email, phone, address;
     private EditText edtNhap;
@@ -156,12 +156,6 @@ public class UpdatedProfileActivity extends AppCompatActivity {
                 inte.putExtra("check","address");
                 startActivityForResult(inte, 9999);
 //                showdialog(tvAddress.getText().toString(),"Sửa địa chỉ?",tvAddress);
-            }
-        });
-        lnupdatepass.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
             }
         });
     }
@@ -378,7 +372,6 @@ public class UpdatedProfileActivity extends AppCompatActivity {
         lnemail = findViewById(R.id.updateEmail);
         lnphone = findViewById(R.id.updatePhone);
         lnaddress = findViewById(R.id.updateAddress);
-        lnupdatepass = findViewById(R.id.updatePass);
         tvName = findViewById(R.id.tvName);
         tvEmail = findViewById(R.id.tvEmail);
         tvPhone = findViewById(R.id.tvPhone);
