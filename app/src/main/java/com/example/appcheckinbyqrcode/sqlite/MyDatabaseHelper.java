@@ -35,6 +35,10 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
 
     private static final String COLUMN_FAVORITE_ID = "idfavo";
     private static final String COLUMN_FAVORITE_EVENT_ID = "idevent";
+    private static final String COLUMN_FAVORITE_EVENT_NAME ="name";
+    private static final String COLUMN_FAVORITE_EVENT_CHAIRMAN = "chaiman";
+    private static final String COLUMN_FAVORITE_EVENT_INTRO = "intro";
+    private static final String COLUMN_FAVORITE_EVENT_IMAGE = "image";
 
     public MyDatabaseHelper(Context context)  {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -58,6 +62,10 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         // Script. COLUMN_FAVORITE
         String favorites = "CREATE TABLE " + TABLE_FAVORITE + "(" +
                 "COLUMN_FAVORITE_ID INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                COLUMN_FAVORITE_EVENT_NAME + " VARCHAR (255)," +
+                COLUMN_FAVORITE_EVENT_INTRO + " VARCHAR (255)," +
+                COLUMN_FAVORITE_EVENT_CHAIRMAN + " VARCHAR (255)," +
+                COLUMN_FAVORITE_EVENT_IMAGE + " VARCHAR (255)," +
                 COLUMN_FAVORITE_EVENT_ID + " INTEGER "  + ")";
         // Execute favorites
         db.execSQL(favorites);
@@ -97,13 +105,24 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
                 new String[]{infoQR.name, infoQR.email, infoQR.avatar, infoQR.phone, infoQR.address, infoQR.timecheckin});
     }
 
-    public void insertFavorite(int a) {
+    public void insertFavoriteId(int a) {
         Log.d(TAG, "insertFavorite: inserting.......");
 
         SQLiteDatabase db = getWritableDatabase();
 //        db.execSQL("INSERT INTO "+TABLE_FAVORITE + " (idevent)VALUES (?)",
 //                new String[]{String.valueOf(favoriteList.idEvent)});
         db.execSQL("INSERT INTO " + TABLE_FAVORITE + "(idevent) VALUES ("+a+")");
+        db.close();
+    }
+
+    public void insertFavorite(FavoriteList favoriteList) {
+        Log.d(TAG, "insertFavorite: inserting.......");
+
+        SQLiteDatabase db = getWritableDatabase();
+//        db.execSQL("INSERT INTO "+TABLE_FAVORITE + " (idevent)VALUES (?)",
+//                new String[]{String.valueOf(favoriteList.idEvent)});
+        db.execSQL("INSERT INTO " + TABLE_FAVORITE + "(idevent,name, intro, chaiman, image) VALUES (?,?,?,?,?)",
+                new String[]{favoriteList.idEvent.toString(), favoriteList.name, favoriteList.intro, favoriteList.chariman, favoriteList.image});
         db.close();
     }
 
@@ -132,6 +151,41 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         }
         // return note list
         return infoQRList;
+    }
+
+    public List<FavoriteList> getAllFavo() {
+        Log.i(TAG, "MyDatabaseHelper.getAllFavo ... " );
+
+        List<FavoriteList> favoriteLists = new ArrayList<FavoriteList>();
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * from "+TABLE_FAVORITE, null);//id, name, email, avatar, phone, address
+
+        //Đến dòng đầu của tập dữ liệu
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast()) {
+            int id = cursor.getInt(0);
+
+            String name = cursor.getString(1);
+            String chaiman = cursor.getString(2);
+            String intro = cursor.getString(3);
+            String image = cursor.getString(4);
+            Integer idevent = cursor.getInt(5);
+//            Log.d(TAG, "getAllInfo1: "+id );
+//            Log.d(TAG, "getAllInfo2: "+idevent);
+//            Log.d(TAG, "getAllInfo3: "+name);
+//            Log.d(TAG, "getAllInfo4: "+chaiman);
+//            Log.d(TAG, "getAllInfo5: "+intro);
+//            Log.d(TAG, "getAllInfo6: "+image);
+
+
+
+            Log.d(TAG, "getAllInfo: "+id +idevent+name+chaiman+intro+ image + cursor.getString(5));
+
+            favoriteLists.add(new FavoriteList(id, idevent, name, chaiman, intro, image));
+            cursor.moveToNext();
+        }
+        // return note list
+        return favoriteLists;
     }
 
     //Favorite

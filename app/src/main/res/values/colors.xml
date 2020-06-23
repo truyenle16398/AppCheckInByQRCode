@@ -7,4 +7,9 @@
     <color name="colorTextPrimary">#FFFFFF</color>
     <color name="colorTextDisable">#66FFFFFF</color>
 
+    <color name="color1">#B867F4</color>
+    <color name="color2">#516BED</color>
+    <color name="color3">#5FE865</color>
+    <color name="color4">#B867F4</color>
+
 </resources>

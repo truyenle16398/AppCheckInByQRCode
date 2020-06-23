@@ -44,6 +44,7 @@
     <string name="going_on_happened">Going On Happen</string>
     <string name="happened">Happened</string>
     <string name="notificationevent">You have no ongoing events</string>
+    <string name="notificationeventsdc">SDC Notification</string>
     <string name="totalevent">Total</string>
     <string name="clearevent">Clear</string>
     <string name="notificationscanner">" Please scan to get through the Port"</string>

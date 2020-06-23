@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "417714209282",
+    "firebase_url": "https://appcheckinbyqrcode.firebaseio.com",
+    "project_id": "appcheckinbyqrcode",
+    "storage_bucket": "appcheckinbyqrcode.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:417714209282:android:fd7469d77ca0421741dd1b",
+        "android_client_info": {
+          "package_name": "com.example.appcheckinbyqrcode"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "417714209282-ov2sqh4rhbvcv5o938r66flct9hgclem.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.appcheckinbyqrcode",
+            "certificate_hash": "b1eb260b579d8d1b8b096b2153c831b3d03d600e"
+          }
+        },
+        {
+          "client_id": "417714209282-m985ajhs5nuka72is6tfihb1vfqhh3hu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB-3FBbv8sBSe53pdfCrFvh_eBWpHAwV2k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "417714209282-m985ajhs5nuka72is6tfihb1vfqhh3hu.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
