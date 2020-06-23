@@ -91,7 +91,7 @@ public class EventGoingOnFragment extends Fragment {
         adapterViewPagerFavorite = new AdapterViewPagerFavorite(favoriteLists, getContext());
         viewPager = view.findViewById(R.id.viewPager);
         viewPager.setAdapter(adapterViewPagerFavorite);
-        viewPager.setPadding(130, 0, 130, 0);
+        viewPager.setPadding(50, 0, 50, 0);
 
         Integer[] colors_temp = {
                 getResources().getColor(R.color.color1),
