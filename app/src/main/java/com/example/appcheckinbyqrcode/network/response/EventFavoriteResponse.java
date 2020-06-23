@@ -42,6 +42,6 @@ public class EventFavoriteResponse {
     private Integer eventId;
     @SerializedName("code")
     @Expose
-    private Integer code;
+    private String code;
 
 }

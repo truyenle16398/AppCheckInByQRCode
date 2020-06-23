@@ -58,7 +58,7 @@ public class UpdatedProfileActivity extends AppCompatActivity {
 
     private AlertDialog dialog;
     private Toolbar toolbar;
-    private LinearLayout lnimg, lnname, lnemail, lnphone, lnaddress, lnupdatepass;
+    private LinearLayout lnimg, lnname, lnemail, lnphone, lnaddress;
     private TextView tvName, tvEmail, tvPhone, tvAddress, tvupdatepass, tvHoi;
     private String name, email, phone, address;
     private EditText edtNhap;
