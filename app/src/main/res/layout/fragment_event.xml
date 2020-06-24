@@ -12,7 +12,21 @@
         android:id="@+id/toolbarSearchView"
         android:layout_width="match_parent"
         android:layout_height="?actionBarSize"
-        android:background="#5257f2" />
+        android:layout_gravity="center"
+        android:background="#5257f2"
+        android:gravity="center">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="40dp"
+            android:gravity="left"
+            android:text="@string/search_something"
+            android:textColor="#fff"
+            android:textStyle="bold">
+
+        </TextView>
+    </androidx.appcompat.widget.Toolbar>
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tabLayoutEvent"
@@ -20,8 +34,8 @@
         android:layout_height="wrap_content"
         android:background="#5257f2"
         app:tabGravity="fill"
-        app:tabMode="scrollable"
         app:tabIndicatorColor="@color/colorAccent"
+        app:tabMode="scrollable"
         app:tabTextColor="@color/colorTextDisable">
 
         <com.google.android.material.tabs.TabItem
@@ -44,17 +58,26 @@
 
 
     </com.google.android.material.tabs.TabLayout>
+
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/viewPager"
+        android:visibility="visible"
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:clipToPadding="false"
+        android:foregroundGravity="center|top"
+        android:overScrollMode="never"/>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycleViewSearch"
-        android:visibility="gone"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        android:visibility="gone" />
 
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/viewPagerEvent"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-    </androidx.viewpager.widget.ViewPager>
+        android:layout_height="match_parent"/>
 
 
 </LinearLayout>
