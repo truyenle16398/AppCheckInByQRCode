@@ -65,6 +65,7 @@ public class EventAdapterGoingOn extends RecyclerView.Adapter<EventAdapterGoingO
             holder.imageButton1.setVisibility(View.GONE);
             holder.imageButton1.setBackgroundResource(R.drawable.ic_favorite_red_24dp);
         }
+        //delete favorite list
         holder.imageButton1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

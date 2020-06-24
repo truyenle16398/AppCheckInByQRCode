@@ -5,11 +5,11 @@
     <color name="colorAccent">#D81B60</color>
 
     <color name="colorTextPrimary">#FFFFFF</color>
-    <color name="colorTextDisable">#66FFFFFF</color>
+    <color name="colorTextDisable">#fff</color>
 
-    <color name="color1">#B867F4</color>
+    <color name="color3">#D9B5F4</color>
     <color name="color2">#5257f2</color>
-    <color name="color3">#5FE865</color>
+    <color name="color1">#5FE865</color>
     <color name="color4">#B867F4</color>
 
 </resources>

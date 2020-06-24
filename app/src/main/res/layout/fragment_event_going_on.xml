@@ -5,14 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".ui.client.fragment.eventsfragment.EventGoingOnFragment">
-    <androidx.viewpager.widget.ViewPager
-        android:foregroundGravity="center|top"
-        android:id="@+id/viewPager"
-        android:overScrollMode="never"
-        android:clipToPadding="false"
-        android:layout_width="match_parent"
-        android:layout_height="250dp">
-    </androidx.viewpager.widget.ViewPager>
+
     <TextView
         android:id="@+id/tvthongbaoEvent"
         android:layout_width="match_parent"

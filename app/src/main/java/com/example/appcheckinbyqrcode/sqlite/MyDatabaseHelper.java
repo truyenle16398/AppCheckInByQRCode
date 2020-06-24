@@ -170,14 +170,6 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
             String intro = cursor.getString(3);
             String image = cursor.getString(4);
             Integer idevent = cursor.getInt(5);
-//            Log.d(TAG, "getAllInfo1: "+id );
-//            Log.d(TAG, "getAllInfo2: "+idevent);
-//            Log.d(TAG, "getAllInfo3: "+name);
-//            Log.d(TAG, "getAllInfo4: "+chaiman);
-//            Log.d(TAG, "getAllInfo5: "+intro);
-//            Log.d(TAG, "getAllInfo6: "+image);
-
-
 
             Log.d(TAG, "getAllInfo: "+id +idevent+name+chaiman+intro+ image + cursor.getString(5));
 
@@ -225,7 +217,7 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         Log.d(TAG, "deleteFavoriteID: ");
 //        db.execSQL("DELETE FROM "+TABLE_FAVORITE+" where TABLE_FAVORITE = " +id,null);
 
-        return db.delete(TABLE_FAVORITE, id + "=" + id, null) > 0;
+        return db.delete(TABLE_FAVORITE, COLUMN_FAVORITE_EVENT_ID + "=" + id, null) > 0;
 
     }
 

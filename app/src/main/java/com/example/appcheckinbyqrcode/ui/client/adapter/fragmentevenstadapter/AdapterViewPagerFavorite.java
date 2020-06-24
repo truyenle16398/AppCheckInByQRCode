@@ -77,7 +77,7 @@ public class AdapterViewPagerFavorite extends PagerAdapter {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, EventDetailActivity.class);
-                intent.putExtra("param", favoriteLists.get(position).getIdEvent());
+                intent.putExtra("id", favoriteLists.get(position).getIdEvent());
                 context.startActivity(intent);
                 // finish();
             }
