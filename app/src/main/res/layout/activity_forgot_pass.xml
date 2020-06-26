@@ -15,7 +15,6 @@
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -31,8 +30,7 @@
                 android:orientation="vertical"
                 android:gravity="center|top"
                 android:layout_gravity="center"
-                android:layout_marginTop="32dp"
-                >
+                android:layout_marginTop="32dp">
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -49,20 +47,29 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"/>
 
-                <EditText
-                    android:id="@+id/inputEmail"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="10dp"
+                <com.google.android.material.textfield.TextInputLayout
+                    android:paddingBottom="10dp"
+                    android:layout_marginBottom="5dp"
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
-                    android:layout_marginTop="16dp"
-                    android:ems="10"
-                    android:inputType="textEmailAddress"
-                    android:hint="@string/hint_your_email"
-                    android:textSize="15dp"
-                    android:textColorHint="#a8a8a8"
-                    />
+                    android:id="@+id/text_input_layout_email"
+                    app:errorEnabled="true"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <com.google.android.material.textfield.TextInputEditText
+                        app:et_dividerErrorColor="#F40808"
+                        android:id="@+id/inputEmail"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:layout_marginTop="16dp"
+                        android:ems="10"
+                        android:inputType="textEmailAddress"
+                        android:hint="@string/hint_your_email"
+                        android:textSize="15dp"
+                        android:textColorHint="#a8a8a8"
+                        />
+                </com.google.android.material.textfield.TextInputLayout>
                 <EditText
                     android:id="@+id/inputCode"
                     android:layout_width="match_parent"
@@ -78,7 +85,7 @@
                     android:textColorHint="#a8a8a8"
                     />
                 <com.google.android.material.textfield.TextInputLayout
-                    app:counterEnabled="true"
+                    android:id="@+id/inputPassLayout"
                     app:passwordToggleEnabled="true"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
