@@ -64,7 +64,6 @@ public interface ApiService {
     //reset pass
     @PUT("update_info")
     Observable<UserResponse> updateinfo(@Query("name") String name,
-                                        @Query("email") String email,
                                         @Query("phone") String phone,
                                         @Query("address") String address);
 

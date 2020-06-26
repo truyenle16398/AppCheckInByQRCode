@@ -121,7 +121,7 @@ public class LoginActivity extends AppCompatActivity {
                                                 Intent intent = new Intent(LoginActivity.this, HomeAdminActivity.class);
                                                 startActivity(intent);
                                             } else {
-                                                Toast.makeText(LoginActivity.this, "Tuoi Nao Ma Doi Vo App Tao!", Toast.LENGTH_SHORT).show();
+                                                Toast.makeText(LoginActivity.this, "Bạn không đủ quyền!", Toast.LENGTH_SHORT).show();
                                             }
 
                                             ApiConfig config = ApiConfig.builder().context(LoginActivity.this).baseUrl(SessionManager.getInstance().getKeySaveCityName())
@@ -185,7 +185,11 @@ public class LoginActivity extends AppCompatActivity {
                 }
                 else
                 {
-                    tilemail.setError("Invalid Email Address");
+                    if (email.isEmpty()){
+                        tilemail.setError("Vui lòng nhập trường này");
+                    } else {
+                        tilemail.setError("Email sai định dạng");
+                    }
                 }
             }
         });
@@ -204,11 +208,11 @@ public class LoginActivity extends AppCompatActivity {
                 pass = edtPass.getText().toString().trim();
                 if (pass.isEmpty())
                 {
-                    edtPass.setError("Vui lòng nhập trường này");
+                    tilpass.setError("Vui lòng nhập trường này");
                 }
                 else
                 {
-                    edtPass.setError(null);
+                    tilpass.setError(null);
                 }
             }
         });

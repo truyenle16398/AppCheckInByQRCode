@@ -20,7 +20,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
-        tools:replace="android:icon">
+        tools:replace="android:icon"
+        tools:targetApi="q">
         <activity android:name=".ui.client.ChangeActivity"/>
         <activity
             android:name=".ui.client.UpdatedProfileActivity"
