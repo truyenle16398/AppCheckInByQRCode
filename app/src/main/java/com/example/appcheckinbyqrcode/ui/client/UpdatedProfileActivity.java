@@ -206,33 +206,37 @@ public class UpdatedProfileActivity extends AppCompatActivity {
         String emaila = tvEmail.getText().toString();
         String phonea = tvPhone.getText().toString();
         String addressa = tvAddress.getText().toString();
-        ApiClient.getService().updateinfo(namea, emaila, phonea, addressa)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<UserResponse>() {
-                    @Override
-                    public void onSubscribe(Disposable d) {
-                    }
+        if(name.equals(namea) && phone.equals(phonea) && address.equals(addressa)){
+            Log.d("zzz", "changeInfo: chưa sửa info");
+        } else {
+            ApiClient.getService().updateinfo(namea, phonea, addressa)
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(new Observer<UserResponse>() {
+                        @Override
+                        public void onSubscribe(Disposable d) {
+                        }
 
-                    @Override
-                    public void onNext(UserResponse userResponse) {
+                        @Override
+                        public void onNext(UserResponse userResponse) {
 //                                Toast.makeText(UpdatedProfileActivity.this, "Thay đổi thông tin thành công!", Toast.LENGTH_SHORT).show();
-                    }
+                        }
 
-                    @Override
-                    public void onError(Throwable e) {
-                        Log.d("nnn", "onError update pass " + e.getMessage());
-                    }
+                        @Override
+                        public void onError(Throwable e) {
+                            Log.d("nnn", "onError update pass " + e.getMessage());
+                        }
 
-                    @Override
-                    public void onComplete() {
-                        Toast.makeText(UpdatedProfileActivity.this, "Đã lưu hồ sơ!", Toast.LENGTH_SHORT).show();
+                        @Override
+                        public void onComplete() {
+                            Toast.makeText(UpdatedProfileActivity.this, "Đã lưu hồ sơ!", Toast.LENGTH_SHORT).show();
 //                                Toast.makeText(UpdatedProfileActivity.this, "Đã cập nhật!", Toast.LENGTH_SHORT).show();
 //                                Intent intent = new Intent();
 //                                setResult(RESULT_OK, intent);
 //                                finish();
-                    }
-                });
+                        }
+                    });
+        }
     }
 
     private void showdialog(String text, String hoi, TextView tvnhan) {
@@ -314,7 +318,6 @@ public class UpdatedProfileActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
-
     //update avatar
     private void upDateUserAvatar(String filename) {
 //        ProgressDialog pd = new ProgressDialog(this);
@@ -336,22 +339,18 @@ public class UpdatedProfileActivity extends AppCompatActivity {
                     @Override
                     public void onSubscribe(Disposable d) {
                     }
-
                     @Override
                     public void onNext(UploadAvatarResponse uploadAvatarResponse) {
 //                        Toast.makeText(UpdatedProfileActivity.this, "Thay đổi thành công!", Toast.LENGTH_SHORT).show();
                         Log.d("nnn", "log api upload image: " + uploadAvatarResponse.getName());
 //                        String urls = url.getUrlimg() + uploadAvatarResponse.getAvatar();
 //                        Glide.with(getContext()).load(urls).into(circleimg);
-
                     }
-
                     @Override
                     public void onError(Throwable e) {
                         Log.d("nn", "onError: " + e.getMessage());
 //                        pd.dismiss();
                     }
-
                     @Override
                     public void onComplete() {
 //                        pd.dismiss();

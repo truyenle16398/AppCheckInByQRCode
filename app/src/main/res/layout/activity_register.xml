@@ -51,7 +51,6 @@
                     android:layout_marginLeft="20dp"
                     android:layout_marginTop="16dp"
                     android:layout_marginRight="20dp"
-                    android:digits="abcdefghijklmnopqrstuvwxyz@.0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ "
                     android:drawableLeft="@drawable/ic_email_black_24dp"
                     android:drawablePadding="10dp"
                     android:ems="10"
@@ -158,9 +157,8 @@
                     android:layout_marginBottom="8dp"
                     android:clickable="true"
                     android:text="@string/already_account_back_to_login"
-                    android:textSize="12dp"
+                    android:textSize="13dp"
                     android:textStyle="bold" />
-
 
                 <Button
                     android:id="@+id/btnRegister"
