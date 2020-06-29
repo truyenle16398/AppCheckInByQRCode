@@ -20,7 +20,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.MenuItemCompat;
-import androidx.core.widget.NestedScrollView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -56,15 +55,13 @@ import static androidx.constraintlayout.widget.Constraints.TAG;
  * A simple {@link Fragment} subclass.
  */
 public class EventFragment extends Fragment {
-
-    //ViewPager Slider
     ViewPager viewPagerFavo;
     AdapterViewPagerFavorite adapterViewPagerFavorite;
     ArrayList<FavoriteList> favoriteLists;
     Integer[] colors = null;
     ArgbEvaluator argbEvaluator = new ArgbEvaluator();
     private MyDatabaseHelper myDatabaseHelper;
-    //ViewPager tablayout fragment
+
     ViewPager pager;
     TabLayout mTabLayoutEvent;
     TabItem firstItem, secondItem, thirdItem;
@@ -75,8 +72,8 @@ public class EventFragment extends Fragment {
     private List<EventSearchListResponse> listResponses;
     private View view;
     Toolbar toolbar;
-//    TextView search;
-//    String[] item;
+    TextView search;
+    String[] item;
 
     public EventFragment() {
         // Required empty public constructor
@@ -129,6 +126,7 @@ public class EventFragment extends Fragment {
                 getResources().getColor(R.color.color2),
                 getResources().getColor(R.color.color3)
         };
+//        colors_temp = favoriteLists
         colors = colors_temp;
 
         viewPagerFavo.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
@@ -226,6 +224,7 @@ public class EventFragment extends Fragment {
         searchView.setSearchableInfo(
                 searchManager.getSearchableInfo(getActivity().getComponentName()));
         searchView.setQueryHint(getResources().getString(R.string.search_something));
+
         searchView.setIconifiedByDefault(false);
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override

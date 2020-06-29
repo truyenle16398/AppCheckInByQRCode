@@ -48,12 +48,10 @@
                     android:layout_gravity="center"/>
 
                 <com.google.android.material.textfield.TextInputLayout
+                    android:paddingBottom="10dp"
+                    android:layout_marginBottom="5dp"
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
-                    android:ems="10"
-                    android:inputType="textEmailAddress"
-                    android:hint="@string/hint_your_email"
-                    android:textColorHint="#a8a8a8"
                     android:id="@+id/text_input_layout_email"
                     app:errorEnabled="true"
                     android:layout_width="match_parent"
@@ -63,11 +61,14 @@
                         android:id="@+id/inputEmail"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:layout_marginTop="16dp"
                         android:ems="10"
                         android:inputType="textEmailAddress"
                         android:hint="@string/hint_your_email"
                         android:textSize="15dp"
-                        android:textColorHint="#a8a8a8" />
+                        android:textColorHint="#a8a8a8"
+                        />
                 </com.google.android.material.textfield.TextInputLayout>
                 <EditText
                     android:id="@+id/inputCode"
@@ -80,9 +81,9 @@
                     android:ems="10"
                     android:inputType="text"
                     android:hint="@string/hint_your_code"
-                    android:digits="abcdefghijklmnopqrstuvwxyz0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"
                     android:textSize="15dp"
-                    android:textColorHint="#a8a8a8" />
+                    android:textColorHint="#a8a8a8"
+                    />
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/inputPassLayout"
                     app:passwordToggleEnabled="true"
@@ -97,11 +98,11 @@
                         android:layout_marginRight="20dp"
                         android:layout_marginTop="16dp"
                         android:ems="10"
-                        android:digits="abcdefghijklmnopqrstuvwxyz0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ"
                         android:inputType="textPassword"
                         android:hint="@string/hint_your_password"
                         android:textSize="15dp"
-                        android:textColorHint="#a8a8a8" />
+                        android:textColorHint="#a8a8a8"
+                        />
                 </com.google.android.material.textfield.TextInputLayout>
                 <TextView
                     android:id="@+id/tvBack"
@@ -111,7 +112,7 @@
                     android:layout_marginLeft="16dp"
                     android:layout_marginEnd="16dp"
                     android:layout_marginRight="16dp"
-                    android:layout_marginBottom="16dp"
+                    android:layout_marginBottom="32dp"
                     android:layout_marginTop="32dp"
                     android:clickable="true"
                     android:text="@string/backtologin"
