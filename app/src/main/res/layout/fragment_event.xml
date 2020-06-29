@@ -23,9 +23,7 @@
             android:gravity="left"
             android:text="@string/search_something"
             android:textColor="#fff"
-            android:textStyle="bold">
-
-        </TextView>
+            android:textStyle="bold"/>
     </androidx.appcompat.widget.Toolbar>
 
     <com.google.android.material.tabs.TabLayout
@@ -56,17 +54,7 @@
             android:layout_height="wrap_content"
             android:text="@string/happened" />
 
-
     </com.google.android.material.tabs.TabLayout>
-
-    <androidx.viewpager.widget.ViewPager
-        android:id="@+id/viewPager"
-        android:visibility="visible"
-        android:layout_width="match_parent"
-        android:layout_height="250dp"
-        android:clipToPadding="false"
-        android:foregroundGravity="center|top"
-        android:overScrollMode="never"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycleViewSearch"
@@ -74,10 +62,23 @@
         android:layout_height="match_parent"
         android:visibility="gone" />
 
-    <androidx.viewpager.widget.ViewPager
-        android:id="@+id/viewPagerEvent"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
+            <androidx.viewpager.widget.ViewPager
+                android:id="@+id/viewPager"
+                android:layout_width="match_parent"
+                android:layout_height="250dp"
+                android:clipToPadding="false"
+                android:foregroundGravity="center|top"
+                android:overScrollMode="never"
+                android:visibility="visible" />
 
+            <androidx.viewpager.widget.ViewPager
+                android:id="@+id/viewPagerEvent"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </LinearLayout>
 </LinearLayout>

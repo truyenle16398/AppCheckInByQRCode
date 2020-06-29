@@ -21,18 +21,17 @@
                 android:src="@drawable/brochure"
                 android:scaleType="centerCrop"
                 android:layout_width="match_parent"
-                android:layout_height="165dp" />
+                android:layout_height="245dp" />
 
             <TextView
                 android:id="@+id/name"
-                android:textColor="#262626"
-                android:layout_below="@id/image"
-                android:layout_marginTop="4dp"
+                android:textColor="#FFFFFF"
+                android:layout_marginTop="200dp"
                 android:layout_marginLeft="16dp"
-                android:text="Name Events"
+                android:text="@string/name_events"
                 android:textStyle="bold"
                 android:maxLines="1"
-                android:textSize="17sp"
+                android:textSize="20sp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
@@ -50,6 +49,7 @@
 
             <TextView
                 android:id="@+id/intro"
+                android:visibility="gone"
                 android:layout_below="@id/chairman"
                 android:layout_marginTop="2dp"
                 android:layout_marginLeft="16dp"
@@ -61,7 +61,6 @@
                 android:text="Intro"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
-
         </RelativeLayout>
 
     </androidx.cardview.widget.CardView>
