@@ -3,6 +3,7 @@ package com.example.appcheckinbyqrcode.ui.client;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
+import android.util.Log;
 import android.widget.ImageView;
 
 import com.example.appcheckinbyqrcode.network.url;
@@ -12,7 +13,7 @@ import java.lang.ref.WeakReference;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-public class ImageDownloaderTask extends AsyncTask<String,Void, Bitmap> {
+public class ImageDownloaderTask extends AsyncTask<String,String, Bitmap> {
     private final WeakReference<ImageView> imageViewWeakReference;
 
     public ImageDownloaderTask(ImageView imageView) {
@@ -21,7 +22,15 @@ public class ImageDownloaderTask extends AsyncTask<String,Void, Bitmap> {
 
     @Override
     protected Bitmap doInBackground(String... strings) {
+        Log.d("nnn", "doInBackground: loadding...............");
+        publishProgress();
         return dowloadBitmap(strings[0]);
+    }
+
+    @Override
+    protected void onProgressUpdate(String... values) {
+        super.onProgressUpdate(values);
+        Log.d("nnn", "onProgressUpdate: loading..........");
     }
 
     @Override
