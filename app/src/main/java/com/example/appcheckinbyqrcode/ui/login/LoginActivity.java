@@ -78,7 +78,8 @@ public class LoginActivity extends AppCompatActivity {
                     tilemail.setError(null);
                     tilpass.setError(null);
                     ProgressDialog pd = new ProgressDialog(LoginActivity.this);
-                    pd.setMessage("loading");
+                    pd.setMessage("Loading");
+                    pd.setCancelable(false);
                     pd.show();
                     //code in here
                     ApiClient.getService().loginnew(email, pass)
@@ -206,9 +207,9 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void afterTextChanged(Editable s) {
                 pass = edtPass.getText().toString().trim();
-                if (pass.isEmpty())
+                if (isValidPassword(pass,true))
                 {
-                    tilpass.setError("Vui lòng nhập trường này");
+                    tilpass.setError("Mật khẩu sai định dạng");
                 }
                 else
                 {
@@ -216,7 +217,6 @@ public class LoginActivity extends AppCompatActivity {
                 }
             }
         });
-
     }
 
     private void CheckLogin() {
@@ -262,7 +262,6 @@ public class LoginActivity extends AppCompatActivity {
                         +"([a-zA-Z]+[\\w-]+\\.)+[a-zA-Z]{2,4})$";
 
         CharSequence inputStr = email;
-
         Pattern pattern = Pattern.compile(regExpn,Pattern.CASE_INSENSITIVE);
         Matcher matcher = pattern.matcher(inputStr);
 
@@ -270,5 +269,19 @@ public class LoginActivity extends AppCompatActivity {
             return true;
         else
             return false;
+    }
+
+    public boolean isValidPassword(String string, boolean allowSpecialChars){
+        String PATTERN;
+        if(allowSpecialChars){
+            //PATTERN = "((?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%]).{6,20})";
+            PATTERN = "^[a-zA-Z@#$%]\\w{5,19}$";
+        }else{
+            //PATTERN = "((?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{6,20})";
+            PATTERN = "^[a-zA-Z]\\w{5,19}$";
+        }
+        Pattern pattern = Pattern.compile(PATTERN);
+        Matcher matcher = pattern.matcher(string);
+        return matcher.matches();
     }
 }

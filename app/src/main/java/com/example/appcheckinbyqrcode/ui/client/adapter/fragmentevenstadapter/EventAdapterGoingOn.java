@@ -54,27 +54,24 @@ public class EventAdapterGoingOn extends RecyclerView.Adapter<EventAdapterGoingO
 
         myDatabaseHelper = new MyDatabaseHelper(context);
         if (myDatabaseHelper.getFavoriteID(id) == 1) {
-            Log.d(TAG, "onBindViewHolder: id okkkkkkkkkk" + id);
-            changgColorButon = true;
-            holder.imageButton1.setVisibility(View.VISIBLE);
+//            changgColorButon = true;
             holder.imageButton1.setBackgroundResource(R.drawable.ic_favorite_red_24dp);
-//            Toast.makeText(context, "aaaa" + , Toast.LENGTH_SHORT).show();
         } else {
-            Log.d(TAG, "ttttttttttttttttttt: ");
-            changgColorButon = true;
-            holder.imageButton1.setVisibility(View.GONE);
-            holder.imageButton1.setBackgroundResource(R.drawable.ic_favorite_red_24dp);
+//            changgColorButon = false;
+            holder.imageButton1.setBackgroundResource(R.drawable.ic_favorite_border_red_24dp);
         }
         //delete favorite list
         holder.imageButton1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //myDatabaseHelper.deleteFavoriteID(id);
-                if (myDatabaseHelper.deleteFavoriteID(id)){
-                    holder.imageButton1.setVisibility(View.GONE);
-                    Toast.makeText(context, "Ban Da Xoa Thanh Cong Su Kien Yeu Thich Nay", Toast.LENGTH_SHORT).show();
+                if (myDatabaseHelper.getFavoriteID(id) == 1){
+                    changgColorButon = false;
+                    holder.imageButton1.setBackgroundResource(R.drawable.ic_favorite_border_red_24dp);
+                } else {
+                    changgColorButon = true;
+                    holder.imageButton1.setBackgroundResource(R.drawable.ic_favorite_red_24dp);
                 }
-
             }
         });
 //        Glide.with(context).load(urls).into(holder.avatar);

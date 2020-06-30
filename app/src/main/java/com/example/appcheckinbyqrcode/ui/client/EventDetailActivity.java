@@ -213,7 +213,6 @@ public class EventDetailActivity extends AppCompatActivity {
         builder.setPositiveButton("Thich", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                Toast.makeText(EventDetailActivity.this, "okInster", Toast.LENGTH_SHORT).show();
                 FavoriteList favoriteList = new FavoriteList(0,idevents,name, intro, chariman, image);
                 myDatabaseHelper.insertFavorite(favoriteList);
 //                Log.d(TAG, "onNext: "+eventDetailResponse.toString());
