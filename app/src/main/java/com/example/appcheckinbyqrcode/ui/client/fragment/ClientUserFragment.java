@@ -72,7 +72,6 @@ public class ClientUserFragment extends Fragment{
     private SwipeRefreshLayout swipeRefreshLayout;
     private TextView tvMyProfile, tvName, tvEmail, tvPhone, tvAddress;
     private LinearLayout lnchangInfo, lnchangPass, lnlogOut;
-    private Button btnChangeAvatar;
     private EditText edt_OldPassword, edt_NewPassword;
     private String name, email, phone, address;
     String urls;
@@ -179,12 +178,6 @@ public class ClientUserFragment extends Fragment{
                 startActivityForResult(intent, 5462);
                 lnchangInfo.setEnabled(false);
 // getActivity().startActivity(intent);
-            }
-        });
-        btnChangeAvatar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-// upDateUserAvatar(realpath);
             }
         });
 
@@ -301,7 +294,6 @@ public class ClientUserFragment extends Fragment{
     @SuppressLint("CutPasteId")
     private void initWidget() {
         circleimg = view.findViewById(R.id.profilePic_client);
-        btnChangeAvatar = view.findViewById(R.id.btnChangeAvatar);
         tvName = view.findViewById(R.id.tvNameClient);
         tvEmail = view.findViewById(R.id.tvEmailClient);
         tvPhone = view.findViewById(R.id.tvPhoneClient);

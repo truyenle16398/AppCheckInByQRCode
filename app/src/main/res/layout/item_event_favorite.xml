@@ -26,6 +26,7 @@
                 android:src="@drawable/loadingkhoa" />
 
             <LinearLayout
+                android:id="@+id/idtest"
                 android:weightSum="3"
                 android:layout_marginLeft="5dp"
                 android:orientation="vertical"

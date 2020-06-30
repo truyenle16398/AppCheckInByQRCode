@@ -40,7 +40,7 @@ public class FavoriteEventFragment extends Fragment {
     public static final int REQUEST_CODE_CANCEL =5555;
     ArrayList<EventFavoriteResponse> arrayList;
     ProgressDialog dialog;
-    SwipeRefreshLayout refreshLayout;
+    public static SwipeRefreshLayout refreshLayout;
     RecyclerView mRCycMs;
     private FavoriteAdapter adapter;
     private List<Favorite> data;

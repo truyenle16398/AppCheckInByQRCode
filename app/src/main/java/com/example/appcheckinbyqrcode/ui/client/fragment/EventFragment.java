@@ -128,56 +128,62 @@ public class EventFragment extends Fragment {
         };
 //        colors_temp = favoriteLists
         colors = colors_temp;
+        toolbar.setBackgroundResource(R.color.colorPrimaryDark);
+        mTabLayoutEvent.setBackgroundResource(R.color.colorPrimaryDark);
+        viewPagerFavo.setBackgroundResource(R.color.colorPrimaryDark);
+        pager.setBackgroundResource(R.color.colorPrimaryDark);
 
-        viewPagerFavo.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-            @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
 
-                if (position < (adapterViewPagerFavorite.getCount() -1) && position < (colors.length - 1)) {
-                    viewPagerFavo.setBackgroundColor(
-
-                            (Integer) argbEvaluator.evaluate(
-                                    positionOffset,
-                                    colors[position],
-                                    colors[position + 1]
-                            )
-                    );
-                    viewPagerFavo.getBackground().setAlpha(100);
-                    toolbar.setBackgroundColor(
-
-                            (Integer) argbEvaluator.evaluate(
-                                    positionOffset,
-                                    colors[position],
-                                    colors[position + 1]
-                            )
-                    );
-                    toolbar.getBackground().setAlpha(100);
-                    mTabLayoutEvent.setBackgroundColor(
-
-                            (Integer) argbEvaluator.evaluate(
-                                    positionOffset,
-                                    colors[position],
-                                    colors[position + 1]
-                            )
-                    );
-                    mTabLayoutEvent.getBackground().setAlpha(100);
-                }
-
-                else {
-                    viewPagerFavo.setBackgroundColor(colors[colors.length - 1]);
-                }
-            }
-
-            @Override
-            public void onPageSelected(int position) {
-
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int state) {
-
-            }
-        });
+//         change background
+//        viewPagerFavo.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+//            @Override
+//            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+//
+//                if (position < (adapterViewPagerFavorite.getCount() -1) && position < (colors.length - 1)) {
+//                    viewPagerFavo.setBackgroundColor(
+//
+//                            (Integer) argbEvaluator.evaluate(
+//                                    positionOffset,
+//                                    colors[position],
+//                                    colors[position + 1]
+//                            )
+//                    );
+//                    viewPagerFavo.getBackground().setAlpha(100);
+//                    toolbar.setBackgroundColor(
+//
+//                            (Integer) argbEvaluator.evaluate(
+//                                    positionOffset,
+//                                    colors[position],
+//                                    colors[position + 1]
+//                            )
+//                    );
+//                    toolbar.getBackground().setAlpha(100);
+//                    mTabLayoutEvent.setBackgroundColor(
+//
+//                            (Integer) argbEvaluator.evaluate(
+//                                    positionOffset,
+//                                    colors[position],
+//                                    colors[position + 1]
+//                            )
+//                    );
+//                    mTabLayoutEvent.getBackground().setAlpha(100);
+//                }
+//
+//                else {
+//                    viewPagerFavo.setBackgroundColor(colors[colors.length - 1]);
+//                }
+//            }
+//
+//            @Override
+//            public void onPageSelected(int position) {
+//
+//            }
+//
+//            @Override
+//            public void onPageScrollStateChanged(int state) {
+//
+//            }
+//        });
     }
 
     public void fetchSearch(String key){

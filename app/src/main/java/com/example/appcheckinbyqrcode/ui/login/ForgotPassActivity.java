@@ -33,9 +33,8 @@ import io.reactivex.schedulers.Schedulers;
 public class ForgotPassActivity extends AppCompatActivity {
     Button btnGetCode;
     TextView tvBack, tvTimer;
-    EditText edtCode;
-    TextInputEditText edtPass,edtEmail;
-    TextInputLayout inputPassLayout, text_input_layout_email;
+    TextInputEditText edtPass,edtEmail,edtCode;
+    TextInputLayout inputPassLayout, text_input_layout_email,text_input_layout_code;
     String email, pass, code, message;
     CountDownTimer countDownTimer;
     private String TAG="nnn";
@@ -46,6 +45,86 @@ public class ForgotPassActivity extends AppCompatActivity {
         setContentView(R.layout.activity_forgot_pass);
         InitWidget();
         onClick();
+        onwritecheck();
+    }
+
+    private void onwritecheck() {
+        edtEmail.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                email = edtEmail.getText().toString().trim();
+                if (isEmailValid(email))
+                {
+                    text_input_layout_email.setError(null);
+                }
+                else
+                {
+                    if (email.isEmpty()){
+                        text_input_layout_email.setError("Vui lòng nhập trường này");
+                    } else {
+                        text_input_layout_email.setError("Email sai định dạng");
+                    }
+                }
+            }
+        });
+        edtCode.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                code = edtCode.getText().toString().trim();
+                if (!code.isEmpty())
+                {
+                    text_input_layout_code.setError(null);
+                }
+                else
+                {
+                    text_input_layout_code.setError("Vui lòng nhập trường này");
+                }
+            }
+        });
+        edtPass.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                pass = edtPass.getText().toString().trim();
+                if (!pass.isEmpty())
+                {
+                    inputPassLayout.setError(null);
+                }
+                else
+                {
+                    inputPassLayout.setError("Vui lòng nhập trường này");
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
     }
 
     void onClick() {
@@ -60,7 +139,8 @@ public class ForgotPassActivity extends AppCompatActivity {
                     text_input_layout_email.setError("Email sai định dạng");
                 } else {
                     ProgressDialog pd = new ProgressDialog(ForgotPassActivity.this);
-                    pd.setMessage("loading");
+                    pd.setMessage("Loading");
+                    pd.setCancelable(false);
                     pd.show();
                     //////API
                     ApiClient.getService().forgetPass(email)
@@ -81,7 +161,7 @@ public class ForgotPassActivity extends AppCompatActivity {
                                     } else {
                                         pd.dismiss();
                                         text_input_layout_email.setVisibility(View.GONE);
-                                        edtCode.setVisibility(View.VISIBLE);
+                                        text_input_layout_code.setVisibility(View.VISIBLE);
                                         inputPassLayout.setVisibility(View.VISIBLE);
                                         tvTimer.setVisibility(View.VISIBLE);
                                         btnGetCode.setText("Change Password");
@@ -89,16 +169,17 @@ public class ForgotPassActivity extends AppCompatActivity {
                                         btnGetCode.setOnClickListener(new View.OnClickListener() {
                                             @Override
                                             public void onClick(View view) {
-                                                ProgressDialog bb = new ProgressDialog(ForgotPassActivity.this);
-                                                bb.setMessage("loading");
-                                                bb.show();
                                                 hideKeybaord(view);
                                                 code = edtCode.getText().toString();
                                                 pass = edtPass.getText().toString();
                                                 if (code.isEmpty() || pass.isEmpty()) {
-                                                    Toast.makeText(ForgotPassActivity.this, "Vui lòng nhập Code và Pass đầy đủ", Toast.LENGTH_SHORT).show();
-                                                    bb.dismiss();
+                                                    text_input_layout_code.setError("Vui lòng nhập trường này");
+                                                    inputPassLayout.setError("Vui lòng nhập trường này");
                                                 } else {
+                                                    ProgressDialog bb = new ProgressDialog(ForgotPassActivity.this);
+                                                    bb.setMessage("Loading");
+                                                    bb.setCancelable(false);
+                                                    bb.show();
                                                     ApiClient.getService().resetPass(email, pass, pass, code)
                                                             .subscribeOn(Schedulers.io())
                                                             .observeOn(AndroidSchedulers.mainThread())
@@ -110,14 +191,20 @@ public class ForgotPassActivity extends AppCompatActivity {
 
                                                                 @Override
                                                                 public void onNext(MessageResponse messageResponse) {
-                                                                    Toast.makeText(ForgotPassActivity.this, messageResponse.getMessage(), Toast.LENGTH_SHORT).show();
-                                                                    Intent intent = new Intent(ForgotPassActivity.this, LoginActivity.class);
-                                                                    startActivity(intent);
+                                                                    if (messageResponse.equals("Mã xác thực không đúng.")){
+                                                                        edtCode.setText(null);
+                                                                        edtPass.setText(null);
+                                                                    } else {
+                                                                        Toast.makeText(ForgotPassActivity.this, messageResponse.getMessage(), Toast.LENGTH_SHORT).show();
+                                                                        Intent intent = new Intent(ForgotPassActivity.this, LoginActivity.class);
+                                                                        startActivity(intent);
+                                                                    }
                                                                 }
 
                                                                 @Override
                                                                 public void onError(Throwable e) {
                                                                     Log.d(TAG, "onError in click BtnGetCode: "+e.getMessage());
+                                                                    bb.dismiss();
                                                                 }
 
                                                                 @Override
@@ -153,34 +240,6 @@ public class ForgotPassActivity extends AppCompatActivity {
                 finish();
             }
         });
-        edtEmail.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                email = edtEmail.getText().toString().trim();
-                if (isEmailValid(email))
-                {
-                    text_input_layout_email.setError(null);
-                }
-                else
-                {
-                    if (email.isEmpty()){
-                        text_input_layout_email.setError("Vui lòng nhập trường này");
-                    } else {
-                        text_input_layout_email.setError("Email sai định dạng");
-                    }
-                }
-            }
-        });
     }
     private void hideKeybaord(View v) {
         InputMethodManager inputMethodManager = (InputMethodManager)getSystemService(INPUT_METHOD_SERVICE);
@@ -209,8 +268,9 @@ public class ForgotPassActivity extends AppCompatActivity {
         edtEmail = findViewById(R.id.inputEmail);
         inputPassLayout = findViewById(R.id.inputPassLayout);
         text_input_layout_email =findViewById(R.id.text_input_layout_email);
+        text_input_layout_code =findViewById(R.id.text_input_layout_code);
+        text_input_layout_code.setVisibility(View.GONE);
         inputPassLayout.setVisibility(View.GONE);
-        edtCode.setVisibility(View.GONE);
         tvTimer = findViewById(R.id.timer);
         tvTimer.setVisibility(View.GONE);
     }
