@@ -55,8 +55,6 @@ import static androidx.constraintlayout.widget.Constraints.TAG;
  * A simple {@link Fragment} subclass.
  */
 public class EventFragment extends Fragment {
-    ViewPager viewPagerFavo;
-    AdapterViewPagerFavorite adapterViewPagerFavorite;
     ArrayList<FavoriteList> favoriteLists;
     Integer[] colors = null;
     ArgbEvaluator argbEvaluator = new ArgbEvaluator();
@@ -72,7 +70,7 @@ public class EventFragment extends Fragment {
     private List<EventSearchListResponse> listResponses;
     private View view;
     Toolbar toolbar;
-    TextView search;
+    TextView txtsearch;
     String[] item;
 
     public EventFragment() {
@@ -116,10 +114,7 @@ public class EventFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         myDatabaseHelper = new MyDatabaseHelper(getContext());
         favoriteLists = (ArrayList<FavoriteList>) myDatabaseHelper.getAllFavo();
-        adapterViewPagerFavorite = new AdapterViewPagerFavorite(favoriteLists, getContext());
-        viewPagerFavo = view.findViewById(R.id.viewPager);
-        viewPagerFavo.setAdapter(adapterViewPagerFavorite);
-        viewPagerFavo.setPadding(50, 0, 50, 0);
+
 
         Integer[] colors_temp = {
                 getResources().getColor(R.color.color1),
@@ -130,7 +125,6 @@ public class EventFragment extends Fragment {
         colors = colors_temp;
         toolbar.setBackgroundResource(R.color.colorPrimaryDark);
         mTabLayoutEvent.setBackgroundResource(R.color.colorPrimaryDark);
-        viewPagerFavo.setBackgroundResource(R.color.colorPrimaryDark);
         pager.setBackgroundResource(R.color.colorPrimaryDark);
 
 
@@ -229,8 +223,7 @@ public class EventFragment extends Fragment {
         SearchView searchView = (SearchView) menu.findItem(R.id.search).getActionView();
         searchView.setSearchableInfo(
                 searchManager.getSearchableInfo(getActivity().getComponentName()));
-        searchView.setQueryHint(getResources().getString(R.string.search_something));
-
+        searchView.setQueryHint(getResources().getString(R.string.search_somethingicons));
         searchView.setIconifiedByDefault(false);
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
@@ -240,10 +233,8 @@ public class EventFragment extends Fragment {
                 //Toast.makeText(getActivity(), "xxx" + query, Toast.LENGTH_SHORT).show();
                 if (query.isEmpty()){
                     recyclerView.setVisibility(View.GONE);
-                    viewPagerFavo.setVisibility(View.VISIBLE);
                 }else {
                     recyclerView.setVisibility(View.VISIBLE);
-                    viewPagerFavo.setVisibility(View.GONE);
                     fetchSearch( query);
                 }
 
@@ -257,10 +248,8 @@ public class EventFragment extends Fragment {
 
                 if (newText.isEmpty()){
                     recyclerView.setVisibility(View.GONE);
-                    viewPagerFavo.setVisibility(View.VISIBLE);
                 }else {
                     recyclerView.setVisibility(View.VISIBLE);
-                    viewPagerFavo.setVisibility(View.GONE);
                     fetchSearch( newText);
                 }
                 return false;
@@ -301,6 +290,7 @@ public class EventFragment extends Fragment {
         layoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setHasFixedSize(true);
+        txtsearch = view.findViewById(R.id.txtsearch);
         fetchSearch( "");
     }
 
