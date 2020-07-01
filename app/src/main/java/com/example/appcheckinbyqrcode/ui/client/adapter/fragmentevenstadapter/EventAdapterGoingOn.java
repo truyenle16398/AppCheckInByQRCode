@@ -104,6 +104,7 @@ public class EventAdapterGoingOn extends RecyclerView.Adapter<EventAdapterGoingO
                     Toast.makeText(context, "Insert Successful", Toast.LENGTH_SHORT).show();
 
 
+
                 }
             }
         });
