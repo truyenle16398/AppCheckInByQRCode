@@ -45,7 +45,6 @@ public class RegisterActivity extends AppCompatActivity {
     TextInputEditText edtemail,edtname,edtpass, edtconfirmpass, edtaddress, edtphone;
     TextInputLayout text_input_layout_email,text_input_layout_name, text_input_layout_address, text_input_layout_phone, text_input_layout_pass, text_input_layout_passconfirm;
     String email, name, address, phone, password, confirmpassword;
-    Pattern regex = Pattern.compile("[$&+,:;=\\\\?@#|/'<>.^*()%!-]");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,14 +92,16 @@ public class RegisterActivity extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable s) {
-                String nameonWrite = edtname.getText().toString();
-                if (nameonWrite.isEmpty()) {
+                if (s.toString().isEmpty()) {
                     text_input_layout_name.setErrorEnabled(true);
                     text_input_layout_name.setError("Trường này không bỏ trống");
-                } else if(!CheckValidate.isValidName(nameonWrite)){
+                }else if(CheckValidate.isValidSpecialCharacters(s)) {
                     text_input_layout_name.setErrorEnabled(true);
                     text_input_layout_name.setError("Tên không được chứa kí tự đặc biệt");
-            }else {
+                }else if(CheckValidate.isValidName(s)) {
+                    text_input_layout_name.setErrorEnabled(true);
+                    text_input_layout_name.setError("Tên không được chứa số");
+                } else {
                     text_input_layout_name.setErrorEnabled(false);
                 }
             }
@@ -116,12 +117,13 @@ public class RegisterActivity extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable s) {
-                check(s);
-                String addressonWrite = edtaddress.getText().toString();
-                if (addressonWrite.isEmpty()) {
+                if (s.toString().isEmpty()) {
                     text_input_layout_address.setErrorEnabled(true);
                     text_input_layout_address.setError("Trường này không bỏ trống");
-                }else {
+                }else if(CheckValidate.isValidAddress(s)) {
+                    text_input_layout_address.setErrorEnabled(true);
+                    text_input_layout_address.setError("Địa chỉ không được chứa kí tự đặc biệt");
+                } else {
                     text_input_layout_address.setErrorEnabled(false);
                 }
             }
@@ -163,11 +165,12 @@ public class RegisterActivity extends AppCompatActivity {
             public void afterTextChanged(Editable s) {
                 String passwordonWrite = edtpass.getText().toString();
                 if (!CheckValidate.isPasswordValid(passwordonWrite)) {
-                    text_input_layout_pass.setError("Mật khẩu phải từ 6 đến 12 ký tự viết liền không dấu và không chứa ký tự đặc biệt");
+                    text_input_layout_pass.setError("Mật khẩu phải từ 6 đến 12 ký tự viết liền không dấu");
                 } else if(passwordonWrite.isEmpty()){
                     text_input_layout_pass.setError("Trường này không bỏ trống");
-                }
-                else {
+                }else if(CheckValidate.isValidSpecialCharacters(s)){
+                    text_input_layout_pass.setError("Mật khẩu không được chứa kí tự đặc biệt");
+                }else {
                     text_input_layout_pass.setError(null);
                 }
             }
@@ -192,8 +195,9 @@ public class RegisterActivity extends AppCompatActivity {
                     text_input_layout_passconfirm.setError("Trường này không bỏ trống");
                 } else if(!edtpass.getText().toString().equals(passconfirmonWrite)){
                     text_input_layout_passconfirm.setError("Mật khẩu không trùng");
-                }
-                else {
+                }else if(CheckValidate.isValidSpecialCharacters(s)){
+                    text_input_layout_pass.setError("Mật khẩu không được chứa kí tự đặc biệt");
+                }else {
                     text_input_layout_passconfirm.setError(null);
                 }
             }
@@ -300,12 +304,4 @@ public class RegisterActivity extends AppCompatActivity {
         text_input_layout_pass = findViewById(R.id.text_input_layout_pass);
         mLlRegister = findViewById(R.id.mLlRegister);
     }
-    void check(Editable s){
-        if (regex.matcher(s).find()) {
-            Toast.makeText(this,"aaa",Toast.LENGTH_LONG).show();
-            //handle your action here toast message/ snackbar or something else
-            return;
-        }
-    }
-
 }
