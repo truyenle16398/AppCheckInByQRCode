@@ -1,5 +1,8 @@
 package com.example.appcheckinbyqrcode;
 
+import android.text.Editable;
+import android.widget.Toast;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -39,17 +42,33 @@ public class CheckValidate {
 
     public static boolean isValidPhoneNumber(String number)
     {
-        String validNumber = "^[+]?[0-9]{10,12}$";
-        if (number.matches(validNumber)) {
+        String validNumber = "^0[35789]{1}\\d{8}$";
+        Pattern pattern = Pattern.compile(validNumber,Pattern.CASE_INSENSITIVE);
+        Matcher matcher = pattern.matcher(number);
+        if (matcher.find()) {
             return true;
         }
         return false;
     }
 
-    public static boolean isValidName(String number)
+    public static boolean isValidName(Editable s)
     {
-        String validName = "[a-zA-Z ]*";
-        if (number.matches(validName)) {
+        String validName = "[0-9]*";
+        if (s.toString().matches(validName)) {
+            return true;
+        }
+        return false;
+    }
+    public static boolean isValidSpecialCharacters(Editable s){
+        Pattern regex = Pattern.compile("[$&+,:;=\\\\?@#|/'<>.^*()%!-]");
+        if (regex.matcher(s).find()) {
+            return true;
+        }
+        return false;
+    }
+    public static boolean isValidAddress(Editable s){
+        Pattern regex = Pattern.compile("[$&+:;=\\\\?@#|/'<>.^*()%!]");
+        if (regex.matcher(s).find()) {
             return true;
         }
         return false;
