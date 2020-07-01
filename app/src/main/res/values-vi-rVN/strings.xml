@@ -55,7 +55,5 @@
     <string name="setupnow">Thiết lập ngay</string>
     <string name="click_to_get_qrcode">Nhấp để nhận mã QR</string>
     <string name="notificationeventsdc">SDC Thông báo</string>
-    <string name="search_something">Bấm vào icon để tìm tên sự kiện ...</string>
-    <string name="search_somethingicons">Nhập tên sự kiện ...</string>
-    <string name="userinfor">Thông tin tài khoản</string>
+    <string name="search_something">Tìm kiếm gì đó...</string>
 </resources>
