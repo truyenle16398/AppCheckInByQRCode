@@ -304,4 +304,5 @@ public class EventFragment extends Fragment {
         fetchSearch( "");
     }
 
+
 }
