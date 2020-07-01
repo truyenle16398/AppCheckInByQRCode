@@ -42,7 +42,7 @@ public class EventDetailActivity extends AppCompatActivity {
     ArrayList<FavoriteList> favoriteLists;
     FavoriteList favoritemodel;
     ImageView imageDetail;
-    TextView  txtDateTimeStart, txtDateTimeEnd, txtInfoDetail, txtAddressInfoDetail;
+    TextView  txtDateTimeStart, txtDateTimeEnd, txtInfoDetail, txtAddressInfoDetail, txtFavorite, txtRemoveFavorite;
     Button btnRegisterDetail;
     Toolbar toolbar;
     private int id;
@@ -71,12 +71,23 @@ public class EventDetailActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 // getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setHomeAsUpIndicator(drawable);
+        txtFavorite = findViewById(R.id.txtFavorite);
 
         Intent intent = getIntent();
         id = intent.getIntExtra("id", 0);
 
         getdata(id);
         onclick();
+        if (myDatabaseHelper.getFavoriteID(id) == 1) {
+            Log.d(TAG, "onBindViewHolder: id okkkkkkkkkk" + id);
+            txtFavorite.setVisibility(View.GONE);
+            txtRemoveFavorite.setVisibility(View.VISIBLE);
+//            Toast.makeText(context, "aaaa" + , Toast.LENGTH_SHORT).show();
+        } else {
+            Log.d(TAG, "ttttttttttttttttttt: ");
+            txtFavorite.setVisibility(View.VISIBLE);
+            txtRemoveFavorite.setVisibility(View.GONE);
+        }
     }
 
 
@@ -117,6 +128,19 @@ public class EventDetailActivity extends AppCompatActivity {
                             }
                         });
 
+            }
+        });
+
+        txtFavorite.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showDialogLikeFavorite();
+            }
+        });
+        txtRemoveFavorite.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showDialogRemoveFavorite();
             }
         });
 
@@ -180,9 +204,72 @@ public class EventDetailActivity extends AppCompatActivity {
                 });
     }
 
+    private void showDialogLikeFavorite() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        LayoutInflater inflater = getLayoutInflater();
+        View view = inflater.inflate(R.layout.dialog_favoriteevent, null);
+        progress = view.findViewById(R.id.progress);
+        builder.setView(view);
+        builder.setPositiveButton("Thich", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                FavoriteList favoriteList = new FavoriteList(0,idevents,name, intro, chariman, image);
+                myDatabaseHelper.insertFavorite(favoriteList);
+//                Log.d(TAG, "onNext: "+eventDetailResponse.toString());
+//                Log.d(TAG, "onNext1: "+id );
+                Intent intent = new Intent(getApplication(), HomeClientActivity.class);
+                startActivity(intent);
+
+            }
+        });
+        builder.setNegativeButton("Hủy", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+//                myDatabaseHelper.insertFavorite(id);
+                Toast.makeText(EventDetailActivity.this, "okInster", Toast.LENGTH_SHORT).show();
+
+            }
+        });
+        dialog = builder.create();
+        dialog.show();
+    }
+
+    private void showDialogRemoveFavorite() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        LayoutInflater inflater = getLayoutInflater();
+        View view = inflater.inflate(R.layout.dialog_removefavoriteevent, null);
+        progress = view.findViewById(R.id.progress);
+        builder.setView(view);
+        builder.setPositiveButton("Xoa", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Toast.makeText(EventDetailActivity.this, "okDelete", Toast.LENGTH_SHORT).show();
+                FavoriteList favoriteList = new FavoriteList(0,idevents,name, intro, chariman, image);
+                myDatabaseHelper.deleteFavoriteID(id);
+//                Log.d(TAG, "onNext: "+eventDetailResponse.toString());
+//                Log.d(TAG, "onNext1: "+id );
+                Intent intent = new Intent(getApplication(), HomeClientActivity.class);
+                startActivity(intent);
+
+            }
+        });
+        builder.setNegativeButton("Hủy", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+//                myDatabaseHelper.insertFavorite(id);
+                Toast.makeText(EventDetailActivity.this, "okInster", Toast.LENGTH_SHORT).show();
+
+            }
+        });
+        dialog = builder.create();
+        dialog.show();
+    }
 
     private void InitWidget() {
         toolbar = findViewById(R.id.toolbarDetail);
+        txtRemoveFavorite = findViewById(R.id.txtRemoveFavorite);
         imageDetail = findViewById(R.id.imageDetail);
         txtDateTimeStart = findViewById(R.id.txtDateTimeStart);
         txtDateTimeEnd = findViewById(R.id.txtDateTimeEnd);
