@@ -9,8 +9,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.util.Patterns;
 import android.view.KeyEvent;
@@ -61,10 +64,58 @@ public class ChangeActivity extends AppCompatActivity {
         editText.requestFocus();
         InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY);
+        editText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                checkedt();
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
     }
 
     private void checkedt() {
         String edt = editText.getText().toString();
+        if (check.equals("name")){
+            if (edt.isEmpty()) {
+                inputLayout.setError("Vui lòng nhập trường này");
+            } else {
+                inputLayout.setError(null);
+            }
+        } else if (check.equals("email")){
+            if (edt.isEmpty()){
+                inputLayout.setError("Vui lòng nhập trường này");
+            } else if (!validateEmail(edt)){
+                inputLayout.setError("Sai định dạng");
+            } else {
+                inputLayout.setError(null);
+            }
+        } else if (check.equals("phone")){
+            if (edt.isEmpty()){
+                inputLayout.setError("Vui lòng nhập trường này");
+            } else if (!    isValidPhoneNumber(edt)){
+                inputLayout.setError("Sai định dạng");
+            } else {
+                inputLayout.setError(null);
+            }
+        } else {
+            if (edt.isEmpty()){
+                inputLayout.setError("Vui lòng nhập trường này");
+            } else {
+                inputLayout.setError(null);
+            }
+        }
+    }
+
+    private void setresult(String edt){
         if (check.equals("name")){
             if (edt.isEmpty()) {
                 inputLayout.setError("Vui lòng nhập trường này");
@@ -84,7 +135,7 @@ public class ChangeActivity extends AppCompatActivity {
         } else if (check.equals("phone")){
             if (edt.isEmpty()){
                 inputLayout.setError("Vui lòng nhập trường này");
-            } else if (!isValidPhoneNo(edt)){
+            } else if (!isValidPhoneNumber(edt)){
                 inputLayout.setError("Sai định dạng");
             } else {
                 inputLayout.setError(null);
@@ -104,14 +155,18 @@ public class ChangeActivity extends AppCompatActivity {
         Intent intent = new Intent();
         intent.putExtra("check",check);
         intent.putExtra("edttrave",editText.getText().toString());
-                setResult(RESULT_OK, intent);
-                finish();
+        setResult(RESULT_OK, intent);
+        finish();
     }
 
 
-    public static boolean isValidPhoneNo(CharSequence iPhoneNo) {
-        return !TextUtils.isEmpty(iPhoneNo) &&
-                Patterns.PHONE.matcher(iPhoneNo).matches();
+    public boolean isValidPhoneNumber(String number)
+    {
+        String validNumber = "^[+]?[0-9]{8,15}$";
+        if (number.matches(validNumber)) {
+            return true;
+        }
+        return false;
     }
 
     private boolean validateEmail(String email) {
@@ -136,7 +191,7 @@ public class ChangeActivity extends AppCompatActivity {
                 hideKeyboard(this);
                 return true;
             case R.id.changeok:
-                checkedt();
+                setresult(editText.getText().toString());
                 hideKeyboard(this);
             default:
                 break;

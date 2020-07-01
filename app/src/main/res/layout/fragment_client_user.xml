@@ -11,9 +11,6 @@
         android:id="@+id/swipeRefreshLayoutuser"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -23,7 +20,7 @@
                 android:id="@+id/tvmyprofile"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="10dp"
                 android:gravity="center"
                 android:text="@string/hint_my_profile"
                 android:textColor="#ffffff"
@@ -35,54 +32,29 @@
                 android:id="@+id/profilePic_client"
                 android:layout_width="200dp"
                 android:layout_height="200dp"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="10dp"
                 android:clickable="true"
                 android:elevation="6dp"
                 android:src="@drawable/unnamed"
                 app:civ_border_color="#fff"
                 app:civ_border_width="4dp" />
-
             <LinearLayout
-                android:layout_marginRight="15dp"
-                android:layout_marginLeft="15dp"
-                android:visibility="visible"
-                android:id="@+id/viewchangeimage"
-                android:gravity="center"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-                    <Button
-                        android:visibility="gone"
-                        android:layout_marginRight="5dp"
-                        android:id="@+id/btnChangeAvatar"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_gravity="center"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginBottom="10dp"
-                        android:background="@drawable/ripple_effect"
-                        android:text="Loading Avatar"
-                        android:textColor="#FFFFFF"
-                        android:textSize="18sp" />
-            </LinearLayout>
-            <LinearLayout
+                android:layout_marginTop="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginLeft="25dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginRight="25dp"
-                android:layout_marginBottom="60dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
                 android:padding="10dp"
                 android:background="@drawable/box_bg"
                 android:gravity="center|top"
                 android:orientation="vertical">
                 <LinearLayout
-                    android:layout_marginBottom="10dp"
                     android:background="@drawable/ripper"
-                    android:paddingLeft="10dp"
-                    android:paddingRight="20dp"
-                    android:paddingBottom="7dp"
-                    android:paddingTop="7dp"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="20dp"
+                    android:paddingBottom="10dp"
+                    android:paddingTop="10dp"
                     android:weightSum="4"
                     android:orientation="horizontal"
                     android:layout_width="match_parent"
@@ -108,13 +80,12 @@
                         android:textSize="15sp" />
                 </LinearLayout>
                 <LinearLayout
-                    android:layout_marginBottom="10dp"
                     android:background="@drawable/ripper"
-                    android:paddingLeft="10dp"
-                    android:paddingRight="20dp"
-                    android:paddingBottom="7dp"
-                    android:paddingTop="7dp"
-                    android:weightSum="4"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="20dp"
+                    android:paddingBottom="10dp"
+                    android:paddingTop="10dp"
+                    android:weightSum="5"
                     android:orientation="horizontal"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
@@ -128,8 +99,8 @@
                         android:textColorHint="#a8a8a8"
                         android:textSize="15sp" />
                     <TextView
+                        android:layout_weight="4"
                         android:id="@+id/tvEmailClient"
-                        android:layout_weight="3"
                         android:text="quachhongkhoa.it@gmail.com"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
@@ -139,18 +110,17 @@
                         android:textSize="15sp" />
                 </LinearLayout>
                 <LinearLayout
-                    android:layout_marginBottom="10dp"
                     android:background="@drawable/ripper"
                     android:paddingLeft="10dp"
                     android:paddingRight="20dp"
-                    android:paddingBottom="7dp"
-                    android:paddingTop="7dp"
-                    android:weightSum="4"
+                    android:paddingBottom="10dp"
+                    android:paddingTop="10dp"
+                    android:weightSum="5"
                     android:orientation="horizontal"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
                     <TextView
-                        android:layout_weight="1"
+                        android:layout_weight="2"
                         android:text="@string/phoneedit"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
@@ -170,12 +140,11 @@
                         android:textSize="15sp" />
                 </LinearLayout>
                 <LinearLayout
-                    android:layout_marginBottom="10dp"
                     android:background="@drawable/ripper"
                     android:paddingLeft="10dp"
                     android:paddingRight="20dp"
-                    android:paddingBottom="7dp"
-                    android:paddingTop="7dp"
+                    android:paddingBottom="10dp"
+                    android:paddingTop="10dp"
                     android:weightSum="4"
                     android:orientation="horizontal"
                     android:layout_width="match_parent"
@@ -202,12 +171,11 @@
                 </LinearLayout>
                 <LinearLayout
                     android:id="@+id/linearChangePass"
-                    android:layout_marginBottom="10dp"
                     android:background="@drawable/ripper"
                     android:paddingLeft="10dp"
                     android:paddingRight="10dp"
-                    android:paddingBottom="7dp"
-                    android:paddingTop="7dp"
+                    android:paddingBottom="10dp"
+                    android:paddingTop="10dp"
                     android:weightSum="4"
                     android:orientation="horizontal"
                     android:layout_width="match_parent"
@@ -233,12 +201,11 @@
                 </LinearLayout>
                 <LinearLayout
                     android:id="@+id/linearChangeInfo"
-                    android:layout_marginBottom="10dp"
                     android:background="@drawable/ripper"
                     android:paddingLeft="10dp"
                     android:paddingRight="10dp"
-                    android:paddingBottom="7dp"
-                    android:paddingTop="7dp"
+                    android:paddingBottom="10dp"
+                    android:paddingTop="10dp"
                     android:weightSum="4"
                     android:orientation="horizontal"
                     android:layout_width="match_parent"
@@ -264,12 +231,11 @@
                 </LinearLayout>
                 <LinearLayout
                     android:id="@+id/linearLogOut"
-                    android:layout_marginBottom="10dp"
-                    android:background="@drawable/ripper"
+                    android:background="@drawable/ripple_while"
                     android:paddingLeft="10dp"
                     android:paddingRight="10dp"
-                    android:paddingBottom="7dp"
-                    android:paddingTop="7dp"
+                    android:paddingBottom="5dp"
+                    android:paddingTop="10dp"
                     android:weightSum="4"
                     android:orientation="horizontal"
                     android:layout_width="match_parent"
@@ -294,6 +260,5 @@
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>
-    </ScrollView>
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 </LinearLayout>

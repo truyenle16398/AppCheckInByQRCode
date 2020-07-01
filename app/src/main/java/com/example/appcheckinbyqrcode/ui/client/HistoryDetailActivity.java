@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,6 +30,7 @@ import com.example.appcheckinbyqrcode.network.response.MessageResponse;
 import com.example.appcheckinbyqrcode.network.url;
 import com.example.appcheckinbyqrcode.ui.client.fragment.FavoriteEventFragment;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
+import com.squareup.picasso.Picasso;
 
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -42,6 +44,8 @@ public class HistoryDetailActivity extends AppCompatActivity {
     Toolbar toolbar;
     private int id;
     private String code;
+    BottomSheetDialog bottomSheetDialog;
+    View bottomSheetView;
     public static final String EXTRA_DATA = "EXTRA_DATA";
 
 
@@ -60,30 +64,28 @@ public class HistoryDetailActivity extends AppCompatActivity {
         code = intent.getStringExtra("code");
         getdata(id);
         onclick();
+        createBottomSheet();
+    }
+
+    private void createBottomSheet() {
+        String qr = id+"-"+code;
+        bottomSheetDialog = new BottomSheetDialog(HistoryDetailActivity.this,R.style.BottomSheetDialogTheme);
+        bottomSheetView = LayoutInflater.from(getApplicationContext()).inflate(R.layout.bottom_dialog_qrcode,(LinearLayout)findViewById(R.id.viewidbottom));
+        ImageView imageView = bottomSheetView.findViewById(R.id.imagebottomdialog);
+        String urls = "https://chart.googleapis.com/chart?cht=qr&chs=500x500&chl="+qr;
+        new ImageDownloaderTask(imageView).execute(urls);
+        bottomSheetDialog.setContentView(bottomSheetView);
     }
 
     private void onclick() {
         tvshowqrcode.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ProgressDialog dialog = new ProgressDialog(HistoryDetailActivity.this);
-                dialog.setMessage("please wait...");
-                String qr = id+"-"+code;
-                Log.d("nnn", "onClick: "+ qr);
-                BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(HistoryDetailActivity.this,R.style.BottomSheetDialogTheme);
-                View bottomSheetView = LayoutInflater.from(getApplicationContext()).inflate(R.layout.bottom_dialog_qrcode,(LinearLayout)findViewById(R.id.viewidbottom));
-                ImageView imageView = bottomSheetView.findViewById(R.id.imagebottomdialog);
-                new ImageDownloaderTask(imageView).execute("https://api.qrserver.com/v1/create-qr-code/?size=1000x1000&data="+qr);
-
-                try {
-                    dialog.show();
-                    Thread.sleep(2000);
-                    dialog.dismiss();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                bottomSheetDialog.setContentView(bottomSheetView);
+//                ProgressDialog dialog = new ProgressDialog(HistoryDetailActivity.this);
+//                dialog.setMessage("Please wait...");
+//                dialog.show();
                 bottomSheetDialog.show();
+
 
             }
         });

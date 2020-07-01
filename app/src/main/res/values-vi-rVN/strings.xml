@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">AppCheckInByQRCode</string>
-    <string name="backtologin">Quay về Trang Đăng Nhập</string>
-    <string name="getcode">Lấy Mã Code</string>
-    <string name="forgot_password">Quên Mật Khẩu</string>
-    <string name="login">Đăng Nhập</string>
-    <string name="register">Đăng Ký</string>
+    <string name="backtologin">Quay về trang đăng nhập</string>
+    <string name="getcode">Lấy mã code</string>
+    <string name="forgot_password">Quên mật khẩu</string>
+    <string name="login">Đăng nhập</string>
+    <string name="register">Đăng ký</string>
     <string name="hint_your_email">Nhập email</string>
     <string name="hint_your_fullName">Nhập tên</string>
     <string name="hint_address">"Nhập địa chỉ "</string>
@@ -21,7 +21,8 @@
     <string name="event_address">Nơi tổ chức sự kiện</string>
     <string name="text_button_register">Đăng Ký</string>
     <string name="event_detail">Chi tiết sự kiện</string>
-    <string name="register_new_account">"Tạo mới tài khoản "</string>
+    <string name="register_new_account">"Đăng ký"</string>
+    <string name="register_new_account0">"Không có tài khoản? "</string>
     <string name="already_account_back_to_login">Bạn đã có tài khoản quay lại đăng nhập</string>
     <string name="yes">Đồng Ý</string>
     <string name="no">Huỷ Bỏ</string>

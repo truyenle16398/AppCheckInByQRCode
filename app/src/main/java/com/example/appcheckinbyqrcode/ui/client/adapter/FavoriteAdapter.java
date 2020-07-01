@@ -11,10 +11,12 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.bumptech.glide.Glide;
 import com.example.appcheckinbyqrcode.R;
@@ -78,6 +80,7 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.Favori
         public TextView name, persion, day, check;
         public ImageView photo;
         public CardView cardView;
+        public LinearLayout idtest;
 
         public Favorite_holder(@NonNull View view) {
             super(view);
@@ -87,6 +90,7 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.Favori
             check = view.findViewById(R.id.eventcheck_favorite);
             photo = view.findViewById(R.id.eventimage_favorite);
             cardView = view.findViewById(R.id.carr);
+            idtest = view.findViewById(R.id.idtest);
             cardView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
