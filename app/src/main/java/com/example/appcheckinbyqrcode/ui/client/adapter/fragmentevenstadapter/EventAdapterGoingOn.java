@@ -2,7 +2,6 @@ package com.example.appcheckinbyqrcode.ui.client.adapter.fragmentevenstadapter;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,20 +14,13 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
-import com.bumptech.glide.load.resource.bitmap.CenterCrop;
-import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
-import com.bumptech.glide.request.RequestOptions;
 import com.example.appcheckinbyqrcode.R;
 import com.example.appcheckinbyqrcode.network.response.EventListResponse;
 import com.example.appcheckinbyqrcode.network.url;
 import com.example.appcheckinbyqrcode.sqlite.MyDatabaseHelper;
 import com.example.appcheckinbyqrcode.ui.admin.model.FavoriteList;
 import com.example.appcheckinbyqrcode.ui.client.EventDetailActivity;
-import com.makeramen.roundedimageview.RoundedTransformationBuilder;
 import com.squareup.picasso.Picasso;
-import com.squareup.picasso.Transformation;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -61,7 +53,7 @@ public class EventAdapterGoingOn extends RecyclerView.Adapter<EventAdapterGoingO
         View v = inflater.inflate(R.layout.item_event_goingon_client, parent, false);
         EventList_holder vholder = new EventList_holder(v);
         favoriteLists = new ArrayList<>();
-        favoritemodel = new FavoriteList(0, 0,null,null,null,null);
+        favoritemodel = new FavoriteList(0, 0, null, null, null, null);
         return vholder;
     }
 
@@ -90,11 +82,10 @@ public class EventAdapterGoingOn extends RecyclerView.Adapter<EventAdapterGoingO
                 image = items.get(position).getImage();
 
 
-
                 //myDatabaseHelper.deleteFavoriteID(id);
-                if (changgColorButon){
+                if (changgColorButon) {
                     changgColorButon = false;
-                    FavoriteList favoriteList = new FavoriteList(0,idevents,name, intro, chariman, image);
+                    FavoriteList favoriteList = new FavoriteList(0, idevents, name, intro, chariman, image);
                     myDatabaseHelper.deleteFavoriteID(id);
                     holder.imageButton1.setBackgroundResource(R.drawable.ic_favorite_border_red_24dp);
 
@@ -102,9 +93,9 @@ public class EventAdapterGoingOn extends RecyclerView.Adapter<EventAdapterGoingO
                     Toast.makeText(context, "Delete Successful", Toast.LENGTH_SHORT).show();
 
                 } else {
-                    FavoriteList favoriteList = new FavoriteList(0,idevents,name, intro, chariman, image);
-                    Log.d(TAG, "onClick1: "+ favoriteList.getName());
-                    Log.d(TAG, "onClick1: "+ favoriteList.getIdEvent());
+                    FavoriteList favoriteList = new FavoriteList(0, idevents, name, intro, chariman, image);
+                    Log.d(TAG, "onClick1: " + favoriteList.getName());
+                    Log.d(TAG, "onClick1: " + favoriteList.getIdEvent());
 
                     myDatabaseHelper.insertFavorite(favoriteList);
                     changgColorButon = true;
@@ -184,6 +175,7 @@ public class EventAdapterGoingOn extends RecyclerView.Adapter<EventAdapterGoingO
 //            });
 
         }
+
         void getData(EventListResponse ex) {
             // Log.d(TAG, "onBindViewHolder: "+ items.get(position).getEventname());
             name.setText(ex.getName());
