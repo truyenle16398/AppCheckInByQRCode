@@ -1,12 +1,17 @@
 package com.example.appcheckinbyqrcode.ui.client.fragment.eventsfragment;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -18,6 +23,10 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import com.example.appcheckinbyqrcode.R;
 import com.example.appcheckinbyqrcode.network.ApiClient;
 import com.example.appcheckinbyqrcode.network.response.EventListResponse;
+import com.example.appcheckinbyqrcode.sqlite.MyDatabaseHelper;
+import com.example.appcheckinbyqrcode.ui.admin.model.FavoriteList;
+import com.example.appcheckinbyqrcode.ui.client.EventDetailActivity;
+import com.example.appcheckinbyqrcode.ui.client.HomeClientActivity;
 import com.example.appcheckinbyqrcode.ui.client.adapter.fragmentevenstadapter.EventAdapterGoingOn;
 
 import java.util.ArrayList;
@@ -41,7 +50,8 @@ public class EventGoingOnFragment extends Fragment {
     private View view;
     TextView tvthongbao;
     private ArrayList<EventListResponse> arrayList = new ArrayList<>();
-//    private MyDatabaseHelper myDatabaseHelper;
+
+
 
 
     public EventGoingOnFragment() {
@@ -103,6 +113,7 @@ public class EventGoingOnFragment extends Fragment {
                     }
                 });
     }
+
 
     private void InitWidget(View view) {
         mRCycMs = view.findViewById(R.id.recyclerviewEventOnGoing);

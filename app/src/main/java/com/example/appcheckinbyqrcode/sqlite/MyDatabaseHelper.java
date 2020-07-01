@@ -123,6 +123,7 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
 //                new String[]{String.valueOf(favoriteList.idEvent)});
         db.execSQL("INSERT INTO " + TABLE_FAVORITE + "(idevent,name, intro, chaiman, image) VALUES (?,?,?,?,?)",
                 new String[]{favoriteList.idEvent.toString(), favoriteList.name, favoriteList.intro, favoriteList.chariman, favoriteList.image});
+        Log.d(TAG, "insertFavorite1: insertingName1.......");
         db.close();
     }
 
