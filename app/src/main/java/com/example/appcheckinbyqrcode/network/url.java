@@ -5,7 +5,6 @@ public class url {
 //    static String url = "http://"+ip+":8888/SDC-Event/public/api/";
 //    static String urlimg = "http://"+ip+":8888/SDC-Event/public/";
 //    static String urlimgevent = "http://"+ip+":8888/SDC-Event/public/uploads/";
-//
 
     static String url = "http://events.sdc.click/api/";
     static String urlimg = "http://events.sdc.click/";

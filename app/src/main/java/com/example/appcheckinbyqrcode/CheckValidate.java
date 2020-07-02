@@ -42,10 +42,13 @@ public class CheckValidate {
 
     public static boolean isValidPhoneNumber(String number)
     {
-        String validNumber = "^0[35789]{1}\\d{8}$";
-        Pattern pattern = Pattern.compile(validNumber,Pattern.CASE_INSENSITIVE);
-        Matcher matcher = pattern.matcher(number);
-        if (matcher.find()) {
+        String validNumber0 = "^(0|84)[35789]{1}\\d{8}$";
+        String validNumber84 = "^84[35789]{1}\\d{9}$";
+        Pattern pattern0 = Pattern.compile(validNumber0,Pattern.CASE_INSENSITIVE);
+        Matcher matcher0 = pattern0.matcher(number);
+        Pattern pattern84 = Pattern.compile(validNumber84,Pattern.CASE_INSENSITIVE);
+        Matcher matcher84 = pattern84.matcher(number);
+        if (matcher0.find() ) {//|| matcher84.find()
             return true;
         }
         return false;
@@ -53,7 +56,7 @@ public class CheckValidate {
 
     public static boolean isValidName(Editable s)
     {
-        String validName = "[0-9]*";
+        String validName = "^[$&+,:;=\\?@#|/'<>.^*()%!-]$";
         if (s.toString().matches(validName)) {
             return true;
         }
