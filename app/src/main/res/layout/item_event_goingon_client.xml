@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     app:cardCornerRadius="9dp"
+    android:id="@+id/linnerOnGoing"
     app:cardElevation="11dp"
     android:layout_marginBottom="2dp"
     android:layout_marginRight="4dp"
@@ -12,7 +13,8 @@
     android:layout_height="wrap_content"
     tools:context="com.example.appcheckinbyqrcode.ui.client.adapter.fragmentevenstadapter.EventAdapterGoingOn">
     <androidx.cardview.widget.CardView
-        android:id="@+id/linnerOnGoing"
+        app:cardCornerRadius="9dp"
+        app:cardElevation="11dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <FrameLayout
@@ -22,7 +24,7 @@
                 android:weightSum="2"
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="200dp">
+                android:layout_height="180dp">
                 <FrameLayout
                     android:layout_weight="1"
                     android:layout_width="0dp"
@@ -78,7 +80,7 @@
                         android:gravity="center|left"
                         android:textSize="12sp"
                         android:textColor="#000"
-                        android:text="Pool Party and Live Music"
+                        android:text="Pool Party and Live Music AAAAA AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"/>
 
@@ -88,7 +90,8 @@
                         android:layout_marginBottom="4dp"
                         android:id="@+id/eventdayOnGoing"
                         android:gravity="center|left"
-                        android:drawableLeft="@drawable/calendar"
+                        android:drawablePadding="5dp"
+                        android:drawableLeft="@drawable/time"
                         android:textSize="12sp"
                         android:textColor="#000"
                         android:text="19-05-2020"
@@ -101,6 +104,7 @@
                         android:gravity="center|left"
                         android:drawableLeft="@drawable/time"
                         android:textSize="12sp"
+                        android:drawablePadding="5dp"
                         android:textColor="#000"
                         android:text="08:00 đến 17:00"
                         android:layout_width="match_parent"
@@ -109,8 +113,9 @@
                         android:singleLine="true"
                         android:layout_marginBottom="4dp"
                         android:id="@+id/eventplaceOnGoing"
+                        android:drawablePadding="5dp"
                         android:gravity="center|left"
-                        android:drawableLeft="@drawable/locationicon"
+                        android:drawableLeft="@drawable/location1"
                         android:textSize="12sp"
                         android:textColor="#000"
                         android:text="41 Le Duan, Hai Chau, DN"

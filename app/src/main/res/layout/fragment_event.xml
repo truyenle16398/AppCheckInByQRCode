@@ -1,17 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/liner"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     tools:context=".ui.client.fragment.EventFragment">
+<LinearLayout
+    android:layout_marginTop="-20dp"
+    android:layout_width="match_parent"
+    android:layout_height="200dp">
+    <androidx.cardview.widget.CardView
+        android:backgroundTint="#000000"
+        app:cardCornerRadius="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+</LinearLayout>
+<LinearLayout
+    android:layout_marginTop="100dp"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
 
     <androidx.appcompat.widget.Toolbar
+
+        android:visibility="gone"
         android:id="@+id/toolbarSearchView"
         android:layout_width="match_parent"
-        android:layout_height="?actionBarSize"
+        android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:background="#5257f2"
         android:gravity="center">
@@ -19,7 +36,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="40dp"
+            android:layout_marginLeft="30dp"
             android:gravity="left"
             android:text="@string/search_something"
             android:textColor="#fff"
@@ -29,6 +46,7 @@
     </androidx.appcompat.widget.Toolbar>
 
     <com.google.android.material.tabs.TabLayout
+        android:layout_margin="10dp"
         android:id="@+id/tabLayoutEvent"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -59,14 +77,12 @@
 
     </com.google.android.material.tabs.TabLayout>
 
-    <androidx.viewpager.widget.ViewPager
-        android:id="@+id/viewPager"
-        android:visibility="visible"
+
+    <TextView
+        android:layout_margin="10dp"
+        android:text="su kien"
         android:layout_width="match_parent"
-        android:layout_height="250dp"
-        android:clipToPadding="false"
-        android:foregroundGravity="center|top"
-        android:overScrollMode="never"/>
+        android:layout_height="wrap_content"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycleViewSearch"
@@ -79,5 +95,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 
-
 </LinearLayout>
+
+</RelativeLayout>
