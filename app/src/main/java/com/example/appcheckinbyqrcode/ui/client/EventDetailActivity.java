@@ -42,7 +42,7 @@ public class EventDetailActivity extends AppCompatActivity {
     ArrayList<FavoriteList> favoriteLists;
     FavoriteList favoritemodel;
     ImageView imageDetail;
-    TextView  txtDateTimeStart, txtDateTimeEnd, txtInfoDetail, txtAddressInfoDetail, txtFavorite, txtRemoveFavorite;
+    TextView  txtDateTimeStart, txtDateTimeEnd, txtInfoDetail, txtAddressInfoDetail;
     Button btnRegisterDetail;
     Toolbar toolbar;
     private int id;
@@ -71,23 +71,13 @@ public class EventDetailActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 // getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setHomeAsUpIndicator(drawable);
-        txtFavorite = findViewById(R.id.txtFavorite);
 
         Intent intent = getIntent();
         id = intent.getIntExtra("id", 0);
 
         getdata(id);
         onclick();
-        if (myDatabaseHelper.getFavoriteID(id) == 1) {
-            Log.d(TAG, "onBindViewHolder: id okkkkkkkkkk" + id);
-            txtFavorite.setVisibility(View.GONE);
-            txtRemoveFavorite.setVisibility(View.VISIBLE);
-//            Toast.makeText(context, "aaaa" + , Toast.LENGTH_SHORT).show();
-        } else {
-            Log.d(TAG, "ttttttttttttttttttt: ");
-            txtFavorite.setVisibility(View.VISIBLE);
-            txtRemoveFavorite.setVisibility(View.GONE);
-        }
+
     }
 
 
@@ -128,19 +118,6 @@ public class EventDetailActivity extends AppCompatActivity {
                             }
                         });
 
-            }
-        });
-
-        txtFavorite.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showDialogLikeFavorite();
-            }
-        });
-        txtRemoveFavorite.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showDialogRemoveFavorite();
             }
         });
 
@@ -269,7 +246,6 @@ public class EventDetailActivity extends AppCompatActivity {
 
     private void InitWidget() {
         toolbar = findViewById(R.id.toolbarDetail);
-        txtRemoveFavorite = findViewById(R.id.txtRemoveFavorite);
         imageDetail = findViewById(R.id.imageDetail);
         txtDateTimeStart = findViewById(R.id.txtDateTimeStart);
         txtDateTimeEnd = findViewById(R.id.txtDateTimeEnd);
