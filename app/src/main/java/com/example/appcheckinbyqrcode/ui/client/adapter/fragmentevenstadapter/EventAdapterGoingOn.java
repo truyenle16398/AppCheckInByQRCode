@@ -94,8 +94,8 @@ public class EventAdapterGoingOn extends RecyclerView.Adapter<EventAdapterGoingO
 
                 } else {
                     FavoriteList favoriteList = new FavoriteList(0, idevents, name, intro, chariman, image);
-                    Log.d(TAG, "onClick1: " + favoriteList.getName());
-                    Log.d(TAG, "onClick1: " + favoriteList.getIdEvent());
+//                    Log.d(TAG, "onClick1: " + favoriteList.getName());
+//                    Log.d(TAG, "onClick1: " + favoriteList.getIdEvent());
 
                     myDatabaseHelper.insertFavorite(favoriteList);
                     changgColorButon = true;
@@ -145,7 +145,7 @@ public class EventAdapterGoingOn extends RecyclerView.Adapter<EventAdapterGoingO
             avatar = view.findViewById(R.id.eventavatarOnGoing);
             cardView = view.findViewById(R.id.linnerOnGoing);
             imageButton1 = view.findViewById(R.id.txtImageFavorite1);
-            avatar.setOnClickListener(new View.OnClickListener() {
+            cardView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(context, EventDetailActivity.class);
