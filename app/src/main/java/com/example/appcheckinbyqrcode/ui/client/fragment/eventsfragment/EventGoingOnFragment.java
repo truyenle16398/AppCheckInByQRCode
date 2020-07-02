@@ -11,6 +11,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
@@ -83,7 +84,7 @@ public class EventGoingOnFragment extends Fragment {
                             tvthongbao.setVisibility(View.VISIBLE);
                         } else {
                             arrayList = (ArrayList<EventListResponse>) eventListResponses;
-                            mRCycMs.setLayoutManager(new LinearLayoutManager(getActivity()));
+                            mRCycMs.setLayoutManager(new GridLayoutManager(getActivity(), 2));
                             adapter = new EventAdapterGoingOn(eventListResponses, getActivity());
                             mRCycMs.setAdapter(adapter);
                             dialog.dismiss();
