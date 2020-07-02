@@ -55,5 +55,6 @@
     <string name="forgotyourpassword">Forget your password</string>
     <string name="setupnow">Set up now</string>
     <string name="click_to_get_qrcode">Click to get QR CODE</string>
-    <string name="search_something">Search Something...</string>
+    <string name="search_something">Click the search icon to find the event name</string>
+    <string name="search_something_hint">Enter event name to search</string>
 </resources>
