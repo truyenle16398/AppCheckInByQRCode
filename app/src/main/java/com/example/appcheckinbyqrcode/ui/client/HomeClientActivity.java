@@ -40,36 +40,41 @@ public class HomeClientActivity extends AppCompatActivity implements OnIntent {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 pager.setCurrentItem(tab.getPosition());
-                switch (tab.getPosition()){
-                    case 0:
-                        mTabLayout.getTabAt(tab.getPosition()).setIcon(getResources().getDrawable(R.drawable.ic_call_to_action_black_24dp));
-                        mTabLayout.getTabAt(1).setIcon(getResources().getDrawable(R.drawable.ic_event_available_while_24dp));
-                        mTabLayout.getTabAt(2).setIcon(getResources().getDrawable(R.drawable.ic_person_white_24dp));
-                        break;
-                    case 1:
-                        mTabLayout.getTabAt(tab.getPosition()).setIcon(getResources().getDrawable(R.drawable.ic_arrow_forward_black_24dp));
-                        break;
-                    case 2:
-                        mTabLayout.getTabAt(tab.getPosition()).setIcon(getResources().getDrawable(R.drawable.ic_chevron_right_black_24dp));
-                        break;
-                }
+//                switch (tab.getPosition()){
+//                    case 0:
+//                        mTabLayout.getTabAt(tab.getPosition()).setIcon(getResources().getDrawable(R.drawable.ic_call_to_action_black_24dp));
+//                        mTabLayout.getTabAt(1).setIcon(getResources().getDrawable(R.drawable.ic_event_available_while_24dp));
+//                        mTabLayout.getTabAt(2).setIcon(getResources().getDrawable(R.drawable.ic_person_white_24dp));
+//                        break;
+//                    case 1:
+//                        mTabLayout.getTabAt(tab.getPosition()).setIcon(getResources().getDrawable(R.drawable.ic_arrow_forward_black_24dp));
+//                        break;
+//                    case 2:
+//                        mTabLayout.getTabAt(tab.getPosition()).setIcon(getResources().getDrawable(R.drawable.ic_chevron_right_black_24dp));
+//                        break;
+//                }
+                //mTabLayout.getTabAt(tab.getPosition()).setIcon(getResources().getDrawable(R.drawable.ic_call_to_action_black_24dp));
+                mTabLayout.getTabAt(tab.getPosition()).getIcon().setColorFilter(getResources().getColor(android.R.color.holo_purple), PorterDuff.Mode.SRC_IN);
             }
 
             @Override
             public void onTabUnselected(TabLayout.Tab tab) {
-                switch (tab.getPosition()){
-                    case 0:
-
-                        break;
-                    case 1:
-                        mTabLayout.getTabAt(0).setIcon(getResources().getDrawable(R.drawable.ic_home_whitte_24dp));
-                        mTabLayout.getTabAt(2).setIcon(getResources().getDrawable(R.drawable.ic_person_white_24dp));
-                        break;
-                    case 2:
-                        mTabLayout.getTabAt(0).setIcon(getResources().getDrawable(R.drawable.ic_home_whitte_24dp));
-                        mTabLayout.getTabAt(1).setIcon(getResources().getDrawable(R.drawable.ic_event_available_while_24dp));
-                        break;
-                }
+                //mTabLayout.getTabAt(tab.getPosition()).setIcon(getResources().getDrawable(R.drawable.ic_person_white_24dp));
+                mTabLayout.getTabAt(tab.getPosition()).getIcon().setColorFilter(getResources().getColor(android.R.color.black), PorterDuff.Mode.SRC_IN);
+//                switch (tab.getPosition()){
+//                    case 0:
+//                        mTabLayout.getTabAt(1).setIcon(getResources().getDrawable(R.drawable.ic_home_whitte_24dp));
+//                        mTabLayout.getTabAt(2).setIcon(getResources().getDrawable(R.drawable.ic_person_white_24dp));
+//                        break;
+//                    case 1:
+//                        mTabLayout.getTabAt(0).setIcon(getResources().getDrawable(R.drawable.ic_home_whitte_24dp));
+//                        mTabLayout.getTabAt(2).setIcon(getResources().getDrawable(R.drawable.ic_person_white_24dp));
+//                        break;
+//                    case 2:
+//                        mTabLayout.getTabAt(0).setIcon(getResources().getDrawable(R.drawable.ic_home_whitte_24dp));
+//                        mTabLayout.getTabAt(1).setIcon(getResources().getDrawable(R.drawable.ic_event_available_while_24dp));
+//                        break;
+//                }
             }
 
             @Override

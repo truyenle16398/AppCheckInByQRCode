@@ -2,4 +2,6 @@
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:state_checked="true" android:drawable="@drawable/ic_event_available_while_24dp" /> <!-- pressed -->
     <item android:state_checked="false" android:drawable="@drawable/ic_home_whitte_24dp" /> <!-- focused -->
+    <item android:state_checked="false" android:drawable="@drawable/ic_person_white_24dp" /> <!-- focused -->
+
 </selector>

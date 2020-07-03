@@ -37,7 +37,7 @@ public class EventHappenedFragment extends Fragment {
     private EventAdapterHappened adapter;
     private List<EventListResponse> data;
     private View view;
-    TextView tvthongbao;
+    TextView tvthongbao, txtEvent3;
     private ArrayList<EventListResponse> arrayList = new ArrayList<>();
 
     public EventHappenedFragment() {
@@ -70,8 +70,10 @@ public class EventHappenedFragment extends Fragment {
                     public void onNext(List<EventListResponse> eventListResponses) {
                         if (eventListResponses.toString().equals("[]")) {
                             mRCycMs.setVisibility(View.GONE);
+                            txtEvent3.setVisibility(View.GONE);
                             tvthongbao.setVisibility(View.VISIBLE);
                         } else {
+                            txtEvent3.setVisibility(View.VISIBLE);
                             arrayList = (ArrayList<EventListResponse>) eventListResponses;
                             mRCycMs.setLayoutManager(new LinearLayoutManager(getActivity()));
                             adapter = new EventAdapterHappened( eventListResponses, getActivity());
@@ -90,6 +92,7 @@ public class EventHappenedFragment extends Fragment {
 
                     @Override
                     public void onComplete() {
+                        dialog.dismiss();
                     }
                 });
     }
@@ -97,6 +100,7 @@ public class EventHappenedFragment extends Fragment {
     private void InitWidget(View view) {
         mRCycMs = view.findViewById(R.id.recyclerviewEventUpComing);
         tvthongbao = view.findViewById(R.id.tvthongbaoEvent1);
+        txtEvent3 = view.findViewById(R.id.txtEvent3);
         swipeRefreshLayout = view.findViewById(R.id.swipeRefreshLayoutEvent1);
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override

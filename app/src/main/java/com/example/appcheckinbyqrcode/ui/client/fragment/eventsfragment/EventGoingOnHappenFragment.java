@@ -2,22 +2,20 @@ package com.example.appcheckinbyqrcode.ui.client.fragment.eventsfragment;
 
 import android.app.ProgressDialog;
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
-
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+
 import com.example.appcheckinbyqrcode.R;
 import com.example.appcheckinbyqrcode.network.ApiClient;
 import com.example.appcheckinbyqrcode.network.response.EventListResponse;
-import com.example.appcheckinbyqrcode.ui.client.adapter.fragmentevenstadapter.EventAdapterGoingOn;
 import com.example.appcheckinbyqrcode.ui.client.adapter.fragmentevenstadapter.EventAdapterGoingOnHappen;
 
 import java.util.ArrayList;
@@ -38,7 +36,7 @@ public class EventGoingOnHappenFragment extends Fragment {
     private EventAdapterGoingOnHappen adapter;
     private List<EventListResponse> data;
     private View view;
-    TextView tvthongbao;
+    TextView tvthongbao, txtEvent2;
     private ArrayList<EventListResponse> arrayList = new ArrayList<>();
 
     public EventGoingOnHappenFragment() {
@@ -55,6 +53,7 @@ public class EventGoingOnHappenFragment extends Fragment {
         getdata();
         return view;
     }
+
     private void getdata() {
         ProgressDialog dialog = new ProgressDialog(getActivity());
         dialog.setMessage("please wait...");
@@ -71,11 +70,13 @@ public class EventGoingOnHappenFragment extends Fragment {
                     public void onNext(List<EventListResponse> eventListResponses) {
                         if (eventListResponses.toString().equals("[]")) {
                             mRCycMs.setVisibility(View.GONE);
+                            txtEvent2.setVisibility(View.GONE);
                             tvthongbao.setVisibility(View.VISIBLE);
                         } else {
+                            txtEvent2.setVisibility(View.VISIBLE);
                             arrayList = (ArrayList<EventListResponse>) eventListResponses;
                             mRCycMs.setLayoutManager(new LinearLayoutManager(getActivity()));
-                            adapter = new EventAdapterGoingOnHappen( eventListResponses, getActivity());
+                            adapter = new EventAdapterGoingOnHappen(eventListResponses, getActivity());
                             mRCycMs.setAdapter(adapter);
                             dialog.dismiss();
 
@@ -90,7 +91,7 @@ public class EventGoingOnHappenFragment extends Fragment {
 
                     @Override
                     public void onComplete() {
-                        adapter.notifyDataSetChanged();
+                        //adapter.notifyDataSetChanged();
                     }
                 });
     }
@@ -98,6 +99,7 @@ public class EventGoingOnHappenFragment extends Fragment {
     private void InitWidget(View view) {
         mRCycMs = view.findViewById(R.id.recyclerviewEventGoingOnHappen);
         tvthongbao = view.findViewById(R.id.tvthongbaoEvent2);
+        txtEvent2 = view.findViewById(R.id.txtEvent2);
         swipeRefreshLayout = view.findViewById(R.id.swipeRefreshLayoutEvent2);
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override

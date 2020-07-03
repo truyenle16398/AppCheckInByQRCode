@@ -13,5 +13,13 @@
     <color name="color4">#B867F4</color>
 
     <color name="textcolorlogin">#3f51b5</color>
+    <color name="gray">#1AD7D8DF</color>
+    <color name="gray_100">#CACBD1</color>
+    <color name="red">#E20A29</color>
+    <color name="bg_xanh">#37AE42</color>
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+    <color name="cam">#FF9800</color>
+    <color name="cam_">#BCBBC9</color>
 
 </resources>
