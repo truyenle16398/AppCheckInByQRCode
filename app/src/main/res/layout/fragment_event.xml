@@ -9,6 +9,7 @@
     android:orientation="vertical"
     tools:context=".ui.client.fragment.EventFragment">
 
+
     <androidx.cardview.widget.CardView
         app:cardCornerRadius="20dp"
         android:layout_margin="10dp"
@@ -26,6 +27,7 @@
                 android:layout_width="24dp"
                 android:layout_height="24dp"/>
             <EditText
+                android:id="@+id/edtSearchView"
                 android:singleLine="true"
                 android:background="@null"
                 android:layout_toRightOf="@+id/mImgSeacr"
@@ -120,6 +122,5 @@
         android:id="@+id/viewPagerEvent"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
-
 
 </LinearLayout>

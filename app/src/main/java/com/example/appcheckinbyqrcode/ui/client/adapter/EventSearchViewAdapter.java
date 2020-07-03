@@ -90,5 +90,9 @@ public class EventSearchViewAdapter extends RecyclerView.Adapter<EventSearchView
             name.setText(ex.getName());
         }
     }
+    public void filterList(ArrayList<EventSearchListResponse> filteredList) {
+        items = filteredList;
+        notifyDataSetChanged();
+    }
 }
 

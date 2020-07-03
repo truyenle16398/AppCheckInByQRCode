@@ -4,6 +4,8 @@ import android.animation.ArgbEvaluator;
 import android.app.SearchManager;
 import android.content.Context;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -11,6 +13,8 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.Filter;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -56,8 +60,7 @@ import static androidx.constraintlayout.widget.Constraints.TAG;
  */
 public class EventFragment extends Fragment {
     ArrayList<FavoriteList> favoriteLists;
-    Integer[] colors = null;
-    ArgbEvaluator argbEvaluator = new ArgbEvaluator();
+
     private MyDatabaseHelper myDatabaseHelper;
 
     ViewPager pager;
@@ -67,11 +70,10 @@ public class EventFragment extends Fragment {
     EventSearchViewAdapter adapterSearch;
     private RecyclerView recyclerView;
     private RecyclerView.LayoutManager layoutManager;
-    private List<EventSearchListResponse> listResponses;
+    private ArrayList<EventSearchListResponse> listSearch;
     private View view;
     Toolbar toolbar;
-    TextView search;
-    String[] item;
+    EditText edtSearchView;
 
     public EventFragment() {
         // Required empty public constructor
@@ -114,71 +116,36 @@ public class EventFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         myDatabaseHelper = new MyDatabaseHelper(getContext());
         favoriteLists = (ArrayList<FavoriteList>) myDatabaseHelper.getAllFavo();
+        edtSearchView.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
+            }
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+            }
+            @Override
+            public void afterTextChanged(Editable s) {
+                fetchSearch(String.valueOf(s));
+                filter(s.toString());
+                Log.d(TAG, "afterTextChanged: "+ s.toString());
+            }
+        });
 
-//        Integer[] colors_temp = {
-//                getResources().getColor(R.color.color1),
-//                getResources().getColor(R.color.color2),
-//                getResources().getColor(R.color.color3)
-//        };
-////        colors_temp = favoriteLists
-//        colors = colors_temp;
-//        toolbar.setBackgroundResource(R.color.colorPrimaryDark);
-//        mTabLayoutEvent.setBackgroundResource(R.color.colorPrimaryDark);
-//        viewPagerFavo.setBackgroundResource(R.color.colorPrimaryDark);
-//        pager.setBackgroundResource(R.color.colorPrimaryDark);
+    }
+    private void filter(String text) {
+        if (text.isEmpty()){
+            Toast.makeText(getContext(), "No data search", Toast.LENGTH_SHORT).show();
+        }else {
+            for (EventSearchListResponse item : listSearch) {
+                if (item.getName().toLowerCase().contains(text.toLowerCase())) {
+                    fetchSearch(text);
+                }
+            }
+            adapterSearch.filterList(listSearch);
+            Log.d(TAG, "filter: " + text.toString());
+        }
 
-
-//         change background
-//        viewPagerFavo.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-//            @Override
-//            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-//
-//                if (position < (adapterViewPagerFavorite.getCount() -1) && position < (colors.length - 1)) {
-//                    viewPagerFavo.setBackgroundColor(
-//
-//                            (Integer) argbEvaluator.evaluate(
-//                                    positionOffset,
-//                                    colors[position],
-//                                    colors[position + 1]
-//                            )
-//                    );
-//                    viewPagerFavo.getBackground().setAlpha(100);
-//                    toolbar.setBackgroundColor(
-//
-//                            (Integer) argbEvaluator.evaluate(
-//                                    positionOffset,
-//                                    colors[position],
-//                                    colors[position + 1]
-//                            )
-//                    );
-//                    toolbar.getBackground().setAlpha(100);
-//                    mTabLayoutEvent.setBackgroundColor(
-//
-//                            (Integer) argbEvaluator.evaluate(
-//                                    positionOffset,
-//                                    colors[position],
-//                                    colors[position + 1]
-//                            )
-//                    );
-//                    mTabLayoutEvent.getBackground().setAlpha(100);
-//                }
-//
-//                else {
-//                    viewPagerFavo.setBackgroundColor(colors[colors.length - 1]);
-//                }
-//            }
-//
-//            @Override
-//            public void onPageSelected(int position) {
-//
-//            }
-//
-//            @Override
-//            public void onPageScrollStateChanged(int state) {
-//
-//            }
-//        });
     }
 
     public void fetchSearch(String key){
@@ -197,6 +164,7 @@ public class EventFragment extends Fragment {
                         recyclerView.setVisibility(View.VISIBLE);
                         recyclerView.setAdapter(adapterSearch);
                         adapterSearch.notifyDataSetChanged();
+                        Log.d(TAG, "onNext: "+ listResponses.toString());
                     }
 
 
@@ -287,6 +255,7 @@ public class EventFragment extends Fragment {
         appCompatActivity.setSupportActionBar(toolbar);
         appCompatActivity.getSupportActionBar().setDisplayShowTitleEnabled(true);
         toolbar.setTitle("SDC");
+        edtSearchView = view.findViewById(R.id.edtSearchView);
         toolbar.setSubtitle(null);
         recyclerView = view.findViewById(R.id.recycleViewSearch);
         layoutManager = new LinearLayoutManager(getActivity());

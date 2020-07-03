@@ -97,10 +97,10 @@ public class EventHappenedFragment extends Fragment {
     }
 
     private void InitWidget(View view) {
-        mRCycMs = view.findViewById(R.id.recyclerviewEventUpComing);
-        tvthongbao = view.findViewById(R.id.tvthongbaoEvent1);
+        mRCycMs = view.findViewById(R.id.recyclerviewEventHappened);
+        tvthongbao = view.findViewById(R.id.tvthongbaoEvent3);
         txtEvent3 = view.findViewById(R.id.txtEvent3);
-        swipeRefreshLayout = view.findViewById(R.id.swipeRefreshLayoutEvent1);
+        swipeRefreshLayout = view.findViewById(R.id.swipeRefreshLayoutEvent3);
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
