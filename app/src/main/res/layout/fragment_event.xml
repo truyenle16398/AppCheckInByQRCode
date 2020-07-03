@@ -26,19 +26,19 @@
                 android:layout_centerVertical="true"
                 android:layout_width="24dp"
                 android:layout_height="24dp"/>
+
             <EditText
                 android:id="@+id/edtSearchView"
-                android:singleLine="true"
-                android:background="@null"
-                android:layout_toRightOf="@+id/mImgSeacr"
-                android:textColor="@color/gray_100"
-                android:hint="@string/search_something"
-                android:gravity="center_vertical"
-                android:layout_marginLeft="8dp"
-                android:layout_centerVertical="true"
                 android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="7dp"
                 android:layout_marginRight="8dp"
-                android:layout_height="match_parent"/>
+                android:layout_toRightOf="@+id/mImgSeacr"
+                android:background="@null"
+                android:gravity="center_vertical"
+                android:hint="@string/search_something"
+                android:singleLine="true"
+                android:textColor="@color/gray_100" />
         </RelativeLayout>
     </androidx.cardview.widget.CardView>
 

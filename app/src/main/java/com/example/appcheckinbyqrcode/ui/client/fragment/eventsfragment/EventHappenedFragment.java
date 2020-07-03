@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
@@ -75,7 +76,7 @@ public class EventHappenedFragment extends Fragment {
                         } else {
                             txtEvent3.setVisibility(View.VISIBLE);
                             arrayList = (ArrayList<EventListResponse>) eventListResponses;
-                            mRCycMs.setLayoutManager(new LinearLayoutManager(getActivity()));
+                            mRCycMs.setLayoutManager(new GridLayoutManager(getActivity(),2));
                             adapter = new EventAdapterHappened( eventListResponses, getActivity());
                             mRCycMs.setAdapter(adapter);
                             dialog.dismiss();

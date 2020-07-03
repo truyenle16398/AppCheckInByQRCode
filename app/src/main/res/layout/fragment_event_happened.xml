@@ -11,7 +11,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:visibility="gone"
-        android:layout_margin="10dp"
+        android:textSize="@dimen/_17sdp"
+        android:layout_margin="5dp"
         android:text="@string/happened"  />
 
     <TextView
@@ -36,7 +37,7 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:paddingBottom="5dp"
-            android:background="#fff"
+            android:background="#F6F2F2"
             android:id="@+id/recyclerviewEventHappened"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
