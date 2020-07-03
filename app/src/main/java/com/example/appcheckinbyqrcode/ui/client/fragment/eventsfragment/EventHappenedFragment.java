@@ -78,6 +78,7 @@ public class EventHappenedFragment extends Fragment {
                             mRCycMs.setLayoutManager(new LinearLayoutManager(getActivity()));
                             adapter = new EventAdapterHappened( eventListResponses, getActivity());
                             mRCycMs.setAdapter(adapter);
+                            adapter.notifyDataSetChanged();
                             dialog.dismiss();
 
                         }
@@ -91,7 +92,7 @@ public class EventHappenedFragment extends Fragment {
 
                     @Override
                     public void onComplete() {
-                        //adapter.notifyDataSetChanged();
+                        dialog.dismiss();
                     }
                 });
     }
