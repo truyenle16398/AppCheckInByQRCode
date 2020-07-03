@@ -77,4 +77,9 @@ dependencies {
     implementation 'com.orhanobut:dialogplus:1.11@aar'
 
     implementation 'com.google.firebase:firebase-analytics:17.2.2'
+
+    //circleimageview
+    implementation 'de.hdodenhof:circleimageview:3.0.1'
+    // not screen
+    implementation 'com.intuit.sdp:sdp-android:1.0.5'
 }

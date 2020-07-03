@@ -40,7 +40,7 @@ public class EventGoingOnFragment extends Fragment {
     private EventAdapterGoingOn adapter;
     private List<EventListResponse> data;
     private View view;
-    TextView tvthongbao;
+    TextView tvthongbao,txtEvent1;
     private ArrayList<EventListResponse> arrayList = new ArrayList<>();
 //    private MyDatabaseHelper myDatabaseHelper;
 
@@ -81,8 +81,10 @@ public class EventGoingOnFragment extends Fragment {
                     public void onNext(List<EventListResponse> eventListResponses) {
                         if (eventListResponses.toString().equals("[]")) {
                             mRCycMs.setVisibility(View.GONE);
+                            txtEvent1.setVisibility(View.GONE);
                             tvthongbao.setVisibility(View.VISIBLE);
                         } else {
+                            txtEvent1.setVisibility(View.VISIBLE);
                             arrayList = (ArrayList<EventListResponse>) eventListResponses;
                             mRCycMs.setLayoutManager(new GridLayoutManager(getActivity(), 2));
                             adapter = new EventAdapterGoingOn(eventListResponses, getActivity());
@@ -108,6 +110,7 @@ public class EventGoingOnFragment extends Fragment {
     private void InitWidget(View view) {
         mRCycMs = view.findViewById(R.id.recyclerviewEventOnGoing);
         tvthongbao = view.findViewById(R.id.tvthongbaoEvent);
+        txtEvent1 = view.findViewById(R.id.txtEvent1);
         swipeRefreshLayout = view.findViewById(R.id.swipeRefreshLayoutEvent);
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override

@@ -57,4 +57,5 @@
     <string name="click_to_get_qrcode">Click to get QR CODE</string>
     <string name="search_something">Click the search icon to find the event name</string>
     <string name="search_something_hint">Enter event name to search</string>
+    <string name="event">Events</string>
 </resources>

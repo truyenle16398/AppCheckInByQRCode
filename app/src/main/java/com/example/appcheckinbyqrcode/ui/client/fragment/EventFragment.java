@@ -285,8 +285,8 @@ public class EventFragment extends Fragment {
         toolbar = view.findViewById(R.id.toolbarSearchView);
         AppCompatActivity appCompatActivity = (AppCompatActivity)getActivity();
         appCompatActivity.setSupportActionBar(toolbar);
-        appCompatActivity.getSupportActionBar().setDisplayShowTitleEnabled(false);
-        toolbar.setTitle(null);
+        appCompatActivity.getSupportActionBar().setDisplayShowTitleEnabled(true);
+        toolbar.setTitle("SDC");
         toolbar.setSubtitle(null);
         recyclerView = view.findViewById(R.id.recycleViewSearch);
         layoutManager = new LinearLayoutManager(getActivity());

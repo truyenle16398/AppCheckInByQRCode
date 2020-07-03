@@ -1,30 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/liner"
+    android:background="@color/gray"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.client.fragment.EventFragment">
-<LinearLayout
-    android:layout_marginTop="-20dp"
-    android:layout_width="match_parent"
-    android:layout_height="200dp">
-    <androidx.cardview.widget.CardView
-        android:backgroundTint="#000000"
-        app:cardCornerRadius="20dp"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
-</LinearLayout>
-<LinearLayout
-    android:layout_marginTop="100dp"
     android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    tools:context=".ui.client.fragment.EventFragment">
+
+    <androidx.cardview.widget.CardView
+        app:cardCornerRadius="20dp"
+        android:layout_margin="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <ImageView
+                android:id="@+id/mImgSeacr"
+                android:layout_marginLeft="8dp"
+                android:src="@drawable/ic_search"
+                android:layout_centerVertical="true"
+                android:layout_width="24dp"
+                android:layout_height="24dp"/>
+            <EditText
+                android:singleLine="true"
+                android:background="@null"
+                android:layout_toRightOf="@+id/mImgSeacr"
+                android:textColor="@color/gray_100"
+                android:hint="@string/search_something"
+                android:gravity="center_vertical"
+                android:layout_marginLeft="8dp"
+                android:layout_centerVertical="true"
+                android:layout_width="match_parent"
+                android:layout_marginRight="8dp"
+                android:layout_height="match_parent"/>
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
 
 
     <androidx.appcompat.widget.Toolbar
-
         android:visibility="gone"
         android:id="@+id/toolbarSearchView"
         android:layout_width="match_parent"
@@ -46,15 +63,20 @@
     </androidx.appcompat.widget.Toolbar>
 
     <com.google.android.material.tabs.TabLayout
-        android:layout_margin="10dp"
+        android:layout_marginLeft="@dimen/_4sdp"
+        android:layout_marginRight="@dimen/_4sdp"
         android:id="@+id/tabLayoutEvent"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#5257f2"
-        app:tabGravity="fill"
-        app:tabIndicatorColor="@color/colorAccent"
+        app:tabBackground="@drawable/tab_background"
+        android:layout_width="wrap_content"
+        android:layout_height="45dp"
         app:tabMode="scrollable"
-        app:tabTextColor="@color/colorTextDisable">
+        app:tabSelectedTextColor="@color/white"
+        app:tabPaddingStart="@dimen/_14sdp"
+        app:tabTextColor="#000000"
+        app:tabPaddingEnd="16dp"
+        app:tabIndicatorHeight="0dp"
+        app:tabRippleColor="@null"
+        app:tabTextAppearance="@style/TabTextAppearance">
 
         <com.google.android.material.tabs.TabItem
             android:id="@+id/firstItemEvent"
@@ -77,24 +99,27 @@
 
     </com.google.android.material.tabs.TabLayout>
 
-
-    <TextView
-        android:layout_margin="10dp"
-        android:text="su kien"
+    <View
+        android:layout_marginTop="@dimen/_2sdp"
+        android:background="@color/cam"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="1dp"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycleViewSearch"
+        android:background="@color/gray"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:visibility="gone" />
 
     <androidx.viewpager.widget.ViewPager
+        android:layout_marginTop="@dimen/_4sdp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:backgroundTint="@color/gray"
         android:id="@+id/viewPagerEvent"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 
-</LinearLayout>
 
-</RelativeLayout>
+</LinearLayout>
