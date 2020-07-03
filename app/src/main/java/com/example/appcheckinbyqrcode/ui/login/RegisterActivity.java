@@ -6,7 +6,9 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.InputType;
 import android.text.TextWatcher;
+import android.text.method.DigitsKeyListener;
 import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -98,7 +100,7 @@ public class RegisterActivity extends AppCompatActivity {
                 }else if(CheckValidate.isValidSpecialCharacters(s)) {
                     text_input_layout_name.setErrorEnabled(true);
                     text_input_layout_name.setError("Tên không được chứa kí tự đặc biệt");
-                }else if(CheckValidate.isValidName(s)) {
+                }else if(edtname.getInputType() == InputType.TYPE_TEXT_VARIATION_PERSON_NAME) {
                     text_input_layout_name.setErrorEnabled(true);
                     text_input_layout_name.setError("Tên không được chứa số");
                 } else {
@@ -122,8 +124,8 @@ public class RegisterActivity extends AppCompatActivity {
                     text_input_layout_address.setError("Trường này không bỏ trống");
                 }else if(CheckValidate.isValidAddress(s)) {
                     text_input_layout_address.setErrorEnabled(true);
-                    text_input_layout_address.setError("Địa chỉ không được chứa kí tự đặc biệt");
-                } else {
+                    text_input_layout_address.setError("Địa chỉ không hợp lệ");
+                }else {
                     text_input_layout_address.setErrorEnabled(false);
                 }
             }
@@ -303,5 +305,6 @@ public class RegisterActivity extends AppCompatActivity {
         text_input_layout_passconfirm = findViewById(R.id.text_input_layout_passconfirm);
         text_input_layout_pass = findViewById(R.id.text_input_layout_pass);
         mLlRegister = findViewById(R.id.mLlRegister);
+//        edtname.setInputType(InputType.TYPE_TEXT_VARIATION_PERSON_NAME);
     }
 }

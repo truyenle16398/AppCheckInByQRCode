@@ -23,7 +23,8 @@
     <string name="event_detail">Chi tiết sự kiện</string>
     <string name="register_new_account">"Đăng ký"</string>
     <string name="register_new_account0">"Không có tài khoản? "</string>
-    <string name="already_account_back_to_login">Bạn đã có tài khoản quay lại đăng nhập</string>
+    <string name="already_account_back_to_login0">Bạn đã có tài khoản </string>
+    <string name="already_account_back_to_login1">Quay lại đăng nhập</string>
     <string name="yes">Đồng Ý</string>
     <string name="no">Huỷ Bỏ</string>
     <string name="event_cancel">Huỷ bỏ sự kiện</string>
