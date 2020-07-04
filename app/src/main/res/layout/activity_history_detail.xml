@@ -50,7 +50,7 @@
                             android:id="@+id/btnRegisterDetailHistory"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:layout_marginTop="10dp"
+                            android:layout_marginTop="5dp"
                             android:layout_marginBottom="5dp"
                             android:background="@drawable/ripple_effect_red"
                             android:text="@string/event_cancel"

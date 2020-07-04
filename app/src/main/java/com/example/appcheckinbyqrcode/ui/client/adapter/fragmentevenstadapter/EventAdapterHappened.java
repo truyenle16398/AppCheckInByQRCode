@@ -115,7 +115,7 @@ public class EventAdapterHappened extends RecyclerView.Adapter<EventAdapterHappe
 //                .diskCacheStrategy(DiskCacheStrategy.NONE)
 //                .skipMemoryCache(true)
 //                .into(holder.avatar);
-        Picasso.get().load(urls).into(holder.avatar);
+        Picasso.get().load("https://i.pinimg.com/originals/e0/90/c6/e090c67add8c2a92a875be7eed526261.jpg").into(holder.avatar);
 
         holder.getData(items.get(position));
     }

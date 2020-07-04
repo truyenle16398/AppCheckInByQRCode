@@ -4,19 +4,22 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F6F2F2"
+    android:background="#fff"
     android:orientation="vertical"
     tools:context=".ui.client.fragment.ClientUserFragment">
+
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/swipeRefreshLayoutuser"
-        android:layout_gravity="center_vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_gravity="center_vertical">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="top|center"
             android:orientation="vertical">
+
             <TextView
                 android:id="@+id/tvmyprofile"
                 android:layout_width="match_parent"
@@ -29,272 +32,312 @@
                 android:textStyle="bold" />
 
             <de.hdodenhof.circleimageview.CircleImageView
-                android:foreground="@drawable/my_selector_circleimage"
                 android:id="@+id/profilePic_client"
                 android:layout_width="200dp"
                 android:layout_height="200dp"
                 android:layout_marginTop="15dp"
                 android:clickable="true"
                 android:elevation="6dp"
+                android:foreground="@drawable/my_selector_circleimage"
                 android:src="@drawable/unnamed"
                 app:civ_border_color="#fff"
                 app:civ_border_width="4dp" />
+
             <TextView
-                android:text="Quách Hồng Khoa"
                 android:id="@+id/tvNameClient"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:gravity="center"
+                android:text="Quách Hồng Khoa"
                 android:textColor="#000"
                 android:textColorHint="#a8a8a8"
                 android:textSize="22sp" />
-            <LinearLayout
-                android:layout_marginTop="20dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:padding="4dp"
-                android:background="@drawable/box_bg1"
-                android:gravity="center|top"
-                android:orientation="vertical">
                 <LinearLayout
-                    android:id="@+id/lineartitle"
-                    android:background="@drawable/ripper"
-                    android:paddingLeft="10dp"
-                    android:paddingRight="10dp"
-                    android:paddingBottom="10dp"
-                    android:paddingTop="15dp"
-                    android:weightSum="4"
-                    android:orientation="horizontal"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-                    <TextView
-                        android:singleLine="true"
-                        android:layout_weight="4"
-                        android:text="@string/profile_setting"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:gravity="center"
-                        android:textColor="#000"
-                        android:textSize="22sp" />
-                </LinearLayout>
-                <LinearLayout
-                    android:background="@drawable/ripper"
-                    android:paddingStart="10dp"
-                    android:paddingEnd="20dp"
-                    android:visibility="gone"
-                    android:paddingBottom="10dp"
-                    android:paddingTop="10dp"
-                    android:weightSum="4"
-                    android:orientation="horizontal"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-                    <TextView
-                        android:layout_weight="1"
-                        android:text="@string/namedit"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:gravity="left"
-                        android:textColor="#000"
-                        android:textColorHint="#a8a8a8"
-                        android:textSize="15sp" />
-                    <TextView
-                        android:layout_weight="3"
-                        android:text="Quách Hồng Khoa"
-                        android:id="@+id/tvNameClients"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:gravity="right"
-                        android:textColor="#000"
-                        android:textColorHint="#a8a8a8"
-                        android:textSize="15sp" />
-                </LinearLayout>
-                <LinearLayout
-                    android:background="@drawable/ripper"
-                    android:paddingStart="10dp"
-                    android:paddingEnd="20dp"
-                    android:visibility="gone"
-                    android:paddingBottom="10dp"
-                    android:paddingTop="10dp"
-                    android:weightSum="5"
-                    android:orientation="horizontal"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-                    <TextView
-                        android:layout_weight="1"
-                        android:text="@string/emailedit"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:gravity="left"
-                        android:textColor="#000"
-                        android:textColorHint="#a8a8a8"
-                        android:textSize="15sp" />
-                    <TextView
-                        android:layout_weight="4"
-                        android:id="@+id/tvEmailClient"
-                        android:text="quachhongkhoa.it@gmail.com"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:gravity="right"
-                        android:textColor="#000"
-                        android:textColorHint="#a8a8a8"
-                        android:textSize="15sp" />
-                </LinearLayout>
-                <LinearLayout
-                    android:background="@drawable/ripper"
-                    android:paddingLeft="10dp"
-                    android:paddingRight="20dp"
-                    android:visibility="gone"
-                    android:paddingBottom="10dp"
-                    android:paddingTop="10dp"
-                    android:weightSum="5"
-                    android:orientation="horizontal"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-                    <TextView
-                        android:layout_weight="2"
-                        android:text="@string/phoneedit"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:gravity="left"
-                        android:textColor="#000"
-                        android:textColorHint="#a8a8a8"
-                        android:textSize="15sp" />
-                    <TextView
-                        android:layout_weight="3"
-                        android:text="0985645057"
-                        android:id="@+id/tvPhoneClient"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:gravity="right"
-                        android:textColor="#000"
-                        android:textColorHint="#a8a8a8"
-                        android:textSize="15sp" />
-                </LinearLayout>
-                <LinearLayout
-                    android:background="@drawable/ripper"
-                    android:paddingLeft="10dp"
-                    android:visibility="gone"
-                    android:paddingRight="20dp"
-                    android:paddingBottom="10dp"
-                    android:paddingTop="10dp"
-                    android:weightSum="4"
-                    android:orientation="horizontal"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-                    <TextView
-                        android:layout_weight="1"
-                        android:text="@string/addressedit"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:gravity="left"
-                        android:textColor="#000"
-                        android:textColorHint="#a8a8a8"
-                        android:textSize="15sp" />
-                    <TextView
-                        android:id="@+id/tvAddressClient"
-                        android:layout_weight="3"
-                        android:text="Hoài Ân- Bình Định"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:gravity="right"
-                        android:textColor="#000"
-                        android:textColorHint="#a8a8a8"
-                        android:textSize="15sp" />
-                </LinearLayout>
-                <LinearLayout
-                    android:id="@+id/linearChangePass"
-                    android:background="@drawable/ripper"
-                    android:paddingLeft="10dp"
-                    android:paddingRight="10dp"
-                    android:paddingBottom="10dp"
-                    android:paddingTop="15dp"
-                    android:weightSum="4"
-                    android:orientation="horizontal"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-                    <TextView
-                        android:singleLine="true"
-                        android:layout_weight="2"
-                        android:text="@string/change_password"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:gravity="left"
-                        android:textColor="#000"
-                        android:textSize="16sp" />
-                    <TextView
-                        android:drawableRight="@drawable/ic_chevron_right_defaul_20dp"
-                        android:enabled="true"
-                        android:layout_weight="2"
-                        android:text="@string/setupnow"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:gravity="right"
-                        android:textSize="16sp" />
-                </LinearLayout>
-                <LinearLayout
-                    android:id="@+id/linearChangeInfo"
-                    android:background="@drawable/ripper"
-                    android:paddingLeft="10dp"
-                    android:paddingRight="10dp"
-                    android:paddingBottom="10dp"
-                    android:paddingTop="10dp"
-                    android:weightSum="4"
-                    android:orientation="horizontal"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-                    <TextView
-                        android:singleLine="true"
-                        android:layout_weight="2"
-                        android:text="@string/hint_your_edit_profile"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:gravity="left"
-                        android:textColor="#000"
-                        android:textSize="16sp" />
-                    <TextView
-                        android:drawableRight="@drawable/ic_chevron_right_defaul_20dp"
-                        android:enabled="true"
-                        android:layout_weight="2"
-                        android:text="@string/setupnow"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:gravity="right"
-                        android:textSize="16sp" />
-                </LinearLayout>
-                <LinearLayout
-                    android:id="@+id/linearLogOut"
-                    android:background="@drawable/ripple_while"
-                    android:paddingLeft="10dp"
-                    android:paddingRight="10dp"
-                    android:paddingBottom="5dp"
-                    android:paddingTop="10dp"
-                    android:weightSum="4"
-                    android:orientation="horizontal"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-                    <TextView
-                        android:singleLine="true"
-                        android:layout_weight="2"
-                        android:text="@string/logout"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:gravity="left"
-                        android:textColor="#000"
-                        android:textSize="16sp" />
-                    <TextView
-                        android:drawableRight="@drawable/ic_chevron_right_defaul_20dp"
-                        android:enabled="true"
-                        android:layout_weight="2"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:gravity="right"
-                        android:textSize="16sp" />
-                </LinearLayout>
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginRight="20dp"
+                    android:background="@drawable/box_bg1"
+                    android:gravity="center|top"
+                    android:orientation="vertical"
+                    android:padding="4dp">
+
+                    <LinearLayout
+                        android:background="#BDB8B8"
+                        android:layout_width="match_parent"
+                        android:orientation="vertical"
+                        android:layout_height="match_parent">
+                        <LinearLayout
+                            android:id="@+id/lineartitle"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/ripper"
+                            android:orientation="horizontal"
+                            android:paddingLeft="10dp"
+                            android:paddingTop="15dp"
+                            android:paddingRight="10dp"
+                            android:paddingBottom="10dp"
+                            android:weightSum="4">
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="4"
+                                android:gravity="center"
+                                android:singleLine="true"
+                                android:text="@string/profile_setting"
+                                android:textColor="#000"
+                                android:textSize="22sp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/ripper"
+                            android:orientation="horizontal"
+                            android:paddingStart="10dp"
+                            android:paddingTop="10dp"
+                            android:paddingEnd="20dp"
+                            android:paddingBottom="10dp"
+                            android:visibility="gone"
+                            android:weightSum="4">
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:gravity="left"
+                                android:text="@string/namedit"
+                                android:textColor="#000"
+                                android:textColorHint="#a8a8a8"
+                                android:textSize="15sp" />
+
+                            <TextView
+                                android:id="@+id/tvNameClients"
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="3"
+                                android:gravity="right"
+                                android:text="Quách Hồng Khoa"
+                                android:textColor="#000"
+                                android:textColorHint="#a8a8a8"
+                                android:textSize="15sp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/ripper"
+                            android:orientation="horizontal"
+                            android:paddingStart="10dp"
+                            android:paddingTop="10dp"
+                            android:paddingEnd="20dp"
+                            android:paddingBottom="10dp"
+                            android:visibility="gone"
+                            android:weightSum="5">
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:gravity="left"
+                                android:text="@string/emailedit"
+                                android:textColor="#000"
+                                android:textColorHint="#a8a8a8"
+                                android:textSize="15sp" />
+
+                            <TextView
+                                android:id="@+id/tvEmailClient"
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="4"
+                                android:gravity="right"
+                                android:text="quachhongkhoa.it@gmail.com"
+                                android:textColor="#000"
+                                android:textColorHint="#a8a8a8"
+                                android:textSize="15sp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/ripper"
+                            android:orientation="horizontal"
+                            android:paddingLeft="10dp"
+                            android:paddingTop="10dp"
+                            android:paddingRight="20dp"
+                            android:paddingBottom="10dp"
+                            android:visibility="gone"
+                            android:weightSum="5">
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="2"
+                                android:gravity="left"
+                                android:text="@string/phoneedit"
+                                android:textColor="#000"
+                                android:textColorHint="#a8a8a8"
+                                android:textSize="15sp" />
+
+                            <TextView
+                                android:id="@+id/tvPhoneClient"
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="3"
+                                android:gravity="right"
+                                android:text="0985645057"
+                                android:textColor="#000"
+                                android:textColorHint="#a8a8a8"
+                                android:textSize="15sp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/ripper"
+                            android:orientation="horizontal"
+                            android:paddingLeft="10dp"
+                            android:paddingTop="10dp"
+                            android:paddingRight="20dp"
+                            android:paddingBottom="10dp"
+                            android:visibility="gone"
+                            android:weightSum="4">
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:gravity="left"
+                                android:text="@string/addressedit"
+                                android:textColor="#000"
+                                android:textColorHint="#a8a8a8"
+                                android:textSize="15sp" />
+
+                            <TextView
+                                android:id="@+id/tvAddressClient"
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="3"
+                                android:gravity="right"
+                                android:text="Hoài Ân- Bình Định"
+                                android:textColor="#000"
+                                android:textColorHint="#a8a8a8"
+                                android:textSize="15sp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/linearChangePass"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/ripper"
+                            android:orientation="horizontal"
+                            android:paddingLeft="10dp"
+                            android:paddingTop="15dp"
+                            android:paddingRight="10dp"
+                            android:paddingBottom="10dp"
+                            android:weightSum="4">
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="2"
+                                android:gravity="left"
+                                android:singleLine="true"
+                                android:text="@string/change_password"
+                                android:textColor="#000"
+                                android:textSize="16sp" />
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="2"
+                                android:drawableRight="@drawable/ic_chevron_right_defaul_20dp"
+                                android:enabled="true"
+                                android:gravity="right"
+                                android:text="@string/setupnow"
+                                android:textSize="16sp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/linearChangeInfo"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/ripper"
+                            android:orientation="horizontal"
+                            android:paddingLeft="10dp"
+                            android:paddingTop="10dp"
+                            android:paddingRight="10dp"
+                            android:paddingBottom="10dp"
+                            android:weightSum="4">
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="2"
+                                android:gravity="left"
+                                android:singleLine="true"
+                                android:text="@string/hint_your_edit_profile"
+                                android:textColor="#000"
+                                android:textSize="16sp" />
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="2"
+                                android:drawableRight="@drawable/ic_chevron_right_defaul_20dp"
+                                android:enabled="true"
+                                android:gravity="right"
+                                android:text="@string/setupnow"
+                                android:textSize="16sp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/linearLogOut"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/ripple_while"
+                            android:orientation="horizontal"
+                            android:paddingLeft="10dp"
+                            android:paddingTop="10dp"
+                            android:paddingRight="10dp"
+                            android:paddingBottom="5dp"
+                            android:weightSum="4">
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="2"
+                                android:gravity="left"
+                                android:singleLine="true"
+                                android:text="@string/logout"
+                                android:textColor="#000"
+                                android:textSize="16sp" />
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="2"
+                                android:drawableRight="@drawable/ic_chevron_right_defaul_20dp"
+                                android:enabled="true"
+                                android:gravity="right"
+                                android:textSize="16sp" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+
+
+
+
+
+
+
             </LinearLayout>
+
+
         </LinearLayout>
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 </LinearLayout>
