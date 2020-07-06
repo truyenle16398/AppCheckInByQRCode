@@ -119,15 +119,16 @@ public class EventFragment extends Fragment {
         edtSearchView.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
+                recyclerView.setVisibility(View.GONE);
+                filter((String) s);
             }
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
             }
             @Override
             public void afterTextChanged(Editable s) {
-                fetchSearch(String.valueOf(s));
-                filter(s.toString());
+                recyclerView.setVisibility(View.VISIBLE);
+                filter(String.valueOf(s));
                 Log.d(TAG, "afterTextChanged: "+ s.toString());
             }
         });

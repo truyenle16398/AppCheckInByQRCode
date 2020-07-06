@@ -70,9 +70,9 @@ import static android.app.Activity.RESULT_OK;
 public class ClientUserFragment extends Fragment{
     private static final String TAG = "nnn";
     private SwipeRefreshLayout swipeRefreshLayout;
-    private TextView tvMyProfile, tvName, tvEmail, tvPhone, tvAddress;
+    private TextView tvMess, tvName, tvEmail, tvPhone, tvAddress;
     private LinearLayout lnchangInfo, lnchangPass, lnlogOut;
-    private EditText edt_OldPassword, edt_NewPassword;
+    private EditText edt_OldPassword, edt_NewPassword ,edt_NewPasswordAgain;
     private String name, email, phone, address;
     String urls;
     private CircleImageView circleimg;
@@ -122,7 +122,7 @@ public class ClientUserFragment extends Fragment{
                         Log.d(TAG, "onNext: " + urls);
 // Picasso.get().load(urls).into(circleimg);
                         Glide.with(getActivity())
-                                .load(urls)
+                                .load("https://i.pinimg.com/originals/e0/90/c6/e090c67add8c2a92a875be7eed526261.jpg")
                                 .diskCacheStrategy(DiskCacheStrategy.NONE)
                                 .skipMemoryCache(true)
                                 .into(circleimg);
@@ -219,7 +219,6 @@ public class ClientUserFragment extends Fragment{
         View view = inflater.inflate(R.layout.dialog_changepass, null);
         progress = view.findViewById(R.id.progress);
         builder.setView(view);
-        builder.setTitle("Đổi mật khẩu mới");
         builder.setPositiveButton("Đổi", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
@@ -237,20 +236,30 @@ public class ClientUserFragment extends Fragment{
         dialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                tvMess = view.findViewById(R.id.tvMess);
                 edt_OldPassword = view.findViewById(R.id.inputOldPass);
                 edt_NewPassword = view.findViewById(R.id.inputNewPass);
+                edt_NewPasswordAgain = view.findViewById(R.id.inputNewPassAgain);
+
                 String old_password = edt_OldPassword.getText().toString();
                 String new_password = edt_NewPassword.getText().toString();
-                if (!old_password.isEmpty() && !new_password.isEmpty()) {
-                    if (true) {
-                        progress.setVisibility(View.VISIBLE);
-                        changePassword(old_password, new_password);
-                    } else {
-                        Toast.makeText(getActivity(), "Trùng mật khẩu!!", Toast.LENGTH_SHORT).show();
-                    }
+                String new_passwordAgain = edt_NewPasswordAgain.getText().toString();
 
-                } else {
-                    Toast.makeText(getActivity(), "Vui lòng nhập đầy đủ!!", Toast.LENGTH_SHORT).show();
+                if (new_password.equalsIgnoreCase(new_passwordAgain)){
+                    if (!old_password.isEmpty() && !new_password.isEmpty()) {
+                        tvMess.setVisibility(View.GONE);
+                        if (true) {
+                            progress.setVisibility(View.VISIBLE);
+                            changePassword(old_password, new_password);
+                        } else {
+                            Toast.makeText(getActivity(), "Trùng mật khẩu!!", Toast.LENGTH_SHORT).show();
+                        }
+
+                    } else {
+                        Toast.makeText(getActivity(), "Vui lòng nhập đầy đủ!!", Toast.LENGTH_SHORT).show();
+                    }
+                }else {
+                    tvMess.setVisibility(View.VISIBLE);
                 }
             }
         });
@@ -298,6 +307,7 @@ public class ClientUserFragment extends Fragment{
         tvEmail = view.findViewById(R.id.tvEmailClient);
         tvPhone = view.findViewById(R.id.tvPhoneClient);
         tvAddress = view.findViewById(R.id.tvAddressClient);
+
         lnchangInfo = view.findViewById(R.id.linearChangeInfo);
         lnchangPass = view.findViewById(R.id.linearChangePass);
         lnlogOut = view.findViewById(R.id.linearLogOut);

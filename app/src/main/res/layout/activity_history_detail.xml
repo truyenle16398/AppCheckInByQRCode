@@ -26,105 +26,151 @@
                         android:id="@+id/imageDetailHistory"
                         android:layout_width="match_parent"
                         android:layout_height="250dp"/>
+
                     <LinearLayout
-                        android:layout_marginLeft="15dp"
-                        android:paddingRight="5dp"
-                        android:paddingLeft="5dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
                         android:orientation="vertical"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                        android:paddingLeft="5dp"
+                        android:paddingRight="5dp">
+
                         <TextView
                             android:id="@+id/tvshowqrcode"
-                            android:background="@drawable/ripper"
-                            android:drawablePadding="-30dp"
-                            android:textColor="#000"
-                            android:gravity="center"
-                            android:drawableLeft="@drawable/ic_arrow_forward_black_24dp"
-                            android:text="@string/click_to_get_qrcode"
                             android:layout_width="match_parent"
-                            android:layout_height="40dp"/>
+                            android:layout_height="40dp"
+                            android:background="@drawable/ripper"
+                            android:drawableLeft="@drawable/ic_arrow_forward_black_24dp"
+                            android:drawablePadding="-30dp"
+                            android:gravity="center"
+                            android:text="@string/click_to_get_qrcode"
+                            android:textColor="#000" />
+
                         <Button
-                            android:layout_marginTop="10dp"
-                            android:layout_marginBottom="10dp"
-                            android:background="@drawable/ripple_effect_red"
                             android:id="@+id/btnRegisterDetailHistory"
                             android:layout_width="match_parent"
-                            android:layout_height="?actionBarSize"
+                            android:layout_height="match_parent"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginBottom="5dp"
+                            android:background="@drawable/ripple_effect_red"
                             android:text="@string/event_cancel"
                             android:textSize="22sp" />
                         <TextView
                             android:layout_marginBottom="5dp"
-                            android:drawablePadding="8dp"
+                            android:drawablePadding="5dp"
+                            android:gravity="center|left"
                             android:drawableLeft="@drawable/person1"
                             android:layout_marginTop="6dp"
                             android:layout_weight="5"
                             android:textStyle="bold"
                             android:textColor="#000"
-                            android:textSize="20dp"
+                            android:textSize="20sp"
+                            android:text="@string/event_chairman"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"/>
+
+                        <TextView
+                            android:layout_marginBottom="5dp"
+                            android:id="@+id/txtChairman"
+                            android:layout_marginTop="5dp"
+                            android:textColor="#000"
+                            android:layout_marginRight="20dp"
+                            android:layout_marginLeft="20dp"
+                            android:textSize="20sp"
+                            android:text="Teacher Huan Roses"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"/>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="5dp"
+                            android:layout_weight="5"
+                            android:gravity="center|left"
+                            android:drawableLeft="@drawable/timess"
+                            android:drawablePadding="5dp"
                             android:text="@string/event_date"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"/>
+                            android:textColor="#000"
+                            android:textSize="20sp"
+                            android:textStyle="bold" />
+
                         <TextView
-                            android:layout_marginBottom="5dp"
                             android:id="@+id/txtDateTimeStartHistory"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
                             android:layout_marginTop="5dp"
-                            android:textColor="#000"
-                            android:textSize="16sp"
+                            android:gravity="center|left"
+                            android:layout_marginRight="20dp"
+                            android:layout_marginLeft="20dp"
+                            android:layout_marginBottom="5dp"
                             android:text="20h00 - 21h00"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"/>
+                            android:textColor="#000"
+                            android:textSize="16sp" />
+
                         <TextView
-                            android:layout_marginBottom="5dp"
                             android:id="@+id/txtDateTimeEndHistory"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginRight="20dp"
+                            android:layout_marginLeft="20dp"
                             android:layout_marginTop="5dp"
-                            android:textColor="#000"
-                            android:textSize="16sp"
+                            android:layout_marginBottom="5dp"
+                            android:gravity="center|left"
                             android:text="Ngày 19 tháng 05 năm 2020"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"/>
+                            android:textColor="#000"
+                            android:textSize="16sp" />
+
                         <TextView
-                            android:layout_marginBottom="5dp"
-                            android:drawablePadding="8dp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
                             android:layout_marginTop="5dp"
+                            android:layout_marginBottom="5dp"
                             android:drawableLeft="@drawable/locations"
-                            android:textColor="#000"
-                            android:textSize="20dp"
-                            android:textStyle="bold"
+                            android:drawablePadding="5dp"
+                            android:gravity="center|left"
                             android:text="@string/event_address"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"/>
-                        <TextView
-                            android:layout_marginBottom="5dp"
-                            android:id="@+id/txtAddressInfoDetailHistory"
-                            android:layout_marginRight="30dp"
-                            android:layout_marginTop="5dp"
-                            android:textColor="#000"
-                            android:textSize="16sp"
-                            android:text="TÒA NHÀ B, TẦNG 5, 41 Lê Duẫn, Hải Châu, Đà Nẵng"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"/>
-                        <TextView
-                            android:layout_marginBottom="5dp"
-                            android:drawablePadding="8dp"
-                            android:layout_marginTop="5dp"
-                            android:drawableLeft="@drawable/article"
                             android:textColor="#000"
                             android:textSize="20dp"
-                            android:textStyle="bold"
-                            android:text="@string/event_detail"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"/>
+                            android:textStyle="bold" />
+
                         <TextView
-                            android:lineSpacingExtra="4dp"
-                            android:id="@+id/txtInfoDetailHistory"
-                            android:layout_marginRight="30dp"
-                            android:layout_marginTop="5dp"
-                            android:textColor="#000"
-                            android:textSize="16sp"
-                            android:text="Bphone B86 sở hữu thiết kế tối giản với viền đều và không có cằm, Bkav thiết kế Bphone B86 như một khối kính, biến Bphone B86 trở thành điện thoại hiếm hoi trên thị trường có màn hình đều và không có cằm, phần trán vốn là đặc trưng của Bphone 3 nay đã được thu gọn hợp lý hơn trên Bphone B86.Bphone B86 sở hữu thiết kế tối giản với viền đều và không có cằm, Bkav thiết kế Bphone B86 như một khối kính, biến Bphone B86 trở thành điện thoại hiếm hoi trên thị trường có màn hình đều và không có cằm, phần trán vốn là đặc trưng của Bphone 3 nay đã được thu gọn hợp lý hơn trên Bphone B86."
+                            android:id="@+id/txtAddressInfoDetailHistory"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"/>
+                            android:layout_height="match_parent"
+                            android:layout_marginTop="5dp"
+                            android:gravity="center|left"
+                            android:layout_marginRight="20dp"
+                            android:layout_marginLeft="20dp"
+                            android:layout_marginBottom="5dp"
+                            android:text="TÒA NHÀ B, TẦNG 5, 41 Lê Duẫn, Hải Châu, Đà Nẵng"
+                            android:textColor="#000"
+                            android:textSize="16sp" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:gravity="center|left"
+                            android:layout_marginBottom="5dp"
+                            android:drawableLeft="@drawable/article"
+                            android:drawablePadding="5dp"
+                            android:text="@string/event_detail"
+                            android:textColor="#000"
+                            android:textSize="20dp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/txtInfoDetailHistory"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginTop="5dp"
+                            android:gravity="center|left"
+                            android:layout_marginRight="20dp"
+                            android:layout_marginLeft="20dp"
+                            android:lineSpacingExtra="4dp"
+                            android:text="Bphone B86 sở hữu thiết kế tối giản với viền đều và không có cằm, Bkav thiết kế Bphone B86 như một khối kính, biến Bphone B86 trở thành điện thoại hiếm hoi trên thị trường có màn hình đều và không có cằm, phần trán vốn là đặc trưng của Bphone 3 nay đã được thu gọn hợp lý hơn trên Bphone B86.Bphone B86 sở hữu thiết kế tối giản với viền đều và không có cằm, Bkav thiết kế Bphone B86 như một khối kính, biến Bphone B86 trở thành điện thoại hiếm hoi trên thị trường có màn hình đều và không có cằm, phần trán vốn là đặc trưng của Bphone 3 nay đã được thu gọn hợp lý hơn trên Bphone B86."
+                            android:textColor="#000"
+                            android:textSize="16sp" />
 
 
                     </LinearLayout>

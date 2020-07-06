@@ -8,7 +8,7 @@ public class url {
 
     static String url = "http://events.sdc.click/api/";
     static String urlimg = "http://events.sdc.click/";
-    static String urlimgevent = "http://events.sdc.click/uploads/";
+    static String urlimgevent = "http://events.sdc.click/uploads/api/";
 
     public static String getUrl() {
         return url;

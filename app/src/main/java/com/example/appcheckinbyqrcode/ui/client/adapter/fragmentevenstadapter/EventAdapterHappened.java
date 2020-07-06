@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -114,7 +115,7 @@ public class EventAdapterHappened extends RecyclerView.Adapter<EventAdapterHappe
 //                .diskCacheStrategy(DiskCacheStrategy.NONE)
 //                .skipMemoryCache(true)
 //                .into(holder.avatar);
-        Picasso.get().load(urls).into(holder.avatar);
+        Picasso.get().load("https://i.pinimg.com/originals/e0/90/c6/e090c67add8c2a92a875be7eed526261.jpg").into(holder.avatar);
 
         holder.getData(items.get(position));
     }
@@ -128,7 +129,7 @@ public class EventAdapterHappened extends RecyclerView.Adapter<EventAdapterHappe
 
         public TextView name, intro, day, time, place;
         public ImageView avatar;
-        public CardView cardView;
+        public RelativeLayout cardView;
         public TextView imageButton3;
 
         public EventList_holder(View view) {

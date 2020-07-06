@@ -160,7 +160,7 @@ public class HistoryDetailActivity extends AppCompatActivity {
                         EventDetailResponse eventDetailResponse = messageResponse.getDetail();
                         String urls = url.getUrlimgevent()+ eventDetailResponse.getImage();
 //                        Log.d("nnn", "onNext: "+urls);
-                        Glide.with(getApplicationContext()).load(urls).into(imageDetail);
+                        Glide.with(getApplicationContext()).load("https://i.pinimg.com/originals/e0/90/c6/e090c67add8c2a92a875be7eed526261.jpg").into(imageDetail);
                         toolbar.setTitle(eventDetailResponse.getName());
                         txtDateTimeStart.setText(eventDetailResponse.getStart_time());
                         txtDateTimeEnd.setText(eventDetailResponse.getEnd_time());

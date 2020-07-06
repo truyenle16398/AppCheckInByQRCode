@@ -2,16 +2,15 @@ package com.example.appcheckinbyqrcode.ui.client.adapter.fragmentevenstadapter;
 
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.appcheckinbyqrcode.R;
@@ -59,7 +58,7 @@ public class EventAdapterGoingOn extends RecyclerView.Adapter<EventAdapterGoingO
 
     @Override
     public void onBindViewHolder(@NonNull EventList_holder holder, int position) {
-        String urls = url.getUrlimgevent() + items.get(position).getImage();
+        String urls = url.getUrlimg() + items.get(position).getImage();
         int id = Integer.parseInt(items.get(position).getId());
 
         myDatabaseHelper = new MyDatabaseHelper(context);
@@ -104,12 +103,13 @@ public class EventAdapterGoingOn extends RecyclerView.Adapter<EventAdapterGoingO
                     Toast.makeText(context, "Insert Successful", Toast.LENGTH_SHORT).show();
 
 
-
                 }
             }
         });
-        Picasso.get().load(urls)
+        Picasso.get().load("https://media.dalatcity.org/Images/LDG/haitra/Th%C3%A1ng3%C4%90%C3%A0L%E1%BA%A1tm%C6%A1m%C3%A0ngm%C3%B9aph%C6%B0%E1%BB%A3ngt%C3%ADm/thang-3-da-lat-mo-mang-mua-phuong-tim-8_636886709249315785.jpg")
                 .into(holder.avatar);
+//        Picasso.get().load(urls)
+//                .into(holder.avatar);
 //        Glide.with(context).load(urls).into(holder.avatar);
 //        Glide.with(context)
 //                .load(urls)
@@ -133,7 +133,7 @@ public class EventAdapterGoingOn extends RecyclerView.Adapter<EventAdapterGoingO
 
         public TextView name, intro, day, time, place;
         public ImageView avatar;
-        public CardView cardView;
+        public RelativeLayout cardView;
         public TextView imageButton1;
 
         public EventList_holder(View view) {

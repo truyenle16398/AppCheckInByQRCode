@@ -37,8 +37,9 @@
     <string name="phoneedit">Phone</string>
     <string name="addressedit">Address</string>
     <string name="change_password_dialog">Change Password</string>
-    <string name="hint_enter_old_pass">Enter Old Pass</string>
-    <string name="hint_enter_new_pass">Enter New Pass</string>
+    <string name="hint_enter_old_pass">Enter The Current Password</string>
+    <string name="hint_enter_new_pass">Enter New Password</string>
+    <string name="hint_enter_new_pass_again">Enter New Password Again</string>
     <string name="hint_question_dialog">Did you like this event?</string>
     <string name="hint_my_profile">MY PROFILE</string>
     <string name="logout">Logout</string>
@@ -56,7 +57,9 @@
     <string name="forgotyourpassword">Forget your password</string>
     <string name="setupnow">Set up now</string>
     <string name="click_to_get_qrcode">Click to get QR CODE</string>
-    <string name="search_something">Click the search icon to find the event name</string>
+    <string name="search_something">Enter event name to find the event name</string>
     <string name="search_something_hint">Enter event name to search</string>
     <string name="event">Events</string>
+    <string name="confirmation_password_again_does_not_match_the_password">Confirmation password again does not match the password</string>
+    <string name="profile_setting">Profile Setting</string>
 </resources>
