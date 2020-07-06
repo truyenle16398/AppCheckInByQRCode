@@ -2,6 +2,7 @@ package com.example.appcheckinbyqrcode.ui.client.adapter.fragmentevenstadapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -89,7 +90,7 @@ public class EventAdapterGoingOn extends RecyclerView.Adapter<EventAdapterGoingO
                     holder.imageButton1.setBackgroundResource(R.drawable.ic_favorite_border_red_24dp);
 
                     //Log.d(TAG, "Delete Successful: "+v.toString());
-                    Toast.makeText(context, "Thêm sự yêu thích thnàh công", Toast.LENGTH_LONG).show();
+                    Toast.makeText(context, "Thêm sự yêu thích thành công", Toast.LENGTH_LONG).show();
 
                 } else {
                     FavoriteList favoriteList = new FavoriteList(0, idevents, name, intro, chariman, image);
@@ -118,7 +119,6 @@ public class EventAdapterGoingOn extends RecyclerView.Adapter<EventAdapterGoingO
 //                .skipMemoryCache(true)
 //                .into(holder.avatar);
 //        Picasso.get().load(urls).into(holder.avatar);
-
         holder.getData(items.get(position));
 
     }
