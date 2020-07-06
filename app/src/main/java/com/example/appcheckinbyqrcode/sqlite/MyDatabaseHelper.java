@@ -218,6 +218,7 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
 //        db.execSQL("DELETE FROM "+TABLE_FAVORITE+" where TABLE_FAVORITE = " +id,null);
 
         return db.delete(TABLE_FAVORITE, COLUMN_FAVORITE_EVENT_ID + "=" + id, null) > 0;
+
     }
 
 }
