@@ -43,6 +43,7 @@
     <string name="hint_question_dialog">Did you like this event?</string>
     <string name="hint_my_profile">MY PROFILE</string>
     <string name="logout">Logout</string>
+    <string name="registered_event">Registered Event</string>
     <string name="going_on">Going On</string>
     <string name="going_on_happened">Going On Happen</string>
     <string name="happened">Happened</string>

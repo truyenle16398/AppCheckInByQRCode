@@ -4,7 +4,6 @@ import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.Html;
@@ -43,7 +42,7 @@ public class EventDetailActivity extends AppCompatActivity {
     ArrayList<FavoriteList> favoriteLists;
     FavoriteList favoritemodel;
     ImageView imageDetail;
-    TextView  txtDateTimeStart, txtDateTimeEnd, txtInfoDetail, txtAddressInfoDetail;
+    TextView txtDateTimeStart, txtDateTimeEnd, txtInfoDetail, txtAddressInfoDetail;
     Button btnRegisterDetail;
     Toolbar toolbar;
     private int id;
@@ -69,7 +68,7 @@ public class EventDetailActivity extends AppCompatActivity {
         myDatabaseHelper = new MyDatabaseHelper(this);
 //        myDatabaseHelper.getWritableDatabase();
         favoriteLists = new ArrayList<>();
-        favoritemodel = new FavoriteList(0, 0,null,null,null,null);
+        favoritemodel = new FavoriteList(0, 0, null, null, null, null);
         setSupportActionBar(toolbar);
         Drawable drawable = getResources().getDrawable(R.drawable.ic_arrow_while24dp);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -78,7 +77,6 @@ public class EventDetailActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         id = intent.getIntExtra("id", 0);
-
         getdata(id);
         onclick();
 
@@ -90,7 +88,7 @@ public class EventDetailActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 ProgressDialog dialog = new ProgressDialog(EventDetailActivity.this);
-                dialog.setMessage("please wait...");
+                dialog.setMessage("Vui lòng đợi...");
                 dialog.show();
                 ApiClient.getService().registerevent(id)
                         .subscribeOn(Schedulers.io())
@@ -106,7 +104,7 @@ public class EventDetailActivity extends AppCompatActivity {
                                 Toast.makeText(EventDetailActivity.this, messageResponse.getMessage(), Toast.LENGTH_SHORT).show();
 
                                 Log.d(TAG, messageResponse.getMessage());
-                                if(messageResponse.getMessage().equals("Mỗi người chỉ được phép đăng ký 1 lần thôi nhé!")){
+                                if (messageResponse.getMessage().equals("Mỗi người chỉ được phép đăng ký 1 lần thôi nhé!")) {
                                     Toast.makeText(EventDetailActivity.this, "Bạn đã đăng kí sự kiện này", Toast.LENGTH_SHORT).show();
                                     finish();
                                     dialog.dismiss();
@@ -178,7 +176,6 @@ public class EventDetailActivity extends AppCompatActivity {
                         image = eventDetailResponse.getImage();
 
 
-
                     }
 
                     @Override
@@ -203,7 +200,7 @@ public class EventDetailActivity extends AppCompatActivity {
         builder.setPositiveButton("Thich", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                FavoriteList favoriteList = new FavoriteList(0,idevents,name, intro, chariman, image);
+                FavoriteList favoriteList = new FavoriteList(0, idevents, name, intro, chariman, image);
                 myDatabaseHelper.insertFavorite(favoriteList);
 //                Log.d(TAG, "onNext: "+eventDetailResponse.toString());
 //                Log.d(TAG, "onNext1: "+id );
@@ -235,7 +232,7 @@ public class EventDetailActivity extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 Toast.makeText(EventDetailActivity.this, "okDelete", Toast.LENGTH_SHORT).show();
-                FavoriteList favoriteList = new FavoriteList(0,idevents,name, intro, chariman, image);
+                FavoriteList favoriteList = new FavoriteList(0, idevents, name, intro, chariman, image);
                 myDatabaseHelper.deleteFavoriteID(id);
 //                Log.d(TAG, "onNext: "+eventDetailResponse.toString());
 //                Log.d(TAG, "onNext1: "+id );

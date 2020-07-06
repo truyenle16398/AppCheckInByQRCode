@@ -30,6 +30,7 @@ import com.example.appcheckinbyqrcode.network.url;
 import com.example.appcheckinbyqrcode.ui.admin.fragment.AdminUserFragment;
 import com.example.appcheckinbyqrcode.ui.login.LoginActivity;
 import com.google.android.gms.common.api.Api;
+import com.squareup.picasso.Picasso;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import io.reactivex.Observer;
@@ -85,12 +86,12 @@ public class AdminUserFragment extends Fragment {
                         tvemail.setText(email);
                         tvphone.setText(phone);
                         tvaddress.setText(address);
-//                        Picasso.get().load(urls).into(circleimg);
-                        Glide.with(getActivity())
-                                .load(urls)
-                                .diskCacheStrategy(DiskCacheStrategy.NONE)
-                                .skipMemoryCache(true)
-                                .into(circleImageView);
+                        Picasso.get().load("https://i.pinimg.com/originals/e0/90/c6/e090c67add8c2a92a875be7eed526261.jpg").into(circleImageView);
+//                        Glide.with(getActivity())
+//                                .load(urls)
+//                                .diskCacheStrategy(DiskCacheStrategy.NONE)
+//                                .skipMemoryCache(true)
+//                                .into(circleImageView);
                     }
 
                     @Override

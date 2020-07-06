@@ -44,7 +44,7 @@ public class FavoriteEventFragment extends Fragment {
     RecyclerView mRCycMs;
     private FavoriteAdapter adapter;
     private List<Favorite> data;
-    TextView tvthongbao;
+    TextView tvthongbao, txtEvents;
     View view;
     LinearLayoutManager linearLayoutManager;
     public static Boolean  checkBack=true;
@@ -112,9 +112,11 @@ public class FavoriteEventFragment extends Fragment {
                     public void onNext(List<EventFavoriteResponse> eventFavoriteResponses) {
                         if (eventFavoriteResponses.toString().equals("[]")){
                             mRCycMs.setVisibility(View.GONE);
+                            txtEvents.setVisibility(View.GONE);
                             tvthongbao.setVisibility(View.VISIBLE);
                         } else {
                             mRCycMs.setVisibility(View.VISIBLE);
+                            txtEvents.setVisibility(View.VISIBLE);
                             tvthongbao.setVisibility(View.GONE);
 //                            Log.d("nnn", "onNext: "+eventFavoriteResponses.toString());
                             arrayList = (ArrayList<EventFavoriteResponse>) eventFavoriteResponses;
@@ -144,6 +146,7 @@ public class FavoriteEventFragment extends Fragment {
     private void InitWidget() {
         arrayList = new ArrayList<>();
         mRCycMs = view.findViewById(R.id.recyclerviewFavorite);
+        txtEvents = view.findViewById(R.id.txtEventss);
         tvthongbao = view.findViewById(R.id.tvthongbao_favorite);
         refreshLayout = view.findViewById(R.id.swipeRefreshLayout);
         refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {

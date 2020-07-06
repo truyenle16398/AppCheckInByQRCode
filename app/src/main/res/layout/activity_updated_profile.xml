@@ -23,7 +23,7 @@
                 android:id="@+id/updateImage"
                 android:orientation="vertical"
                 android:gravity="center"
-                android:background="@drawable/ripple_default"
+                android:background="#E8E6E6"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <de.hdodenhof.circleimageview.CircleImageView
@@ -39,15 +39,16 @@
                     android:src="@drawable/unnamed"
                     app:civ_border_color="#fff"
                     app:civ_border_width="4dp" />
-                <TextView
-                    android:padding="10dp"
-                    android:background="#90000000"
-                    android:textColor="#fff"
-                    android:gravity="center"
-                    android:text="@string/hint_your_touch_to_change"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
+
             </LinearLayout>
+            <TextView
+                android:padding="10dp"
+                android:background="#90555454"
+                android:textColor="#fff"
+                android:gravity="center"
+                android:text="@string/hint_your_touch_to_change"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
             <LinearLayout
                 android:id="@+id/updateName"
                 android:paddingRight="10dp"
