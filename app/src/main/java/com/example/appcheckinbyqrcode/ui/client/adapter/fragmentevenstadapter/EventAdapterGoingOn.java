@@ -123,7 +123,6 @@ public class EventAdapterGoingOn extends RecyclerView.Adapter<EventAdapterGoingO
 
     }
 
-
     @Override
     public int getItemCount() {
         return items.size();
