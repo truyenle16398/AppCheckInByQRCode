@@ -105,6 +105,16 @@ public class EventDetailActivity extends AppCompatActivity {
                             public void onNext(MessageResponse messageResponse) {
                                 Toast.makeText(EventDetailActivity.this, messageResponse.getMessage(), Toast.LENGTH_SHORT).show();
 
+                                Log.d(TAG, messageResponse.getMessage());
+                                if(messageResponse.getMessage().equals("Mỗi người chỉ được phép đăng ký 1 lần thôi nhé!")){
+                                    Toast.makeText(EventDetailActivity.this, "Bạn đã đăng kí sự kiện này", Toast.LENGTH_SHORT).show();
+                                    finish();
+                                    dialog.dismiss();
+                                } else {
+                                    Toast.makeText(EventDetailActivity.this, messageResponse.getMessage(), Toast.LENGTH_SHORT).show();
+                                    finish();
+                                    dialog.dismiss();
+                                }
                             }
 
                             @Override
@@ -114,8 +124,6 @@ public class EventDetailActivity extends AppCompatActivity {
 
                             @Override
                             public void onComplete() {
-                                finish();
-                                dialog.dismiss();
                                 if (home != null) {
                                     ;
                                     home.intents();

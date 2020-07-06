@@ -1,10 +1,17 @@
 package com.example.appcheckinbyqrcode.ui.login;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
+import android.Manifest;
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.text.Editable;
@@ -48,6 +55,7 @@ public class LoginActivity extends AppCompatActivity {
     TextInputLayout tilemail, tilpass;
     String email;
     String pass;
+    private int READ_STORAGE_PERMISSION_CODE = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +64,7 @@ public class LoginActivity extends AppCompatActivity {
         InitWidget();
         onClick();
         CheckLogin();
+        CheckPermission();
     }
 
     void onClick() {
@@ -242,11 +251,53 @@ public class LoginActivity extends AppCompatActivity {
         tvRegister = findViewById(R.id.tvRegister);
     }
 
-//    private boolean validateEmail(String email) {
-//        String emails = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@" + "[_A-Za-z0-9-]+(\\.[_A-Za-z0-9-]+)*(\\.[A-Za-z]{2,})$";
-//        Pattern pattern = Pattern.compile(emails);
-//        Matcher matcher = pattern.matcher(email);
-//        return matcher.matches();
-//    }
+    private void CheckPermission(){
+//        if (ContextCompat.checkSelfPermission(LoginActivity.this,
+//                Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED){
+//            Toast.makeText(this, "You have already granted this permission", Toast.LENGTH_SHORT).show();
+//        } else {
+//            Toast.makeText(this, "aaaaaaaaaaaaaaaaa", Toast.LENGTH_SHORT).show();
+//
+//        }
+//        requestStoragePermission();
+        ActivityCompat.requestPermissions(LoginActivity.this, new String[] {Manifest.permission.READ_EXTERNAL_STORAGE,Manifest.permission.CAMERA},READ_STORAGE_PERMISSION_CODE);
+        ActivityCompat.requestPermissions(LoginActivity.this, new String[] {Manifest.permission.CAMERA},2);;
+    }
 
+    private void requestStoragePermission() {
+        if (ActivityCompat.shouldShowRequestPermissionRationale(this,Manifest.permission.READ_EXTERNAL_STORAGE)){
+            new AlertDialog.Builder(this)
+                    .setTitle("Permission needed")
+                    .setMessage("This permission is needed because of this and that")
+                    .setPositiveButton("ok", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            ActivityCompat.requestPermissions(LoginActivity.this, new String[] {Manifest.permission.READ_EXTERNAL_STORAGE},READ_STORAGE_PERMISSION_CODE);
+                        }
+                    })
+                    .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            dialogInterface.dismiss();
+                        }
+                    })
+                    .create().show();
+        } else{
+            ActivityCompat.requestPermissions(this, new String[] {Manifest.permission.READ_EXTERNAL_STORAGE},READ_STORAGE_PERMISSION_CODE);
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == READ_STORAGE_PERMISSION_CODE){
+            if(grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
+//                Toast.makeText(this, "Permission granted", Toast.LENGTH_SHORT).show();
+            }
+        } else if (requestCode == 2){
+            if(grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
+//                Toast.makeText(this, "Permission granted", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
 }

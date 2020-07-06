@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">AppCheckInByQRCode</string>
+    <string name="app_name">Events App</string>
     <string name="backtologin">Quay về trang đăng nhập</string>
     <string name="getcode">Lấy mã code</string>
     <string name="forgot_password">Quên mật khẩu</string>
