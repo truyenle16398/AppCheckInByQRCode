@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.Html;
@@ -50,6 +51,8 @@ public class EventDetailActivity extends AppCompatActivity {
     private AlertDialog dialog;
     private static final String TAG = "nnn";
     private ProgressBar progress;
+
+    public static final String REC_DATA = "REC_DATA";
     public int idevents = 0;
     public String name = null;
     public String intro = null;
@@ -61,6 +64,7 @@ public class EventDetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_event_detail);
 //         home =  (OnIntent) EventDetailActivity.this.getBaseContext();
+
         InitWidget();
         myDatabaseHelper = new MyDatabaseHelper(this);
 //        myDatabaseHelper.getWritableDatabase();
@@ -99,6 +103,8 @@ public class EventDetailActivity extends AppCompatActivity {
 
                             @Override
                             public void onNext(MessageResponse messageResponse) {
+                                Toast.makeText(EventDetailActivity.this, messageResponse.getMessage(), Toast.LENGTH_SHORT).show();
+
                                 Log.d(TAG, messageResponse.getMessage());
                                 if(messageResponse.getMessage().equals("Mỗi người chỉ được phép đăng ký 1 lần thôi nhé!")){
                                     Toast.makeText(EventDetailActivity.this, "Bạn đã đăng kí sự kiện này", Toast.LENGTH_SHORT).show();

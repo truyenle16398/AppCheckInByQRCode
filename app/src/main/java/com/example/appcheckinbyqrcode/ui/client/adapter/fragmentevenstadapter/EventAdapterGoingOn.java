@@ -172,7 +172,6 @@ public class EventAdapterGoingOn extends RecyclerView.Adapter<EventAdapterGoingO
 //                    }
 //
 //
-//
 //                }
 //            });
 
@@ -185,7 +184,10 @@ public class EventAdapterGoingOn extends RecyclerView.Adapter<EventAdapterGoingO
             day.setText(ex.getStart_time());
             time.setText(ex.getEnd_time());
             place.setText(ex.getPlace());
+
         }
+
+
 
 
     }
