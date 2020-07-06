@@ -12,10 +12,12 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.Filter;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -91,6 +93,7 @@ public class EventFragment extends Fragment {
 
         adapterPager = new EventsClientPagerAdapter(getChildFragmentManager(), FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT, mTabLayoutEvent.getTabCount());
         pager.setAdapter(adapterPager);
+
 
         mTabLayoutEvent.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
