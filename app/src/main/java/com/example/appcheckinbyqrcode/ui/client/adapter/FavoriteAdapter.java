@@ -26,6 +26,10 @@ import com.example.appcheckinbyqrcode.sqlite.MyDatabaseHelper;
 import com.example.appcheckinbyqrcode.ui.client.HistoryDetailActivity;
 import com.example.appcheckinbyqrcode.ui.client.fragment.FavoriteEventFragment;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.Favorite_holder> {
@@ -55,9 +59,32 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.Favori
 //        String a = Resources.getSystem().getString(R.string.base_url);
         String urls = url.getUrlimgevent()+ items.get(position).getImage();
         Glide.with(context).load(urls).into(holder.photo);
+        Date datestart = null;
+        Date dateend = null;
+        try {
+            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            datestart = format.parse(items.get(position).getStartTime());
+            dateend = format.parse(items.get(position).getEndTime());
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        SimpleDateFormat formatter = new SimpleDateFormat("HH:mm dd-MM-yyyy");
+        SimpleDateFormat formatterDate = new SimpleDateFormat("dd-MM-yyyy");
+        SimpleDateFormat formatterTime = new SimpleDateFormat("HH:mm");
+        String day1 = formatterDate.format(datestart);
+        String day2 = formatterDate.format(dateend);
+        if (day1.equals(day2)){
+            holder.startdate.setText("Bắt đầu lúc: "+formatterTime.format(datestart)+" tới "+formatterTime.format(dateend));
+            holder.enddate.setText("Ngày: "+formatter.format(dateend));
+//            holder.check.setText("trùng ngày");
+        } else {
+            holder.startdate.setText("Bắt đầu từ: "+formatter.format(datestart));
+            holder.enddate.setText("Kết thúc lúc: "+formatter.format(dateend));
+//            holder.check.setText("không trùng ngày");
+        }
         holder.name.setText(items.get(position).getName());
-        holder.day.setText(items.get(position).getStartTime());
-        holder.persion.setText(items.get(position).getEndTime());
+//        holder.startdate.setText("Bắt đầu từ: "+formatter.format(datestart));
+//        holder.enddate.setText("Kết thúc lúc: "+formatter.format(dateend));
         if (items.get(position).getStatus() == 0) {
             holder.check.setText("Đã đăng ký");
         } else {
@@ -77,20 +104,18 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.Favori
     }
 
     public class Favorite_holder extends RecyclerView.ViewHolder {
-        public TextView name, persion, day, check;
+        public TextView name, enddate, startdate, check;
         public ImageView photo;
         public CardView cardView;
-        public LinearLayout idtest;
 
         public Favorite_holder(@NonNull View view) {
             super(view);
             name = view.findViewById(R.id.eventname_favorite);
-            day = view.findViewById(R.id.eventday_favorite);
-            persion = view.findViewById(R.id.eventpersonname_favorite);
+            startdate = view.findViewById(R.id.eventstartdate_favorite);
+            enddate = view.findViewById(R.id.eventenddate_favorite);
             check = view.findViewById(R.id.eventcheck_favorite);
             photo = view.findViewById(R.id.eventimage_favorite);
             cardView = view.findViewById(R.id.carr);
-            idtest = view.findViewById(R.id.idtest);
             cardView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

@@ -31,6 +31,7 @@ import com.example.appcheckinbyqrcode.network.response.MessageResponse;
 import com.example.appcheckinbyqrcode.network.url;
 import com.example.appcheckinbyqrcode.sqlite.MyDatabaseHelper;
 import com.example.appcheckinbyqrcode.ui.admin.model.FavoriteList;
+import com.example.appcheckinbyqrcode.ui.client.fragment.FavoriteEventFragment;
 
 import java.util.ArrayList;
 
@@ -119,6 +120,7 @@ public class EventDetailActivity extends AppCompatActivity {
                                     finish();
                                     dialog.dismiss();
                                 } else {
+                                    FavoriteEventFragment.checkBack = false;
                                     Toast.makeText(EventDetailActivity.this, messageResponse.getMessage(), Toast.LENGTH_SHORT).show();
                                     finish();
                                     dialog.dismiss();
