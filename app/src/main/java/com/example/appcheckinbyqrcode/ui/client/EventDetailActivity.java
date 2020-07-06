@@ -5,8 +5,10 @@ import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.Html;
+import android.text.method.LinkMovementMethod;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -42,7 +44,7 @@ public class EventDetailActivity extends AppCompatActivity {
     ArrayList<FavoriteList> favoriteLists;
     FavoriteList favoritemodel;
     ImageView imageDetail;
-    TextView txtDateTimeStart, txtDateTimeEnd, txtInfoDetail, txtAddressInfoDetail;
+    TextView txtDateTimeStart, txtDateTimeEnd, txtInfoDetail, txtAddressInfoDetail, txtChairman;
     Button btnRegisterDetail;
     Toolbar toolbar;
     private int id;
@@ -84,6 +86,14 @@ public class EventDetailActivity extends AppCompatActivity {
 
 
     private void onclick() {
+        txtChairman.setMovementMethod(LinkMovementMethod.getInstance());
+        txtChairman.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW);
+                browserIntent.setData(Uri.parse("http://www.google.com"));
+                startActivity(browserIntent);
+            }
+        });
         btnRegisterDetail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -257,6 +267,7 @@ public class EventDetailActivity extends AppCompatActivity {
     private void InitWidget() {
         toolbar = findViewById(R.id.toolbarDetail);
         imageDetail = findViewById(R.id.imageDetail);
+        txtChairman = findViewById(R.id.txtChairman);
         txtDateTimeStart = findViewById(R.id.txtDateTimeStart);
         txtDateTimeEnd = findViewById(R.id.txtDateTimeEnd);
         txtInfoDetail = findViewById(R.id.txtInfoDetail);
