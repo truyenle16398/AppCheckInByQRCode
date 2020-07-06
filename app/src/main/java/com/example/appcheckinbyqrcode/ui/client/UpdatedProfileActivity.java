@@ -209,7 +209,7 @@ public class UpdatedProfileActivity extends AppCompatActivity {
         if(name.equals(namea) && phone.equals(phonea) && address.equals(addressa)){
             Log.d("zzz", "changeInfo: chưa sửa info");
         } else {
-            ApiClient.getService().updateinfo(namea, phonea, addressa)
+            ApiClient.getService().updateinfo(emaila,namea, phonea, addressa)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(new Observer<UserResponse>() {

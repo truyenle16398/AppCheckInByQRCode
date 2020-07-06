@@ -24,62 +24,116 @@
                 android:layout_weight="2"
                 android:scaleType="centerCrop"
                 android:src="@drawable/loadingkhoa" />
-
             <LinearLayout
-                android:id="@+id/idtest"
-                android:weightSum="3"
-                android:layout_marginLeft="5dp"
-                android:orientation="vertical"
                 android:layout_weight="3"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/mRl"
+                android:layout_gravity="top|left"
+                android:layout_marginLeft="5dp"
+                android:orientation="vertical"
+                android:visibility="visible">
                 <TextView
                     android:layout_marginBottom="4dp"
                     android:textStyle="bold"
                     android:id="@+id/eventname_favorite"
                     android:gravity="center|left"
-                    android:textSize="20sp"
+                    android:textSize="17sp"
                     android:maxLines="2"
                     android:textColor="#000"
                     android:text="Tên sự kiện ở đây nè nha bạn"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
                 <TextView
-                    android:maxLines="1"
-                    android:layout_marginBottom="4dp"
-                    android:id="@+id/eventpersonname_favorite"
-                    android:gravity="center|left"
-                    android:drawablePadding="@dimen/_5sdp"
-                    android:drawableLeft="@drawable/time"
-                    android:textSize="12sp"
-                    android:textColor="#000"
-                    android:text="Diễn dã ở đây"
+                    android:id="@+id/eventintroHappened"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
-                <TextView
-                    android:maxLines="1"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_4sdp"
                     android:layout_marginBottom="4dp"
-                    android:id="@+id/eventday_favorite"
-                    android:gravity="center|left"
-                    android:drawablePadding="@dimen/_5sdp"
-                    android:drawableLeft="@drawable/time"
-                    android:textSize="12sp"
-                    android:textColor="#000"
-                    android:text="Ngày diễn ra ở đây"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
-                <TextView
-                    android:maxLines="1"
-                    android:layout_marginBottom="4dp"
-                    android:id="@+id/eventcheck_favorite"
-                    android:drawablePadding="@dimen/_5sdp"
-                    android:gravity="center|left"
-                    android:drawableLeft="@drawable/subscribe"
-                    android:textSize="12sp"
-                    android:textColor="#000"
-                    android:text="08:00 đến 17:00"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
+                    android:gravity="left"
+                    android:maxLines="2"
+                    android:text="Pool Party and Live Music AAAAA AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+                    android:textColor="@color/cam_"
+                    android:textSize="12sp" />
+
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="@dimen/_16sdp"
+                        android:layout_height="@dimen/_16sdp"
+                        android:layout_marginRight="@dimen/_10sdp"
+                        android:src="@drawable/ic_lich" />
+
+                    <TextView
+                        android:id="@+id/eventstartdate_favorite"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/_2sdp"
+                        android:layout_marginBottom="4dp"
+                        android:drawablePadding="5dp"
+                        android:gravity="center|left"
+                        android:singleLine="true"
+                        android:text="19-05-2020"
+                        android:textColor="@color/cam_"
+                        android:textSize="12sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_4sdp"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="@dimen/_16sdp"
+                        android:layout_height="@dimen/_16sdp"
+                        android:layout_marginRight="@dimen/_10sdp"
+                        android:src="@drawable/ic_lich" />
+
+                    <TextView
+                        android:id="@+id/eventenddate_favorite"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/_2sdp"
+                        android:layout_marginBottom="4dp"
+                        android:drawablePadding="5dp"
+                        android:gravity="center|left"
+                        android:singleLine="true"
+                        android:text="08:00 đến 17:00"
+                        android:textColor="@color/cam_"
+                        android:textSize="12sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_4sdp"
+                    android:layout_marginBottom="@dimen/_4sdp"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="@dimen/_16sdp"
+                        android:layout_height="@dimen/_16sdp"
+                        android:layout_marginRight="@dimen/_10sdp"
+                        android:src="@drawable/ic_map" />
+
+                    <TextView
+                        android:id="@+id/eventcheck_favorite"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/_2sdp"
+                        android:layout_marginBottom="4dp"
+                        android:drawablePadding="5dp"
+                        android:gravity="center|left"
+                        android:singleLine="true"
+                        android:text="41 Le Duan, Hai Chau, DN"
+                        android:textColor="@color/cam_"
+                        android:textSize="12sp" />
+                </LinearLayout>
             </LinearLayout>
         </LinearLayout>
 </androidx.cardview.widget.CardView>

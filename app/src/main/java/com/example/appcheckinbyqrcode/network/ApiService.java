@@ -62,8 +62,9 @@ public interface ApiService {
 
 
     //reset pass
-    @PUT("update_info")
-    Observable<UserResponse> updateinfo(@Query("name") String name,
+    @POST("update_info")
+    Observable<UserResponse> updateinfo(@Query("email") String email,
+                                        @Query("name") String name,
                                         @Query("phone") String phone,
                                         @Query("address") String address);
 
@@ -84,7 +85,7 @@ public interface ApiService {
     Observable<UploadAvatarResponse> updateAvatar(@Part MultipartBody.Part avatar);
 
     //doi mat khau
-    @PUT("update_pass")
+    @POST("update_pass")
     Observable<MessageResponse> updatepass(@Query("old_pass") String oldpass,
                                            @Query("new_pass") String newpass);
 
@@ -122,11 +123,11 @@ public interface ApiService {
     Observable<MessageResponse> registerevent(@Path("id") int id);
 
     //Hủy sự kiện
-    @PUT("event/cancel/{id}")
+    @POST("event/cancel/{id}")
     Observable<MessageResponse> cancelevent(@Path("id") int id);
 
     //Quét qr
-    @PUT("checkin/{id}")
+    @POST("checkin/{id}")
     Observable<MessageResponse> savecheckin(@Path("id") int id,@Query("code") String code);
 
 }
