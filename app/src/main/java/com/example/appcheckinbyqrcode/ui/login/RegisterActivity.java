@@ -92,17 +92,20 @@ public class RegisterActivity extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable s) {
-                if (s.toString().isEmpty()) {
-                    text_input_layout_name.setErrorEnabled(true);
-                    text_input_layout_name.setError("Trường này không bỏ trống");
-                }else if(CheckValidate.isValidSpecialCharacters(s)) {
-                    text_input_layout_name.setErrorEnabled(true);
-                    text_input_layout_name.setError("Tên không được chứa kí tự đặc biệt");
-                }else if(CheckValidate.isValidName(s)) {
+                if (!containsDigit(s.toString())){
+                    String b =  s.toString().replaceAll("0123456789","");
+                    if (b.isEmpty()) {
+                        text_input_layout_name.setErrorEnabled(true);
+                        text_input_layout_name.setError("Trường này không bỏ trống");
+                    }else if(CheckValidate.isValidSpecialCharacters(s)) {
+                        text_input_layout_name.setErrorEnabled(true);
+                        text_input_layout_name.setError("Tên không được chứa kí tự đặc biệt");
+                    } else {
+                        text_input_layout_name.setErrorEnabled(false);
+                    }
+                }else {
                     text_input_layout_name.setErrorEnabled(true);
                     text_input_layout_name.setError("Tên không được chứa số");
-                } else {
-                    text_input_layout_name.setErrorEnabled(false);
                 }
             }
         });
@@ -117,15 +120,7 @@ public class RegisterActivity extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable s) {
-                if (s.toString().isEmpty()) {
-                    text_input_layout_address.setErrorEnabled(true);
-                    text_input_layout_address.setError("Trường này không bỏ trống");
-                }else if(CheckValidate.isValidAddress(s)) {
-                    text_input_layout_address.setErrorEnabled(true);
-                    text_input_layout_address.setError("Địa chỉ không được chứa kí tự đặc biệt");
-                } else {
-                    text_input_layout_address.setErrorEnabled(false);
-                }
+                check(s);
             }
         });
         edtphone.addTextChangedListener(new TextWatcher() {
@@ -165,7 +160,7 @@ public class RegisterActivity extends AppCompatActivity {
             public void afterTextChanged(Editable s) {
                 String passwordonWrite = edtpass.getText().toString();
                 if (!CheckValidate.isPasswordValid(passwordonWrite)) {
-                    text_input_layout_pass.setError("Mật khẩu phải từ 6 đến 12 ký tự viết liền không dấu");
+                    text_input_layout_pass.setError("Mật khẩu phải từ 6 đến 12 kí tự");
                 } else if(passwordonWrite.isEmpty()){
                     text_input_layout_pass.setError("Trường này không bỏ trống");
                 }else if(CheckValidate.isValidSpecialCharacters(s)){
@@ -190,7 +185,7 @@ public class RegisterActivity extends AppCompatActivity {
             public void afterTextChanged(Editable s) {
                 String passconfirmonWrite = edtconfirmpass.getText().toString();
                 if (!CheckValidate.isPasswordValid(passconfirmonWrite)) {
-                    text_input_layout_passconfirm.setError("Mật khẩu phải từ 6 đến 12 ký tự viết liền không dấu");
+                    text_input_layout_passconfirm.setError("Mật khẩu phải từ 6 đến 12 kí tự");
                 } else if(passconfirmonWrite.isEmpty()){
                     text_input_layout_passconfirm.setError("Trường này không bỏ trống");
                 } else if(!edtpass.getText().toString().equals(passconfirmonWrite)){
@@ -232,7 +227,7 @@ public class RegisterActivity extends AppCompatActivity {
 //                    text_input_layout_pass.setError("Vui lòng nhập trường này");
 //                    text_input_layout_passconfirm.setError("Vui lòng nhập trường này");
                 } else if(text_input_layout_email.getError() != null || text_input_layout_name.getError() != null || text_input_layout_address.getError() != null
-                            || text_input_layout_phone.getError() != null || text_input_layout_pass.getError() != null || text_input_layout_passconfirm.getError() != null){
+                        || text_input_layout_phone.getError() != null || text_input_layout_pass.getError() != null || text_input_layout_passconfirm.getError() != null){
                 } else{
                     ProgressDialog pd = new ProgressDialog(RegisterActivity.this);
                     pd.setMessage("loading");
@@ -303,5 +298,34 @@ public class RegisterActivity extends AppCompatActivity {
         text_input_layout_passconfirm = findViewById(R.id.text_input_layout_passconfirm);
         text_input_layout_pass = findViewById(R.id.text_input_layout_pass);
         mLlRegister = findViewById(R.id.mLlRegister);
+    }
+
+    public final boolean containsDigit(String s) {
+        boolean containsDigit = false;
+        if (s != null && !s.isEmpty()) {
+            for (char c : s.toCharArray()) {
+                if (containsDigit = Character.isDigit(c)) {
+                    break;
+                }
+            }
+        }
+        return containsDigit;
+    }
+
+    void check(Editable s){
+        if (containsDigit(s.toString())){
+            String b = CheckValidate.replaceMultiple(s.toString(),"1","2","3","4","5","6","7","8","9","0"," ","-");
+            if (b.isEmpty()){
+                text_input_layout_address.setErrorEnabled(true);
+                text_input_layout_address.setError("Vui lòng nhập thêm chữ");
+            }else if (CheckValidate.isValidAddress(s)) {
+                text_input_layout_address.setErrorEnabled(true);
+                text_input_layout_address.setError("Địa chỉ không chứa ký tự đặc biệt");
+            }else{
+                text_input_layout_address.setErrorEnabled(false);
+            }
+        }else {
+            text_input_layout_address.setErrorEnabled(false);
+        }
     }
 }

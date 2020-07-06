@@ -24,7 +24,8 @@
     <string name="event_detail"><u>Event Detail</u></string>
     <string name="register_new_account"><u>Sign up</u></string>
     <string name="register_new_account0"><u>Dont have an account? </u></string>
-    <string name="already_account_back_to_login"><u>Already account Back to Login</u></string>
+    <string name="already_account_back_to_login0"><u>Already account </u></string>
+    <string name="already_account_back_to_login1"><u>Back to Login</u></string>
     <string name="yes">OK</string>
     <string name="no">Cancel</string>
     <string name="event_cancel">Event Cancel</string>

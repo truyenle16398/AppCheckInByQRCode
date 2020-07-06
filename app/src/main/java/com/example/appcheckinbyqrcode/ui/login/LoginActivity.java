@@ -18,6 +18,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.appcheckinbyqrcode.CheckValidate;
 import com.example.appcheckinbyqrcode.R;
 import com.example.appcheckinbyqrcode.network.ApiClient;
 import com.example.appcheckinbyqrcode.ui.admin.HomeAdminActivity;
@@ -42,9 +43,9 @@ import io.reactivex.schedulers.Schedulers;
 public class LoginActivity extends AppCompatActivity {
     Button btnLogin;
     TextView tvForgotPass, tvRegister;
-//    EditText edtEmail, edtPass;
-    TextInputEditText edtEmail,edtPass;
-    TextInputLayout tilemail,tilpass;
+    //    EditText edtEmail, edtPass;
+    TextInputEditText edtEmail, edtPass;
+    TextInputLayout tilemail, tilpass;
     String email;
     String pass;
 
@@ -177,20 +178,19 @@ public class LoginActivity extends AppCompatActivity {
             public void onTextChanged(CharSequence s, int start, int before, int count) {
 
             }
+
             @Override
             public void afterTextChanged(Editable s) {
                 email = edtEmail.getText().toString().trim();
-                if (isEmailValid(email))
-                {
-                    tilemail.setError(null);
-                }
-                else
-                {
-                    if (email.isEmpty()){
-                        tilemail.setError("Vui lòng nhập trường này");
+                if (!CheckValidate.isEmailValid(email)) {
+                    tilemail.setErrorEnabled(true);
+                    if (email.isEmpty()) {
+                        tilemail.setError("Trường này không bỏ trống");
                     } else {
                         tilemail.setError("Email sai định dạng");
                     }
+                } else {
+                    tilemail.setErrorEnabled(false);
                 }
             }
         });
@@ -204,15 +204,13 @@ public class LoginActivity extends AppCompatActivity {
             public void onTextChanged(CharSequence s, int start, int before, int count) {
 
             }
+
             @Override
             public void afterTextChanged(Editable s) {
                 pass = edtPass.getText().toString().trim();
-                if (isValidPassword(pass,true))
-                {
-                    tilpass.setError("Mật khẩu sai định dạng");
-                }
-                else
-                {
+                if (pass.isEmpty()) {
+                    tilpass.setError("Trường này không được bỏ trống");
+                } else {
                     tilpass.setError(null);
                 }
             }
@@ -251,37 +249,4 @@ public class LoginActivity extends AppCompatActivity {
 //        return matcher.matches();
 //    }
 
-    public boolean isEmailValid(String email)
-    {
-        String regExpn =
-                "^(([\\w-]+\\.)+[\\w-]+|([a-zA-Z]{1}|[\\w-]{2,}))@"
-                        +"((([0-1]?[0-9]{1,2}|25[0-5]|2[0-4][0-9])\\.([0-1]?"
-                        +"[0-9]{1,2}|25[0-5]|2[0-4][0-9])\\."
-                        +"([0-1]?[0-9]{1,2}|25[0-5]|2[0-4][0-9])\\.([0-1]?"
-                        +"[0-9]{1,2}|25[0-5]|2[0-4][0-9])){1}|"
-                        +"([a-zA-Z]+[\\w-]+\\.)+[a-zA-Z]{2,4})$";
-
-        CharSequence inputStr = email;
-        Pattern pattern = Pattern.compile(regExpn,Pattern.CASE_INSENSITIVE);
-        Matcher matcher = pattern.matcher(inputStr);
-
-        if(matcher.matches())
-            return true;
-        else
-            return false;
-    }
-
-    public boolean isValidPassword(String string, boolean allowSpecialChars){
-        String PATTERN;
-        if(allowSpecialChars){
-            //PATTERN = "((?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%]).{6,20})";
-            PATTERN = "^[a-zA-Z@#$%]\\w{5,19}$";
-        }else{
-            //PATTERN = "((?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{6,20})";
-            PATTERN = "^[a-zA-Z]\\w{5,19}$";
-        }
-        Pattern pattern = Pattern.compile(PATTERN);
-        Matcher matcher = pattern.matcher(string);
-        return matcher.matches();
-    }
 }

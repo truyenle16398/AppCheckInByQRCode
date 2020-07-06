@@ -45,7 +45,13 @@ public class CheckValidate {
         String validNumber = "^0[35789]{1}\\d{8}$";
         Pattern pattern = Pattern.compile(validNumber,Pattern.CASE_INSENSITIVE);
         Matcher matcher = pattern.matcher(number);
-        if (matcher.find()) {
+        String validNumber1 = "^(([+84]{3})|[84]{2})[35789]{1}\\d{8}$";
+        Pattern pattern1 = Pattern.compile(validNumber1,Pattern.CASE_INSENSITIVE);
+        Matcher matcher1 = pattern1.matcher(number);
+        String validNumber3 = "^[35789]{1}\\d{8}$";
+        Pattern pattern3 = Pattern.compile(validNumber3,Pattern.CASE_INSENSITIVE);
+        Matcher matcher3 = pattern3.matcher(number);
+        if (matcher.find() || matcher1.find() || matcher3.find()) {
             return true;
         }
         return false;
@@ -60,17 +66,23 @@ public class CheckValidate {
         return false;
     }
     public static boolean isValidSpecialCharacters(Editable s){
-        Pattern regex = Pattern.compile("[$&+,:;=\\\\?@#|/'<>.^*()%!-]");
+        Pattern regex = Pattern.compile("[$&+,:;=\\?@#|/'<>.^*()%!-~`•√ππ÷×¶∆\\}{°¢€£©®™✓]");
         if (regex.matcher(s).find()) {
             return true;
         }
         return false;
     }
     public static boolean isValidAddress(Editable s){
-        Pattern regex = Pattern.compile("[$&+:;=\\\\?@#|/'<>.^*()%!]");
+        Pattern regex = Pattern.compile("[$&+:;=\\?@#|/'<>.^*()%!~`•√ππ÷×¶∆\\}{°¢€£©®™✓]");
         if (regex.matcher(s).find()) {
             return true;
         }
         return false;
+    }
+    public static String replaceMultiple (String baseString, String ... replaceParts) {
+        for (String s : replaceParts) {
+            baseString = baseString.replaceAll(s, "");
+        }
+        return baseString;
     }
 }
