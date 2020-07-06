@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">AppCheckInByQRCode</string>
+    <string name="app_name">Events App</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="backtologin"><u>Back to login</u></string>
