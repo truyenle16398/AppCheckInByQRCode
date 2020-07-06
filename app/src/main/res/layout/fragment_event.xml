@@ -12,57 +12,31 @@
 
     <androidx.cardview.widget.CardView
         app:cardCornerRadius="20dp"
+        android:background="#BCBBC9"
         android:layout_margin="10dp"
         android:layout_width="match_parent"
         android:layout_height="50dp">
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-            <ImageView
-                android:id="@+id/mImgSeacr"
-                android:layout_marginLeft="8dp"
-                android:src="@drawable/ic_search"
-                android:layout_centerVertical="true"
-                android:layout_width="24dp"
-                android:layout_height="24dp"/>
-
-            <EditText
-                android:id="@+id/edtSearchView"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="7dp"
-                android:layout_marginRight="8dp"
-                android:layout_toRightOf="@+id/mImgSeacr"
-                android:background="@null"
-                android:gravity="center_vertical"
-                android:hint="@string/search_something"
-                android:singleLine="true"
-                android:textColor="@color/gray_100" />
-        </RelativeLayout>
-    </androidx.cardview.widget.CardView>
-
-
-    <androidx.appcompat.widget.Toolbar
-        android:visibility="gone"
-        android:id="@+id/toolbarSearchView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:background="#5257f2"
-        android:gravity="center">
-
-        <TextView
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbarSearchView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="30dp"
-            android:gravity="left"
-            android:text="@string/search_something"
-            android:textColor="#fff"
-            android:textStyle="bold">
+            android:layout_gravity="center|right"
+            android:background="#F6F3F3"
+            android:gravity="center">
 
-        </TextView>
-    </androidx.appcompat.widget.Toolbar>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="40dp"
+                android:gravity="left"
+                android:textColor="#EE57F3"
+                android:textStyle="bold">
+
+            </TextView>
+        </androidx.appcompat.widget.Toolbar>
+
+    </androidx.cardview.widget.CardView>
+
 
     <com.google.android.material.tabs.TabLayout
         android:layout_marginLeft="@dimen/_4sdp"
@@ -98,12 +72,11 @@
             android:layout_height="wrap_content"
             android:text="@string/happened" />
 
-
     </com.google.android.material.tabs.TabLayout>
 
     <View
         android:layout_marginTop="@dimen/_2sdp"
-        android:background="@color/cam"
+        android:background="@color/color4"
         android:layout_width="match_parent"
         android:layout_height="1dp"/>
 

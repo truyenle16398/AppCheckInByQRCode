@@ -122,7 +122,7 @@ public class ClientUserFragment extends Fragment{
                         Log.d(TAG, "onNext: " + urls);
 // Picasso.get().load(urls).into(circleimg);
                         Glide.with(getActivity())
-                                .load("https://i.pinimg.com/originals/e0/90/c6/e090c67add8c2a92a875be7eed526261.jpg")
+                                .load(urls)
                                 .diskCacheStrategy(DiskCacheStrategy.NONE)
                                 .skipMemoryCache(true)
                                 .into(circleimg);

@@ -7,7 +7,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
@@ -19,6 +21,7 @@ import com.example.appcheckinbyqrcode.R;
 import com.example.appcheckinbyqrcode.network.response.EventListResponse;
 import com.example.appcheckinbyqrcode.network.url;
 import com.example.appcheckinbyqrcode.sqlite.MyDatabaseHelper;
+import com.example.appcheckinbyqrcode.ui.admin.model.FavoriteList;
 import com.example.appcheckinbyqrcode.ui.client.EventDetailActivity;
 import com.squareup.picasso.Picasso;
 
@@ -28,9 +31,16 @@ import java.util.List;
 public class EventAdapterGoingOnHappen extends RecyclerView.Adapter<EventAdapterGoingOnHappen.EventList_holder> {
     private MyDatabaseHelper myDatabaseHelper;
     private static final String TAG = "nnn";
-    private List<EventListResponse> items= new ArrayList<>();
+    private List<EventListResponse> items = new ArrayList<>();
     private Context context;
     public boolean changgColorButon = true;
+    public int idevents = 0;
+    public String name = null;
+    public String intro = null;
+    public String chariman = null;
+    public String image = null;
+    ArrayList<FavoriteList> favoriteLists;
+    FavoriteList favoritemodel;
 
     public EventAdapterGoingOnHappen(List<EventListResponse> items, Context context) {
         this.items = items;
@@ -43,6 +53,8 @@ public class EventAdapterGoingOnHappen extends RecyclerView.Adapter<EventAdapter
         LayoutInflater inflater = LayoutInflater.from(context);
         View v = inflater.inflate(R.layout.item_event_goingon_happen_client, parent, false);
         EventAdapterGoingOnHappen.EventList_holder vholder = new EventAdapterGoingOnHappen.EventList_holder(v);
+        favoriteLists = new ArrayList<>();
+        favoritemodel = new FavoriteList(0, 0, null, null, null, null);
         return  vholder;
     }
 
@@ -50,26 +62,64 @@ public class EventAdapterGoingOnHappen extends RecyclerView.Adapter<EventAdapter
     public void onBindViewHolder(@NonNull EventAdapterGoingOnHappen.EventList_holder holder, int position) {
         String urls = url.getUrlimgevent() + items.get(position).getImage();
         int id = Integer.parseInt(items.get(position).getId());
+
         myDatabaseHelper = new MyDatabaseHelper(context);
         if (myDatabaseHelper.getFavoriteID(id) == 1) {
-            Log.d(TAG, "onBindViewHolder: id okkkkkkkkkk" + id);
             changgColorButon = true;
-            holder.imageButton2.setVisibility(View.VISIBLE);
             holder.imageButton2.setBackgroundResource(R.drawable.ic_favorite_red_24dp);
-//            Toast.makeText(context, "aaaa" + , Toast.LENGTH_SHORT).show();
         } else {
-            Log.d(TAG, "ttttttttttttttttttt: ");
-            changgColorButon = true;
-            holder.imageButton2.setVisibility(View.GONE);
-            holder.imageButton2.setBackgroundResource(R.drawable.ic_favorite_red_24dp);
+            changgColorButon = false;
+            holder.imageButton2.setBackgroundResource(R.drawable.ic_favorite_border_red_24dp);
         }
+        //delete favorite list
+        holder.imageButton2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int id = Integer.parseInt(items.get(position).getId());
+                idevents = Integer.parseInt(items.get(position).getId());
+                name = items.get(position).getName();
+                intro = items.get(position).getIntro();
+                chariman = items.get(position).getChairman();
+                image = items.get(position).getImage();
+
+
+                //myDatabaseHelper.deleteFavoriteID(id);
+                if (changgColorButon) {
+                    changgColorButon = false;
+                    FavoriteList favoriteList = new FavoriteList(0, idevents, name, intro, chariman, image);
+                    myDatabaseHelper.deleteFavoriteID(id);
+                    holder.imageButton2.setBackgroundResource(R.drawable.ic_favorite_border_red_24dp);
+
+                    //Log.d(TAG, "Delete Successful: "+v.toString());
+                    Toast.makeText(context, "Delete Successful", Toast.LENGTH_SHORT).show();
+
+                } else {
+                    FavoriteList favoriteList = new FavoriteList(0, idevents, name, intro, chariman, image);
+//                    Log.d(TAG, "onClick1: " + favoriteList.getName());
+//                    Log.d(TAG, "onClick1: " + favoriteList.getIdEvent());
+
+                    myDatabaseHelper.insertFavorite(favoriteList);
+                    changgColorButon = true;
+                    holder.imageButton2.setBackgroundResource(R.drawable.ic_favorite_red_24dp);
+                    //Log.d(TAG, "Delete Successful: "+v.toString());
+                    Toast.makeText(context, "Insert Successful", Toast.LENGTH_SHORT).show();
+
+
+                }
+            }
+        });
+        Picasso.get().load(urls)
+                .into(holder.avatar);
+//        Picasso.get().load(urls)
+//                .into(holder.avatar);
 //        Glide.with(context).load(urls).into(holder.avatar);
 //        Glide.with(context)
 //                .load(urls)
+//                .transform(new CenterCrop(),new RoundedCorners(25))
 //                .diskCacheStrategy(DiskCacheStrategy.NONE)
 //                .skipMemoryCache(true)
 //                .into(holder.avatar);
-        Picasso.get().load(urls).into(holder.avatar);
+//        Picasso.get().load(urls).into(holder.avatar);
 
         holder.getData(items.get(position));
     }
@@ -83,7 +133,7 @@ public class EventAdapterGoingOnHappen extends RecyclerView.Adapter<EventAdapter
 
         public TextView name, intro, day, time, place;
         public ImageView avatar;
-        public CardView cardView;
+        public RelativeLayout cardView;
         public TextView imageButton2;
 
         public EventList_holder(View view) {

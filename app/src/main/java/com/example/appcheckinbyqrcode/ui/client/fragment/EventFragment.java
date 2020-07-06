@@ -3,6 +3,7 @@ package com.example.appcheckinbyqrcode.ui.client.fragment;
 import android.animation.ArgbEvaluator;
 import android.app.SearchManager;
 import android.content.Context;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -20,6 +21,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
@@ -80,6 +82,7 @@ public class EventFragment extends Fragment {
     }
 
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -116,22 +119,22 @@ public class EventFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         myDatabaseHelper = new MyDatabaseHelper(getContext());
         favoriteLists = (ArrayList<FavoriteList>) myDatabaseHelper.getAllFavo();
-        edtSearchView.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                recyclerView.setVisibility(View.GONE);
-                filter((String) s);
-            }
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-            }
-            @Override
-            public void afterTextChanged(Editable s) {
-                recyclerView.setVisibility(View.VISIBLE);
-                filter(String.valueOf(s));
-                Log.d(TAG, "afterTextChanged: "+ s.toString());
-            }
-        });
+//        edtSearchView.addTextChangedListener(new TextWatcher() {
+//            @Override
+//            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+//                recyclerView.setVisibility(View.GONE);
+//                filter((String) s);
+//            }
+//            @Override
+//            public void onTextChanged(CharSequence s, int start, int before, int count) {
+//            }
+//            @Override
+//            public void afterTextChanged(Editable s) {
+//                recyclerView.setVisibility(View.VISIBLE);
+//                filter(String.valueOf(s));
+//                Log.d(TAG, "afterTextChanged: "+ s.toString());
+//            }
+//        });
 
     }
     private void filter(String text) {
@@ -245,6 +248,7 @@ public class EventFragment extends Fragment {
 
 
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     private void initWidget() {
         pager = view.findViewById(R.id.viewPagerEvent);
         mTabLayoutEvent = view.findViewById(R.id.tabLayoutEvent);
@@ -256,7 +260,8 @@ public class EventFragment extends Fragment {
         appCompatActivity.setSupportActionBar(toolbar);
         appCompatActivity.getSupportActionBar().setDisplayShowTitleEnabled(true);
         toolbar.setTitle("SDC");
-        edtSearchView = view.findViewById(R.id.edtSearchView);
+        toolbar.setTitleTextColor(getContext().getColor(R.color.color4));
+        //edtSearchView = view.findViewById(R.id.edtSearchView);
         toolbar.setSubtitle(null);
         recyclerView = view.findViewById(R.id.recycleViewSearch);
         layoutManager = new LinearLayoutManager(getActivity());

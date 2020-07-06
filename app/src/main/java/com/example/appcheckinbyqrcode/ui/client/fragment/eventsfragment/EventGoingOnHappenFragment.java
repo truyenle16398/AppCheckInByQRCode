@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
@@ -75,7 +76,7 @@ public class EventGoingOnHappenFragment extends Fragment {
                         } else {
                             txtEvent2.setVisibility(View.VISIBLE);
                             arrayList = (ArrayList<EventListResponse>) eventListResponses;
-                            mRCycMs.setLayoutManager(new LinearLayoutManager(getActivity()));
+                            mRCycMs.setLayoutManager(new GridLayoutManager(getActivity(), 2));
                             adapter = new EventAdapterGoingOnHappen(eventListResponses, getActivity());
                             mRCycMs.setAdapter(adapter);
                             dialog.dismiss();

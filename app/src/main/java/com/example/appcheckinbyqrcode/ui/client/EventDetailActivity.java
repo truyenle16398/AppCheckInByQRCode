@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.Html;
@@ -50,6 +51,8 @@ public class EventDetailActivity extends AppCompatActivity {
     private AlertDialog dialog;
     private static final String TAG = "nnn";
     private ProgressBar progress;
+
+    public static final String REC_DATA = "REC_DATA";
     public int idevents = 0;
     public String name = null;
     public String intro = null;
@@ -61,6 +64,7 @@ public class EventDetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_event_detail);
 //         home =  (OnIntent) EventDetailActivity.this.getBaseContext();
+
         InitWidget();
         myDatabaseHelper = new MyDatabaseHelper(this);
 //        myDatabaseHelper.getWritableDatabase();
@@ -100,6 +104,7 @@ public class EventDetailActivity extends AppCompatActivity {
                             @Override
                             public void onNext(MessageResponse messageResponse) {
                                 Toast.makeText(EventDetailActivity.this, messageResponse.getMessage(), Toast.LENGTH_SHORT).show();
+
                             }
 
                             @Override
@@ -151,7 +156,7 @@ public class EventDetailActivity extends AppCompatActivity {
                     public void onNext(MessageResponse messageResponse) {
                         EventDetailResponse eventDetailResponse = messageResponse.getDetail();
                         String urls = url.getUrlimgevent() + eventDetailResponse.getImage();
-                        Glide.with(getApplicationContext()).load("https://i.pinimg.com/originals/e0/90/c6/e090c67add8c2a92a875be7eed526261.jpg").into(imageDetail);
+                        Glide.with(getApplicationContext()).load(urls).into(imageDetail);
                         toolbar.setTitle(eventDetailResponse.getName());
                         txtDateTimeStart.setText(eventDetailResponse.getStart_time());
                         txtDateTimeEnd.setText(eventDetailResponse.getEnd_time());
