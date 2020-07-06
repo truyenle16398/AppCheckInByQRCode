@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">AppCheckInByQRCode</string>
+    <string name="app_name">Events App</string>
     <string name="backtologin">Quay về trang đăng nhập</string>
     <string name="getcode">Lấy mã code</string>
     <string name="forgot_password">Quên mật khẩu</string>
@@ -40,7 +40,7 @@
     <string name="hint_enter_new_pass">Nhập mật khẩu mới</string>
     <string name="hint_question_dialog">Bạn muốn thích sự kiện này</string>
     <string name="hint_my_profile">Hồ sơ cá nhân</string>
-    <string name="logout">Đăng Xuất</string>
+    <string name="logout">Đăng xuất</string>
     <string name="going_on">Sự kiện đang xảy ra</string>
     <string name="happened">Sự kiện đã xảy ra</string>
     <string name="going_on_happened">Sự kiện sắp xảy ra</string>
