@@ -158,7 +158,7 @@ public class EventDetailActivity extends AppCompatActivity {
                     public void onNext(MessageResponse messageResponse) {
                         EventDetailResponse eventDetailResponse = messageResponse.getDetail();
                         String urls = url.getUrlimgevent() + eventDetailResponse.getImage();
-                        Glide.with(getApplicationContext()).load("https://i.pinimg.com/originals/e0/90/c6/e090c67add8c2a92a875be7eed526261.jpg").into(imageDetail);
+                        Glide.with(getApplicationContext()).load(urls).into(imageDetail);
                         toolbar.setTitle(eventDetailResponse.getName());
                         txtDateTimeStart.setText(eventDetailResponse.getStart_time());
                         txtDateTimeEnd.setText(eventDetailResponse.getEnd_time());

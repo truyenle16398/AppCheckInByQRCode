@@ -91,7 +91,7 @@ public class EventAdapterHappened extends RecyclerView.Adapter<EventAdapterHappe
                     holder.imageButton3.setBackgroundResource(R.drawable.ic_favorite_border_red_24dp);
 
                     //Log.d(TAG, "Delete Successful: "+v.toString());
-                    Toast.makeText(context, "Delete Successful", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, "Delete successful", Toast.LENGTH_SHORT).show();
 
                 } else {
                     FavoriteList favoriteList = new FavoriteList(0, idevents, name, intro, chariman, image);
@@ -102,7 +102,7 @@ public class EventAdapterHappened extends RecyclerView.Adapter<EventAdapterHappe
                     changgColorButon = true;
                     holder.imageButton3.setBackgroundResource(R.drawable.ic_favorite_red_24dp);
                     //Log.d(TAG, "Delete Successful: "+v.toString());
-                    Toast.makeText(context, "Insert Successful", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, "Insert successful", Toast.LENGTH_SHORT).show();
 
 
 
@@ -115,7 +115,7 @@ public class EventAdapterHappened extends RecyclerView.Adapter<EventAdapterHappe
 //                .diskCacheStrategy(DiskCacheStrategy.NONE)
 //                .skipMemoryCache(true)
 //                .into(holder.avatar);
-        Picasso.get().load("https://i.pinimg.com/originals/e0/90/c6/e090c67add8c2a92a875be7eed526261.jpg").into(holder.avatar);
+        Picasso.get().load(urls).into(holder.avatar);
 
         holder.getData(items.get(position));
     }
