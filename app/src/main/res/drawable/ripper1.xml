@@ -3,7 +3,7 @@
     <item android:drawable="@drawable/border1">
         <shape
             android:shape="rectangle">
-            <solid android:color="#FEFEFF" />
+            <solid android:color="#D7D7DA" />
         </shape>
     </item>
 </ripple>
