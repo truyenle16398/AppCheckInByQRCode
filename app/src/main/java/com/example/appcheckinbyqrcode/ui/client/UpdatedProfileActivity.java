@@ -123,16 +123,6 @@ public class UpdatedProfileActivity extends AppCompatActivity {
 //                showdialog(tvName.getText().toString(),"Sửa tên?",tvName);
             }
         });
-        lnemail.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-//                inte.putExtra("title","Sửa email");
-//                inte.putExtra("edtnhan",tvName.getText().toString());
-//                inte.putExtra("check","email");
-//                startActivityForResult(inte, 9999);
-//                showdialog(tvEmail.getText().toString(),"Sửa email?",tvEmail);
-            }
-        });
         lnphone.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -75,7 +75,7 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.Favori
         String day2 = formatterDate.format(dateend);
         if (day1.equals(day2)){
             holder.startdate.setText("Bắt đầu lúc: "+formatterTime.format(datestart)+" tới "+formatterTime.format(dateend));
-            holder.enddate.setText("Ngày: "+formatter.format(dateend));
+            holder.enddate.setText("Ngày: "+day2);
 //            holder.check.setText("trùng ngày");
         } else {
             holder.startdate.setText("Bắt đầu từ: "+formatter.format(datestart));
@@ -95,12 +95,6 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.Favori
     @Override
     public int getItemCount() {
         return items.size();
-    }
-
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode==5555){
-            Log.d(TAG, "onActivityResult: okeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee");
-        }
     }
 
     public class Favorite_holder extends RecyclerView.ViewHolder {
@@ -124,7 +118,6 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.Favori
                     Intent intent = new Intent(context, HistoryDetailActivity.class);
                     intent.putExtra("idhistory",items.get(getAdapterPosition()).getEventId());
                     intent.putExtra("code",items.get(getAdapterPosition()).getCode());
-                    Log.d(TAG, "codeeeeeeeeeeeeeeeeeeeeeeeeeeee: "+items.get(getAdapterPosition()).getCode());
                     ((Activity) context).startActivityForResult(intent, FavoriteEventFragment.REQUEST_CODE_CANCEL);
 //                    context.startActivityForResult(intent, 5555);
 //                    context.startActivity(intent);

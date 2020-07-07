@@ -66,14 +66,14 @@ public class CheckValidate {
         return false;
     }
     public static boolean isValidSpecialCharacters(Editable s){
-        Pattern regex = Pattern.compile("[$&+,:;=\\?@#|/'<>.^*()%!-~`•√ππ÷×¶∆\\}{°¢€£©®™✓]");
+        Pattern regex = Pattern.compile("[$&+,:;=\\?@#|/'<>.^*()%!-]");//~`•√ππ÷×¶∆\}{°¢€£©®™✓
         if (regex.matcher(s).find()) {
             return true;
         }
         return false;
     }
     public static boolean isValidAddress(Editable s){
-        Pattern regex = Pattern.compile("[$&+:;=\\?@#|/'<>.^*()%!~`•√ππ÷×¶∆\\}{°¢€£©®™✓]");
+        Pattern regex = Pattern.compile("[$&+:;=\\?@#|/'<>.^*()%!]");//~`•√ππ÷×¶∆\}{°¢€£©®™✓
         if (regex.matcher(s).find()) {
             return true;
         }

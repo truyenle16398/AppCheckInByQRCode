@@ -25,7 +25,10 @@ import com.example.appcheckinbyqrcode.ui.admin.model.FavoriteList;
 import com.example.appcheckinbyqrcode.ui.client.EventDetailActivity;
 import com.squareup.picasso.Picasso;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class EventAdapterGoingOnHappen extends RecyclerView.Adapter<EventAdapterGoingOnHappen.EventList_holder> {
@@ -158,11 +161,33 @@ public class EventAdapterGoingOnHappen extends RecyclerView.Adapter<EventAdapter
 
         }
         void getData(EventListResponse ex){
-            // Log.d(TAG, "onBindViewHolder: "+ items.get(position).getEventname());
+            Date datestart = null;
+            Date dateend = null;
+            try {
+                SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                datestart = format.parse(ex.getStart_time());
+                dateend = format.parse(ex.getEnd_time());
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+            SimpleDateFormat formatter = new SimpleDateFormat("HH:mm dd-MM-yyyy");
+            SimpleDateFormat formatterDate = new SimpleDateFormat("dd-MM-yyyy");
+            SimpleDateFormat formatterTime = new SimpleDateFormat("HH:mm");
+            String day1 = formatterDate.format(datestart);
+            String day2 = formatterDate.format(dateend);
+            if (day1.equals(day2)){
+                day.setText(formatterTime.format(datestart)+" đến "+formatterTime.format(dateend));
+                time.setText("Ngày: "+day2);
+//            holder.check.setText("trùng ngày");
+            } else {
+                day.setText(formatter.format(datestart));
+                time.setText(formatter.format(dateend));
+//            holder.check.setText("không trùng ngày");
+            }
             name.setText(ex.getName());
             intro.setText(ex.getIntro());
-            day.setText(ex.getStart_time());
-            time.setText(ex.getEnd_time());
+//            day.setText(ex.getStart_time());
+//            time.setText(ex.getEnd_time());
             place.setText(ex.getPlace());
         }
     }

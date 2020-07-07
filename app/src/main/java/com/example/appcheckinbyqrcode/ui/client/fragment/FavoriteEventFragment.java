@@ -71,7 +71,6 @@ public class FavoriteEventFragment extends Fragment {
 
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        adapter.onActivityResult(requestCode, resultCode, data);
         if(requestCode == REQUEST_CODE_CANCEL) {
             if(resultCode==getActivity().RESULT_OK) {
                 Log.d("nnn", "onActivityResult goingiiiiiiiiiiiii ");
