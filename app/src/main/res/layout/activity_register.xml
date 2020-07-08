@@ -47,7 +47,7 @@
                     android:id="@+id/text_input_layout_email"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
-                <com.google.android.material.textfield.TextInputEditText
+                <com.google.android.material.textfield.TextInputEditTextv
                     android:drawablePadding="10dp"
                     android:drawableLeft="@drawable/ic_email_black_24dp"
                     android:id="@+id/inputEmail"
@@ -188,7 +188,7 @@
                     android:layout_height="50dp"
                     android:layout_gravity="center"
                     android:layout_marginTop="10dp"
-                    android:background="@drawable/buttonlogin"
+                    android:background="@drawable/ripple_effect"
                     android:text="@string/register"
                     android:textColor="#FFFFFF"
                     android:textSize="18sp" />
