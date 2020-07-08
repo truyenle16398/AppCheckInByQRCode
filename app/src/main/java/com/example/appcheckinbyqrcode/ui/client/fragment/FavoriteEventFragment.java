@@ -1,6 +1,5 @@
 package com.example.appcheckinbyqrcode.ui.client.fragment;
 
-import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -20,7 +19,6 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import com.example.appcheckinbyqrcode.R;
 import com.example.appcheckinbyqrcode.network.ApiClient;
 import com.example.appcheckinbyqrcode.network.response.EventFavoriteResponse;
-import com.example.appcheckinbyqrcode.ui.client.HistoryDetailActivity;
 import com.example.appcheckinbyqrcode.ui.client.adapter.FavoriteAdapter;
 import com.example.appcheckinbyqrcode.ui.client.model.Favorite;
 
@@ -37,7 +35,7 @@ import io.reactivex.schedulers.Schedulers;
  */
 public class FavoriteEventFragment extends Fragment {
 
-    public static final int REQUEST_CODE_CANCEL =5555;
+    public static final int REQUEST_CODE_CANCEL = 5555;
     ArrayList<EventFavoriteResponse> arrayList;
     ProgressDialog dialog;
     public static SwipeRefreshLayout refreshLayout;
@@ -47,10 +45,12 @@ public class FavoriteEventFragment extends Fragment {
     TextView tvthongbao, txtEvents;
     View view;
     LinearLayoutManager linearLayoutManager;
-    public static Boolean  checkBack=true;
+    public static Boolean checkBack = true;
+
     public FavoriteEventFragment() {
         // Required empty public constructor
     }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -71,12 +71,12 @@ public class FavoriteEventFragment extends Fragment {
 
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == REQUEST_CODE_CANCEL) {
-            if(resultCode==getActivity().RESULT_OK) {
+        if (requestCode == REQUEST_CODE_CANCEL) {
+            if (resultCode == getActivity().RESULT_OK) {
                 Log.d("nnn", "onActivityResult goingiiiiiiiiiiiii ");
-                int result = data.getIntExtra("EXTRA_DATA",0);
+                int result = data.getIntExtra("EXTRA_DATA", 0);
 //                removeitem(result);
-            }else {
+            } else {
                 Log.d("nnn", "eeeeeeeeeeeeeeeeeeeeeee ");
             }
         } else {
@@ -84,7 +84,7 @@ public class FavoriteEventFragment extends Fragment {
         }
     }
 
-    public void removeitem(int position){
+    public void removeitem(int position) {
         Log.d("nnn", "removeitem goingiiiiiiiiiiiii ");
         adapter.notifyDataSetChanged();
         arrayList.remove(position);
@@ -108,9 +108,10 @@ public class FavoriteEventFragment extends Fragment {
                     public void onSubscribe(Disposable d) {
 
                     }
+
                     @Override
                     public void onNext(List<EventFavoriteResponse> eventFavoriteResponses) {
-                        if (eventFavoriteResponses.toString().equals("[]")){
+                        if (eventFavoriteResponses.toString().equals("[]")) {
                             mRCycMs.setVisibility(View.GONE);
                             txtEvents.setVisibility(View.GONE);
                             tvthongbao.setVisibility(View.VISIBLE);
@@ -132,7 +133,7 @@ public class FavoriteEventFragment extends Fragment {
 
                     @Override
                     public void onError(Throwable e) {
-                        Log.d("nnn", "onError: "+e.getMessage());
+                        Log.d("nnn", "onError: " + e.getMessage());
                         dialog.dismiss();
                     }
 
@@ -149,21 +150,18 @@ public class FavoriteEventFragment extends Fragment {
         txtEvents = view.findViewById(R.id.txtEventss);
         tvthongbao = view.findViewById(R.id.tvthongbao_favorite);
         refreshLayout = view.findViewById(R.id.swipeRefreshLayout);
-        refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                getData();
-                refreshLayout.setRefreshing(false);
-            }
+        refreshLayout.setOnRefreshListener(() -> {
+            getData();
+            refreshLayout.setRefreshing(false);
         });
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        if (!checkBack){
-             getData();
-             checkBack=true;
+        if (!checkBack) {
+            getData();
+            checkBack = true;
         }
 
     }

@@ -13,7 +13,6 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-
         <RelativeLayout
             android:id="@+id/mRl"
             android:layout_width="match_parent"
@@ -25,18 +24,6 @@
                 android:id="@+id/eventavatarOnGoing"
                 android:layout_width="@dimen/_60sdp"
                 android:layout_height="@dimen/_60sdp"/>
-            <TextView
-                android:layout_alignParentRight="true"
-                android:layout_gravity="top|left"
-                android:layout_weight="1"
-                android:layout_marginBottom="2dp"
-                android:scaleType="centerCrop"
-                android:background="@drawable/ic_favorite_red_24dp"
-                android:id="@+id/txtImageFavorite1"
-                android:visibility="visible"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
-
             <TextView
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="@dimen/_2sdp"
@@ -51,6 +38,18 @@
                 android:text="Kiet's BirthDay Party at home, Kiet's BirthDay Party at home"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"/>
+
+            <TextView
+                android:layout_alignParentRight="true"
+                android:layout_gravity="top|left"
+                android:layout_weight="1"
+                android:layout_marginBottom="2dp"
+                android:scaleType="centerCrop"
+                android:background="@drawable/ic_favorite_red_24dp"
+                android:id="@+id/txtImageFavorite1"
+                android:visibility="visible"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
         </RelativeLayout>
         <LinearLayout
             android:layout_below="@+id/mRl"

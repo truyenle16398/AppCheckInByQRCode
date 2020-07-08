@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#fff"
     android:orientation="vertical"
     tools:context=".ui.client.fragment.ClientUserFragment">
 
@@ -53,20 +52,14 @@
                 android:textColor="#000"
                 android:textColorHint="#a8a8a8"
                 android:textSize="22sp" />
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginRight="20dp"
-                    android:background="@drawable/box_bg1"
-                    android:gravity="center|top"
-                    android:orientation="vertical"
-                    android:padding="4dp">
+            <androidx.cardview.widget.CardView
+                app:cardCornerRadius="20dp"
+                android:background="#9D9CA1"
+                android:layout_margin="@dimen/_10sdp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
                     <LinearLayout
-                        android:background="#8E6363"
                         android:layout_width="match_parent"
                         android:orientation="vertical"
                         android:layout_height="match_parent">
@@ -74,7 +67,7 @@
                             android:id="@+id/lineartitle"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:background="@drawable/ripper"
+                            android:background="@drawable/ripper1"
                             android:orientation="horizontal"
                             android:paddingLeft="10dp"
                             android:paddingTop="15dp"
@@ -233,7 +226,7 @@
                             android:id="@+id/linearChangePass"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:background="@drawable/ripper"
+                            android:background="@drawable/ripper1"
                             android:orientation="horizontal"
                             android:paddingLeft="10dp"
                             android:paddingTop="15dp"
@@ -266,7 +259,7 @@
                             android:id="@+id/linearChangeInfo"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:background="@drawable/ripper"
+                            android:background="@drawable/ripper1"
                             android:orientation="horizontal"
                             android:paddingLeft="10dp"
                             android:paddingTop="10dp"
@@ -299,7 +292,7 @@
                             android:id="@+id/linearLogOut"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:background="@drawable/ripple_while"
+                            android:background="@drawable/ripper1"
                             android:orientation="horizontal"
                             android:paddingLeft="10dp"
                             android:paddingTop="10dp"
@@ -326,16 +319,11 @@
                                 android:gravity="right"
                                 android:textSize="16sp" />
                         </LinearLayout>
-                    </LinearLayout>
 
+                </LinearLayout>
 
+            </androidx.cardview.widget.CardView>
 
-
-
-
-
-
-            </LinearLayout>
 
 
         </LinearLayout>

@@ -5,13 +5,16 @@ import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.Html;
+import android.text.method.LinkMovementMethod;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -30,6 +33,7 @@ import com.example.appcheckinbyqrcode.network.url;
 import com.example.appcheckinbyqrcode.sqlite.MyDatabaseHelper;
 import com.example.appcheckinbyqrcode.ui.admin.model.FavoriteList;
 import com.example.appcheckinbyqrcode.ui.client.fragment.FavoriteEventFragment;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -42,15 +46,18 @@ public class EventDetailActivity extends AppCompatActivity {
     MyDatabaseHelper myDatabaseHelper;
     ArrayList<FavoriteList> favoriteLists;
     FavoriteList favoritemodel;
-    ImageView imageDetail;
-    TextView txtDateTimeStart, txtDateTimeEnd, txtInfoDetail, txtAddressInfoDetail;
+    ImageView imageDetail,imageDetailFull;
+    FrameLayout showImageFull;
+    TextView txtDateTimeStart, txtDateTimeEnd, txtInfoDetail, txtAddressInfoDetail, txtChairman, tvbackdetail;
     Button btnRegisterDetail;
     Toolbar toolbar;
+    Toolbar toolbarDetailFull;
     private int id;
     private OnIntent home;
     private AlertDialog dialog;
     private static final String TAG = "nnn";
     private ProgressBar progress;
+
 
     public static final String REC_DATA = "REC_DATA";
     public int idevents = 0;
@@ -84,7 +91,43 @@ public class EventDetailActivity extends AppCompatActivity {
     }
 
 
+
     private void onclick() {
+
+        imageDetail.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showImageFull.setVisibility(View.VISIBLE);
+                Log.d(TAG, "onClick: "+v.toString());
+
+//                String urls = url.getUrlimgevent() + eventDetailResponse.getImage();
+
+
+            }
+        });
+        tvbackdetail.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showImageFull.setVisibility(View.GONE);
+            }
+        });
+
+
+
+        txtAddressInfoDetail.setText(Html.fromHtml(
+                "Location " +
+                        "<a href=\"http://maps.google.com/maps?q=1+Infinite+Loop,+Cupertino,+Santa+Clara,+California+95014\">" +
+                        "1 Infinite Loop, Cupertino, Santa Clara, California 95014" +
+                        "</a>"));
+        txtAddressInfoDetail.setMovementMethod(LinkMovementMethod.getInstance());
+        txtChairman.setMovementMethod(LinkMovementMethod.getInstance());
+        txtChairman.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW);
+                browserIntent.setData(Uri.parse("https://www.facebook.com/HuanHoaHongFan/"));
+                startActivity(browserIntent);
+            }
+        });
         btnRegisterDetail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -177,6 +220,8 @@ public class EventDetailActivity extends AppCompatActivity {
                         chariman = eventDetailResponse.getChairman();
                         image = eventDetailResponse.getImage();
 
+                        Glide.with(getApplicationContext()).load(urls).into(imageDetailFull);
+
 
                     }
 
@@ -258,7 +303,14 @@ public class EventDetailActivity extends AppCompatActivity {
 
     private void InitWidget() {
         toolbar = findViewById(R.id.toolbarDetail);
+        toolbarDetailFull = findViewById(R.id.toolbarDetailFull);
+
+        showImageFull = findViewById(R.id.showImageFull);
+        imageDetailFull = findViewById(R.id.imageDetailFull);
+        tvbackdetail = findViewById(R.id.tvbackdetail);
+
         imageDetail = findViewById(R.id.imageDetail);
+        txtChairman = findViewById(R.id.txtChairman);
         txtDateTimeStart = findViewById(R.id.txtDateTimeStart);
         txtDateTimeEnd = findViewById(R.id.txtDateTimeEnd);
         txtInfoDetail = findViewById(R.id.txtInfoDetail);
