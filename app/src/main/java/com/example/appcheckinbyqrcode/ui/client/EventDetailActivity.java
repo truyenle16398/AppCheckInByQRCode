@@ -195,6 +195,7 @@ public class EventDetailActivity extends AppCompatActivity {
     private void getdata(int i) {
         ProgressDialog dialog = new ProgressDialog(EventDetailActivity.this);
         dialog.setMessage("please wait...");
+        dialog.setCancelable(false);
         dialog.show();
         ApiClient.getService().detailevents(i).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
