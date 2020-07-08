@@ -132,7 +132,8 @@ public class EventDetailActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 ProgressDialog dialog = new ProgressDialog(EventDetailActivity.this);
-                dialog.setMessage("Vui lòng đợi...");
+                dialog.setMessage(getResources().getString(R.string.load));
+                dialog.setCancelable(false);
                 dialog.show();
                 ApiClient.getService().registerevent(id)
                         .subscribeOn(Schedulers.io())

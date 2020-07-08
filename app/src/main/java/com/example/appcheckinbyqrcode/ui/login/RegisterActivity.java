@@ -230,7 +230,7 @@ public class RegisterActivity extends AppCompatActivity {
                         || text_input_layout_phone.getError() != null || text_input_layout_pass.getError() != null || text_input_layout_passconfirm.getError() != null){
                 } else{
                     ProgressDialog pd = new ProgressDialog(RegisterActivity.this);
-                    pd.setMessage("loading");
+                    pd.setMessage(getResources().getString(R.string.load));
                     pd.setCancelable(false);
                     pd.show();
                     ApiClient.getService().register(email, name, address, phone, password, confirmpassword)
