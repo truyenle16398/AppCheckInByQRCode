@@ -63,4 +63,5 @@
     <string name="confirmation_password_again_does_not_match_the_password">" Xác nhận lại mật khẩu không khớp."</string>
     <string name="profile_setting">Thiết lập hồ sơ</string>
     <string name="registered_event">Sự kiện đã đăng ký</string>
+    <string name="load">Đang tải...</string>
 </resources>

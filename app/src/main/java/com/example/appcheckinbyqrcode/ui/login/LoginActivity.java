@@ -88,7 +88,7 @@ public class LoginActivity extends AppCompatActivity {
                     tilemail.setError(null);
                     tilpass.setError(null);
                     ProgressDialog pd = new ProgressDialog(LoginActivity.this);
-                    pd.setMessage("Loading");
+                    pd.setMessage(getResources().getString(R.string.load));
                     pd.setCancelable(false);
                     pd.show();
                     //code in here

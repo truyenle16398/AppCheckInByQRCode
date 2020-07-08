@@ -94,7 +94,7 @@ public class EventAdapterGoingOnHappen extends RecyclerView.Adapter<EventAdapter
                     holder.imageButton2.setBackgroundResource(R.drawable.ic_favorite_border_red_24dp);
 
                     //Log.d(TAG, "Delete Successful: "+v.toString());
-                    Toast.makeText(context, "Xoá sự yêu thích thành công", Toast.LENGTH_LONG).show();
+                    Toast.makeText(context, "Xoá sự kiện yêu thích thành công", Toast.LENGTH_LONG).show();
 
                 } else {
                     FavoriteList favoriteList = new FavoriteList(0, idevents, name, intro, chariman, image);
