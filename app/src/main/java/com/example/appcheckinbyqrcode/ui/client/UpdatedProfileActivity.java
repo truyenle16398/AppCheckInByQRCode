@@ -1,7 +1,9 @@
 package com.example.appcheckinbyqrcode.ui.client;
 
+import android.Manifest;
 import android.app.AlertDialog;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -25,6 +27,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.ActivityCompat;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
@@ -32,6 +35,7 @@ import com.example.appcheckinbyqrcode.R;
 import com.example.appcheckinbyqrcode.network.ApiClient;
 import com.example.appcheckinbyqrcode.network.response.UploadAvatarResponse;
 import com.example.appcheckinbyqrcode.network.response.UserResponse;
+import com.example.appcheckinbyqrcode.ui.login.LoginActivity;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -96,21 +100,13 @@ public class UpdatedProfileActivity extends AppCompatActivity {
         circleimg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Intent intent = new Intent();
-//                intent.setType("image/*");
-//                intent.setAction(Intent.ACTION_GET_CONTENT);
-//                startActivityForResult(Intent.createChooser(intent, "Select Picture"), 1);
-                Intent intent = new Intent(Intent.ACTION_PICK);
-                intent.setType("image/*");
-                startActivityForResult(intent, 1);
+                ActivityCompat.requestPermissions(UpdatedProfileActivity.this, new String[] {Manifest.permission.READ_EXTERNAL_STORAGE,Manifest.permission.CAMERA},1010);
             }
         });
         lnimg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Intent.ACTION_PICK);
-                intent.setType("image/*");
-                startActivityForResult(intent, 1);
+                ActivityCompat.requestPermissions(UpdatedProfileActivity.this, new String[] {Manifest.permission.READ_EXTERNAL_STORAGE,Manifest.permission.CAMERA},1010);
             }
         });
         lnname.setOnClickListener(new View.OnClickListener() {
@@ -121,16 +117,6 @@ public class UpdatedProfileActivity extends AppCompatActivity {
                 inte.putExtra("check", "name");
                 startActivityForResult(inte, 9999);
 //                showdialog(tvName.getText().toString(),"Sửa tên?",tvName);
-            }
-        });
-        lnemail.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-//                inte.putExtra("title","Sửa email");
-//                inte.putExtra("edtnhan",tvName.getText().toString());
-//                inte.putExtra("check","email");
-//                startActivityForResult(inte, 9999);
-//                showdialog(tvEmail.getText().toString(),"Sửa email?",tvEmail);
             }
         });
         lnphone.setOnClickListener(new View.OnClickListener() {
@@ -186,6 +172,18 @@ public class UpdatedProfileActivity extends AppCompatActivity {
                 break;
             default:
                 break;
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == 1010){
+            if(grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
+                Intent intent = new Intent(Intent.ACTION_PICK);
+                intent.setType("image/*");
+                startActivityForResult(intent, 1);
+            }
         }
     }
 

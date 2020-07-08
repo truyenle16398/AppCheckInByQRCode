@@ -28,6 +28,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.appcheckinbyqrcode.CheckValidate;
 import com.example.appcheckinbyqrcode.R;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
@@ -71,83 +72,58 @@ public class ChangeActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                checkedt();
+            public void onTextChanged(CharSequence s, int start, int before, int count){
             }
 
             @Override
             public void afterTextChanged(Editable s) {
-
+            checkedt(s);
             }
         });
     }
 
-    private void checkedt() {
+    private void checkedt(Editable s) {
         String edt = editText.getText().toString();
         if (check.equals("name")){
-            if (edt.isEmpty()) {
-                inputLayout.setError("Vui lòng nhập trường này");
-            } else {
-                inputLayout.setError(null);
-            }
-        } else if (check.equals("email")){
-            if (edt.isEmpty()){
-                inputLayout.setError("Vui lòng nhập trường này");
-            } else if (!validateEmail(edt)){
-                inputLayout.setError("Sai định dạng");
-            } else {
-                inputLayout.setError(null);
+            if (!containsDigit(edt)){
+                String b =  s.toString().replaceAll("0123456789","");
+                if (b.isEmpty()) {
+                    inputLayout.setErrorEnabled(true);
+                    inputLayout.setError("Trường này không bỏ trống");
+                }else if(CheckValidate.isValidSpecialCharacters(s)) {
+                    inputLayout.setErrorEnabled(true);
+                    inputLayout.setError("Tên không được chứa kí tự đặc biệt");
+                } else {
+                    inputLayout.setErrorEnabled(false);
+                }
+            }else {
+                inputLayout.setErrorEnabled(true);
+                inputLayout.setError("Tên không được chứa số");
             }
         } else if (check.equals("phone")){
-            if (edt.isEmpty()){
-                inputLayout.setError("Vui lòng nhập trường này");
-            } else if (!    isValidPhoneNumber(edt)){
-                inputLayout.setError("Sai định dạng");
+            if (edt.isEmpty()) {
+                inputLayout.setErrorEnabled(true);
+                inputLayout.setError("Trường này không bỏ trống");
+            } else if (!CheckValidate.isValidPhoneNumber(edt)){
+                inputLayout.setError("Số điện thoại sai định dạng");
             } else {
-                inputLayout.setError(null);
+                inputLayout.setErrorEnabled(false);
             }
         } else {
-            if (edt.isEmpty()){
-                inputLayout.setError("Vui lòng nhập trường này");
-            } else {
-                inputLayout.setError(null);
-            }
+            check(s);
         }
     }
 
-    private void setresult(String edt){
+
+    private void setresult(){
         if (check.equals("name")){
-            if (edt.isEmpty()) {
-                inputLayout.setError("Vui lòng nhập trường này");
-            } else {
-                inputLayout.setError(null);
-                result("name");
-            }
+            result("name");
         } else if (check.equals("email")){
-            if (edt.isEmpty()){
-                inputLayout.setError("Vui lòng nhập trường này");
-            } else if (!validateEmail(edt)){
-                inputLayout.setError("Sai định dạng");
-            } else {
-                inputLayout.setError(null);
-                result("email");
-            }
+            result("email");
         } else if (check.equals("phone")){
-            if (edt.isEmpty()){
-                inputLayout.setError("Vui lòng nhập trường này");
-            } else if (!isValidPhoneNumber(edt)){
-                inputLayout.setError("Sai định dạng");
-            } else {
-                inputLayout.setError(null);
-                result("phone");
-            }
+            result("phone");
         } else {
-            if (edt.isEmpty()){
-                inputLayout.setError("Vui lòng nhập trường này");
-            } else {
-                inputLayout.setError(null);
-                result("address");
-            }
+            result("address");
         }
     }
 
@@ -157,23 +133,6 @@ public class ChangeActivity extends AppCompatActivity {
         intent.putExtra("edttrave",editText.getText().toString());
         setResult(RESULT_OK, intent);
         finish();
-    }
-
-
-    public boolean isValidPhoneNumber(String number)
-    {
-        String validNumber = "^[+]?[0-9]{8,15}$";
-        if (number.matches(validNumber)) {
-            return true;
-        }
-        return false;
-    }
-
-    private boolean validateEmail(String email) {
-        String emails = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@" + "[_A-Za-z0-9-]+(\\.[_A-Za-z0-9-]+)*(\\.[A-Za-z]{2,})$";
-        Pattern pattern = Pattern.compile(emails);
-        Matcher matcher = pattern.matcher(email);
-        return matcher.matches();
     }
 
     @Override
@@ -191,7 +150,9 @@ public class ChangeActivity extends AppCompatActivity {
                 hideKeyboard(this);
                 return true;
             case R.id.changeok:
-                setresult(editText.getText().toString());
+                if (inputLayout.getError()==null){
+                    setresult();
+                }
                 hideKeyboard(this);
             default:
                 break;
@@ -208,5 +169,34 @@ public class ChangeActivity extends AppCompatActivity {
             view = new View(activity);
         }
         imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+    }
+
+    public final boolean containsDigit(String s) {
+        boolean containsDigit = false;
+        if (s != null && !s.isEmpty()) {
+            for (char c : s.toCharArray()) {
+                if (containsDigit = Character.isDigit(c)) {
+                    break;
+                }
+            }
+        }
+        return containsDigit;
+    }
+
+    void check(Editable s){
+        if (containsDigit(s.toString())){
+            String b = CheckValidate.replaceMultiple(s.toString(),"1","2","3","4","5","6","7","8","9","0"," ","-");
+            if (b.isEmpty()){
+                inputLayout.setErrorEnabled(true);
+                inputLayout.setError("Vui lòng nhập thêm chữ");
+            }else if (CheckValidate.isValidAddress(s)) {
+                inputLayout.setErrorEnabled(true);
+                inputLayout.setError("Địa chỉ không chứa ký tự đặc biệt");
+            }else{
+                inputLayout.setErrorEnabled(false);
+            }
+        }else {
+            inputLayout.setErrorEnabled(false);
+        }
     }
 }

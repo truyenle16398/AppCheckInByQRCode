@@ -99,6 +99,7 @@ public class ClientUserFragment extends Fragment{
     }
 
     private void getinfo() {
+
         ApiClient.getService().showinfo()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -107,7 +108,6 @@ public class ClientUserFragment extends Fragment{
                     public void onSubscribe(Disposable d) {
 
                     }
-
                     @Override
                     public void onNext(UserResponse userResponse) {
                         name = userResponse.getName();
