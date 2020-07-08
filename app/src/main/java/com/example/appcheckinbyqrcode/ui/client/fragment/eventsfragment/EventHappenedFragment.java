@@ -58,6 +58,7 @@ public class EventHappenedFragment extends Fragment {
     private void getdata() {
         ProgressDialog dialog = new ProgressDialog(getActivity());
         dialog.setMessage("please wait...");
+        dialog.setCancelable(false);
         dialog.show();
         ApiClient.getService().listleventhappened().subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

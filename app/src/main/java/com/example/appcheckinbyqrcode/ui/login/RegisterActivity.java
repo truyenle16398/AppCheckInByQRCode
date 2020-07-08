@@ -231,6 +231,7 @@ public class RegisterActivity extends AppCompatActivity {
                 } else{
                     ProgressDialog pd = new ProgressDialog(RegisterActivity.this);
                     pd.setMessage("loading");
+                    pd.setCancelable(false);
                     pd.show();
                     ApiClient.getService().register(email, name, address, phone, password, confirmpassword)
                             .subscribeOn(Schedulers.io())

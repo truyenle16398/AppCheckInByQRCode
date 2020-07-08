@@ -46,7 +46,6 @@ import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 
-;
 
 public class UpdatedProfileActivity extends AppCompatActivity {
 
