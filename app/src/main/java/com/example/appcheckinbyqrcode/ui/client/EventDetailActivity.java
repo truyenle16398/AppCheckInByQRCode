@@ -222,8 +222,6 @@ public class EventDetailActivity extends AppCompatActivity {
                         image = eventDetailResponse.getImage();
 
                         Glide.with(getApplicationContext()).load(urls).into(imageDetailFull);
-
-
                     }
 
                     @Override
