@@ -67,7 +67,7 @@ public class EventGoingOnFragment extends Fragment {
 
     private void getdata() {
         ProgressDialog dialog = new ProgressDialog(getActivity());
-        dialog.setMessage("please wait...");
+        dialog.setMessage("Vui lòng đợi...");
         dialog.setCancelable(false);
         dialog.show();
         ApiClient.getService().listleventgoingon().subscribeOn(Schedulers.io())

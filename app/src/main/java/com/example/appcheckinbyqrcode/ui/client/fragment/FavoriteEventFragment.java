@@ -98,7 +98,7 @@ public class FavoriteEventFragment extends Fragment {
 
     public void getData() {
         dialog = new ProgressDialog(getActivity());
-        dialog.setMessage("loading...");
+        dialog.setMessage("Vui lòng đợi...");
         dialog.setCancelable(false);
         dialog.show();
         ApiClient.getService().listhistoryregis().subscribeOn(Schedulers.io())
