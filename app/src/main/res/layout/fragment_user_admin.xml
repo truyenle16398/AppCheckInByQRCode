@@ -11,182 +11,277 @@
         android:id="@+id/swipeRefreshLayoutadminUser"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        <ScrollView
+        <LinearLayout
+            android:background="#F1EFEF"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-            <LinearLayout
-                android:visibility="visible"
+            android:layout_height="match_parent"
+            android:gravity="top|center"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/myprofileadmin"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center|top"
-                android:orientation="vertical">
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:gravity="center"
+                android:text="@string/hint_my_profile"
+                android:textColor="#3E3D3D"
+                android:textSize="30sp"
+                android:textStyle="bold" />
 
-                <TextView
-                    android:id="@+id/myprofileadmin"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="40dp"
-                    android:gravity="center"
-                    android:text="@string/my_profile_admin"
-                    android:textColor="#000"
-                    android:textSize="30dp"
-                    android:textStyle="bold" />
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/profilePicadmin"
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:layout_marginTop="15dp"
+                android:clickable="true"
+                android:elevation="6dp"
+                android:foreground="@drawable/my_selector_circleimage"
+                android:src="@drawable/unnamed"
+                app:civ_border_color="#fff"
+                app:civ_border_width="4dp" />
 
-                <de.hdodenhof.circleimageview.CircleImageView
-                    android:id="@+id/profilePicadmin"
-                    android:layout_width="200dp"
-                    android:layout_height="200dp"
-                    android:layout_marginTop="20dp"
-                    android:clickable="true"
-                    android:elevation="6dp"
-                    android:src="@drawable/unnamed"
-                    app:civ_border_color="#fff"
-                    app:civ_border_width="4dp" />
-                <TextView
-                    android:id="@+id/tvNameAdmin"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:gravity="center"
-                    android:text="Quách Hồng Khoa"
-                    android:textColor="#000"
-                    android:textColorHint="#a8a8a8"
-                    android:textSize="22sp" />
+            <TextView
+                android:id="@+id/tvNameAdmin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:gravity="center"
+                android:text="Quách Hồng Khoa"
+                android:textColor="#000"
+                android:textColorHint="#a8a8a8"
+                android:textSize="22sp" />
+            <androidx.cardview.widget.CardView
+                app:cardCornerRadius="20dp"
+                android:layout_margin="@dimen/_10sdp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
                 <LinearLayout
+                    android:background="@drawable/border_fagment_user"
+                    android:visibility="visible"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginLeft="25dp"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginRight="25dp"
-                    android:layout_marginBottom="50dp"
-                    android:padding="10dp"
-                    android:background="#FAF6F6"
-                    android:gravity="center|top"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:layout_height="match_parent">
                     <LinearLayout
-                        android:layout_marginBottom="20dp"
-                        android:background="@drawable/ripper1"
-                        android:paddingLeft="10dp"
-                        android:paddingRight="20dp"
-                        android:paddingBottom="7dp"
-                        android:paddingTop="7dp"
-                        android:weightSum="4"
-                        android:orientation="horizontal"
+                        android:visibility="gone"
+                        android:id="@+id/lineartitle"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/ripper"
+                        android:orientation="horizontal"
+                        android:paddingLeft="10dp"
+                        android:paddingTop="15dp"
+                        android:paddingRight="10dp"
+                        android:paddingBottom="10dp"
+                        android:weightSum="4">
                         <TextView
-                            android:layout_weight="1"
-                            android:text="@string/emailedit"
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
+                            android:layout_weight="4"
+                            android:gravity="center"
+                            android:singleLine="true"
+                            android:text="@string/profile_setting"
+                            android:textColor="#000"
+                            android:textSize="22sp" />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/ripper"
+                        android:orientation="horizontal"
+                        android:paddingStart="10dp"
+                        android:paddingTop="10dp"
+                        android:paddingEnd="20dp"
+                        android:paddingBottom="10dp"
+                        android:weightSum="5">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
                             android:gravity="left"
+                            android:text="@string/emailedit"
                             android:textColor="#000"
                             android:textColorHint="#a8a8a8"
                             android:textSize="15sp" />
+
                         <TextView
                             android:id="@+id/tvEmailAdmin"
-                            android:layout_weight="3"
-                            android:text="quachhongkhoa.it@gmail.com"
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
+                            android:layout_weight="4"
                             android:gravity="right"
+                            android:text="quachhongkhoa.it@gmail.com"
                             android:textColor="#000"
                             android:textColorHint="#a8a8a8"
                             android:textSize="15sp" />
                     </LinearLayout>
                     <LinearLayout
-                        android:layout_marginBottom="20dp"
-                        android:background="@drawable/ripper1"
-                        android:paddingLeft="10dp"
-                        android:paddingRight="20dp"
-                        android:paddingBottom="7dp"
-                        android:paddingTop="7dp"
-                        android:weightSum="5"
-                        android:orientation="horizontal"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/ripper"
+                        android:orientation="horizontal"
+                        android:paddingLeft="10dp"
+                        android:paddingTop="10dp"
+                        android:paddingRight="20dp"
+                        android:paddingBottom="10dp"
+                        android:weightSum="5">
+
                         <TextView
-                            android:layout_weight="2"
-                            android:text="@string/phoneedit"
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
+                            android:layout_weight="2"
                             android:gravity="left"
+                            android:text="@string/phoneedit"
                             android:textColor="#000"
                             android:textColorHint="#a8a8a8"
                             android:textSize="15sp" />
+
                         <TextView
-                            android:layout_weight="3"
-                            android:text="0985645057"
                             android:id="@+id/tvPhoneAdmin"
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
+                            android:layout_weight="3"
                             android:gravity="right"
+                            android:text="0985645057"
                             android:textColor="#000"
                             android:textColorHint="#a8a8a8"
                             android:textSize="15sp" />
                     </LinearLayout>
                     <LinearLayout
-                        android:layout_marginBottom="20dp"
-                        android:background="@drawable/ripper1"
-                        android:paddingLeft="10dp"
-                        android:paddingRight="20dp"
-                        android:paddingBottom="7dp"
-                        android:paddingTop="7dp"
-                        android:weightSum="4"
-                        android:orientation="horizontal"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/ripper"
+                        android:orientation="horizontal"
+                        android:paddingLeft="10dp"
+                        android:paddingTop="10dp"
+                        android:paddingRight="20dp"
+                        android:paddingBottom="10dp"
+                        android:weightSum="4">
+
                         <TextView
-                            android:layout_weight="1"
-                            android:text="@string/addressedit"
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
+                            android:layout_weight="1"
                             android:gravity="left"
+                            android:text="@string/addressedit"
                             android:textColor="#000"
                             android:textColorHint="#a8a8a8"
                             android:textSize="15sp" />
+
                         <TextView
                             android:id="@+id/tvAddressAdmin"
-                            android:layout_weight="3"
-                            android:text="Hoài Ân- Bình Định"
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
+                            android:layout_weight="3"
                             android:gravity="right"
+                            android:text="Hoài Ân- Bình Định"
                             android:textColor="#000"
                             android:textColorHint="#a8a8a8"
                             android:textSize="15sp" />
                     </LinearLayout>
                     <LinearLayout
-                        android:id="@+id/linearLogOutAdmin"
-                        android:layout_marginBottom="20dp"
-                        android:paddingLeft="10dp"
-                        android:paddingRight="10dp"
-                        android:paddingTop="7dp"
-                        android:weightSum="4"
-                        android:orientation="horizontal"
+                        android:visibility="gone"
+                        android:id="@+id/linearChangePass1"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/ripper"
+                        android:orientation="horizontal"
+                        android:paddingLeft="10dp"
+                        android:paddingTop="15dp"
+                        android:paddingRight="10dp"
+                        android:paddingBottom="10dp"
+                        android:weightSum="4">
+
                         <TextView
-                            android:singleLine="true"
-                            android:layout_weight="2"
-                            android:text="@string/logout"
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
-                            android:gravity="left"
-                            android:textColor="#000"
-                            android:textSize="15sp" />
-                        <TextView
-                            android:drawableRight="@drawable/ic_chevron_right_defaul_20dp"
-                            android:enabled="true"
                             android:layout_weight="2"
+                            android:gravity="left"
+                            android:singleLine="true"
+                            android:text="@string/change_password"
+                            android:textColor="#000"
+                            android:textSize="16sp" />
+
+                        <TextView
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
+                            android:layout_weight="2"
+                            android:drawableRight="@drawable/ic_chevron_right_defaul_20dp"
+                            android:enabled="true"
                             android:gravity="right"
-                            android:textSize="15sp" />
+                            android:text="@string/setupnow"
+                            android:textSize="16sp" />
                     </LinearLayout>
+
+                    <LinearLayout
+                        android:visibility="gone"
+                        android:id="@+id/linearChangeInfo1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/ripper"
+                        android:orientation="horizontal"
+                        android:paddingLeft="10dp"
+                        android:paddingTop="10dp"
+                        android:paddingRight="10dp"
+                        android:paddingBottom="10dp"
+                        android:weightSum="4">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="2"
+                            android:gravity="left"
+                            android:singleLine="true"
+                            android:text="@string/hint_your_edit_profile"
+                            android:textColor="#000"
+                            android:textSize="16sp" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="2"
+                            android:drawableRight="@drawable/ic_chevron_right_defaul_20dp"
+                            android:enabled="true"
+                            android:gravity="right"
+                            android:text="@string/setupnow"
+                            android:textSize="16sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/linearLogOutAdmin"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/ripper_bottom"
+                        android:orientation="horizontal"
+                        android:paddingLeft="10dp"
+                        android:paddingTop="10dp"
+                        android:paddingRight="10dp"
+                        android:paddingBottom="15dp"
+                        android:weightSum="4">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="2"
+                            android:gravity="left"
+                            android:singleLine="true"
+                            android:text="@string/logout"
+                            android:textColor="#000"
+                            android:textSize="16sp" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="2"
+                            android:drawableRight="@drawable/ic_chevron_right_defaul_20dp"
+                            android:enabled="true"
+                            android:gravity="right"
+                            android:textSize="16sp" />
+                    </LinearLayout>
+
                 </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
             </LinearLayout>
-        </ScrollView>
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 </LinearLayout>

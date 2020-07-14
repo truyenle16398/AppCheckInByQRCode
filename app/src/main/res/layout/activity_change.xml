@@ -19,12 +19,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <com.google.android.material.textfield.TextInputLayout
+            app:errorTextAppearance="@style/error_appearance"
             android:id="@+id/inputlayout_change"
             app:boxBackgroundColor="#000"
             android:background="#fff"
             android:layout_marginRight="5dp"
             android:layout_marginLeft="5dp"
-            style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/hint_activity_change">

@@ -6,7 +6,40 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".ui.client.fragment.ClientUserFragment">
+    <FrameLayout
+        android:id="@+id/showAvatar"
+        android:background="#020202"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_350sdp">
+            <ImageView
+                android:layout_gravity="center"
+                android:src="@drawable/loading"
+                android:id="@+id/imageAvatarFull"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
 
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbarDetailFull"
+            android:layout_width="match_parent"
+            android:layout_height="?actionBarSize"
+            android:background="#40000000"
+            app:titleTextColor="#fff" >
+            <TextView
+                android:paddingLeft="10dp"
+                android:id="@+id/tvbackAvatar"
+                android:textColor="#fff"
+                android:drawableLeft="@drawable/ic_white_back_ios_24"
+                android:textSize="@dimen/_40sdp"
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"/>
+        </androidx.appcompat.widget.Toolbar>
+    </FrameLayout>
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/swipeRefreshLayoutuser"
         android:layout_width="match_parent"
@@ -14,6 +47,7 @@
         android:layout_gravity="center_vertical">
 
         <LinearLayout
+            android:background="#F1EFEF"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="top|center"
@@ -48,18 +82,18 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:gravity="center"
-                android:text="Quách Hồng Khoa"
+                android:text=""
                 android:textColor="#000"
                 android:textColorHint="#a8a8a8"
                 android:textSize="22sp" />
             <androidx.cardview.widget.CardView
                 app:cardCornerRadius="20dp"
-                android:background="#9D9CA1"
                 android:layout_margin="@dimen/_10sdp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
-
                     <LinearLayout
+                        android:background="@drawable/border_fagment_user"
+                        android:visibility="visible"
                         android:layout_width="match_parent"
                         android:orientation="vertical"
                         android:layout_height="match_parent">
@@ -67,14 +101,13 @@
                             android:id="@+id/lineartitle"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:background="@drawable/ripper1"
+                            android:background="@drawable/ripper"
                             android:orientation="horizontal"
                             android:paddingLeft="10dp"
                             android:paddingTop="15dp"
                             android:paddingRight="10dp"
                             android:paddingBottom="10dp"
                             android:weightSum="4">
-
                             <TextView
                                 android:layout_width="0dp"
                                 android:layout_height="match_parent"
@@ -226,7 +259,7 @@
                             android:id="@+id/linearChangePass"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:background="@drawable/ripper1"
+                            android:background="@drawable/ripper"
                             android:orientation="horizontal"
                             android:paddingLeft="10dp"
                             android:paddingTop="15dp"
@@ -259,7 +292,7 @@
                             android:id="@+id/linearChangeInfo"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:background="@drawable/ripper1"
+                            android:background="@drawable/ripper"
                             android:orientation="horizontal"
                             android:paddingLeft="10dp"
                             android:paddingTop="10dp"
@@ -292,12 +325,12 @@
                             android:id="@+id/linearLogOut"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:background="@drawable/ripper1"
+                            android:background="@drawable/ripper_bottom"
                             android:orientation="horizontal"
                             android:paddingLeft="10dp"
                             android:paddingTop="10dp"
                             android:paddingRight="10dp"
-                            android:paddingBottom="5dp"
+                            android:paddingBottom="15dp"
                             android:weightSum="4">
 
                             <TextView

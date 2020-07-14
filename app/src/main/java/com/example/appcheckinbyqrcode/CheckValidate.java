@@ -1,10 +1,15 @@
 package com.example.appcheckinbyqrcode;
 
+import android.content.Context;
 import android.text.Editable;
+import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import static android.content.Context.INPUT_METHOD_SERVICE;
 
 public class CheckValidate {
     public static boolean isEmailValid(String email)
@@ -84,5 +89,9 @@ public class CheckValidate {
             baseString = baseString.replaceAll(s, "");
         }
         return baseString;
+    }
+    public static void hideKeyboard(View v, Context context) {
+        InputMethodManager inputMethodManager = (InputMethodManager)context.getSystemService(INPUT_METHOD_SERVICE);
+        inputMethodManager.hideSoftInputFromWindow(v.getApplicationWindowToken(),0);
     }
 }

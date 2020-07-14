@@ -56,7 +56,7 @@ public class UpdatedProfileActivity extends AppCompatActivity {
     private AlertDialog dialog;
     private Toolbar toolbar;
     private LinearLayout lnimg, lnname, lnemail, lnphone, lnaddress;
-    private TextView tvName, tvEmail, tvPhone, tvAddress, tvupdatepass, tvHoi;
+    private TextView tvName, tvEmail, tvPhone, tvAddress, tvupdatepass, tvHoi,tvuploadimage;
     private String name, email, phone, address;
     private EditText edtNhap;
     private CircleImageView circleimg;
@@ -96,6 +96,12 @@ public class UpdatedProfileActivity extends AppCompatActivity {
     }
 
     private void onclick() {
+        tvuploadimage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ActivityCompat.requestPermissions(UpdatedProfileActivity.this, new String[] {Manifest.permission.READ_EXTERNAL_STORAGE,Manifest.permission.CAMERA},1010);
+            }
+        });
         circleimg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -367,6 +373,7 @@ public class UpdatedProfileActivity extends AppCompatActivity {
         lnphone = findViewById(R.id.updatePhone);
         lnaddress = findViewById(R.id.updateAddress);
         tvName = findViewById(R.id.tvName);
+        tvuploadimage = findViewById(R.id.tvuploadimage);
         tvEmail = findViewById(R.id.tvEmail);
         tvPhone = findViewById(R.id.tvPhone);
         tvAddress = findViewById(R.id.tvAddress);

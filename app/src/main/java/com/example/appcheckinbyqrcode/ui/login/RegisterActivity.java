@@ -204,14 +204,14 @@ public class RegisterActivity extends AppCompatActivity {
         mLlRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                hideKeybaord(v);
+                CheckValidate.hideKeyboard(v,RegisterActivity.this);
             }
         });
         //set su kien cho button register
         btnregister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                hideKeybaord(view);
+                CheckValidate.hideKeyboard(view,RegisterActivity.this);
                 email = edtemail.getText().toString();
                 name = edtname.getText().toString();
                 address = edtaddress.getText().toString();
@@ -278,10 +278,6 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
     }
-    private void hideKeybaord(View v) {
-        InputMethodManager inputMethodManager = (InputMethodManager)getSystemService(INPUT_METHOD_SERVICE);
-        inputMethodManager.hideSoftInputFromWindow(v.getApplicationWindowToken(),0);
-    }
 
     private void initWidget() {
         edtemail = findViewById(R.id.inputEmail);
@@ -325,7 +321,11 @@ public class RegisterActivity extends AppCompatActivity {
             }else{
                 text_input_layout_address.setErrorEnabled(false);
             }
-        }else {
+        }else if (s.toString().isEmpty()){
+
+            text_input_layout_address.setErrorEnabled(true);
+            text_input_layout_address.setError("Trường này không bỏ trống");
+        } else{
             text_input_layout_address.setErrorEnabled(false);
         }
     }

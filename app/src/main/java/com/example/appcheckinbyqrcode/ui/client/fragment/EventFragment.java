@@ -15,8 +15,10 @@ import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.Filter;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -26,7 +28,6 @@ import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
-import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.MenuItemCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentPagerAdapter;
@@ -34,6 +35,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
+import com.example.appcheckinbyqrcode.CheckValidate;
 import com.example.appcheckinbyqrcode.R;
 import com.example.appcheckinbyqrcode.network.ApiClient;
 import com.example.appcheckinbyqrcode.network.response.EventSearchListResponse;
@@ -65,9 +67,11 @@ import static androidx.constraintlayout.widget.Constraints.TAG;
 public class EventFragment extends Fragment {
     ArrayList<FavoriteList> favoriteLists;
 
+    boolean doubleBackToExitPressedOnce = false;
     private MyDatabaseHelper myDatabaseHelper;
-
+    EditText mEdtSearch;
     ViewPager pager;
+    ImageView mImgSeacr;
     TabLayout mTabLayoutEvent;
     TabItem firstItem, secondItem, thirdItem;
     EventsClientPagerAdapter adapterPager;
@@ -76,7 +80,6 @@ public class EventFragment extends Fragment {
     private RecyclerView.LayoutManager layoutManager;
     private ArrayList<EventSearchListResponse> listSearch;
     private View view;
-    Toolbar toolbar;
     EditText edtSearchView;
 
     public EventFragment() {
@@ -114,8 +117,51 @@ public class EventFragment extends Fragment {
         pager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(mTabLayoutEvent));
         pager.setOffscreenPageLimit(3);
         setHasOptionsMenu(true); // Add this!
+        mEdtSearch.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (s.toString().isEmpty()) {
+                    recyclerView.setVisibility(View.GONE);
+                } else {
+                    recyclerView.setVisibility(View.VISIBLE);
+                    fetchSearch(s.toString());
+                }
+
+            }
+        });
+        mEdtSearch.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    Log.d("focus", "focus loosed");
+                    CheckValidate.hideKeyboard(v,getActivity());
+                } else {
+                    Log.d("focus", "focused");
+                }
+            }
+        });
+        mImgSeacr.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mEdtSearch.setFocusableInTouchMode(true);
+                mEdtSearch.requestFocus();
+                InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.showSoftInput(mEdtSearch, InputMethodManager.SHOW_IMPLICIT);
+            }
+        });
         return view;
     }
+
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -140,10 +186,11 @@ public class EventFragment extends Fragment {
 //        });
 
     }
+
     private void filter(String text) {
-        if (text.isEmpty()){
+        if (text.isEmpty()) {
             Toast.makeText(getContext(), "No data search", Toast.LENGTH_SHORT).show();
-        }else {
+        } else {
             for (EventSearchListResponse item : listSearch) {
                 if (item.getName().toLowerCase().contains(text.toLowerCase())) {
                     fetchSearch(text);
@@ -155,7 +202,7 @@ public class EventFragment extends Fragment {
 
     }
 
-    public void fetchSearch(String key){
+    public void fetchSearch(String key) {
         ApiClient.getService().getListSearch(key)
                 .debounce(300, TimeUnit.MILLISECONDS)
                 .subscribeOn(Schedulers.io())
@@ -171,7 +218,7 @@ public class EventFragment extends Fragment {
                         recyclerView.setVisibility(View.VISIBLE);
                         recyclerView.setAdapter(adapterSearch);
                         adapterSearch.notifyDataSetChanged();
-                        Log.d(TAG, "onNext: "+ listResponses.toString());
+                        Log.d(TAG, "onNext: " + listResponses.toString());
                     }
 
 
@@ -183,7 +230,8 @@ public class EventFragment extends Fragment {
                     @Override
                     public void onComplete() {
                         adapterSearch.notifyDataSetChanged();
-                    }});
+                    }
+                });
 
     }
 
@@ -191,7 +239,7 @@ public class EventFragment extends Fragment {
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         //inflater = getActivity().getMenuInflater();
         inflater.inflate(R.menu.menu_search, menu);
-        super.onCreateOptionsMenu(menu,inflater);
+        super.onCreateOptionsMenu(menu, inflater);
 
 //        MenuItem item = menu.findItem(R.id.search);
 
@@ -208,11 +256,11 @@ public class EventFragment extends Fragment {
 
 
                 //Toast.makeText(getActivity(), "xxx" + query, Toast.LENGTH_SHORT).show();
-                if (query.isEmpty()){
+                if (query.isEmpty()) {
                     recyclerView.setVisibility(View.GONE);
-                }else {
+                } else {
                     recyclerView.setVisibility(View.VISIBLE);
-                    fetchSearch( query);
+                    fetchSearch(query);
                 }
 
                 return false;
@@ -223,11 +271,11 @@ public class EventFragment extends Fragment {
 
                 //Toast.makeText(getActivity(), "yyy" + newText, Toast.LENGTH_SHORT).show();
 
-                if (newText.isEmpty()){
+                if (newText.isEmpty()) {
                     recyclerView.setVisibility(View.GONE);
-                }else {
+                } else {
                     recyclerView.setVisibility(View.VISIBLE);
-                    fetchSearch( newText);
+                    fetchSearch(newText);
                 }
                 return false;
             }
@@ -250,28 +298,19 @@ public class EventFragment extends Fragment {
     }
 
 
-
     @RequiresApi(api = Build.VERSION_CODES.M)
     private void initWidget() {
         pager = view.findViewById(R.id.viewPagerEvent);
+        mImgSeacr = view.findViewById(R.id.mImgSeacr);
+        mEdtSearch = view.findViewById(R.id.mEdtSearch);
         mTabLayoutEvent = view.findViewById(R.id.tabLayoutEvent);
         firstItem = view.findViewById(R.id.firstItemEvent);
         secondItem = view.findViewById(R.id.secondItemEvent);
         thirdItem = view.findViewById(R.id.thirdItemEvent);
-        toolbar = view.findViewById(R.id.toolbarSearchView);
-        AppCompatActivity appCompatActivity = (AppCompatActivity)getActivity();
-        appCompatActivity.setSupportActionBar(toolbar);
-        appCompatActivity.getSupportActionBar().setDisplayShowTitleEnabled(true);
-        toolbar.setTitle("SDC");
-        toolbar.setTitleTextColor(getContext().getColor(R.color.color4));
-        //edtSearchView = view.findViewById(R.id.edtSearchView);
-        toolbar.setSubtitle(null);
         recyclerView = view.findViewById(R.id.recycleViewSearch);
         layoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setHasFixedSize(true);
-        fetchSearch( "");
+        fetchSearch("");
     }
-
-
 }

@@ -79,67 +79,88 @@
                                 android:layout_height="?actionBarSize"
                                 android:text="@string/text_button_register"
                                 android:textSize="22sp" />
-                            <TextView
-                                android:layout_marginBottom="5dp"
-                                android:drawablePadding="5dp"
+                            <LinearLayout
                                 android:gravity="center|left"
-                                android:drawableLeft="@drawable/person1"
-                                android:layout_marginTop="6dp"
-                                android:layout_weight="5"
-                                android:textStyle="bold"
-                                android:textColor="#000"
-                                android:textSize="20sp"
-                                android:text="@string/event_chairman"
+                                android:orientation="horizontal"
                                 android:layout_width="match_parent"
-                                android:layout_height="wrap_content"/>
+                                android:layout_height="wrap_content">
+                                <ImageView
+                                    android:layout_marginRight="10dp"
+                                    android:layout_width="30dp"
+                                    android:layout_height="30dp"
+                                    android:src="@drawable/personman1" />
+                                <TextView
+                                    android:layout_gravity=""
+                                    android:textStyle="bold"
+                                    android:textColor="#000"
+                                    android:textSize="20sp"
+                                    android:text="@string/event_chairman"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"/>
+                            </LinearLayout>
 
                             <TextView
-                                android:layout_marginBottom="5dp"
                                 android:id="@+id/txtChairman"
-                                android:layout_marginTop="5dp"
-                                android:textColor="#000"
-                                android:layout_marginRight="20dp"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
                                 android:layout_marginLeft="20dp"
-                                android:textSize="20sp"
+                                android:layout_marginTop="5dp"
+                                android:layout_marginRight="20dp"
+                                android:layout_marginBottom="5dp"
                                 android:autoLink="web"
                                 android:text="Teacher Huan Roses"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"/>
+                                android:textColor="#000"
+                                android:textSize="15sp" />
 
-                            <TextView
-                                android:layout_marginBottom="5dp"
-                                android:drawablePadding="5dp"
-                                android:layout_marginTop="5dp"
-                                android:drawableLeft="@drawable/locations"
-                                android:textColor="#000"
-                                android:textSize="20sp"
-                                android:textStyle="bold"
-                                android:text="@string/event_address"
+                            <LinearLayout
+                                android:gravity="center|left"
+                                android:orientation="horizontal"
                                 android:layout_width="match_parent"
-                                android:layout_height="wrap_content"/>
+                                android:layout_height="wrap_content">
+                                <ImageView
+                                    android:layout_marginRight="10dp"
+                                    android:layout_width="30dp"
+                                    android:layout_height="30dp"
+                                    android:src="@drawable/ic_map" />
+                                <TextView
+                                    android:layout_gravity=""
+                                    android:textStyle="bold"
+                                    android:textColor="#000"
+                                    android:textSize="20sp"
+                                    android:text="@string/event_address"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"/>
+                            </LinearLayout>
                             <TextView
-                                android:layout_marginBottom="5dp"
                                 android:id="@+id/txtAddressInfoDetail"
-                                android:layout_marginTop="5dp"
-                                android:textColor="#000"
-                                android:layout_marginRight="20dp"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
                                 android:layout_marginLeft="20dp"
-                                android:textSize="16sp"
-                                android:text="TÒA NHÀ B, TẦNG 5, 41 Lê Duẫn, Hải Châu, Đà Nẵng"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"/>
-                            <TextView
+                                android:layout_marginTop="5dp"
+                                android:layout_marginRight="20dp"
                                 android:layout_marginBottom="5dp"
-                                android:drawablePadding="5dp"
-                                android:drawableLeft="@drawable/timess"
-                                android:layout_marginTop="6dp"
-                                android:layout_weight="5"
-                                android:textStyle="bold"
+                                android:text="TÒA NHÀ B, TẦNG 5, 41 Lê Duẫn, Hải Châu, Đà Nẵng"
                                 android:textColor="#000"
-                                android:textSize="20sp"
-                                android:text="@string/event_date"
+                                android:textSize="16sp" />
+                            <LinearLayout
+                                android:gravity="center|left"
+                                android:orientation="horizontal"
                                 android:layout_width="match_parent"
-                                android:layout_height="wrap_content"/>
+                                android:layout_height="wrap_content">
+                                <ImageView
+                                    android:layout_marginRight="10dp"
+                                    android:layout_width="30dp"
+                                    android:layout_height="30dp"
+                                    android:src="@drawable/ic_lich" />
+                                <TextView
+                                    android:layout_gravity=""
+                                    android:textStyle="bold"
+                                    android:textColor="#000"
+                                    android:textSize="20sp"
+                                    android:text="@string/event_date"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"/>
+                            </LinearLayout>
                             <LinearLayout
                                 android:orientation="vertical"
                                 android:layout_width="match_parent"
@@ -173,17 +194,25 @@
                                 android:text="Ngày 19 tháng 05 năm 2020"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"/>
-                            <TextView
-                                android:layout_marginBottom="5dp"
-                                android:drawablePadding="5dp"
-                                android:layout_marginTop="5dp"
-                                android:drawableLeft="@drawable/article"
-                                android:textColor="#000"
-                                android:textSize="20sp"
-                                android:textStyle="bold"
-                                android:text="@string/event_detail"
+                            <LinearLayout
+                                android:gravity="center|left"
+                                android:orientation="horizontal"
                                 android:layout_width="match_parent"
-                                android:layout_height="wrap_content"/>
+                                android:layout_height="wrap_content">
+                                <ImageView
+                                    android:layout_marginRight="10dp"
+                                    android:layout_width="30dp"
+                                    android:layout_height="30dp"
+                                    android:src="@drawable/detail" />
+                                <TextView
+                                    android:layout_gravity=""
+                                    android:textStyle="bold"
+                                    android:textColor="#000"
+                                    android:textSize="20sp"
+                                    android:text="@string/event_detail"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"/>
+                            </LinearLayout>
                             <TextView
                                 android:lineSpacingExtra="4dp"
                                 android:id="@+id/txtInfoDetail"
@@ -197,10 +226,8 @@
                                 android:layout_height="match_parent"/>
 
                         </LinearLayout>
-
                     </LinearLayout>
                 </ScrollView>
-
                 <androidx.appcompat.widget.Toolbar
                     android:id="@+id/toolbarDetail"
                     android:layout_width="match_parent"

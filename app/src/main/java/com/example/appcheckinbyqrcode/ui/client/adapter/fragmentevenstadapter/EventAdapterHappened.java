@@ -23,6 +23,7 @@ import com.example.appcheckinbyqrcode.network.url;
 import com.example.appcheckinbyqrcode.sqlite.MyDatabaseHelper;
 import com.example.appcheckinbyqrcode.ui.admin.model.FavoriteList;
 import com.example.appcheckinbyqrcode.ui.client.EventDetailActivity;
+import com.google.android.material.snackbar.Snackbar;
 import com.squareup.picasso.Picasso;
 
 import java.text.ParseException;
@@ -92,9 +93,9 @@ public class EventAdapterHappened extends RecyclerView.Adapter<EventAdapterHappe
                     FavoriteList favoriteList = new FavoriteList(0, idevents, name, intro, chariman, image);
                     myDatabaseHelper.deleteFavoriteID(id);
                     holder.imageButton3.setBackgroundResource(R.drawable.ic_favorite_border_red_24dp);
-
                     //Log.d(TAG, "Delete Successful: "+v.toString());
-                    Toast.makeText(context, "Xoá sự kiện yêu thích thành công", Toast.LENGTH_LONG).show();
+                    Snackbar.make(v, "Xoá sự kiện yêu thích thành công", Snackbar.LENGTH_LONG).show();
+//                    Toast.makeText(context, "Xoá sự kiện yêu thích thành công", Toast.LENGTH_LONG).show();
 
                 } else {
                     FavoriteList favoriteList = new FavoriteList(0, idevents, name, intro, chariman, image);
@@ -105,7 +106,8 @@ public class EventAdapterHappened extends RecyclerView.Adapter<EventAdapterHappe
                     changgColorButon = true;
                     holder.imageButton3.setBackgroundResource(R.drawable.ic_favorite_red_24dp);
                     //Log.d(TAG, "Delete Successful: "+v.toString());
-                    Toast.makeText(context, "Thêm sự kiện yêu thích thành công", Toast.LENGTH_SHORT).show();
+                    Snackbar.make(v, "Thêm sự kiện yêu thích thành công", Snackbar.LENGTH_LONG).show();
+//                    Toast.makeText(context, "Thêm sự kiện yêu thích thành công", Toast.LENGTH_SHORT).show();
 
                 }
             }
@@ -165,23 +167,23 @@ public class EventAdapterHappened extends RecyclerView.Adapter<EventAdapterHappe
                 e.printStackTrace();
             }
             SimpleDateFormat formatter = new SimpleDateFormat("HH:mm dd-MM-yyyy");
-            SimpleDateFormat formatterDate = new SimpleDateFormat("dd-MM-yyyy");
-            SimpleDateFormat formatterTime = new SimpleDateFormat("HH:mm");
-            String day1 = formatterDate.format(datestart);
-            String day2 = formatterDate.format(dateend);
-            if (day1.equals(day2)){
-                day.setText(formatterTime.format(datestart)+" đến "+formatterTime.format(dateend));
-                time.setText("Ngày: "+day2);
-//            holder.check.setText("trùng ngày");
-            } else {
-                day.setText(formatter.format(datestart));
-                time.setText(formatter.format(dateend));
-//            holder.check.setText("không trùng ngày");
-            }
+//            SimpleDateFormat formatterDate = new SimpleDateFormat("dd-MM-yyyy");
+//            SimpleDateFormat formatterTime = new SimpleDateFormat("HH:mm");
+//            String day1 = formatterDate.format(datestart);
+//            String day2 = formatterDate.format(dateend);
+//            if (day1.equals(day2)){
+//                day.setText(formatterTime.format(datestart)+" đến "+formatterTime.format(dateend));
+//                time.setText("Ngày: "+day2);
+////            holder.check.setText("trùng ngày");
+//            } else {
+//                day.setText(formatter.format(datestart));
+//                time.setText(formatter.format(dateend));
+////            holder.check.setText("không trùng ngày");
+//            }
             name.setText(ex.getName());
             intro.setText(ex.getIntro());
-//            day.setText(ex.getStart_time());
-//            time.setText(ex.getEnd_time());
+            day.setText("Bắt đầu: "+formatter.format(datestart));
+            time.setText("Kết thúc: "+formatter.format(dateend));
             place.setText(ex.getPlace());
         }
     }

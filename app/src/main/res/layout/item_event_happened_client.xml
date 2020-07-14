@@ -84,7 +84,7 @@
                 <ImageView
                     android:layout_width="@dimen/_16sdp"
                     android:layout_height="@dimen/_16sdp"
-                    android:layout_marginRight="@dimen/_10sdp"
+                    android:layout_marginRight="2dp"
                     android:src="@drawable/ic_lich" />
 
                 <TextView
@@ -110,7 +110,7 @@
                 <ImageView
                     android:layout_width="@dimen/_16sdp"
                     android:layout_height="@dimen/_16sdp"
-                    android:layout_marginRight="@dimen/_10sdp"
+                    android:layout_marginRight="2dp"
                     android:src="@drawable/ic_lich" />
 
                 <TextView
@@ -137,7 +137,7 @@
                 <ImageView
                     android:layout_width="@dimen/_16sdp"
                     android:layout_height="@dimen/_16sdp"
-                    android:layout_marginRight="@dimen/_10sdp"
+                    android:layout_marginRight="2dp"
                     android:src="@drawable/ic_map" />
 
                 <TextView
