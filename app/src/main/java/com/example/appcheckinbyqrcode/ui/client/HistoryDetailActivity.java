@@ -94,7 +94,7 @@ public class HistoryDetailActivity extends AppCompatActivity {
             public void onClick(View v) {
                 FavoriteEventFragment.checkBack=false;
                 ProgressDialog dialog = new ProgressDialog(HistoryDetailActivity.this);
-                dialog.setMessage("please wait...");
+                dialog.setMessage(getResources().getString(R.string.load));
                 dialog.setCancelable(false);
                 dialog.show();
                 ApiClient.getService().cancelevent(id)

@@ -139,7 +139,7 @@ public class ForgotPassActivity extends AppCompatActivity {
                     text_input_layout_email.setError("Email sai định dạng");
                 } else {
                     ProgressDialog pd = new ProgressDialog(ForgotPassActivity.this);
-                    pd.setMessage("Loading");
+                    pd.setMessage(getResources().getString(R.string.load));
                     pd.setCancelable(false);
                     pd.show();
                     //////API
@@ -177,7 +177,7 @@ public class ForgotPassActivity extends AppCompatActivity {
                                                     inputPassLayout.setError("Vui lòng nhập trường này");
                                                 } else {
                                                     ProgressDialog bb = new ProgressDialog(ForgotPassActivity.this);
-                                                    bb.setMessage("Loading");
+                                                    bb.setMessage(getResources().getString(R.string.load));
                                                     bb.setCancelable(false);
                                                     bb.show();
                                                     ApiClient.getService().resetPass(email, pass, pass, code)

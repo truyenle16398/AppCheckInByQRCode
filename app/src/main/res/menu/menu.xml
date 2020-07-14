@@ -3,6 +3,5 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item android:id="@+id/updateok"
         app:showAsAction="always"
-        android:icon="@drawable/ic_check_black_24dp"
-        android:title="@string/hint_your_edit_profile" />
+        android:title="@string/save"  />
 </menu>
