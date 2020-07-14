@@ -30,7 +30,7 @@ public class HistoryCheckInFragment extends Fragment {
 
     SwipeRefreshLayout refreshLayout;
     View view;
-    TextView tvCountMan,tvclear;
+    TextView tvCountMan,tvclear,tvdatanull;
     RecyclerView recyclerView;
     ItemHistoryAdapter adapter;
     ArrayList<HistoryCheckIn> items;
@@ -90,6 +90,7 @@ public class HistoryCheckInFragment extends Fragment {
 
     private void InitWidget() {
         tvclear = view.findViewById(R.id.tvclearhistory);
+        tvdatanull = view.findViewById(R.id.tvdatanull);
         tvCountMan = view.findViewById(R.id.countman);
         refreshLayout = view.findViewById(R.id.swipeRefreshLayoutHistory);
         refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -109,7 +110,19 @@ public class HistoryCheckInFragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         adapter = new ItemHistoryAdapter(getActivity(),listinfo);
         recyclerView.setAdapter(adapter);
+        if (listinfo.size()<1){
+            tvdatanull.setVisibility(View.VISIBLE);
+            recyclerView.setVisibility(View.GONE);
+        } else{
+            tvdatanull.setVisibility(View.GONE);
+            recyclerView.setVisibility(View.VISIBLE);
+        }
+
     }
 
-
+    @Override
+    public void onResume() {
+        super.onResume();
+        getdata();
+    }
 }

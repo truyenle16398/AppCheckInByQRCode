@@ -2,8 +2,8 @@
 <resources>
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#5257f2</color>
-    <color name="colorAccent">#D81B60</color>
-
+    <color name="colorAccent">#F40808</color>
+<!--    E80707-->
     <color name="colorTextPrimary">#FFFFFF</color>
     <color name="colorTextDisable">#fff</color>
 
@@ -15,7 +15,7 @@
     <color name="textcolorlogin">#3f51b5</color>
     <color name="gray">#1AD7D8DF</color>
     <color name="gray_100">#CACBD1</color>
-    <color name="red">#E20A29</color>
+    <color name="red">#F40808</color>
     <color name="bg_xanh">#37AE42</color>
     <color name="white">#FFFFFF</color>
     <color name="black">#000000</color>

@@ -16,25 +16,35 @@
         android:layout_margin="10dp"
         android:layout_width="match_parent"
         android:layout_height="50dp">
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbarSearchView"
+        <RelativeLayout
+            android:layout_gravity="right"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center|right"
-            android:background="#F6F3F3"
-            android:gravity="center">
+            android:layout_height="match_parent">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="40dp"
-                android:gravity="left"
-                android:textColor="#EE57F3"
-                android:textStyle="bold">
+            <ImageView
+                android:layout_alignParentRight="true"
+                android:visibility="visible"
+                android:id="@+id/mImgSeacr"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="15dp"
+                android:src="@drawable/ic_search" />
 
-            </TextView>
-        </androidx.appcompat.widget.Toolbar>
-
+            <EditText
+                android:id="@+id/mEdtSearch"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="28dp"
+                android:background="@null"
+                android:gravity="center_vertical"
+                android:hint="Tìm kiếm sự kiện"
+                android:singleLine="true"
+                android:textColor="@color/gray_100"
+                android:textColorHint="#CFADE0" />
+        </RelativeLayout>
     </androidx.cardview.widget.CardView>
 
 

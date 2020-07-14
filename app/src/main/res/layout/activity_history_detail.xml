@@ -4,7 +4,43 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".ui.client.HistoryDetailActivity">
+    <FrameLayout
+        android:id="@+id/showImageFullHis"
+        android:background="#020202"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_350sdp">
+            <ImageView
+                android:layout_gravity="center"
+                android:scaleType="fitXY"
+                android:src="@drawable/loading"
+                android:id="@+id/imageDetailFullHis"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbarDetailFull"
+            android:layout_width="match_parent"
+            android:layout_height="?actionBarSize"
+            android:background="#40000000"
+            app:titleTextColor="#fff">
+            <TextView
+                android:paddingRight="30dp"
+                android:id="@+id/tvbackdetailHis"
+                android:textColor="#fff"
+                android:drawableLeft="@drawable/ic_white_back_ios_24"
+                android:textSize="@dimen/_40sdp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        </androidx.appcompat.widget.Toolbar>
+    </FrameLayout>
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
@@ -45,6 +81,26 @@
                             android:gravity="center"
                             android:text="@string/click_to_get_qrcode"
                             android:textColor="#000" />
+                        <LinearLayout
+                            android:visibility="gone"
+                            android:layout_gravity="center"
+                            android:background="@drawable/ripper"
+                            android:gravity="center"
+                            android:orientation="horizontal"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+                            <ImageView
+                                android:layout_marginRight="10dp"
+                                android:layout_width="30dp"
+                                android:layout_height="30dp"
+                                android:src="@drawable/qrcode" />
+                            <TextView
+                                android:textStyle="normal"
+                                android:textColor="#000"
+                                android:text="@string/click_to_get_qrcode"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"/>
+                        </LinearLayout>
 
                         <Button
                             android:id="@+id/btnRegisterDetailHistory"
@@ -55,19 +111,25 @@
                             android:background="@drawable/ripple_effect_red"
                             android:text="@string/event_cancel"
                             android:textSize="22sp" />
-                        <TextView
-                            android:layout_marginBottom="5dp"
-                            android:drawablePadding="5dp"
+                        <LinearLayout
                             android:gravity="center|left"
-                            android:drawableLeft="@drawable/person1"
-                            android:layout_marginTop="6dp"
-                            android:layout_weight="5"
-                            android:textStyle="bold"
-                            android:textColor="#000"
-                            android:textSize="20sp"
-                            android:text="@string/event_chairman"
+                            android:orientation="horizontal"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"/>
+                            android:layout_height="wrap_content">
+                            <ImageView
+                                android:layout_marginRight="10dp"
+                                android:layout_width="30dp"
+                                android:layout_height="30dp"
+                                android:src="@drawable/personman1" />
+                            <TextView
+                                android:layout_gravity=""
+                                android:textStyle="bold"
+                                android:textColor="#000"
+                                android:textSize="20sp"
+                                android:text="@string/event_chairman"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"/>
+                        </LinearLayout>
 
                         <TextView
                             android:layout_marginBottom="5dp"
@@ -76,23 +138,30 @@
                             android:textColor="#000"
                             android:layout_marginRight="20dp"
                             android:layout_marginLeft="20dp"
-                            android:textSize="20sp"
+                            android:textSize="15sp"
                             android:text="Teacher Huan Roses"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"/>
 
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_margin="5dp"
-                            android:layout_weight="5"
+                        <LinearLayout
                             android:gravity="center|left"
-                            android:drawableLeft="@drawable/timess"
-                            android:drawablePadding="5dp"
-                            android:text="@string/event_date"
-                            android:textColor="#000"
-                            android:textSize="20sp"
-                            android:textStyle="bold" />
+                            android:orientation="horizontal"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+                            <ImageView
+                                android:layout_marginRight="10dp"
+                                android:layout_width="30dp"
+                                android:layout_height="30dp"
+                                android:src="@drawable/ic_map" />
+                            <TextView
+                                android:layout_gravity=""
+                                android:textStyle="bold"
+                                android:textColor="#000"
+                                android:textSize="20sp"
+                                android:text="@string/event_address"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"/>
+                        </LinearLayout>
 
                         <TextView
                             android:id="@+id/txtDateTimeStartHistory"
@@ -120,18 +189,25 @@
                             android:textColor="#000"
                             android:textSize="16sp" />
 
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="5dp"
-                            android:layout_marginBottom="5dp"
-                            android:drawableLeft="@drawable/locations"
-                            android:drawablePadding="5dp"
+                        <LinearLayout
                             android:gravity="center|left"
-                            android:text="@string/event_address"
-                            android:textColor="#000"
-                            android:textSize="20dp"
-                            android:textStyle="bold" />
+                            android:orientation="horizontal"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+                            <ImageView
+                                android:layout_marginRight="10dp"
+                                android:layout_width="30dp"
+                                android:layout_height="30dp"
+                                android:src="@drawable/ic_lich" />
+                            <TextView
+                                android:layout_gravity=""
+                                android:textStyle="bold"
+                                android:textColor="#000"
+                                android:textSize="20sp"
+                                android:text="@string/event_date"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"/>
+                        </LinearLayout>
 
                         <TextView
                             android:id="@+id/txtAddressInfoDetailHistory"
@@ -146,18 +222,25 @@
                             android:textColor="#000"
                             android:textSize="16sp" />
 
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="5dp"
+                        <LinearLayout
                             android:gravity="center|left"
-                            android:layout_marginBottom="5dp"
-                            android:drawableLeft="@drawable/article"
-                            android:drawablePadding="5dp"
-                            android:text="@string/event_detail"
-                            android:textColor="#000"
-                            android:textSize="20dp"
-                            android:textStyle="bold" />
+                            android:orientation="horizontal"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+                            <ImageView
+                                android:layout_marginRight="10dp"
+                                android:layout_width="30dp"
+                                android:layout_height="30dp"
+                                android:src="@drawable/detail" />
+                            <TextView
+                                android:layout_gravity=""
+                                android:textStyle="bold"
+                                android:textColor="#000"
+                                android:textSize="20sp"
+                                android:text="@string/event_detail"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"/>
+                        </LinearLayout>
 
                         <TextView
                             android:id="@+id/txtInfoDetailHistory"

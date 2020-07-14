@@ -13,6 +13,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -33,9 +36,14 @@ import com.example.appcheckinbyqrcode.network.url;
 import com.example.appcheckinbyqrcode.sqlite.MyDatabaseHelper;
 import com.example.appcheckinbyqrcode.ui.admin.model.FavoriteList;
 import com.example.appcheckinbyqrcode.ui.client.fragment.FavoriteEventFragment;
+import com.example.appcheckinbyqrcode.ui.client.model.Event;
+import com.google.android.material.snackbar.Snackbar;
 import com.squareup.picasso.Picasso;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -97,9 +105,8 @@ public class EventDetailActivity extends AppCompatActivity {
         imageDetail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showImageFull.setVisibility(View.VISIBLE);
                 Log.d(TAG, "onClick: "+v.toString());
-
+                showImageFull.setVisibility(View.VISIBLE);
 //                String urls = url.getUrlimgevent() + eventDetailResponse.getImage();
 
 
@@ -146,17 +153,18 @@ public class EventDetailActivity extends AppCompatActivity {
 
                             @Override
                             public void onNext(MessageResponse messageResponse) {
-                                Toast.makeText(EventDetailActivity.this, messageResponse.getMessage(), Toast.LENGTH_SHORT).show();
-
+//                                Toast.makeText(EventDetailActivity.this, messageResponse.getMessage(), Toast.LENGTH_SHORT).show();
                                 Log.d(TAG, messageResponse.getMessage());
                                 if (messageResponse.getMessage().equals("Mỗi người chỉ được phép đăng ký 1 lần thôi nhé!")) {
-                                    Toast.makeText(EventDetailActivity.this, "Bạn đã đăng kí sự kiện này", Toast.LENGTH_SHORT).show();
-                                    finish();
+//                                    Toast.makeText(EventDetailActivity.this, "Bạn đã đăng kí sự kiện này", Toast.LENGTH_SHORT).show();
+                                    Snackbar.make(v, "Bạn đã đăng kí sự kiện này", Snackbar.LENGTH_LONG).show();
+//                                    finish();
                                     dialog.dismiss();
                                 } else {
                                     FavoriteEventFragment.checkBack = false;
-                                    Toast.makeText(EventDetailActivity.this, messageResponse.getMessage(), Toast.LENGTH_SHORT).show();
-                                    finish();
+//                                    Toast.makeText(EventDetailActivity.this, messageResponse.getMessage(), Toast.LENGTH_SHORT).show();
+                                    Snackbar.make(v, messageResponse.getMessage(), Snackbar.LENGTH_LONG).show();
+//                                    finish();
                                     dialog.dismiss();
                                 }
                             }
@@ -194,7 +202,7 @@ public class EventDetailActivity extends AppCompatActivity {
 
     private void getdata(int i) {
         ProgressDialog dialog = new ProgressDialog(EventDetailActivity.this);
-        dialog.setMessage("please wait...");
+        dialog.setMessage(getResources().getString(R.string.load));
         dialog.setCancelable(false);
         dialog.show();
         ApiClient.getService().detailevents(i).subscribeOn(Schedulers.io())
@@ -211,8 +219,6 @@ public class EventDetailActivity extends AppCompatActivity {
                         String urls = url.getUrlimgevent() + eventDetailResponse.getImage();
                         Glide.with(getApplicationContext()).load(urls).into(imageDetail);
                         toolbar.setTitle(eventDetailResponse.getName());
-                        txtDateTimeStart.setText(eventDetailResponse.getStart_time());
-                        txtDateTimeEnd.setText(eventDetailResponse.getEnd_time());
                         String plainText = Html.fromHtml(eventDetailResponse.getDetail()).toString();
                         txtInfoDetail.setText(plainText);
                         txtAddressInfoDetail.setText(eventDetailResponse.getPlace());
@@ -221,10 +227,19 @@ public class EventDetailActivity extends AppCompatActivity {
                         intro = eventDetailResponse.getIntro();
                         chariman = eventDetailResponse.getChairman();
                         image = eventDetailResponse.getImage();
-
                         Glide.with(getApplicationContext()).load(urls).into(imageDetailFull);
-
-
+                        Date datestart = null;
+                        Date dateend = null;
+                        try {
+                            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                            datestart = format.parse(eventDetailResponse.getStart_time());
+                            dateend = format.parse(eventDetailResponse.getEnd_time());
+                        } catch (ParseException e) {
+                            e.printStackTrace();
+                        }
+                        SimpleDateFormat formatter = new SimpleDateFormat("HH:mm dd-MM-yyyy");
+                        txtDateTimeStart.setText("Bắt đầu: "+formatter.format(datestart));
+                        txtDateTimeEnd.setText("Kết thúc: "+formatter.format(dateend));
                     }
 
                     @Override

@@ -85,7 +85,7 @@ public class ChangeActivity extends AppCompatActivity {
     private void checkedt(Editable s) {
         String edt = editText.getText().toString();
         if (check.equals("name")){
-            if (!containsDigit(edt)){
+            if (!containsDigit(s.toString())){
                 String b =  s.toString().replaceAll("0123456789","");
                 if (b.isEmpty()) {
                     inputLayout.setErrorEnabled(true);
@@ -94,6 +94,7 @@ public class ChangeActivity extends AppCompatActivity {
                     inputLayout.setErrorEnabled(true);
                     inputLayout.setError("Tên không được chứa kí tự đặc biệt");
                 } else {
+
                     inputLayout.setErrorEnabled(false);
                 }
             }else {

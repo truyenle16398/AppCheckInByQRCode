@@ -106,7 +106,7 @@
                         android:layout_width="@dimen/_16sdp"
                         android:layout_height="@dimen/_16sdp"
                         android:layout_marginRight="@dimen/_10sdp"
-                        android:src="@drawable/ic_map" />
+                        android:src="@drawable/checkfile" />
 
                     <TextView
                         android:id="@+id/eventcheck_favorite"
