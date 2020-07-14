@@ -16,6 +16,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.appcheckinbyqrcode.CheckValidate;
 import com.example.appcheckinbyqrcode.R;
 import com.example.appcheckinbyqrcode.network.ApiClient;
 import com.example.appcheckinbyqrcode.network.response.MessageResponse;
@@ -131,7 +132,7 @@ public class ForgotPassActivity extends AppCompatActivity {
         btnGetCode.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                hideKeybaord(view);
+                CheckValidate.hideKeyboard(view,ForgotPassActivity.this);
                 email = edtEmail.getText().toString();
                 if (email.isEmpty()) {
                     text_input_layout_email.setError("Vui lòng nhập Email của bạn");
@@ -169,7 +170,7 @@ public class ForgotPassActivity extends AppCompatActivity {
                                         btnGetCode.setOnClickListener(new View.OnClickListener() {
                                             @Override
                                             public void onClick(View view) {
-                                                hideKeybaord(view);
+                                                CheckValidate.hideKeyboard(view,ForgotPassActivity.this);
                                                 code = edtCode.getText().toString();
                                                 pass = edtPass.getText().toString();
                                                 if (code.isEmpty() || pass.isEmpty()) {
@@ -240,10 +241,6 @@ public class ForgotPassActivity extends AppCompatActivity {
                 finish();
             }
         });
-    }
-    private void hideKeybaord(View v) {
-        InputMethodManager inputMethodManager = (InputMethodManager)getSystemService(INPUT_METHOD_SERVICE);
-        inputMethodManager.hideSoftInputFromWindow(v.getApplicationWindowToken(),0);
     }
 
     private void startCountdownTimer() {

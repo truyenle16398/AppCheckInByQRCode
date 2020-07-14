@@ -1,5 +1,6 @@
 package com.example.appcheckinbyqrcode.ui.client;
 
+import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
@@ -9,7 +10,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
@@ -32,14 +35,19 @@ import com.example.appcheckinbyqrcode.ui.client.fragment.FavoriteEventFragment;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.squareup.picasso.Picasso;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 
 public class HistoryDetailActivity extends AppCompatActivity {
-    ImageView imageDetail;
-    TextView tvshowqrcode, txtDateTimeStart, txtDateTimeEnd, txtInfoDetail, txtAddressInfoDetail;
+    FrameLayout showImageFull;
+    ImageView imageDetail,imageDetailFull;
+    TextView tvshowqrcode, txtDateTimeStart, txtDateTimeEnd, txtInfoDetail, txtAddressInfoDetail,tvbackdetail;
     Button btnRegisterDetail;
     Toolbar toolbar;
     private int id;
@@ -78,6 +86,18 @@ public class HistoryDetailActivity extends AppCompatActivity {
     }
 
     private void onclick() {
+        tvbackdetail.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showImageFull.setVisibility(View.GONE);
+            }
+        });
+        imageDetail.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showImageFull.setVisibility(View.VISIBLE);
+            }
+        });
         tvshowqrcode.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -85,8 +105,6 @@ public class HistoryDetailActivity extends AppCompatActivity {
 //                dialog.setMessage("Please wait...");
 //                dialog.show();
                 bottomSheetDialog.show();
-
-
             }
         });
         btnRegisterDetail.setOnClickListener(new View.OnClickListener() {
@@ -162,11 +180,25 @@ public class HistoryDetailActivity extends AppCompatActivity {
                         String urls = url.getUrlimgevent()+ eventDetailResponse.getImage();
 //                        Log.d("nnn", "onNext: "+urls);
                         Glide.with(getApplicationContext()).load(urls).into(imageDetail);
+                        Glide.with(getApplicationContext()).load(urls).into(imageDetailFull);
                         toolbar.setTitle(eventDetailResponse.getName());
-                        txtDateTimeStart.setText(eventDetailResponse.getStart_time());
-                        txtDateTimeEnd.setText(eventDetailResponse.getEnd_time());
+//                        txtDateTimeStart.setText(eventDetailResponse.getStart_time());
+//                        txtDateTimeEnd.setText(eventDetailResponse.getEnd_time());
                         txtInfoDetail.setText(Html.fromHtml(eventDetailResponse.getDetail()));
                         txtAddressInfoDetail.setText(eventDetailResponse.getPlace());
+
+                        Date datestart = null;
+                        Date dateend = null;
+                        try {
+                            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                            datestart = format.parse(eventDetailResponse.getStart_time());
+                            dateend = format.parse(eventDetailResponse.getEnd_time());
+                        } catch (ParseException e) {
+                            e.printStackTrace();
+                        }
+                        SimpleDateFormat formatter = new SimpleDateFormat("HH:mm dd-MM-yyyy");
+                        txtDateTimeStart.setText("Bắt đầu: "+formatter.format(datestart));
+                        txtDateTimeEnd.setText("Kết thúc: "+formatter.format(dateend));
                     }
 
                     @Override
@@ -191,6 +223,9 @@ public class HistoryDetailActivity extends AppCompatActivity {
         txtAddressInfoDetail = findViewById(R.id.txtAddressInfoDetailHistory);
         btnRegisterDetail = findViewById(R.id.btnRegisterDetailHistory);
         tvshowqrcode =findViewById(R.id.tvshowqrcode);
+        imageDetailFull = findViewById(R.id.imageDetailFullHis);
+        tvbackdetail = findViewById(R.id.tvbackdetailHis);
+        showImageFull = findViewById(R.id.showImageFullHis);
 
     }
 }

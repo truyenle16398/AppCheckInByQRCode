@@ -69,22 +69,22 @@ public class FavoriteAdapter extends RecyclerView.Adapter<FavoriteAdapter.Favori
             e.printStackTrace();
         }
         SimpleDateFormat formatter = new SimpleDateFormat("HH:mm dd-MM-yyyy");
-        SimpleDateFormat formatterDate = new SimpleDateFormat("dd-MM-yyyy");
-        SimpleDateFormat formatterTime = new SimpleDateFormat("HH:mm");
-        String day1 = formatterDate.format(datestart);
-        String day2 = formatterDate.format(dateend);
-        if (day1.equals(day2)){
-            holder.startdate.setText("Bắt đầu lúc: "+formatterTime.format(datestart)+" tới "+formatterTime.format(dateend));
-            holder.enddate.setText("Ngày: "+day2);
-//            holder.check.setText("trùng ngày");
-        } else {
-            holder.startdate.setText("Bắt đầu từ: "+formatter.format(datestart));
-            holder.enddate.setText("Kết thúc lúc: "+formatter.format(dateend));
-//            holder.check.setText("không trùng ngày");
-        }
+//        SimpleDateFormat formatterDate = new SimpleDateFormat("dd-MM-yyyy");
+//        SimpleDateFormat formatterTime = new SimpleDateFormat("HH:mm");
+//        String day1 = formatterDate.format(datestart);
+//        String day2 = formatterDate.format(dateend);
+//        if (day1.equals(day2)){
+//            holder.startdate.setText("Bắt đầu lúc: "+formatterTime.format(datestart)+" tới "+formatterTime.format(dateend));
+//            holder.enddate.setText("Ngày: "+day2);
+////            holder.check.setText("trùng ngày");
+//        } else {
+//            holder.startdate.setText("Bắt đầu: "+formatter.format(datestart));
+//            holder.enddate.setText("Kết thúc lúc: "+formatter.format(dateend));
+////            holder.check.setText("không trùng ngày");
+//        }
         holder.name.setText(items.get(position).getName());
-//        holder.startdate.setText("Bắt đầu từ: "+formatter.format(datestart));
-//        holder.enddate.setText("Kết thúc lúc: "+formatter.format(dateend));
+        holder.startdate.setText("Bắt đầu: "+formatter.format(datestart));
+        holder.enddate.setText("Kết thúc: "+formatter.format(dateend));
         if (items.get(position).getStatus() == 0) {
             holder.check.setText("Đã đăng ký");
         } else {

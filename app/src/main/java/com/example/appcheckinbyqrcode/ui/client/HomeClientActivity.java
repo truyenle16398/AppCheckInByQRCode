@@ -8,6 +8,8 @@ import androidx.viewpager.widget.ViewPager;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
+import android.os.Handler;
+import android.widget.Toast;
 
 import com.example.appcheckinbyqrcode.R;
 import com.example.appcheckinbyqrcode.ui.client.adapter.ClientPagerAdapter;
@@ -15,6 +17,7 @@ import com.google.android.material.tabs.TabItem;
 import com.google.android.material.tabs.TabLayout;
 
 public class HomeClientActivity extends AppCompatActivity implements OnIntent {
+    boolean doubleBackToExitPressedOnce = false;
     DrawerLayout drawerLayout;
     ViewPager pager;
     TabLayout mTabLayout;
@@ -89,11 +92,30 @@ public class HomeClientActivity extends AppCompatActivity implements OnIntent {
 
 //        mTabLayout.getTabAt(0).getIcon().setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_IN);
 //        mTabLayout.getTabAt(1).getIcon().setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_IN);
-//        mTabLayout.getTabAt(2).getIcon().setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_IN);
+//        mTabLayout.getTabAt(2).getIcon().setColorFilter(Color .WHITE, PorterDuff.Mode.SRC_IN);
     }
 
     @Override
     public void intents() {
         pager.setCurrentItem(1);
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (doubleBackToExitPressedOnce) {
+            super.onBackPressed();
+//            Toast.makeText(this, "thoát rrrrrrrrrrr", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        this.doubleBackToExitPressedOnce = true;
+        Toast.makeText(this, "Chạm lần nữa để thoát!", Toast.LENGTH_SHORT).show();
+
+        new Handler().postDelayed(new Runnable() {
+
+            @Override
+            public void run() {
+                doubleBackToExitPressedOnce=false;
+            }
+        }, 2000);
     }
 }

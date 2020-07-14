@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -42,7 +43,8 @@ public class FavoriteEventFragment extends Fragment {
     RecyclerView mRCycMs;
     private FavoriteAdapter adapter;
     private List<Favorite> data;
-    TextView tvthongbao, txtEvents;
+    TextView txtEvents;
+    FrameLayout tvthongbao;
     View view;
     LinearLayoutManager linearLayoutManager;
     public static Boolean checkBack = true;

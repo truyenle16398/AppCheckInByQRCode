@@ -1,5 +1,6 @@
 package com.example.appcheckinbyqrcode.ui.client.fragment;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -7,6 +8,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -25,11 +27,16 @@ import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
@@ -70,11 +77,13 @@ import static android.app.Activity.RESULT_OK;
 public class ClientUserFragment extends Fragment{
     private static final String TAG = "nnn";
     private SwipeRefreshLayout swipeRefreshLayout;
-    private TextView tvMess, tvName, tvEmail, tvPhone, tvAddress;
+    private TextView tvMess, tvName, tvEmail, tvPhone, tvAddress,tvbackAvatar;
     private LinearLayout lnchangInfo, lnchangPass, lnlogOut;
     private EditText edt_OldPassword, edt_NewPassword ,edt_NewPasswordAgain;
     private String name, email, phone, address;
     String urls;
+    private FrameLayout showAvatar;
+    private ImageView mAvatar;
     private CircleImageView circleimg;
     private View view;
     private AlertDialog dialog;
@@ -96,6 +105,12 @@ public class ClientUserFragment extends Fragment{
         getinfo();
         onclick();
         return view;
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        getinfo();
     }
 
     private void getinfo() {
@@ -126,6 +141,11 @@ public class ClientUserFragment extends Fragment{
                                 .diskCacheStrategy(DiskCacheStrategy.NONE)
                                 .skipMemoryCache(true)
                                 .into(circleimg);
+                        Glide.with(getActivity())
+                                .load(urls)
+                                .diskCacheStrategy(DiskCacheStrategy.NONE)
+                                .skipMemoryCache(true)
+                                .into(mAvatar);
                     }
 
                     @Override
@@ -181,12 +201,52 @@ public class ClientUserFragment extends Fragment{
             }
         });
 
+//        circleimg.setOnLongClickListener(new View.OnLongClickListener() {
+//            @Override
+//            public boolean onLongClick(View v) {
+//                Intent intent = new Intent(Intent.ACTION_PICK);
+//                intent.setType("image/*");
+//                startActivityForResult(intent, PICK_IMAGE);
+////                ActivityCompat.requestPermissions(getActivity(), new String[] {Manifest.permission.READ_EXTERNAL_STORAGE},1999);
+//                return true;
+//            }
+//        });
         circleimg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                showAvatar.setVisibility(View.VISIBLE);
             }
         });
+        tvbackAvatar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showAvatar.setVisibility(View.GONE);
+            }
+        });
+    }
 
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == 1999){
+            if(grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
+                Intent intent = new Intent(Intent.ACTION_PICK);
+                intent.setType("image/*");
+                startActivityForResult(intent, PICK_IMAGE);
+            }
+        }
+    }
+
+    public String getRealPathFromURI(Uri contentUri) {
+        String path = null;
+        String[] proj = {MediaStore.MediaColumns.DATA};
+        Cursor cursor = getActivity().getContentResolver().query(contentUri, proj, null, null, null);
+        if (cursor.moveToFirst()) {
+            int column_index = cursor.getColumnIndexOrThrow(MediaStore.MediaColumns.DATA);
+            path = cursor.getString(column_index);
+        }
+        cursor.close();
+        return path;
     }
 
     @Override
@@ -204,10 +264,26 @@ public class ClientUserFragment extends Fragment{
                             .diskCacheStrategy(DiskCacheStrategy.NONE)
                             .skipMemoryCache(true)
                             .into(circleimg);
+                    Glide.with(getActivity())
+                            .load(urls)
+                            .diskCacheStrategy(DiskCacheStrategy.NONE)
+                            .skipMemoryCache(true)
+                            .into(mAvatar);
                     Log.d(TAG, "onActivityResult: "+name+ email+phone+address);
                 }
                 break;
             case PICK_IMAGE:
+                if (data != null && data.getData() != null) {
+                    Uri uri = data.getData();
+                    realpath = getRealPathFromURI(uri);
+                    try {
+                        InputStream inputStream = getActivity().getContentResolver().openInputStream(uri);
+                        Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
+                        circleimg.setImageBitmap(bitmap);
+                    } catch (FileNotFoundException e) {
+                        e.printStackTrace();
+                    }
+                }
                 break;
             default:
                 break;
@@ -265,6 +341,45 @@ public class ClientUserFragment extends Fragment{
         });
     }
 
+    //update avatar
+    private void upDateUserAvatar(String filename) {
+//        ProgressDialog pd = new ProgressDialog(this);
+//        pd.setMessage("loading");
+//        pd.show();
+//        MultipartBody.Part body =
+//                MultipartBody.Part.createFormData("image", "avatar.png", fbody);
+        File file = new File(filename);
+        String filepath = file.getAbsolutePath();
+        String[] arraynamefile = filepath.split("\\.");
+        filepath = arraynamefile[0] + System.currentTimeMillis() + "." + arraynamefile[1];
+        RequestBody requestBody = RequestBody.create(MediaType.parse("multipart/form-data"), file);
+        MultipartBody.Part body = MultipartBody.Part.createFormData("avatar", filepath, requestBody);
+        Log.d("nnn", "upDateUserAvatar: " + filepath);
+        ApiClient.getService().updateAvatar(body)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<UploadAvatarResponse>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+                    }
+                    @Override
+                    public void onNext(UploadAvatarResponse uploadAvatarResponse) {
+//                        Toast.makeText(UpdatedProfileActivity.this, "Thay đổi thành công!", Toast.LENGTH_SHORT).show();
+                        Log.d("nnn", "log api upload image: " + uploadAvatarResponse.getName());
+//                        String urls = url.getUrlimg() + uploadAvatarResponse.getAvatar();
+//                        Glide.with(getContext()).load(urls).into(circleimg);
+                    }
+                    @Override
+                    public void onError(Throwable e) {
+                        Log.d("nn", "onError: " + e.getMessage());
+//                        pd.dismiss();
+                    }
+                    @Override
+                    public void onComplete() {
+//                        pd.dismiss();
+                    }
+                });
+    }
 
     private void changePassword(String old_password1, String new_password1) {
         if (old_password1 != new_password1) {
@@ -303,6 +418,9 @@ public class ClientUserFragment extends Fragment{
     @SuppressLint("CutPasteId")
     private void initWidget() {
         circleimg = view.findViewById(R.id.profilePic_client);
+        showAvatar = view.findViewById(R.id.showAvatar);
+        tvbackAvatar = view.findViewById(R.id.tvbackAvatar);
+        mAvatar = view.findViewById(R.id.imageAvatarFull);
         tvName = view.findViewById(R.id.tvNameClient);
         tvEmail = view.findViewById(R.id.tvEmailClient);
         tvPhone = view.findViewById(R.id.tvPhoneClient);
@@ -365,19 +483,3 @@ public class ClientUserFragment extends Fragment{
         lnchangInfo.setEnabled(true);
     }
 }
-
-
-
-// try {
-// Bitmap bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), data.getData());
-// ByteArrayOutputStream stream = new ByteArrayOutputStream();
-// bitmap.compress(Bitmap.CompressFormat.PNG, 45, stream);
-// byte[] byteArray = stream.toByteArray();
-// bitmap.recycle();
-// //Log.v("Avatar Path", file.getAbsolutePath());
-// fbody = RequestBody.create(MediaType.parse("image/png"), byteArray);
-//
-// //choose image finsh update image
-// } catch (IOException e) {
-// e.printStackTrace();
-// }
